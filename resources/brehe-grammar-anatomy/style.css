@@ -1,0 +1,174 @@
+:root {
+  --bg: #faf8f5;
+  --text: #2b2b2b;
+  --muted: #666;
+  --accent: #8b2c2c;
+  --link: #8b2c2c;
+  --border: #e0dad2;
+  --max: 42rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 2rem 1.5rem 4rem;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+body.index {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+header {
+  max-width: var(--max);
+  margin: 0 auto 1.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+}
+
+header a {
+  display: inline-block;
+  margin-right: 1.25rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+header a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  max-width: var(--max);
+  margin: 0 auto 1.5rem;
+  font-size: 1.85rem;
+  line-height: 1.25;
+  color: var(--accent);
+}
+
+body.index h1 {
+  text-align: center;
+}
+
+.subtitle {
+  max-width: var(--max);
+  margin: -1rem auto 2rem;
+  text-align: center;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.toc {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  line-height: 2.1;
+}
+
+.toc a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+.toc a:hover {
+  text-decoration: underline;
+}
+
+.manifold-text-section {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.manifold-text-section h1,
+.manifold-text-section h2,
+.manifold-text-section h3 {
+  color: var(--accent);
+  line-height: 1.3;
+  margin-top: 2rem;
+  max-width: none;
+}
+
+.manifold-text-section h2 {
+  font-size: 1.4rem;
+}
+
+.manifold-text-section .textTitle {
+  font-size: 1.6rem;
+}
+
+.manifold-text-section p {
+  margin: 0 0 1rem;
+}
+
+.manifold-text-section a {
+  color: var(--link);
+  text-decoration: underline;
+}
+
+.manifold-text-section ul,
+.manifold-text-section ol {
+  padding-left: 1.5rem;
+  margin: 0 0 1rem;
+}
+
+.manifold-text-section li {
+  margin-bottom: 0.4rem;
+}
+
+.manifold-text-section table {
+  border-collapse: collapse;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.manifold-text-section th,
+.manifold-text-section td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.manifold-text-section th {
+  background: #f0ebe4;
+  font-weight: bold;
+}
+
+.manifold-text-section strong {
+  font-weight: bold;
+}
+
+.manifold-text-section em {
+  font-style: italic;
+}
+
+.nav {
+  max-width: var(--max);
+  margin: 2.5rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+}
+
+.nav a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+.nav .disabled {
+  color: var(--muted);
+  opacity: 0.4;
+}
