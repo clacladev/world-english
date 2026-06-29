@@ -142,6 +142,74 @@ rely on a question marker or intonation; *wh-* questions keep the question word
 
 ---
 
+## Rule G7 — A reduced modal set, shades by adverb
+
+**Rule.** World English keeps **four modals**, one per core meaning, each invariant:
+
+| Meaning | World English modal | Drops |
+| ------- | ------------------- | ----- |
+| ability / possibility / permission | **can** | could, may, might |
+| obligation / necessity | **must** | have to, need to, shall |
+| advice / recommendation | **should** | ought to |
+| future | **will** (see G1) | shall |
+
+Finer **degrees of probability** — the work *may/might/could/must* used to do — are carried
+by ordinary **adverbs** before the verb: *maybe, probably, certainly*. Modals take no past
+`-ed` and no `-ing`; past and hypothetical meaning come from time words ([style.md S5](style.md))
+and the conditional rule ([G8](#rule-g8--one-conditional-shape)).
+
+**Problem it solves.** The modal cluster overlaps on two axes with no rule for which to pick,
+and carries suppletive pasts (*can*→*could*) and defective morphology (see
+[§7](../resources/IRREGULARITIES.md#7-grammar-systems-articles-prepositions-tense-phrasal-verbs)).
+
+**Examples.**
+
+| Standard English | World English |
+| ---------------- | ------------- |
+| It may / might rain. | **Maybe it rain.** / **It can rain.** |
+| It must be John. (deduction) | **Probably it be John.** / **Certainly it be John.** |
+| You must / have to go. | **You must go.** |
+| You ought to rest. | **You should rest.** |
+| I could swim as a child. | **I can swim before.** (past via time word) |
+
+**Divergence & trade-off.** Loses the modal system's fine gradient of certainty and
+politeness, recovered with plain adverbs — the same plain-phrasing trade as
+[style.md S3–S4](style.md). *would* is **not** kept as a modal here; its one surviving job is
+the hypothetical marker in [G8](#rule-g8--one-conditional-shape).
+
+---
+
+## Rule G8 — One conditional shape
+
+**Rule.** Every conditional is **`if` + clause, + result clause**, each in its **natural
+tense** — no tense-backshift. The result clause marks how real it is with one word:
+
+- **`will`** — a real or expected result (standard zero + first conditional).
+- **`would`** — a hypothetical or unreal result (standard second + third conditional).
+
+Past-unreal ("if it had happened") is carried by a **time word** ([style.md S5](style.md)),
+since World English has no perfect ([G1](#rule-g1--a-leaner-tenseaspect-system)).
+
+**Problem it solves.** The five-way conditional grid graded by backshift + *would* — and the
+third conditional's reliance on *had* + participle (see
+[§7](../resources/IRREGULARITIES.md#7-grammar-systems-articles-prepositions-tense-phrasal-verbs)).
+
+**Examples.**
+
+| Standard English | World English |
+| ---------------- | ------------- |
+| If it rains, the ground gets wet. | If it rain, the ground get wet. |
+| If it rains, I will go. | If it rain, **I will go.** |
+| If I had money, I would buy it. | If I **have** money, **I would buy** it. |
+| If I had known, I would have told you. | If I **knowed before**, **I would tell** you. |
+
+**Divergence & trade-off.** Drops backshift, *had* + participle, and *would have* + participle
+— four forms collapse to **present tense + `will`/`would`**. *would* keeps the one job an
+English reader already reads as "unreal," so the shape stays legible; only the certainty/time
+split is preserved, everything else is dropped.
+
+---
+
 ## Summary table
 
 | System | Standard English | World English rule |
@@ -152,3 +220,5 @@ rely on a question marker or intonation; *wh-* questions keep the question word
 | Pronoun case | irregular grid, who/whom | subj + obj + obj`-s` (G4) |
 | Countability | countable vs uncountable | all countable (G5) |
 | Questions/negation | do-support + inversion | marker/intonation + `not` (G6) |
+| Modals | overlapping cluster + suppletive pasts | can / must / should / will + adverbs (G7) |
+| Conditionals | 5 shapes via backshift + would | `if` + natural tense, will/would (G8) |

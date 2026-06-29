@@ -202,6 +202,16 @@ hardest grammar for many learners (see [`PAIN-POINTS.md` §3](PAIN-POINTS.md)).
 - **Phrasal verbs.** *give up, put off, look after, come up with* — meaning is often
   non-compositional (*give up* ≠ *give* + *up*), and the grammar is irregular too
   (separable *pick it up* vs inseparable, with pronoun-placement rules).
+- **Modals (`can/could/may/might/must/shall/should/will/would/ought to`).** Defective verbs
+  (no past `-ed`, no `-ing`) whose meanings overlap on two axes — probability
+  (*may/might/could/must* all grade certainty) and obligation (*must/have to/should/ought
+  to*) — with no clean rule for which to pick, and suppletive past forms (*can*→*could*).
+- **Conditionals (zero / first / second / third / mixed).** Five shapes graded by
+  tense-backshift plus *would*: *if it rains, I will go* (real) vs *if I had money, I would
+  buy it* (present-unreal, marked by a **past** tense) vs *if I had known, I would have told
+  you* (past-unreal, marked by *had* + participle). The "remoteness via backshift" device is
+  opaque, and the third conditional rides on the present-perfect machinery English encodes
+  inconsistently.
 
 **Scale.** Articles are acquired late and often never fully mastered (corpus accuracy
 ~60–80%); prepositions and phrasal verbs are open-ended, idiom-by-idiom learning with no
