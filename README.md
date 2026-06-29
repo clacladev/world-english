@@ -7,6 +7,20 @@
 *principles*, and *plan*. The language itself, and the tools around it, are being
 mapped out from scratch.
 
+## Terms
+
+- **World English** — the name of this revision of the English language.
+- **WoE** — the short form of "World English".
+
+## Philosophy
+
+Language exists for communication. World English orders its priorities accordingly:
+**ease** first (it must be easy to learn and use — achieved through regularity and
+predictability), then **clarity** (hard to misread), and last **entertainment**
+(expressive and literary richness). Where these conflict, the earlier wins — which
+is why WoE trades away nuance, idiom, and flourish. A standing constraint bounds all
+three: it must stay **legible as English** — an evolution, not a cipher.
+
 ---
 
 ## What is World English?
