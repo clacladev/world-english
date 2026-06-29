@@ -19,7 +19,7 @@ Every rule in these specs follows the same template, per the project
 | [orthography.md](orthography.md) | Spelling regularization (light, legibility-preserving) | §1 |
 | [pronunciation.md](pronunciation.md) | Sound↔spelling mapping, respelling key, stress rule | §1, §2 |
 | [morphology.md](morphology.md) | Regular verbs, plurals, comparatives, adverbs | §3, §4, §5 |
-| [grammar.md](grammar.md) | Tense/aspect, articles, prepositions, pronouns, countability, questions | §4, §6, §7, §8 |
+| [grammar.md](grammar.md) | Tense/aspect, articles, prepositions, pronouns, countability, questions, modals, conditionals | §4, §6, §7, §8 |
 | [style.md](style.md) | Plain, unambiguous phrasing; word order; avoiding idiom | §7, §8 |
 
 ## How the specs fit together
