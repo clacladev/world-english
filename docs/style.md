@@ -50,6 +50,11 @@ verb.
 **Trade-off.** Slightly less idiomatic, more learnable. Phrasal verbs are not *banned* —
 the transparent ones (*sit down*, *stand up*) are fine — only the opaque ones are replaced.
 
+**Boundary with G3.** This rule handles particles that *change* a verb's meaning (*look
+after* ≠ *look*). Meaning-neutral prepositions that a verb merely selects (*listen to*,
+*wait for*) are not replaced here — [grammar G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs)
+simply drops them.
+
 ---
 
 ## Rule S3 — One word, one meaning (avoid heavy polysemy)

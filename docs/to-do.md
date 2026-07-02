@@ -51,7 +51,10 @@ not invention — and two have an explicit open decision blocking them.
    fossilized L1-transfer error.
    Source: [PAIN-POINTS §3](../resources/PAIN-POINTS.md#3-grammar),
    [IRREGULARITIES §7](../resources/IRREGULARITIES.md#7-grammar-systems-articles-prepositions-tense-phrasal-verbs).
-   Status: drafted → [grammar.md G3](grammar.md#rule-g3--regular-prepositions-for-time-and-place).
+   Status: drafted → [grammar.md G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs).
+   Refined: G3 now covers dependent prepositions too — the arbitrary verb-selected ones are
+   dropped (*listen music*, *wait the bus*), with a keep/drop/replace boundary that routes
+   meaning-changing particles to [S2](style.md#rule-s2--prefer-plain-verbs-over-phrasal-verbs).
 
 5. **Verb irregularity, incl. the *be* paradigm.** ~200 irregular verbs in everyday use —
    the densest pure-memorization load in the language; *be* alone has eight forms and is

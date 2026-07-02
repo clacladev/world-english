@@ -97,9 +97,15 @@ pattern. Diverges from standard English but removes the largest single grammar b
 
 ---
 
-## Rule G3 — Regular prepositions for time and place
+## Rule G3 — Regular prepositions for time, place, and verbs
 
-**Rule.** The arbitrary time/place prepositions are fixed to **one default each**:
+**Rule.** Prepositions are split into two jobs. Where the choice is **arbitrary** — fixed by
+idiom, carrying no meaning a learner could derive — World English removes the guesswork:
+the *time/place* choices collapse to **one default each**, and the *verb-selected*
+prepositions are **dropped** so the verb takes a direct object. Where a preposition marks a
+**real relation** (surface, direction, topic), it keeps its meaning.
+
+**Time and place — one default each.**
 
 | Use | Standard (arbitrary) | World English |
 | --- | -------------------- | ------------- |
@@ -110,13 +116,64 @@ pattern. Diverges from standard English but removes the largest single grammar b
 | place — going somewhere | to the shop | **to** the shop |
 | place — arriving | arrive at the station, arrive in Paris | **arrive to** the station, **arrive to** Paris |
 
-**Problem it solves.** ~60–70 prepositions used idiomatically with no logic (see
-[§7](../resources/IRREGULARITIES.md#7-grammar-systems-articles-prepositions-tense-phrasal-verbs)) —
-a top source of fossilized error.
+Only the *arbitrary location* choice collapses. The **topological** prepositions that mark a
+genuine spatial relation keep their meanings — *the cup is **on** the table* (surface
+contact), *under the bridge*, *behind the door*, *between the trees*. You say *in the shop*
+(being located there) but *on the table* (resting on its surface): the first was arbitrary,
+the second is real.
 
-**Divergence & trade-off.** Concrete spatial and relational prepositions (*under*, *with*,
-*for*) keep their meanings; only the *arbitrary* time/place choices are collapsed. *On
-Monday* and *on July* read slightly off to a native ear but are never ambiguous.
+**Dependent prepositions — dropped.** Many verbs demand a preposition for no reason (*listen
+**to**, wait **for**, depend **on***); one L1 preposition maps to several English ones and
+vice-versa, with no rule to fall back on. When the preposition merely marks the verb's own
+object and adds no meaning, World English **drops it** and the verb becomes directly
+transitive:
+
+| Standard | World English |
+| -------- | ------------- |
+| listen **to** music | **listen music** |
+| wait **for** the bus | **wait the bus** |
+| depend **on** the weather | **depend the weather** |
+| believe **in** it | **believe it** |
+| pay **for** it | **pay it** |
+| look **at** the picture | **look the picture** |
+
+**Keep / drop / replace — the boundary.** Every verb+preposition pairing falls into exactly
+one bucket:
+
+| Bucket | Preposition | Action | Example |
+| ------ | ----------- | ------ | ------- |
+| marks a real spatial/time/direction/topic relation | *on the table*, *to the shop*, *talk about the plan* | **keep** (time/place defaults above) | *put it **on** the table* |
+| verb-selected, meaning-neutral | *listen to*, *wait for*, *depend on* | **drop** — verb goes transitive | *listen music* |
+| particle that *changes* the verb's meaning (phrasal) | *look after*, *give up*, *look for* | **replace** with a plain verb, per [S2](style.md#rule-s2--prefer-plain-verbs-over-phrasal-verbs) | *look after → mind* |
+
+**The test** that separates *drop* from *replace*: drop the preposition only when the verb's
+meaning is unchanged without it. If removing it would merge two distinct senses — *look
+**at*** (view) vs *look **for*** (search) — the particle carries meaning, so it is a phrasal
+verb and S2 swaps in a plain verb (*seek*) instead. This keeps G3 and S2 from claiming the
+same forms.
+
+**Scope of the drop.** Transitive-capable **verbs** only. Adjective- and noun-selected
+prepositions (*good **at** math*, *afraid **of** dogs*, *reason **for** it*) are **not**
+dropped — a predicate adjective cannot take a direct object, so *good math* is ungrammatical.
+These are left as collocation residue for
+[S6](style.md#rule-s6--prefer-regular-replacements-for-collocations).
+
+**Problem it solves.** ~60–70 prepositions used idiomatically with no logic (see
+[§7](../resources/IRREGULARITIES.md#7-grammar-systems-articles-prepositions-tense-phrasal-verbs))
+— the top source of fossilized error, because the arbitrary pairings are "open-ended,
+idiom-by-idiom learning with no rule to fall back on." World English replaces that memorized
+list with three moves a learner can apply on sight: default the time/place slot, drop the
+verb's preposition, or reach for a plain verb.
+
+**Divergence & trade-off.** Meaningful spatial and relational prepositions (*on* = surface,
+*under*, *between*, *with*, directional *to*) keep their jobs; only the *arbitrary* choices
+change. *On Monday*, *on July*, and *listen music* read slightly off to a native ear but are
+never ambiguous. The drop is lossy on the surface yet **reversible**: each verb has one
+canonical preposition, so a reverse translator restores it by lookup (*listen* → *listen
+to*), consistent with the map-back-losslessly goal of
+[morphology M1](morphology.md#rule-m1--all-verbs-are-regular). The one real risk — two
+senses collapsing onto one verb — is handled by routing meaning-changing particles to S2
+rather than dropping them.
 
 ---
 
