@@ -104,11 +104,12 @@ pronunciation layer carry predictability.
 
 ---
 
-## Rule O5 — `through` and the worst `ough` words (optional, flagged)
+## Rule O5 — Respell `ough` words only where an informal form already exists
 
-**Rule (provisional).** The single most-cited offender, `ough` (8–9 sounds, see
-[§1](../resources/IRREGULARITIES.md#1-spelling--orthography)), is regularized **only** for
-the highest-frequency words, toward their actual sound:
+**Rule.** The single most-cited offender, `ough` (8–9 sounds, see
+[§1](../resources/IRREGULARITIES.md#1-spelling--orthography)), is regularized toward its
+actual sound **only for words that already have a conventional informal respelling in
+common use**:
 
 | Standard | World English | Sound |
 | -------- | ------------- | ----- |
@@ -116,11 +117,18 @@ the highest-frequency words, toward their actual sound:
 | though | **tho** | /ðoʊ/ |
 | although | **altho** | /ɔːlˈðoʊ/ |
 
-**Divergence & trade-off.** *thru* and *tho* are already common informal spellings, so the
-divergence is mild and familiar. We stop here rather than respelling *thought, cough,
-rough, bough* — those are left to the pronunciation key (O4) to avoid a cascade of
-unfamiliar forms. This rule is **flagged for review**: it is the boundary case between
-"light cleanup" and "phonetic reform."
+**The stopping criterion.** The list stops where it does for a *principled* reason, not an
+arbitrary one: *thru*, *tho*, and *altho* are already everyday informal spellings, so
+adopting them changes nothing a reader hasn't already seen. We do **not** respell *thought,
+cough, rough, bough, thorough* — none of these has an established informal form, so
+respelling them would mean **inventing** new spellings. That is precisely the
+phonetic-reform line O4 refuses to cross: unfamiliar coinages (*thot*, *cof*, *ruf*) trade
+legibility for predictability the pronunciation key already supplies. So the boundary is:
+**adopt an existing informal spelling; never coin a new one.**
+
+**Divergence & trade-off.** Mild and familiar — these three forms are already in wide
+informal use. Every other `ough` word keeps its standard spelling and is made predictable
+by the respelling key in [pronunciation.md](pronunciation.md), consistent with O4.
 
 ---
 
