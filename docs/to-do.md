@@ -42,15 +42,19 @@ not invention — and two have an explicit open decision blocking them.
    Source: [PAIN-POINTS §2](../resources/PAIN-POINTS.md#2-spelling--orthography),
    [IRREGULARITIES §1](../resources/IRREGULARITIES.md#1-spelling--orthography).
    Status: drafted → [orthography.md O1–O5](orthography.md).
-   **Open decision:** O5 is explicitly "flagged for review" — how far to extend `ough`
-   respelling (currently only *through/though/although*) before it tips from "light
-   cleanup" into full phonetic reform. Needs a decision, not just more examples.
+   **Decision resolved:** O5 now has an explicit stopping criterion — respell an `ough`
+   word only where a conventional informal spelling already exists (*thru/tho/altho*);
+   never coin a new form (*thot/cof/ruf*). That draws the "light cleanup vs. phonetic
+   reform" boundary in line with O4, so the rule is no longer flagged.
 
 4. **Prepositions.** ~60–70 prepositions used arbitrarily/idiomatically; a top source of
    fossilized L1-transfer error.
    Source: [PAIN-POINTS §3](../resources/PAIN-POINTS.md#3-grammar),
    [IRREGULARITIES §7](../resources/IRREGULARITIES.md#7-grammar-systems-articles-prepositions-tense-phrasal-verbs).
-   Status: drafted → [grammar.md G3](grammar.md#rule-g3--regular-prepositions-for-time-and-place).
+   Status: drafted → [grammar.md G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs).
+   Refined: G3 now covers dependent prepositions too — the arbitrary verb-selected ones are
+   dropped (*listen music*, *wait the bus*), with a keep/drop/replace boundary that routes
+   meaning-changing particles to [S2](style.md#rule-s2--prefer-plain-verbs-over-phrasal-verbs).
 
 5. **Verb irregularity, incl. the *be* paradigm.** ~200 irregular verbs in everyday use —
    the densest pure-memorization load in the language; *be* alone has eight forms and is
@@ -180,7 +184,7 @@ here.
 | - | ---- | ------ | ---- |
 | 1 | Articles | drafted (refine) | P1 |
 | 2 | Pronunciation system | drafted (refine) | P1 |
-| 3 | Spelling opacity | drafted (open decision: O5) | P1 |
+| 3 | Spelling opacity | drafted | P1 |
 | 4 | Prepositions | drafted (refine) | P1 |
 | 5 | Verb irregularity / *be* | drafted (open decision: M2) | P1 |
 | 6 | Present perfect / tense | drafted (review) | P1 |

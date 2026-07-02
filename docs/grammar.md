@@ -20,9 +20,12 @@ relevance is expressed by the simple past plus a time word when needed.
 | Meaning | Standard English | World English |
 | ------- | ---------------- | ------------- |
 | simple past | I lived here | I lived here |
-| present perfect | I have lived here for ten years | I **lived here for ten years** (still true) → *I live here for ten years* / *I live here since ten years* |
+| present continuous | I am living | I **be living** (see [morphology M2](morphology.md)) |
 | past continuous | I was living | I **beed living** (see [morphology M2](morphology.md)) |
+| present perfect | I have lived here for ten years | I **lived here for ten years** (still true) → *I live here for ten years* / *I live here since ten years* |
+| past perfect | I had lived here before that | I **lived here before** (time word carries the earlier past) |
 | future | I will live | I **will live** |
+| future perfect | I will have lived here by then | I **live here by then** (time word carries completion) |
 
 **Problem it solves.** The present perfect is the single most-cited tense difficulty (see
 [§7](../resources/IRREGULARITIES.md#7-grammar-systems-articles-prepositions-tense-phrasal-verbs)),
@@ -94,23 +97,83 @@ pattern. Diverges from standard English but removes the largest single grammar b
 
 ---
 
-## Rule G3 — Regular prepositions for time and place
+## Rule G3 — Regular prepositions for time, place, and verbs
 
-**Rule.** The arbitrary time/place prepositions are fixed to **one default each**:
+**Rule.** Prepositions are split into two jobs. Where the choice is **arbitrary** — fixed by
+idiom, carrying no meaning a learner could derive — World English removes the guesswork:
+the *time/place* choices collapse to **one default each**, and the *verb-selected*
+prepositions are **dropped** so the verb takes a direct object. Where a preposition marks a
+**real relation** (surface, direction, topic), it keeps its meaning.
+
+**Time and place — one default each.**
 
 | Use | Standard (arbitrary) | World English |
 | --- | -------------------- | ------------- |
 | time — point or period | at 3, on Monday, in July | **on** 3, **on** Monday, **on** July |
+| time — part of the day | in the morning, at night | **on** the morning, **on** night |
 | place — being somewhere | at the shop, in the city | **in** the shop, **in** the city |
+| place — no-article spots | at home, at work | **in** home, **in** work |
 | place — going somewhere | to the shop | **to** the shop |
+| place — arriving | arrive at the station, arrive in Paris | **arrive to** the station, **arrive to** Paris |
+
+Only the *arbitrary location* choice collapses. The **topological** prepositions that mark a
+genuine spatial relation keep their meanings — *the cup is **on** the table* (surface
+contact), *under the bridge*, *behind the door*, *between the trees*. You say *in the shop*
+(being located there) but *on the table* (resting on its surface): the first was arbitrary,
+the second is real.
+
+**Dependent prepositions — dropped.** Many verbs demand a preposition for no reason (*listen
+**to**, wait **for**, depend **on***); one L1 preposition maps to several English ones and
+vice-versa, with no rule to fall back on. When the preposition merely marks the verb's own
+object and adds no meaning, World English **drops it** and the verb becomes directly
+transitive:
+
+| Standard | World English |
+| -------- | ------------- |
+| listen **to** music | **listen music** |
+| wait **for** the bus | **wait the bus** |
+| depend **on** the weather | **depend the weather** |
+| believe **in** it | **believe it** |
+| pay **for** it | **pay it** |
+| look **at** the picture | **look the picture** |
+
+**Keep / drop / replace — the boundary.** Every verb+preposition pairing falls into exactly
+one bucket:
+
+| Bucket | Preposition | Action | Example |
+| ------ | ----------- | ------ | ------- |
+| marks a real spatial/time/direction/topic relation | *on the table*, *to the shop*, *talk about the plan* | **keep** (time/place defaults above) | *put it **on** the table* |
+| verb-selected, meaning-neutral | *listen to*, *wait for*, *depend on* | **drop** — verb goes transitive | *listen music* |
+| particle that *changes* the verb's meaning (phrasal) | *look after*, *give up*, *look for* | **replace** with a plain verb, per [S2](style.md#rule-s2--prefer-plain-verbs-over-phrasal-verbs) | *look after → mind* |
+
+**The test** that separates *drop* from *replace*: drop the preposition only when the verb's
+meaning is unchanged without it. If removing it would merge two distinct senses — *look
+**at*** (view) vs *look **for*** (search) — the particle carries meaning, so it is a phrasal
+verb and S2 swaps in a plain verb (*seek*) instead. This keeps G3 and S2 from claiming the
+same forms.
+
+**Scope of the drop.** Transitive-capable **verbs** only. Adjective- and noun-selected
+prepositions (*good **at** math*, *afraid **of** dogs*, *reason **for** it*) are **not**
+dropped — a predicate adjective cannot take a direct object, so *good math* is ungrammatical.
+These are left as collocation residue for
+[S6](style.md#rule-s6--prefer-regular-replacements-for-collocations).
 
 **Problem it solves.** ~60–70 prepositions used idiomatically with no logic (see
-[§7](../resources/IRREGULARITIES.md#7-grammar-systems-articles-prepositions-tense-phrasal-verbs)) —
-a top source of fossilized error.
+[§7](../resources/IRREGULARITIES.md#7-grammar-systems-articles-prepositions-tense-phrasal-verbs))
+— the top source of fossilized error, because the arbitrary pairings are "open-ended,
+idiom-by-idiom learning with no rule to fall back on." World English replaces that memorized
+list with three moves a learner can apply on sight: default the time/place slot, drop the
+verb's preposition, or reach for a plain verb.
 
-**Divergence & trade-off.** Concrete spatial and relational prepositions (*under*, *with*,
-*for*) keep their meanings; only the *arbitrary* time/place choices are collapsed. *On
-Monday* and *on July* read slightly off to a native ear but are never ambiguous.
+**Divergence & trade-off.** Meaningful spatial and relational prepositions (*on* = surface,
+*under*, *between*, *with*, directional *to*) keep their jobs; only the *arbitrary* choices
+change. *On Monday*, *on July*, and *listen music* read slightly off to a native ear but are
+never ambiguous. The drop is lossy on the surface yet **reversible**: each verb has one
+canonical preposition, so a reverse translator restores it by lookup (*listen* → *listen
+to*), consistent with the map-back-losslessly goal of
+[morphology M1](morphology.md#rule-m1--all-verbs-are-regular). The one real risk — two
+senses collapsing onto one verb — is handled by routing meaning-changing particles to S2
+rather than dropping them.
 
 ---
 
@@ -122,7 +185,11 @@ form** built regularly. The *who/whom* distinction is removed (always **who**).
 | Standard (subj / obj / poss / poss-pron) | World English (subj / obj / poss) |
 | ---------------------------------------- | --------------------------------- |
 | I / me / my / mine | I / **me** / **mes** |
+| you / you / your / yours | you / **you** / **yous** |
 | he / him / his | he / **him** / **hims** |
+| she / her / her / hers | she / **her** / **hers** |
+| it / it / its | it / **it** / **its** |
+| we / us / our / ours | we / **us** / **uss** |
 | they / them / their / theirs | they / **them** / **thems** |
 | who / whom / whose | who / **who** / **whos** |
 
@@ -147,7 +214,8 @@ furniture*) that blocks *informations*, *an advice* (see
 [§4](../resources/IRREGULARITIES.md#4-noun-plurals--countability)).
 
 **Examples.** *some information → **informations*** (when plural is meant);
-*a piece of advice → **one advice***; *furniture → **furnitures***.
+*a piece of advice → **one advice***; *furniture → **furnitures***;
+*much information → **many informations***; *how much furniture → **how many furnitures***.
 
 **Divergence & trade-off.** *informations* is non-standard English but grammatical in many
 languages and instantly clear. Removes a noun-by-noun memorization list and its knock-on
@@ -165,8 +233,10 @@ by placing **`not`** before the verb.
 | ---------------- | ------------- |
 | Do you like it? | **You like it?** (rising) / **Q you like it?** |
 | Does she know? | **She know?** |
+| Who did you call? | **Who you called?** (wh-word kept, normal word order) |
 | I do not like it. | I **not like** it. |
 | She did not go. | She **not goed**. |
+| It is good, isn't it? | **It be good, right?** (invariant tag) |
 
 **Problem it solves.** Do-support inserts a meaningless auxiliary into *every* question and
 negative, plus inversion (see

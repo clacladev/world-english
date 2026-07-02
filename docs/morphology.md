@@ -73,7 +73,8 @@ singular `-s`.
 [§3](../resources/IRREGULARITIES.md#3-verb-conjugation)), with its own spelling sub-rules
 (*goes*, *tries*) — high cost, near-zero information (the subject already marks person).
 
-**Examples.** *he goes → he go*, *she tries → she try*, *it works → it work*.
+**Examples.** *he goes → he go*, *she tries → she try*, *it works → it work*,
+*he has → he have*, *she does → she do*.
 
 **Divergence & trade-off.** Removes redundant agreement; no meaning is lost. Diverges from
 standard English but matches a pattern already present in many English dialects and
@@ -141,7 +142,8 @@ adverbs, no zero-derived adverbs.
 **Problem it solves.** Irregular adverb formation: *good → well*, *fast → fast*,
 *hard → hard* (see [§5](../resources/IRREGULARITIES.md#5-adjectives--adverbs)).
 
-**Examples.** *good → **goodly*** (= "well"), *fast → **fastly***, *hard → **hardly*** in
+**Examples.** *quick → **quickly***, *easy → **easily***, *careful → **carefully***,
+*good → **goodly*** (= "well"), *fast → **fastly***, *hard → **hardly*** in
 the manner sense — note World English drops the standard *hardly* = "barely" meaning, which
 must be expressed plainly (*barely*, *almost not*), per [style.md](style.md).
 

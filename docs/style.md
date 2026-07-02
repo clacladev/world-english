@@ -21,7 +21,8 @@ clefting for emphasis; use plain word choice or a marker instead.
 fixed-order *and* free-order L1s alike.
 
 **Examples.** *Never have I seen it* → **I never seed it** (see [morphology M1](morphology.md)).
-*It was John who called* → **John called**.
+*It was John who called* → **John called**. *Rarely does she call* → **She rarely call**
+(fronting undone; see [morphology M3](morphology.md)).
 
 **Trade-off.** Loses some rhetorical emphasis; gains one predictable sentence shape.
 
@@ -49,6 +50,11 @@ verb.
 **Trade-off.** Slightly less idiomatic, more learnable. Phrasal verbs are not *banned* —
 the transparent ones (*sit down*, *stand up*) are fine — only the opaque ones are replaced.
 
+**Boundary with G3.** This rule handles particles that *change* a verb's meaning (*look
+after* ≠ *look*). Meaning-neutral prepositions that a verb merely selects (*listen to*,
+*wait for*) are not replaced here — [grammar G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs)
+simply drops them.
+
 ---
 
 ## Rule S3 — One word, one meaning (avoid heavy polysemy)
@@ -61,7 +67,9 @@ senses); learners may know a word yet misread it (see
 [`PAIN-POINTS.md` §4](../resources/PAIN-POINTS.md)).
 
 **Examples.** Instead of *run a business* → **manage a business**; *run a program* →
-**start a program**. Reserve *run* for physical running.
+**start a program**. Reserve *run* for physical running. Likewise *get a letter* →
+**receive a letter**, *get tired* → **become tired**; *take a photo* → **make a photo**,
+*take a bus* → **use a bus**.
 
 **Trade-off.** A little verbosity for a lot of clarity.
 
