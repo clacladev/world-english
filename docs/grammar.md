@@ -37,22 +37,60 @@ a beginner can apply.
 ## Rule G2 — One article rule
 
 **Rule.** World English has **one article: `the`**, used for *definite, already-known*
-things. For *indefinite* things, use **no article** (singular) or a number/quantifier when
-count matters. The *a/an* distinction is removed.
+things. For *indefinite* things, use **no article** (singular or plural) or a
+number/quantifier when count matters. The *a/an* distinction is removed.
 
 | Standard English | World English |
 | ---------------- | ------------- |
 | I saw a dog. The dog barked. | I saw **dog**. **The dog** barked. |
 | She is a doctor. | She is **doctor**. |
 | an hour, a university | (no article) **hour**, **university** |
+| The dogs barked. (definite plural) | **The dogs** barked. (`the` + [M4](morphology.md) plural — no new rule) |
+| Some information I gave you was wrong. | **The information** I gave you was wrong. (definite, singular) |
+| I need informations for the report. | I need **informations**. (indefinite, plural, per [G5](#rule-g5--all-nouns-are-countable)) |
+
+**Generics.** A generic statement names a whole kind, not one already-known thing, so it
+takes the **zero article** — the same "indefinite → no article" case, applied to a class
+instead of an instance. Standard English spreads generics across three patterns (bare
+plural, generic *the*+singular, generic *a*+singular); World English uses **one**, the bare
+plural, already licensed by [morphology M4](morphology.md):
+
+| Standard English | World English |
+| ----------------- | ------------- |
+| Dogs are loyal. | **Dogs are loyal.** |
+| The dog is a loyal animal. | **Dogs are loyal animals.** |
+| A dog is a loyal animal. | **Dogs are loyal animals.** |
+
+**One word, every kind of "known."** Linguists distinguish four reasons a thing can count
+as definite — shared world knowledge, the immediate situation, an earlier mention, or the
+structure of the phrase itself (see
+[PAIN-POINTS §3](../resources/PAIN-POINTS.md#3-grammar), Liu & Gleason 2002) — and standard
+English learners acquire these at different rates even though the surface word never
+changes. World English makes that fact explicit: it is always just **`the`**, so a learner
+never has to classify which kind of "known" applies.
+
+| Reason it's definite | Example |
+| --------------------- | ------- |
+| shared/world knowledge | **The sun** is bright today. |
+| the immediate situation | Close **the door**, please. |
+| earlier mention in the text | I saw a dog. **The dog** barked. |
+| the phrase itself picks it out | **The captain of the team** is late. |
 
 **Problem it solves.** Articles are the single hardest grammatical feature for many
 learners (see [§7](../resources/IRREGULARITIES.md#7-grammar-systems-articles-prepositions-tense-phrasal-verbs));
-*a* vs *an* adds a phonetic sub-rule on top.
+*a* vs *an* adds a phonetic sub-rule on top, and standard English spreads one job
+(marking definiteness) across four unpredictable surface behaviors of *the* plus a
+three-way generic split.
 
 **Divergence & trade-off.** Drops the indefinite article entirely and the *a/an* sound
-agreement. Definiteness — the one genuinely useful distinction — is preserved in *the*.
-Diverges from standard English but removes the largest single grammar burden.
+agreement. Definiteness — the one genuinely useful distinction — is preserved in *the*,
+and applies unchanged to plurals ([M4](morphology.md)) and to newly-countable nouns
+([G5](#rule-g5--all-nouns-are-countable)) with no extra rule. Collapsing the four
+definiteness "uses" into one *the* is not a new divergence — they were always the same
+word — only the acquisition burden of distinguishing them disappears. The one real loss
+is in generics: standard English's generic-*the*-singular (species framing) and
+generic-*a*-singular ("any one member") both fall away in favor of a single bare-plural
+pattern. Diverges from standard English but removes the largest single grammar burden.
 
 ---
 
