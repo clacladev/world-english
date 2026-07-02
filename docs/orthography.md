@@ -74,7 +74,8 @@ regardless of dialect.
 (*travelling*/*traveling*) and hard to predict.
 
 **Examples.** *refer → referred* (stressed final syllable, doubles), *travel → traveled*
-(unstressed, does not), *stop → stopped*, *offer → offered*.
+(unstressed, does not), *stop → stopped*, *offer → offered*, *begin → beginned* (stressed
+final, doubles), *open → opened* (unstressed, does not).
 
 **Divergence & trade-off.** Matches American practice; removes the British double-`l`
 exceptions. One rule, no list.

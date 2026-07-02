@@ -20,9 +20,12 @@ relevance is expressed by the simple past plus a time word when needed.
 | Meaning | Standard English | World English |
 | ------- | ---------------- | ------------- |
 | simple past | I lived here | I lived here |
-| present perfect | I have lived here for ten years | I **lived here for ten years** (still true) → *I live here for ten years* / *I live here since ten years* |
+| present continuous | I am living | I **be living** (see [morphology M2](morphology.md)) |
 | past continuous | I was living | I **beed living** (see [morphology M2](morphology.md)) |
+| present perfect | I have lived here for ten years | I **lived here for ten years** (still true) → *I live here for ten years* / *I live here since ten years* |
+| past perfect | I had lived here before that | I **lived here before** (time word carries the earlier past) |
 | future | I will live | I **will live** |
+| future perfect | I will have lived here by then | I **live here by then** (time word carries completion) |
 
 **Problem it solves.** The present perfect is the single most-cited tense difficulty (see
 [§7](../resources/IRREGULARITIES.md#7-grammar-systems-articles-prepositions-tense-phrasal-verbs)),
@@ -101,8 +104,11 @@ pattern. Diverges from standard English but removes the largest single grammar b
 | Use | Standard (arbitrary) | World English |
 | --- | -------------------- | ------------- |
 | time — point or period | at 3, on Monday, in July | **on** 3, **on** Monday, **on** July |
+| time — part of the day | in the morning, at night | **on** the morning, **on** night |
 | place — being somewhere | at the shop, in the city | **in** the shop, **in** the city |
+| place — no-article spots | at home, at work | **in** home, **in** work |
 | place — going somewhere | to the shop | **to** the shop |
+| place — arriving | arrive at the station, arrive in Paris | **arrive to** the station, **arrive to** Paris |
 
 **Problem it solves.** ~60–70 prepositions used idiomatically with no logic (see
 [§7](../resources/IRREGULARITIES.md#7-grammar-systems-articles-prepositions-tense-phrasal-verbs)) —
@@ -122,7 +128,11 @@ form** built regularly. The *who/whom* distinction is removed (always **who**).
 | Standard (subj / obj / poss / poss-pron) | World English (subj / obj / poss) |
 | ---------------------------------------- | --------------------------------- |
 | I / me / my / mine | I / **me** / **mes** |
+| you / you / your / yours | you / **you** / **yous** |
 | he / him / his | he / **him** / **hims** |
+| she / her / her / hers | she / **her** / **hers** |
+| it / it / its | it / **it** / **its** |
+| we / us / our / ours | we / **us** / **uss** |
 | they / them / their / theirs | they / **them** / **thems** |
 | who / whom / whose | who / **who** / **whos** |
 
@@ -147,7 +157,8 @@ furniture*) that blocks *informations*, *an advice* (see
 [§4](../resources/IRREGULARITIES.md#4-noun-plurals--countability)).
 
 **Examples.** *some information → **informations*** (when plural is meant);
-*a piece of advice → **one advice***; *furniture → **furnitures***.
+*a piece of advice → **one advice***; *furniture → **furnitures***;
+*much information → **many informations***; *how much furniture → **how many furnitures***.
 
 **Divergence & trade-off.** *informations* is non-standard English but grammatical in many
 languages and instantly clear. Removes a noun-by-noun memorization list and its knock-on
@@ -165,8 +176,10 @@ by placing **`not`** before the verb.
 | ---------------- | ------------- |
 | Do you like it? | **You like it?** (rising) / **Q you like it?** |
 | Does she know? | **She know?** |
+| Who did you call? | **Who you called?** (wh-word kept, normal word order) |
 | I do not like it. | I **not like** it. |
 | She did not go. | She **not goed**. |
+| It is good, isn't it? | **It be good, right?** (invariant tag) |
 
 **Problem it solves.** Do-support inserts a meaningless auxiliary into *every* question and
 negative, plus inversion (see

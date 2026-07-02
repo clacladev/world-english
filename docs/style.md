@@ -21,7 +21,8 @@ clefting for emphasis; use plain word choice or a marker instead.
 fixed-order *and* free-order L1s alike.
 
 **Examples.** *Never have I seen it* → **I never seed it** (see [morphology M1](morphology.md)).
-*It was John who called* → **John called**.
+*It was John who called* → **John called**. *Rarely does she call* → **She rarely call**
+(fronting undone; see [morphology M3](morphology.md)).
 
 **Trade-off.** Loses some rhetorical emphasis; gains one predictable sentence shape.
 
@@ -61,7 +62,9 @@ senses); learners may know a word yet misread it (see
 [`PAIN-POINTS.md` §4](../resources/PAIN-POINTS.md)).
 
 **Examples.** Instead of *run a business* → **manage a business**; *run a program* →
-**start a program**. Reserve *run* for physical running.
+**start a program**. Reserve *run* for physical running. Likewise *get a letter* →
+**receive a letter**, *get tired* → **become tired**; *take a photo* → **make a photo**,
+*take a bus* → **use a bus**.
 
 **Trade-off.** A little verbosity for a lot of clarity.
 
