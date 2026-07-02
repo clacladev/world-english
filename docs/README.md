@@ -22,6 +22,12 @@ Every rule in these specs follows the same template, per the project
 | [grammar.md](grammar.md) | Tense/aspect, articles, prepositions, pronouns, countability, questions, modals, conditionals | §4, §6, §7, §8 |
 | [style.md](style.md) | Plain, unambiguous phrasing; word order; avoiding idiom | §7, §8 |
 
+## Backlog
+
+[`to-do.md`](to-do.md) is the prioritized list of what to work on next — spec gaps, open
+decisions inside existing specs, and planned tooling — ranked by learner impact per
+[`../resources/PAIN-POINTS.md`](../resources/PAIN-POINTS.md).
+
 ## How the specs fit together
 
 - **orthography.md and pronunciation.md are a pair.** A spelling change implies a sound,
