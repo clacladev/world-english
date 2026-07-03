@@ -180,7 +180,7 @@ Pronouns are the one place modern English still inflects for grammatical case, i
 common error source for speakers of caseless or differently-cased L1s.
 
 **World English target →** [`docs/grammar.md`](../docs/grammar.md) (regularized pronoun
-case and *who/whom*).
+case and *who/whom*, and a single object-based reflexive pattern).
 
 ---
 
@@ -212,15 +212,20 @@ hardest grammar for many learners (see [`PAIN-POINTS.md` §3](PAIN-POINTS.md)).
   you* (past-unreal, marked by *had* + participle). The "remoteness via backshift" device is
   opaque, and the third conditional rides on the present-perfect machinery English encodes
   inconsistently.
+- **Gerund vs infinitive complements.** Which verbal complement a verb takes is lexically
+  fixed with no rule: *enjoy **doing*** (gerund only) but *want **to do*** (infinitive only),
+  *begin* takes either, and a handful (*stop, remember, try*) **change meaning** with the
+  choice (*stop **smoking*** = quit vs *stop **to smoke*** = pause in order to). Learned verb
+  by verb.
 
 **Scale.** Articles are acquired late and often never fully mastered (corpus accuracy
 ~60–80%); prepositions and phrasal verbs are open-ended, idiom-by-idiom learning with no
 rule to fall back on.
 
 **World English target →** [`docs/grammar.md`](../docs/grammar.md) (a leaner tense/aspect
-set, a simplified article rule, regularized preposition choices, countable nouns) and
-[`docs/style.md`](../docs/style.md) (prefer plain regular verbs over idiomatic phrasal
-verbs).
+set, a simplified article rule, regularized preposition choices, countable nouns, a single
+`to`-infinitive complement) and [`docs/style.md`](../docs/style.md) (prefer plain regular
+verbs over idiomatic phrasal verbs).
 
 ---
 

@@ -130,6 +130,38 @@ pairing instead of the arbitrary collocation); *make a decision* → **decide**;
 
 ---
 
+## Rule S7 — One default adverb position
+
+**Rule.** Put manner, frequency, and degree adverbs in **one fixed slot: immediately before
+the main verb** (and after any modal or `be`). A whole-sentence adverb (*maybe, probably,
+certainly*) may instead lead the clause. Do not scatter adverbs across the other positions
+standard English allows.
+
+**Problem it solves.** English lets the same adverb sit in several positions (*I usually go*
+/ *I go usually* / *Usually I go*), and which are natural is itself an unwritten rule. One
+default removes the choice and matches the fixed word order of
+[S1](#rule-s1--fixed-subjectverbobject-order).
+
+**Examples.**
+
+| Standard English (scatter) | World English (before the verb) |
+| -------------------------- | ------------------------------- |
+| He drives carefully. | He **carefully drive**. |
+| She calls me often. | She **often call** me. |
+| I have never seen it. | I **never seed** it. (see [morphology M1](morphology.md)) |
+| I will always help. | I **will always help**. (after the modal) |
+
+Sentence adverbs lead or take the same slot: **Maybe it will rain.** / **It maybe will rain.**
+Time and place adjuncts (*today*, *here*, *in the shop*) keep their natural clause-final spot
+— they are not the adverbs that scatter, so the rule leaves them alone. The pre-verb slot is
+the same one `not` occupies ([grammar G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)),
+so negation and adverb placement share one position rule.
+
+**Trade-off.** *He carefully drive* is slightly less idiomatic than *drives carefully*, but
+it is one predictable position instead of several.
+
+---
+
 ## Summary
 
 | Guideline | Keep it... |
@@ -140,3 +172,4 @@ pairing instead of the arbitrary collocation); *make a decision* → **decide**;
 | S4 idioms | literal phrasing |
 | S5 relevance | explicit time words (no perfect) |
 | S6 collocations | regular literal pairings allowed |
+| S7 adverb position | one slot: before the main verb |

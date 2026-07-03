@@ -146,6 +146,30 @@ The *more/most* periphrasis is dropped entirely, removing the syllable-count jud
 (Flagged: very long adjectives produce long forms like *beautifulest*; acceptable because
 the rule is exceptionless and the form is still readable.)
 
+**Two cases the base rule leaves to state.**
+
+- **Comparatives of `-ly` adverbs.** An adverb ending in `-ly` is a consonant + `y`, so it
+  takes the same **`y → i`** spelling sub-rule as the verb/plural rules
+  ([M1](#rule-m1--all-verbs-are-regular)): `-lier` / `-liest`.
+
+  | Adverb | Comparative | Superlative |
+  | ------ | ----------- | ----------- |
+  | quickly | **quicklier** | **quickliest** |
+  | easily | **easilier** | **easiliest** |
+  | carefully | **carefullier** | **carefulliest** |
+
+  This replaces standard *more quickly* / *most quickly*. **Open decision (flagged):**
+  *carefullier* and *easilier* are exceptionless but clumsy; whether long `-ly` adverbs
+  should instead be allowed a *more/most* escape hatch is logged in
+  [to-do.md](../docs/to-do.md), not decided here.
+
+- **Quantifier *more* / *most*.** Because *many/much* regularize to **`manyer` / `manyest`**
+  (row above, and [G5](grammar.md#rule-g5--all-nouns-are-countable) makes every noun count),
+  the quantifier uses of *more* and *most* follow suit: *more than 100 persons* →
+  **manyer than 100 persons**; *most people* → **manyest persons**. **Open decision
+  (flagged):** as bare quantifiers (*I want more* → *I want manyer*) these read oddly; logged
+  in [to-do.md](../docs/to-do.md) in case the forms turn out too absurd to keep.
+
 ---
 
 ## Rule M6 — One adverb rule
