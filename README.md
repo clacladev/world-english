@@ -141,6 +141,7 @@ world-english/
 │   ├── morphology.md           # regular verbs, plurals, comparatives
 │   ├── grammar.md              # tense/aspect, articles, prepositions
 │   ├── style.md                # plain-phrasing guidance
+│   ├── samples.md              # dogfooded translations + regression test
 │   └── to-do.md                # prioritized problem backlog
 ├── resources/
 │   ├── IRREGULARITIES.md       # catalogue of what English forces you to memorize

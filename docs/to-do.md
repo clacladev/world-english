@@ -121,6 +121,22 @@ methodology (README step 3: "design the fixes" is incomplete for these three).
     this may end up as `style.md` guidance (plain, low-context request/refusal templates)
     rather than a full spec. Worth a design discussion before writing.
 
+16. **Constructions surfaced by dogfooding ([samples.md](samples.md)).** Translating real
+    passages exposed four gaps the specs do not yet cover — logged here so they are fixed by
+    rule, not improvised:
+    - **The *for* test — duration vs. thing-awaited.** [G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs)
+      drops verb-selected *for* (*wait the bus*) but [S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect)
+      keeps duration *for* (*for three minutes*); one clause can hold both, so the specs need
+      an explicit test for which survives.
+    - **Reported speech / content clauses.** Whether tense backshifts, and how complementizer
+      *that* behaves in nominal clauses (*He said that it beed…*), is unspecified.
+    - **The *of*-genitive vs. G10 *'s*.** *the trip of hims life* vs. *hims life's trip* —
+      [G10](grammar.md#rule-g10--noun-possessive) fixes *'s* but not when the *of*-phrase is
+      preferred.
+    - **Subordinating conjunctions.** *while, because, when, if* (beyond G8's conditional) are
+      used on the standard model with no spec of their own.
+    Source: [samples.md](samples.md) "Gaps this file surfaced". Status: **gap**.
+
 ---
 
 ## Priority 3 — Build the planned tooling
@@ -197,3 +213,4 @@ here.
 | 13 | Pronunciation/speech tool | tooling | P3 |
 | 14 | Listening & speaking support | uncovered, needs scoping | P4 |
 | 15 | Psychological/motivational factors | uncovered, likely out of scope | P4 |
+| 16 | Constructions surfaced by dogfooding | **gap** | P2 |
