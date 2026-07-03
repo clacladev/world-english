@@ -43,8 +43,8 @@ verb.
 | ------------ | ------------------- |
 | give up | **quit** / **stop** |
 | put off | **delay** |
-| look after | **mind** / **care for** |
-| come up with | **invent** / **think of** |
+| look after | **mind** / **tend** |
+| come up with | **invent** / **devise** |
 | find out | **learn** / **discover** |
 
 **Trade-off.** Slightly less idiomatic, more learnable. Phrasal verbs are not *banned* —
@@ -99,8 +99,15 @@ now, so far*.
 **Problem it solves.** Recovers the nuance the perfect used to encode, without its
 irregular form.
 
-**Examples.** *I have finished* → **I already finished**. *She has lived here for years* →
-**She lived here since years** / **She still live here, since years**.
+**Examples.** *I have finished* → **I already finished** (finished → past tense + *already*).
+*She has lived here for ten years* (and still does) → **She still live here, for ten years**
+(still true → **present** tense, per [G1](grammar.md#rule-g1--a-leaner-tenseaspect-system)).
+
+**`for` and `since` keep their standard split.** Use **`for`** for a **duration**
+(*for ten years*, *for a long time*) and **`since`** for a **starting point**
+(*since 2015*, *since Monday*) — this is a real, non-arbitrary distinction, so World English
+keeps it rather than collapsing it. *Since years* is wrong in standard English and stays
+wrong here: a stretch of time takes *for*.
 
 **Trade-off.** A word or two longer; the meaning is explicit instead of carried by an
 opaque tense.
@@ -115,8 +122,9 @@ literal pairing is acceptable in World English.
 **Problem it solves.** Collocations (*heavy rain* not *strong rain*; *make the bed*) are
 unpredictable word-partnerships (see [`PAIN-POINTS.md` §4](../resources/PAIN-POINTS.md)).
 
-**Examples.** *heavy rain* / *strong rain* → **much rain** is fine; *make a decision* →
-**decide**; *do homework* → **do homework** *or* **study**.
+**Examples.** *heavy rain* → **strong rain** is fine (a regular, literal adjective+noun
+pairing instead of the arbitrary collocation); *make a decision* → **decide**;
+*do homework* → **do homework** *or* **study**.
 
 **Trade-off.** Sounds less native; removes a large memorization layer.
 

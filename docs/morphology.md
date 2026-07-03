@@ -14,9 +14,20 @@ standard English in its *forms*, but every form is now derivable from a single r
 
 ## Rule M1 — All verbs are regular
 
-**Rule.** Every verb forms its past tense and past participle by adding **`-ed`** (with the
-regular spelling sub-rules: `-e` → `-ed`, consonant-`y` → `-ied`, double a stressed final
-consonant). There are **no irregular verbs** and **no separate participle form**.
+**Rule.** Every verb forms its past tense and past participle by adding **`-ed`**, using the
+ordinary regular spelling sub-rules — stated precisely here so every form, including *beed*,
+derives from the rule rather than contradicting it:
+
+- **Silent final `-e`** → add just **`-d`** (the `e` is already written): *love → loved*,
+  *give → **gived*** (GIVD).
+- **Stem ending in a *pronounced* vowel** → add the full **`-ed`**: *be → **beed***,
+  *go → **goed***. (*see → **seed*** lands the same way under either reading, since its
+  final `e` is not silent.)
+- **Consonant + `y`** → **`-ied`**: *try → tried*, *carry → carried*.
+- **Stressed final single-vowel + single-consonant** → double the consonant: *stop → stopped*,
+  *refer → referred*.
+
+There are **no irregular verbs** and **no separate participle form**.
 
 **Problem it solves.** ~200 irregular verbs in everyday use (see
 [§3](../resources/IRREGULARITIES.md#3-verb-conjugation)) — the densest pure-memorization
@@ -51,7 +62,10 @@ a single present form **`be`** for all persons and a regular past **`beed`**:
 | participle | been | **beed** |
 | `-ing` | being | being |
 
-*I be here. She be ready. They beed late. It has beed done.*
+*I be here. She be ready. They beed late. The work beed hard.*
+
+(No perfect form appears here — *has beed* would rebuild the perfect [G1](grammar.md#rule-g1--a-leaner-tenseaspect-system)
+drops; the passive *be + -ed* is specified separately in [G9](grammar.md#rule-g9--passive-voice).)
 
 **Problem it solves.** *be* is the most irregular **and** most frequent word in English
 (eight forms, see [§3](../resources/IRREGULARITIES.md#3-verb-conjugation)). Regularizing it

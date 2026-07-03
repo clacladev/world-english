@@ -14,15 +14,19 @@ probabilistic system with one explicit rule.
 ## Rule G1 — A leaner tense/aspect system
 
 **Rule.** World English keeps **three tenses** (past, present, future) and **one optional
-aspect** (continuous, with `-ing`). It **removes the perfect** as a separate form. Past
-relevance is expressed by the simple past plus a time word when needed.
+aspect** (continuous, with `-ing`). It **removes the perfect** as a separate form. What the
+perfect used to encode splits by a single deterministic test: if the situation **still holds**,
+use the **present tense** + a time phrase (*I live here for ten years*); if it is **finished**,
+use the **past tense** + a time word (*I finished already*). No wavering between forms — the
+"still true?" question has one answer, and it picks the tense.
 
 | Meaning | Standard English | World English |
 | ------- | ---------------- | ------------- |
 | simple past | I lived here | I lived here |
 | present continuous | I am living | I **be living** (see [morphology M2](morphology.md)) |
 | past continuous | I was living | I **beed living** (see [morphology M2](morphology.md)) |
-| present perfect | I have lived here for ten years | I **lived here for ten years** (still true) → *I live here for ten years* / *I live here since ten years* |
+| present perfect — still true | I have lived here for ten years | I **live here for ten years** (present tense = it still holds) |
+| present perfect — finished | I have finished the work | I **finished the work already** (past tense + time word) |
 | past perfect | I had lived here before that | I **lived here before** (time word carries the earlier past) |
 | future | I will live | I **will live** |
 | future perfect | I will have lived here by then | I **live here by then** (time word carries completion) |
@@ -45,11 +49,11 @@ number/quantifier when count matters. The *a/an* distinction is removed.
 
 | Standard English | World English |
 | ---------------- | ------------- |
-| I saw a dog. The dog barked. | I saw **dog**. **The dog** barked. |
-| She is a doctor. | She is **doctor**. |
+| I saw a dog. The dog barked. | I **seed dog**. **The dog** barked. |
+| She is a doctor. | She **be doctor**. |
 | an hour, a university | (no article) **hour**, **university** |
 | The dogs barked. (definite plural) | **The dogs** barked. (`the` + [M4](morphology.md) plural — no new rule) |
-| Some information I gave you was wrong. | **The information** I gave you was wrong. (definite, singular) |
+| Some information I gave you was wrong. | **The information** I **gived** you **beed** wrong. (definite, singular) |
 | I need informations for the report. | I need **informations**. (indefinite, plural, per [G5](#rule-g5--all-nouns-are-countable)) |
 
 **Generics.** A generic statement names a whole kind, not one already-known thing, so it
@@ -110,7 +114,7 @@ prepositions are **dropped** so the verb takes a direct object. Where a preposit
 | Use | Standard (arbitrary) | World English |
 | --- | -------------------- | ------------- |
 | time — point or period | at 3, on Monday, in July | **on** 3, **on** Monday, **on** July |
-| time — part of the day | in the morning, at night | **on** the morning, **on** night |
+| time — part of the day | in the morning, at night | **on** the morning, **on** the night |
 | place — being somewhere | at the shop, in the city | **in** the shop, **in** the city |
 | place — no-article spots | at home, at work | **in** home, **in** work |
 | place — going somewhere | to the shop | **to** the shop |
@@ -133,8 +137,6 @@ transitive:
 | listen **to** music | **listen music** |
 | wait **for** the bus | **wait the bus** |
 | depend **on** the weather | **depend the weather** |
-| believe **in** it | **believe it** |
-| pay **for** it | **pay it** |
 | look **at** the picture | **look the picture** |
 
 **Keep / drop / replace — the boundary.** Every verb+preposition pairing falls into exactly
@@ -151,6 +153,15 @@ meaning is unchanged without it. If removing it would merge two distinct senses 
 **at*** (view) vs *look **for*** (search) — the particle carries meaning, so it is a phrasal
 verb and S2 swaps in a plain verb (*seek*) instead. This keeps G3 and S2 from claiming the
 same forms.
+
+**Two the test explicitly excludes from the drop list.** *believe **in*** and *pay **for***
+fail it, so they are **not** dropped: *believe* (accept as true) and *believe in* (have faith
+in) are distinct senses — dropping *in* would merge them — so *believe in* is a
+meaning-changing particle routed to **replace** ([S2](style.md#rule-s2--prefer-plain-verbs-over-phrasal-verbs):
+*trust*). And *pay* already takes a direct object for the recipient (*pay the waiter*), so
+*pay **for*** (the thing bought) marks a **real relation** and is **kept** — dropping it
+would collide *pay the meal* with *pay the person*. They are listed here as the worked cases
+that show the boundary is a test, not a blanket rule.
 
 **Scope of the drop.** Transitive-capable **verbs** only. Adjective- and noun-selected
 prepositions (*good **at** math*, *afraid **of** dogs*, *reason **for** it*) are **not**
@@ -217,6 +228,13 @@ furniture*) that blocks *informations*, *an advice* (see
 *a piece of advice → **one advice***; *furniture → **furnitures***;
 *much information → **many informations***; *how much furniture → **how many furnitures***.
 
+**Quantifier consequence.** Once every noun counts, the count/non-count quantifier split has
+nothing left to split, so its members collapse to the count form everywhere: **`much` → `many`**
+and **`less` → `fewer`** in all cases (*many informations*, *fewer furnitures*). The learner
+never again decides whether a noun is "mass" before choosing a quantifier. (This is only the
+*determiner* *much*; the degree adverb *much* in *much better* is untouched — it quantifies an
+adjective, not a noun.)
+
 **Divergence & trade-off.** *informations* is non-standard English but grammatical in many
 languages and instantly clear. Removes a noun-by-noun memorization list and its knock-on
 effects (*much* vs *many*, article choice).
@@ -225,15 +243,20 @@ effects (*much* vs *many*, article choice).
 
 ## Rule G6 — Regular questions and negation (no do-support)
 
-**Rule.** Form a **question** by adding a clause-initial question word or marker, keeping
-normal word order — **no dummy `do`**, no subject–auxiliary inversion. Form a **negative**
-by placing **`not`** before the verb.
+**Rule.** Form a **question** with a clause-initial marker, keeping normal word order —
+**no dummy `do`**, no subject–auxiliary inversion. A *yes/no* question takes the invariant
+marker **`Q`** (pronounced **KYOO** /kjuː/, per [pronunciation.md](pronunciation.md)); a
+*wh-* question uses its **wh-word** (*who, what, where…*) as the marker instead — no extra
+`Q`. The marker is **always present in speech and writing**; rising intonation is
+*permitted on top* of it but is never what carries the question ([P7](pronunciation.md#rule-p7--intonation-carries-no-grammatical-load)
+makes intonation non-load-bearing, so a flat pitch reads correctly). Form a **negative** by
+placing **`not`** before the verb.
 
 | Standard English | World English |
 | ---------------- | ------------- |
-| Do you like it? | **You like it?** (rising) / **Q you like it?** |
-| Does she know? | **She know?** |
-| Who did you call? | **Who you called?** (wh-word kept, normal word order) |
+| Do you like it? | **Q you like it?** (rising pitch optional, never required) |
+| Does she know? | **Q she know?** |
+| Who did you call? | **Who you called?** (wh-word is the marker; normal word order) |
 | I do not like it. | I **not like** it. |
 | She did not go. | She **not goed**. |
 | It is good, isn't it? | **It be good, right?** (invariant tag) |
@@ -244,9 +267,14 @@ negative, plus inversion (see
 naturally (*You like it?*).
 
 **Divergence & trade-off.** Removes do-support and inversion outright. Yes/no questions
-rely on a question marker or intonation; *wh-* questions keep the question word
-(*Who you saw?*). Tag questions (*…isn't it?*) are replaced by a single invariant tag —
-**`right?`** — eliminating the mirror-the-auxiliary computation.
+carry the marker **`Q`** (rising intonation optional on top, never load-bearing — this is
+the divergence that resolves the [P7](pronunciation.md#rule-p7--intonation-carries-no-grammatical-load)
+promise that pitch changes nothing); *wh-* questions keep the question word as their marker
+(*Who you seed?*). Tag questions (*…isn't it?*) are replaced by a single invariant tag —
+**`right?`** — eliminating the mirror-the-auxiliary computation. Introducing `Q` as a new
+function word is a real addition (against principle 1's "subtract first"), accepted because
+it buys a fully intonation-free, do-support-free question — recorded as a deliberate coinage,
+the one place World English adds a word rather than removing one.
 
 ---
 
@@ -274,7 +302,7 @@ and carries suppletive pasts (*can*→*could*) and defective morphology (see
 
 | Standard English | World English |
 | ---------------- | ------------- |
-| It may / might rain. | **Maybe it rain.** / **It can rain.** |
+| It may / might rain. | **Maybe it will rain.** / **It can rain.** |
 | It must be John. (deduction) | **Probably it be John.** / **Certainly it be John.** |
 | You must / have to go. | **You must go.** |
 | You ought to rest. | **You should rest.** |
@@ -327,6 +355,6 @@ split is preserved, everything else is dropped.
 | Prepositions (time/place) | arbitrary at/in/on | fixed defaults (G3) |
 | Pronoun case | irregular grid, who/whom | subj + obj + obj`-s` (G4) |
 | Countability | countable vs uncountable | all countable (G5) |
-| Questions/negation | do-support + inversion | marker/intonation + `not` (G6) |
+| Questions/negation | do-support + inversion | `Q`/wh-word marker + `not` (G6) |
 | Modals | overlapping cluster + suppletive pasts | can / must / should / will + adverbs (G7) |
 | Conditionals | 5 shapes via backshift + would | `if` + natural tense, will/would (G8) |

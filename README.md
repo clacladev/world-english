@@ -83,15 +83,18 @@ claim that the world should switch tomorrow.
 - Not a "dumbed-down" English — it aims to express the same ideas, just with less
   arbitrary machinery.
 - Not a phonetic rewrite. Spelling changes are conservative and recognizable.
-- Not finished, or even started in earnest. This README is the map; the territory
-  comes next.
+- Not finished. The design is underway: five specifications are drafted under `docs/`
+  (orthography, pronunciation, morphology, grammar, style), backed by the research in
+  `resources/`. The rules will keep changing as they are worked out — and the tooling has
+  not started.
 
 ## Scope of the reform
 
-The detailed catalogue of learner difficulties — *what* is hard, and *why* — will
-live in a separate document (`PAIN-POINTS.md`, to be added). Each documented pain
-point becomes a design target with its own proposed ruleset. Broadly, the work
-spans:
+The detailed catalogue of learner difficulties — *what* is hard, and *why* — lives in
+[`resources/PAIN-POINTS.md`](resources/PAIN-POINTS.md) (the research-backed survey) and
+[`resources/IRREGULARITIES.md`](resources/IRREGULARITIES.md) (the what-must-be-memorized
+companion). Each documented pain point becomes a design target with its own proposed
+ruleset. Broadly, the work spans:
 
 - **Orthography** — spelling regularized lightly toward predictable sound.
 - **Morphology** — regular verbs, regular plurals, regular comparatives.
@@ -108,7 +111,7 @@ A core promise is that **how a word is written should tell you how it is said.**
 Pronunciation will be documented two ways, for two audiences:
 
 - **Learner respelling** — a simple, symbol-free key (e.g. *World English* →
-  `WURLD ING-glish`) that anyone can read at a glance.
+  `WERLD ING-glish`) that anyone can read at a glance.
 - **IPA** — the International Phonetic Alphabet, for precision and for linguists.
 
 Both will accompany the spelling rules and feed the pronunciation tooling.
@@ -126,19 +129,24 @@ The end goal is not just documentation but working tools:
 These are goals, not yet implementations. Their design will be specified before any
 code is written.
 
-## Repository layout (planned)
+## Repository layout
 
 ```
 world-english/
-├── README.md          # this file — goals, principles, plan
-├── PAIN-POINTS.md      # catalogue of learner difficulties and their causes
+├── README.md                   # this file — goals, principles, plan
 ├── docs/
-│   ├── orthography.md  # spelling regularization rules
-│   ├── morphology.md   # regular verbs, plurals, comparatives
-│   ├── grammar.md      # tense/aspect, articles, prepositions
-│   ├── pronunciation.md# respelling key + IPA conventions
-│   └── style.md        # plain-phrasing guidance
-└── tools/              # translators and pronunciation tooling (future)
+│   ├── README.md               # specs index + how the specs fit together
+│   ├── orthography.md          # spelling regularization rules
+│   ├── pronunciation.md        # respelling key + IPA conventions
+│   ├── morphology.md           # regular verbs, plurals, comparatives
+│   ├── grammar.md              # tense/aspect, articles, prepositions
+│   ├── style.md                # plain-phrasing guidance
+│   └── to-do.md                # prioritized problem backlog
+├── resources/
+│   ├── IRREGULARITIES.md       # catalogue of what English forces you to memorize
+│   ├── PAIN-POINTS.md          # research-backed survey of learner difficulty
+│   └── brehe-grammar-anatomy/  # standard-English grammar baseline (reference)
+└── tools/                      # translators and pronunciation tooling (planned, not yet created)
 ```
 
 ## Methodology

@@ -140,14 +140,17 @@ with CAPITALS in the respelling. The predictability comes from *showing* the str
 word, not from moving it to a fixed position — so a learner never has to memorize or guess
 where the stress falls, but the word still sounds like English. The one regularization is
 that **stress-based noun/verb pairs are eliminated**: the two senses take the same stress
-and are distinguished by context.
+and are distinguished by context. The merger is **deterministic — the collapsed pair always
+takes the noun's stress** (the more frequent, phrase-initial form), so there is a single
+right answer to mark, never a coin-toss.
 
 **Problem it solves.** Unpredictable, contrastive word stress — a leading cause of being
 misunderstood (see [§2](../resources/IRREGULARITIES.md#2-pronunciation)). Learners cannot
 derive stress placement from the written word; the respelling supplies it directly.
 
-**Examples.** *present* (gift) and *present* (to give) → both **PREZ-ent**; *record* (noun)
-and *record* (verb) → both **REK-erd**. Words with no such pair keep their ordinary stress,
+**Examples.** *present* (gift) and *present* (to give) → both **PREZ-ent** (the noun's
+first-syllable stress); *record* (noun) and *record* (verb) → both **REK-erd** (again the
+noun's). Words with no such pair keep their ordinary stress,
 always shown — and it is often *not* first:
 
 | Word | Respelling | Stressed syllable |
@@ -286,13 +289,17 @@ their stress openly — nothing to guess (kom-**PYOO**-ter, uh-**BOWT**).
 
 ### A full sentence
 
-> *The doctor gave the young child a book about birds.*
+This is a valid World English sentence — regular past *gived* ([M1](morphology.md#rule-m1--all-verbs-are-regular),
+silent-*e* stem adds *-d*) and no indefinite article before *book*
+([G2](grammar.md#rule-g2--one-article-rule)):
 
-**Respelling:** dhuh **DOK**-ter **GAYV** dhuh **YUNG** **CHYLD** uh **BUUK** uh-**BOWT** **BERDZ**
+> *The doctor gived the young child book about birds.*
 
-**IPA:** /ðə ˈdɑktɚ ɡeɪv ðə jʌŋ tʃaɪld ə bʊk əˈbaʊt bɝdz/
+**Respelling:** dhuh **DOK**-ter **GIVD** dhuh **YUNG** **CHYLD** **BUUK** uh-**BOWT** **BERDZ**
 
-The function words (*the*, *a*) sit unstressed and lowercase; the content words carry the
+**IPA:** /ðə ˈdɑktɚ ɡɪvd ðə jʌŋ tʃaɪld bʊk əˈbaʊt bɝdz/
+
+The function word *the* sits unstressed and lowercase; the content words carry the
 CAPITAL-marked stress. Reading it exactly like this — each word at full value — is **always
 correct** (P5–P6). A fast speaker might blur *the* and link the words together, but that is
 optional, never required.
@@ -302,10 +309,19 @@ optional, never required.
 ## Cross-spec note
 
 The respelling key and [orthography.md](orthography.md) move together. The `ough` words
-respelled in orthography O5 take the obvious key reading — *thru* → THROO, *tho* → THOH,
-*altho* → awl-THOH; every word *not* respelled there (*knight* → NYT, *through*-as-retained)
-is still fully covered by its entry here. No word is left without a predictable
-pronunciation.
+respelled in orthography O5 take the obvious key reading — *thru* → THROO, *tho* → **DHOH**,
+*altho* → **awl-DHOH** (the `th` in *though*/*although* is the **voiced** /ð/, so it is `dh`
+in the key, per [P3](#rule-p3--th-is-split-in-the-key)); every word *not* respelled there
+(*knight* → NYT, *through*-as-retained) is still fully covered by its entry here.
+
+**Homographs are the one residue.** A handful of words are spelled the same but said two
+ways — *lead* (the metal, LED) vs *lead* (guide, LEED); *read* (present, REED) vs *read*
+(past, RED). These keep **two key entries**, and context selects which applies — the reader
+knows *the pipe is lead* is LED, not LEED. So the guarantee is precise: every *word* has a
+predictable pronunciation, and the only place a reader must consult context is this small,
+closed set of retained homographs — recorded here as known residue (it is the pronunciation
+mirror of the homographs [orthography O4](orthography.md#rule-o4--what-is-deliberately-left-alone)
+keeps distinct in spelling).
 
 ---
 
