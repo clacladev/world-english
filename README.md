@@ -163,7 +163,15 @@ world-english/
 3. **Design the fixes** — for each difficulty, propose a regularized or reformed
    rule, with examples and trade-offs.
 4. **Specify the language** — consolidate the rules into the `docs/` specifications.
-5. **Build the tools** — translators and pronunciation/speech support.
+5. **Prove the rules hold together** — dogfood them and check them mechanically before
+   trusting them. Concretely: keep [`docs/samples.md`](docs/samples.md) (real passages
+   translated and annotated rule-by-rule) as a **regression test**, build the **linter** that
+   flags any World English example still using an abolished form, and hold every rule to
+   explicit **acceptance criteria** — it is "done" only when it is *statable without a hidden
+   word list*, *`samples.md` stays consistent*, and its *example columns pass a rule sweep*.
+   This step exists because a first design pass produced internal contradictions that only a
+   sweep caught; the rules are not stable until they survive it.
+6. **Build the tools** — translators and pronunciation/speech support.
 
 Each step produces documentation that the next step builds on. Nothing is decided
 silently: divergences from English are always written down with their rationale.
