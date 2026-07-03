@@ -2,7 +2,9 @@
 
 These are the **fix specifications** for World English: each file takes a class of English
 irregularity (catalogued in [`../resources/IRREGULARITIES.md`](../resources/IRREGULARITIES.md))
-and replaces it with a regular, predictable rule.
+and replaces it with a regular, predictable rule. For how earlier reforms and controlled-English
+subsets approached the same problems — and what the intelligibility research says about these
+choices — see [`../resources/PRIOR-ART.md`](../resources/PRIOR-ART.md).
 
 Every rule in these specs follows the same template, per the project
 [design principles](../README.md#design-principles):

@@ -60,7 +60,10 @@ ask, rigorously: **how simple could English be while still being English?**
 
 This is a **research and design effort**, not a campaign. The goal is to map the
 problem honestly, design defensible solutions, and document them well — not to
-claim that the world should switch tomorrow.
+claim that the world should switch tomorrow. It is also not the first such effort:
+[`resources/PRIOR-ART.md`](resources/PRIOR-ART.md) surveys a century of controlled-English
+subsets, spelling reforms, and intelligibility research — what survived, what failed, and
+where that evidence backs or challenges World English's own rules.
 
 ## Design principles
 
@@ -146,6 +149,7 @@ world-english/
 ├── resources/
 │   ├── IRREGULARITIES.md       # catalogue of what English forces you to memorize
 │   ├── PAIN-POINTS.md          # research-backed survey of learner difficulty
+│   ├── PRIOR-ART.md            # what earlier reforms/subsets tried, and what happened
 │   └── brehe-grammar-anatomy/  # standard-English grammar baseline (reference)
 └── tools/                      # translators and pronunciation tooling (planned, not yet created)
 ```
