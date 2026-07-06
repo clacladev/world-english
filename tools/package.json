@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Tooling for World English — starting with the spec linter (to-do.md item 11).",
+  "description": "Tooling for World English — the spec linter and the SE→WoE / WoE→SE translators (to-do.md items 11–12).",
   "scripts": {
     "lint": "bun lint.ts",
+    "translate": "bun translate.ts",
     "test": "bun test",
     "typecheck": "tsc --noEmit"
   },

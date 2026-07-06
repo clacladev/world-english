@@ -58,16 +58,22 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
     of "tooling someday" into Priority 1.
     Source: [README "Planned tooling"](../README.md#planned-tooling),
     [samples.md](samples.md).
-    Status: **linter built** (the forward *translator* still remains). The linter lives in
+    Status: **linter + forward translator built**. The linter lives in
     [`../tools`](../tools) (Bun/TypeScript): it sweeps every World-English example column and
     the `samples.md` passages for abolished forms, gates CI (`bun run lint`), and ships the
     **abolished-forms dataset** the specs never had (irregular verbs/plurals, `be`, British
     spellings, suppletives, phrasal/dropped-prep pairs). It already caught one real
     inconsistency prose review had missed — a possessive left unconverted in the [G11](grammar.md#rule-g11--relative-clauses)
     relative-clause example (*My car* → **Mes car**). Low-confidence/POS-dependent classes
-    (articles, third-person `-s`, modals, homographs) are gated behind `--strict`. The
-    **SE→WoE forward translator** (POS/syntax: article insertion-drop, `-s`, preposition
-    restoration) is the remaining half of this item.
+    (articles, third-person `-s`, modals, homographs) are gated behind `--strict`.
+    **The SE→WoE forward translator is now built too** (`../tools/translate.ts`, `bun run
+    translate`): it applies the *deterministic* closed-class transforms (spelling, `be`,
+    pronouns, comparatives, and the non-homograph irregular verbs/plurals) and **flags** — never
+    guesses — the POS/syntax/lexicon-dependent cases (article drop, `-s`, preposition
+    restoration, phrasal verbs, zero-past verbs). It reuses the linter's dataset as the forward
+    map and is regression-tested against the four `samples.md` gold passages. The
+    lexicon-dependent half (article drop by syntax, preposition restoration) waits on the core
+    lexicon (item 8).
     Acceptance criteria per [README methodology step 5](../README.md#methodology): a rule is
     "done" only when it is
     statable without a hidden word list, `samples.md` stays consistent, and the example
@@ -77,10 +83,17 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
     (M1 *goed*, M4 *childs*, G3's dropped prepositions) are explicitly designed to map back
     losslessly; this tool proves the claim and depends on the same core lexicon (item 8) for
     the preposition/phrasal restorations.
-    Source: [README "Planned tooling"](../README.md#planned-tooling). Status: **tooling**
-    (was Priority 3), paired with item 11. The linter's **abolished-forms dataset**
-    ([`../tools/data`](../tools/data)) already encodes the standard↔regular pairs (irregular
-    verbs/plurals, `be`, spellings, pronouns) this restorer needs — it is the seed to build on.
+    Source: [README "Planned tooling"](../README.md#planned-tooling).
+    Status: **built** (`../tools/translate.ts --reverse`, logic in `src/reverse.ts`). It inverts
+    the linter's **abolished-forms dataset** ([`../tools/data`](../tools/data)) to restore
+    standard English. The truly-lossless classes (non-homograph irregular verbs, plurals,
+    comparatives, silent letters, `ough`, unique pronouns) round-trip cleanly; the deliberate
+    collapses restore a **canonical default and flag the guess** (`be`→*is*, `beed`→*was*,
+    `mes`→*my*, and every verb whose `-ed` past covers both past and participle, e.g. `seed`→
+    *saw*). Valid standard forms are left alone (American spelling stays; `who` untouched), and
+    the preposition/phrasal restorations still **depend on the core lexicon (item 8)** — those
+    are left unrestored, not guessed. Proven by `test/reverse.test.ts`, which round-trips the
+    `samples.md` passages (Passage 4 returns to its exact Standard-English source).
 
 1. **Articles (a/an/the/zero).** Called "a universally acknowledged difficulty" and the
    single hardest grammatical feature for many learners (article-less L1s especially);
@@ -266,8 +279,8 @@ user, not decided here.
 | # | Item | Status | Tier |
 | - | ---- | ------ | ---- |
 | 8 | Core lexicon (2–3k word families) | **drafted (seed)** — hidden dependency | **P1** |
-| 11 | SE→WoE translator + linter | **linter built** (`tools/`); forward translator remains | **P1** |
-| 12 | WoE→SE reverse translator | tooling — prerequisite (dataset seed now exists) | **P1** |
+| 11 | SE→WoE translator + linter | **linter + forward translator built** (`tools/`); lexicon-dependent parts flagged | **P1** |
+| 12 | WoE→SE reverse translator | **built** (`translate.ts --reverse`); lexicon-dependent restorations deferred to item 8 | **P1** |
 | 1 | Articles | drafted (point-4 fix applied) | P1 |
 | 2 | Pronunciation system | drafted (point-4 fix; see item 18) | P1 |
 | 3 | Spelling opacity | drafted (resolved) | P1 |
