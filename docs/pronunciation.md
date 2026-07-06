@@ -140,14 +140,17 @@ with CAPITALS in the respelling. The predictability comes from *showing* the str
 word, not from moving it to a fixed position — so a learner never has to memorize or guess
 where the stress falls, but the word still sounds like English. The one regularization is
 that **stress-based noun/verb pairs are eliminated**: the two senses take the same stress
-and are distinguished by context.
+and are distinguished by context. The merger is **deterministic — the collapsed pair always
+takes the noun's stress** (the more frequent, phrase-initial form), so there is a single
+right answer to mark, never a coin-toss.
 
 **Problem it solves.** Unpredictable, contrastive word stress — a leading cause of being
 misunderstood (see [§2](../resources/IRREGULARITIES.md#2-pronunciation)). Learners cannot
 derive stress placement from the written word; the respelling supplies it directly.
 
-**Examples.** *present* (gift) and *present* (to give) → both **PREZ-ent**; *record* (noun)
-and *record* (verb) → both **REK-erd**. Words with no such pair keep their ordinary stress,
+**Examples.** *present* (gift) and *present* (to give) → both **PREZ-ent** (the noun's
+first-syllable stress); *record* (noun) and *record* (verb) → both **REK-erd** (again the
+noun's). Words with no such pair keep their ordinary stress,
 always shown — and it is often *not* first:
 
 | Word | Respelling | Stressed syllable |
@@ -214,31 +217,50 @@ always understood.
 
 ---
 
-## Rule P7 — Intonation carries no grammatical load
+## Rule P7 — Intonation carries only the question
 
-**Rule.** Meaning is carried by **words and word order**, never by required pitch. Questions,
-negation, and emphasis are marked grammatically (see [grammar.md](grammar.md)), so a flat or
-L1-native intonation **never changes the literal meaning** of a sentence.
+**Rule.** Pitch is load-bearing only where **no word already marks the meaning** — and there is
+exactly one such place: the **yes/no question**. It has no question word (World English dropped
+do-support and inversion), so `You like it` and its question are segmentally identical, and
+**rising intonation** in speech — plus a **leading `?`** in writing — is the *only* thing that
+tells them apart (see [grammar.md G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)).
+A **wh-question is already marked by its wh-word** (*who, what, where…*), so pitch there is
+redundant: it is **permitted for naturalness but never required**, and English wh-questions
+naturally *fall* like statements anyway. Everywhere else — statements, negation, emphasis,
+attitude — meaning rides on **words and word order**, so pitch changes nothing.
 
-**Example.** In standard English *You like it.* becomes a question only by a rising pitch.
-World English marks it with a word instead (see [grammar.md](grammar.md) G6): the question
-is *Q you like it?* — so a flat, unchanging pitch reads correctly as either the statement or
-the question, told apart by the marker, not the tune.
+**Example.** *You like it.* (statement) vs *?You like it?* (question). In speech the question
+**rises** at the end; in writing the leading `?` says so. The leading `?` *is* the written
+instruction to raise the pitch, so the two channels agree — a reader and a listener reach the
+same reading, one by the mark and one by the tune.
 
-**Problem it solves.** English uses pitch movement to signal questions, contrast, and
-attitude, and learners from languages with different intonation patterns both mis-signal and
-mis-hear these (see [PAIN-POINTS §1](../resources/PAIN-POINTS.md#1-pronunciation--phonology),
-intonation). World English does not make understanding depend on hearing or producing pitch.
+**Problem it solves.** English uses pitch for many jobs at once — questions, contrast,
+sarcasm, politeness — and learners from differently-intoned languages both mis-signal and
+mis-hear them (see [PAIN-POINTS §1](../resources/PAIN-POINTS.md#1-pronunciation--phonology),
+intonation). World English load-bears pitch for **only** the yes/no question, so a learner has
+a single intonation contrast to master, not an open set — and in writing does not need even
+that, because the leading `?` carries it.
 
-**Divergence & trade-off.** Intonation still exists for naturalness and emotion, but it is
-never load-bearing: nothing a learner needs to understand or be understood rides on it.
+**Divergence & trade-off.** This is a deliberate reversal of a stricter earlier stance:
+World English *does* let the yes/no question ride on intonation, because questions are frequent
+and important enough to be worth it, and because the alternative — a coined question particle —
+adds a word the language would rather not have (so removing it keeps questions **purely
+subtractive**: they drop do-support and add nothing). The cost is real: speakers of flat- or
+differently-intoned L1s must produce and hear a rising question — the difficulty
+[PAIN-POINTS §1](../resources/PAIN-POINTS.md#1-pronunciation--phonology) documents. It is
+mitigated in **writing** by the always-present leading `?` and bounded in **speech** to one
+contrast. Note this diverges from Jenkins' Lingua Franca Core, which rates grammatical
+intonation non-essential for intelligibility (see
+[PRIOR-ART §C](../resources/PRIOR-ART.md#c-the-empirical-base-on-international-intelligibility)
+and [to-do.md](../docs/to-do.md) item 18) — a recorded tension, not a settled call.
 
 ---
 
 ## Scope note — contrasts the respelling can't remove
 
 World English regularizes the **mapping** (which sound a spelling represents) and **what is
-required** of a speaker (P5–P7). It does **not** erase the phonetic difficulty of individual
+required** of a speaker (P5–P6 make connected speech and rhythm optional; P7 requires pitch for
+the one yes/no-question contrast and nothing else). It does **not** erase the phonetic difficulty of individual
 sounds. Phonemic contrasts that carry meaning are kept — *rice*/*lice* (r vs l),
 *think*/*sink* (/θ/ vs /s/), *ship*/*sheep* (/ɪ/ vs /i/) — because collapsing them would
 lose information. What the key guarantees is that it always shows **which** sound is
@@ -286,13 +308,17 @@ their stress openly — nothing to guess (kom-**PYOO**-ter, uh-**BOWT**).
 
 ### A full sentence
 
-> *The doctor gave the young child a book about birds.*
+This is a valid World English sentence — regular past *gived* ([M1](morphology.md#rule-m1--all-verbs-are-regular),
+silent-*e* stem adds *-d*) and no indefinite article before *book*
+([G2](grammar.md#rule-g2--one-article-rule)):
 
-**Respelling:** dhuh **DOK**-ter **GAYV** dhuh **YUNG** **CHYLD** uh **BUUK** uh-**BOWT** **BERDZ**
+> *The doctor gived the young child book about birds.*
 
-**IPA:** /ðə ˈdɑktɚ ɡeɪv ðə jʌŋ tʃaɪld ə bʊk əˈbaʊt bɝdz/
+**Respelling:** dhuh **DOK**-ter **GIVD** dhuh **YUNG** **CHYLD** **BUUK** uh-**BOWT** **BERDZ**
 
-The function words (*the*, *a*) sit unstressed and lowercase; the content words carry the
+**IPA:** /ðə ˈdɑktɚ ɡɪvd ðə jʌŋ tʃaɪld bʊk əˈbaʊt bɝdz/
+
+The function word *the* sits unstressed and lowercase; the content words carry the
 CAPITAL-marked stress. Reading it exactly like this — each word at full value — is **always
 correct** (P5–P6). A fast speaker might blur *the* and link the words together, but that is
 optional, never required.
@@ -302,10 +328,19 @@ optional, never required.
 ## Cross-spec note
 
 The respelling key and [orthography.md](orthography.md) move together. The `ough` words
-respelled in orthography O5 take the obvious key reading — *thru* → THROO, *tho* → THOH,
-*altho* → awl-THOH; every word *not* respelled there (*knight* → NYT, *through*-as-retained)
-is still fully covered by its entry here. No word is left without a predictable
-pronunciation.
+respelled in orthography O5 take the obvious key reading — *thru* → THROO, *tho* → **DHOH**,
+*altho* → **awl-DHOH** (the `th` in *though*/*although* is the **voiced** /ð/, so it is `dh`
+in the key, per [P3](#rule-p3--th-is-split-in-the-key)); every word *not* respelled there
+(*knight* → NYT, *through*-as-retained) is still fully covered by its entry here.
+
+**Homographs are the one residue.** A handful of words are spelled the same but said two
+ways — *lead* (the metal, LED) vs *lead* (guide, LEED); *read* (present, REED) vs *read*
+(past, RED). These keep **two key entries**, and context selects which applies — the reader
+knows *the pipe is lead* is LED, not LEED. So the guarantee is precise: every *word* has a
+predictable pronunciation, and the only place a reader must consult context is this small,
+closed set of retained homographs — recorded here as known residue (it is the pronunciation
+mirror of the homographs [orthography O4](orthography.md#rule-o4--what-is-deliberately-left-alone)
+keeps distinct in spelling).
 
 ---
 
@@ -319,4 +354,4 @@ pronunciation.
 | P4 | Native stress is kept and *always* marked; only noun/verb pairs collapse |
 | P5 | Connected speech is permitted, never required |
 | P6 | Syllable-timed rhythm is always acceptable |
-| P7 | Intonation is never load-bearing — grammar carries the meaning |
+| P7 | Intonation is load-bearing for one thing only — the yes/no question (rising pitch / leading `?`) |

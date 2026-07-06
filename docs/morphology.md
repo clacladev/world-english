@@ -14,9 +14,20 @@ standard English in its *forms*, but every form is now derivable from a single r
 
 ## Rule M1 — All verbs are regular
 
-**Rule.** Every verb forms its past tense and past participle by adding **`-ed`** (with the
-regular spelling sub-rules: `-e` → `-ed`, consonant-`y` → `-ied`, double a stressed final
-consonant). There are **no irregular verbs** and **no separate participle form**.
+**Rule.** Every verb forms its past tense and past participle by adding **`-ed`**, using the
+ordinary regular spelling sub-rules — stated precisely here so every form, including *beed*,
+derives from the rule rather than contradicting it:
+
+- **Silent final `-e`** → add just **`-d`** (the `e` is already written): *love → loved*,
+  *give → **gived*** (GIVD).
+- **Stem ending in a *pronounced* vowel** → add the full **`-ed`**: *be → **beed***,
+  *go → **goed***. (*see → **seed*** lands the same way under either reading, since its
+  final `e` is not silent.)
+- **Consonant + `y`** → **`-ied`**: *try → tried*, *carry → carried*.
+- **Stressed final single-vowel + single-consonant** → double the consonant: *stop → stopped*,
+  *refer → referred*.
+
+There are **no irregular verbs** and **no separate participle form**.
 
 **Problem it solves.** ~200 irregular verbs in everyday use (see
 [§3](../resources/IRREGULARITIES.md#3-verb-conjugation)) — the densest pure-memorization
@@ -51,7 +62,10 @@ a single present form **`be`** for all persons and a regular past **`beed`**:
 | participle | been | **beed** |
 | `-ing` | being | being |
 
-*I be here. She be ready. They beed late. It has beed done.*
+*I be here. She be ready. They beed late. The work beed hard.*
+
+(No perfect form appears here — *has beed* would rebuild the perfect [G1](grammar.md#rule-g1--a-leaner-tenseaspect-system)
+drops; the passive *be + -ed* is specified separately in [G9](grammar.md#rule-g9--passive-voice).)
 
 **Problem it solves.** *be* is the most irregular **and** most frequent word in English
 (eight forms, see [§3](../resources/IRREGULARITIES.md#3-verb-conjugation)). Regularizing it
@@ -131,6 +145,30 @@ split.
 The *more/most* periphrasis is dropped entirely, removing the syllable-count judgment call.
 (Flagged: very long adjectives produce long forms like *beautifulest*; acceptable because
 the rule is exceptionless and the form is still readable.)
+
+**Two cases the base rule leaves to state.**
+
+- **Comparatives of `-ly` adverbs.** An adverb ending in `-ly` is a consonant + `y`, so it
+  takes the same **`y → i`** spelling sub-rule as the verb/plural rules
+  ([M1](#rule-m1--all-verbs-are-regular)): `-lier` / `-liest`.
+
+  | Adverb | Comparative | Superlative |
+  | ------ | ----------- | ----------- |
+  | quickly | **quicklier** | **quickliest** |
+  | easily | **easilier** | **easiliest** |
+  | carefully | **carefullier** | **carefulliest** |
+
+  This replaces standard *more quickly* / *most quickly*. **Open decision (flagged):**
+  *carefullier* and *easilier* are exceptionless but clumsy; whether long `-ly` adverbs
+  should instead be allowed a *more/most* escape hatch is logged in
+  [to-do.md](../docs/to-do.md), not decided here.
+
+- **Quantifier *more* / *most*.** Because *many/much* regularize to **`manyer` / `manyest`**
+  (row above, and [G5](grammar.md#rule-g5--all-nouns-are-countable) makes every noun count),
+  the quantifier uses of *more* and *most* follow suit: *more than 100 persons* →
+  **manyer than 100 persons**; *most people* → **manyest persons**. **Open decision
+  (flagged):** as bare quantifiers (*I want more* → *I want manyer*) these read oddly; logged
+  in [to-do.md](../docs/to-do.md) in case the forms turn out too absurd to keep.
 
 ---
 

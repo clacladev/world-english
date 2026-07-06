@@ -43,8 +43,8 @@ verb.
 | ------------ | ------------------- |
 | give up | **quit** / **stop** |
 | put off | **delay** |
-| look after | **mind** / **care for** |
-| come up with | **invent** / **think of** |
+| look after | **mind** / **tend** |
+| come up with | **invent** / **devise** |
 | find out | **learn** / **discover** |
 
 **Trade-off.** Slightly less idiomatic, more learnable. Phrasal verbs are not *banned* —
@@ -99,8 +99,15 @@ now, so far*.
 **Problem it solves.** Recovers the nuance the perfect used to encode, without its
 irregular form.
 
-**Examples.** *I have finished* → **I already finished**. *She has lived here for years* →
-**She lived here since years** / **She still live here, since years**.
+**Examples.** *I have finished* → **I already finished** (finished → past tense + *already*).
+*She has lived here for ten years* (and still does) → **She still live here, for ten years**
+(still true → **present** tense, per [G1](grammar.md#rule-g1--a-leaner-tenseaspect-system)).
+
+**`for` and `since` keep their standard split.** Use **`for`** for a **duration**
+(*for ten years*, *for a long time*) and **`since`** for a **starting point**
+(*since 2015*, *since Monday*) — this is a real, non-arbitrary distinction, so World English
+keeps it rather than collapsing it. *Since years* is wrong in standard English and stays
+wrong here: a stretch of time takes *for*.
 
 **Trade-off.** A word or two longer; the meaning is explicit instead of carried by an
 opaque tense.
@@ -115,10 +122,43 @@ literal pairing is acceptable in World English.
 **Problem it solves.** Collocations (*heavy rain* not *strong rain*; *make the bed*) are
 unpredictable word-partnerships (see [`PAIN-POINTS.md` §4](../resources/PAIN-POINTS.md)).
 
-**Examples.** *heavy rain* / *strong rain* → **much rain** is fine; *make a decision* →
-**decide**; *do homework* → **do homework** *or* **study**.
+**Examples.** *heavy rain* → **strong rain** is fine (a regular, literal adjective+noun
+pairing instead of the arbitrary collocation); *make a decision* → **decide**;
+*do homework* → **do homework** *or* **study**.
 
 **Trade-off.** Sounds less native; removes a large memorization layer.
+
+---
+
+## Rule S7 — One default adverb position
+
+**Rule.** Put manner, frequency, and degree adverbs in **one fixed slot: immediately before
+the main verb** (and after any modal or `be`). A whole-sentence adverb (*maybe, probably,
+certainly*) may instead lead the clause. Do not scatter adverbs across the other positions
+standard English allows.
+
+**Problem it solves.** English lets the same adverb sit in several positions (*I usually go*
+/ *I go usually* / *Usually I go*), and which are natural is itself an unwritten rule. One
+default removes the choice and matches the fixed word order of
+[S1](#rule-s1--fixed-subjectverbobject-order).
+
+**Examples.**
+
+| Standard English (scatter) | World English (before the verb) |
+| -------------------------- | ------------------------------- |
+| He drives carefully. | He **carefully drive**. |
+| She calls me often. | She **often call** me. |
+| I have never seen it. | I **never seed** it. (see [morphology M1](morphology.md)) |
+| I will always help. | I **will always help**. (after the modal) |
+
+Sentence adverbs lead or take the same slot: **Maybe it will rain.** / **It maybe will rain.**
+Time and place adjuncts (*today*, *here*, *in the shop*) keep their natural clause-final spot
+— they are not the adverbs that scatter, so the rule leaves them alone. The pre-verb slot is
+the same one `not` occupies ([grammar G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)),
+so negation and adverb placement share one position rule.
+
+**Trade-off.** *He carefully drive* is slightly less idiomatic than *drives carefully*, but
+it is one predictable position instead of several.
 
 ---
 
@@ -132,3 +172,4 @@ unpredictable word-partnerships (see [`PAIN-POINTS.md` §4](../resources/PAIN-PO
 | S4 idioms | literal phrasing |
 | S5 relevance | explicit time words (no perfect) |
 | S6 collocations | regular literal pairings allowed |
+| S7 adverb position | one slot: before the main verb |

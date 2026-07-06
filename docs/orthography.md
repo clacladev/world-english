@@ -87,9 +87,13 @@ exceptions. One rule, no list.
 To stay legible, World English does **not**:
 
 - **Phonetically respell common words.** *knight* stays *knight*, *night* stays *night*,
-  *light*, *through* (see O5), *one*, *two*, *who*. Rewriting these (*nite*, *thru*) would
-  make the page look alien for little gain — predictability comes from the respelling key
-  in [pronunciation.md](pronunciation.md), not from mutilating the spelling.
+  *light*, *one*, *two*, *who*. Rewriting these (*nite*, *lite*, *wun*) would make the page
+  look alien for little gain — predictability comes from the respelling key in
+  [pronunciation.md](pronunciation.md), not from mutilating the spelling. The **one
+  exception** is the `ough` set, and only where a conventional informal spelling already
+  exists (*through → thru*): that narrow case is [O5](#rule-o5--respell-ough-words-only-where-an-informal-form-already-exists)'s
+  job, and O4 defers to it — the boundary is "adopt an existing informal form, never coin a
+  new one," so O4 and O5 never disagree about a given word.
 - **Merge homophones.** *flour/flower*, *their/there/they're*, *hear/here* keep distinct
   spellings — collapsing them would *lose* information, not simplify.
 - **Touch proper nouns, brand names, or loanwords** still felt as foreign.
