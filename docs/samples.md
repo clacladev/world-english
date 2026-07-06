@@ -62,19 +62,21 @@ Rule keys: `O*` [orthography](orthography.md) · `P*` [pronunciation](pronunciat
 
 **World English**
 
-> "Q you seed mes keys?" Tom asked.
-> "No. Q you looked under the sofa?" Mary sayed.
+> "?You seed mes keys?" Tom asked.
+> "No. ?You looked under the sofa?" Mary sayed.
 > "I already looked there. I can not find them anywhere."
 > "Maybe they be in yous coat. You should check the pockets."
 
 **Annotations**
 
-1. *Q you seed mes keys? Tom asked.* — `[G6]` yes/no question marker **Q** (no *do*, no
-   inversion) · `[G1]` present perfect → simple past · `[M1]` see → **seed** · `[G4]` my →
-   **mes** · `[M4]` **keys** · `[S1]` undo the *asked Tom* inversion → **Tom asked**.
-2. *No. Q you looked under the sofa? Mary sayed.* — `[G6]` short answer is invariant **No.**
-   (no *I haven't* echo) · `[G6]` **Q** + no *do*-support · `[M1]` look → **looked**, say →
-   **sayed** · `[G3]` keep **under** (real spatial relation) · `[S1]` undo inversion.
+1. *?You seed mes keys? Tom asked.* — `[G6]` yes/no question marked by the **leading `?`**
+   (rising intonation in speech; no *do*, no inversion) · `[G1]` present perfect → simple past ·
+   `[M1]` see → **seed** · `[G4]` my → **mes** · `[M4]` **keys** · `[S1]` undo the *asked Tom*
+   inversion → **Tom asked**.
+2. *No. ?You looked under the sofa? Mary sayed.* — `[G6]` short answer is invariant **No.**
+   (no *I haven't* echo) · `[G6]` **leading `?`** + rising intonation, no *do*-support · `[M1]`
+   look → **looked**, say → **sayed** · `[G3]` keep **under** (real spatial relation) · `[S1]`
+   undo inversion.
 3. *I already looked there. I can not find them anywhere.* — `[S5]` **already** carries the
    perfect's relevance · `[M1]` **looked** · `[G6]`/`[G7]` modal negation **can not** (*not*
    after the modal, before the verb) · `[G4]` **them** (object form).

@@ -237,7 +237,7 @@ actually helps or hurts understanding between non-native speakers. It is where p
   placement. **Non-core** (variation tolerated, treat as accent): **the *th* sounds /θ/ and
   /ð/**, fine **vowel quality**, **lexical word-stress** placement, weak forms/schwa,
   stress-timed rhythm, and attitudinal intonation.
-- **Where it contradicts WoE.** Two places, recorded honestly:
+- **Where it contradicts WoE.** Three places, recorded honestly:
   1. **The *th* split.** Jenkins found /θ/ and /ð/ are **non-core and safely substitutable**
      (with /t d/, /s z/, /f v/) without harming international intelligibility. Yet
      [P3](../docs/pronunciation.md#rule-p3--th-is-split-in-the-key) *keeps and distinguishes*
@@ -252,18 +252,27 @@ actually helps or hurts understanding between non-native speakers. It is where p
      **non-core** (only *nuclear/contrastive* stress is essential). World English's marking is
      still defensible as a *reading aid*, but it is not, per Jenkins, load-bearing for
      intelligibility.
-- **Where it agrees with WoE.** The LFC rates **stress-timed rhythm** and **grammatical/
-  attitudinal intonation** as non-core — direct empirical support for
+  3. **Question intonation.** The LFC rates **grammatical intonation non-core**, yet
+     [P7](../docs/pronunciation.md#rule-p7--intonation-carries-only-the-question) — as
+     redesigned — deliberately *load-bears* rising intonation for the yes/no question. This one
+     **flipped**: before the redesign P7 said intonation carries no grammatical load, which the
+     LFC *supported*; the choice to let questions ride on pitch (rather than coin a particle)
+     turned it into a divergence. World English still treats *attitudinal* intonation as
+     non-load-bearing (aligned with the LFC); only the *question* now rides on pitch, and it is
+     mitigated in writing by the leading `?`.
+- **Where it agrees with WoE.** The LFC rates **stress-timed rhythm** non-core — direct
+  empirical support for
   [P6](../docs/pronunciation.md#rule-p6--sentence-rhythm-is-optional-syllable-timing-is-acceptable)
-  (syllable-timing is fine) and [P7](../docs/pronunciation.md#rule-p7--intonation-carries-no-grammatical-load)
-  (intonation carries no grammatical load). And its emphasis on **vowel length over quality**
+  (syllable-timing is fine) — and its treatment of **attitudinal** intonation as non-core
+  matches P7 for everything except the question. Its emphasis on **vowel length over quality**
   aligns with [P2](../docs/pronunciation.md#rule-p2--the-respelling-alphabet-one-symbol-per-sound)
   keeping length contrasts (*book* BUUK vs *moon* MOON).
 - **Bears on.** [P2](../docs/pronunciation.md#rule-p2--the-respelling-alphabet-one-symbol-per-sound),
   [P3](../docs/pronunciation.md#rule-p3--th-is-split-in-the-key) (**contradiction**),
   [P4](../docs/pronunciation.md#rule-p4--stress-is-always-marked-never-guessed) (**partial
-  contradiction**), [P6](../docs/pronunciation.md#rule-p6--sentence-rhythm-is-optional-syllable-timing-is-acceptable),
-  [P7](../docs/pronunciation.md#rule-p7--intonation-carries-no-grammatical-load) (support).
+  contradiction**), [P6](../docs/pronunciation.md#rule-p6--sentence-rhythm-is-optional-syllable-timing-is-acceptable)
+  (support), [P7](../docs/pronunciation.md#rule-p7--intonation-carries-only-the-question)
+  (**partial divergence — question intonation**).
 
 ### Creole & learner-English convergence — strong corroboration
 
@@ -303,7 +312,7 @@ actually helps or hurts understanding between non-native speakers. It is where p
 | Basic English, VOA, STE, Globish, Plain English | **survived** | Subsets in a bounded domain, backed by institutions, work. Don't reform spelling; constrain vocabulary and grammar and stay legible. |
 | Webster (radical set), SSB, Cut Spelling, ITA | **failed** | Public respelling fails; only the conservative subset ever sticks. Adopt existing forms, never coin; keep the phonetic layer separate from the orthography. |
 | Quirk's Nuclear English | **stalled** | A proposal that is never built changes nothing. Ship specs, dogfood, and tool. |
-| Jenkins' LFC | **contradicts (th, word-stress)** | Keeping /θ/–/ð/ and marking lexical stress is not required for intelligibility — a flagged tension, not settled truth. |
+| Jenkins' LFC | **contradicts (th, word-stress, question intonation)** | Keeping /θ/–/ð/, marking lexical stress, and load-bearing question intonation are not required for intelligibility — a flagged tension, not settled truth. |
 | Creole / interlanguage convergence | **corroborates** | No 3rd-sg *-s*, preverbal negation, invariant tags, regularized past are what English becomes when simplified — natural, not arbitrary. |
 
 ---

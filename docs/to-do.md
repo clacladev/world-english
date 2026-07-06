@@ -83,10 +83,12 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
    Source: [PAIN-POINTS §1](../resources/PAIN-POINTS.md#1-pronunciation--phonology),
    [IRREGULARITIES §2](../resources/IRREGULARITIES.md#2-pronunciation).
    Status: drafted → [pronunciation.md P1–P7](pronunciation.md). Point-4 fixes applied
-   (deterministic noun-stress merger, homograph residue, valid worked sentence).
-   **New open decision (see item 18):** [`PRIOR-ART.md`](../resources/PRIOR-ART.md) surfaced
-   that Jenkins' Lingua Franca Core rates /θ/–/ð/ and lexical stress *non-core* for
-   intelligibility — a research contradiction with P3/P4 worth revisiting.
+   (deterministic noun-stress merger, homograph residue, valid worked sentence); **P7
+   redesigned** — intonation now load-bears the yes/no question (rising pitch in speech,
+   leading `?` in writing), replacing the coined `Q` particle.
+   **Open decision (see item 18):** [`PRIOR-ART.md`](../resources/PRIOR-ART.md) surfaced
+   that Jenkins' Lingua Franca Core rates /θ/–/ð/, lexical stress, *and* grammatical intonation
+   *non-core* for intelligibility — a research contradiction with P3/P4/P7 worth revisiting.
 
 3. **Spelling opacity.** One of the least phonetically transparent alphabetic systems;
    ~25% of common words have unpredictable spelling.
@@ -190,14 +192,19 @@ yet, plus the open decisions the point-5 rules deliberately left flagged.
     [morphology.md M5](morphology.md#rule-m5--one-comparative-rule). Status: **open decisions**.
 
 18. **Research contradictions from [`PRIOR-ART.md`](../resources/PRIOR-ART.md).** The
-    intelligibility research disagrees with two pronunciation rules, recorded for a decision:
+    intelligibility research disagrees with three pronunciation rules, recorded for a decision:
     - Jenkins' **Lingua Franca Core rates /θ/–/ð/ non-core** and safely substitutable, yet
       [P3](pronunciation.md#rule-p3--th-is-split-in-the-key) keeps and marks the contrast.
     - The **LFC rates lexical word-stress non-core** (only nuclear stress is essential), yet
       [P4](pronunciation.md#rule-p4--stress-is-always-marked-never-guessed) marks it on every
       word.
-    Neither is a bug — both are defensible on writing-side/reading-aid grounds — but the
-    tension with the empirical evidence should be resolved deliberately, not ignored.
+    - The **LFC rates grammatical intonation non-core**, yet
+      [P7](pronunciation.md#rule-p7--intonation-carries-only-the-question) — as redesigned —
+      now *load-bears* rising intonation for the yes/no question. (This one flipped: before the
+      P7 redesign it *supported* the LFC; the deliberate choice to make questions ride on pitch
+      turned it into a divergence. Mitigated in writing by the leading `?`.)
+    None is a bug — all are defensible on writing-side/reading-aid grounds — but the tension
+    with the empirical evidence should be resolved deliberately, not ignored.
     Source: [PRIOR-ART.md §C](../resources/PRIOR-ART.md#c-the-empirical-base-on-international-intelligibility).
     Status: **open decision**.
 

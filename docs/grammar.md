@@ -252,20 +252,19 @@ effects (*much* vs *many*, article choice).
 
 ## Rule G6 — Regular questions and negation (no do-support)
 
-**Rule.** Form a **question** with a clause-initial marker, keeping normal word order —
-**no dummy `do`**, no subject–auxiliary inversion. A *yes/no* question takes the invariant
-marker **`Q`** (pronounced **KYOO** /kjuː/, per [pronunciation.md](pronunciation.md)); a
-*wh-* question uses its **wh-word** (*who, what, where…*) as the marker instead — no extra
-`Q`. The marker is **always present in speech and writing**; rising intonation is
-*permitted on top* of it but is never what carries the question ([P7](pronunciation.md#rule-p7--intonation-carries-no-grammatical-load)
-makes intonation non-load-bearing, so a flat pitch reads correctly). Form a **negative** by
-placing **`not`** before the verb.
+**Rule.** Form a **question** with **normal word order** — **no dummy `do`**, no
+subject–auxiliary inversion. In **writing**, open the question with a **leading `?`** (and
+capitalize the next word, as the `?` opens the sentence) and close it with the usual `?`:
+*?You like it?*. In **speech**, a **yes/no** question is carried by **rising intonation**
+([P7](pronunciation.md#rule-p7--intonation-carries-only-the-question)); a **wh-** question is
+carried by its **wh-word** (*who, what, where…*). Form a **negative** by placing **`not`**
+before the verb.
 
 | Standard English | World English |
 | ---------------- | ------------- |
-| Do you like it? | **Q you like it?** (rising pitch optional, never required) |
-| Does she know? | **Q she know?** |
-| Who did you call? | **Who you called?** (wh-word is the marker; normal word order) |
+| Do you like it? | **?You like it?** (rising intonation in speech) |
+| Does she know? | **?She know?** |
+| Who did you call? | **?Who you called?** (wh-word marks it; normal word order) |
 | I do not like it. | I **not like** it. |
 | She did not go. | She **not goed**. |
 | It is good, isn't it? | **It be good, right?** (invariant tag) |
@@ -275,15 +274,15 @@ negative, plus inversion (see
 [§8](../resources/IRREGULARITIES.md#8-sentence-structure)). Learners already drop it
 naturally (*You like it?*).
 
-**Divergence & trade-off.** Removes do-support and inversion outright. Yes/no questions
-carry the marker **`Q`** (rising intonation optional on top, never load-bearing — this is
-the divergence that resolves the [P7](pronunciation.md#rule-p7--intonation-carries-no-grammatical-load)
-promise that pitch changes nothing); *wh-* questions keep the question word as their marker
-(*Who you seed?*). Tag questions (*…isn't it?*) are replaced by a single invariant tag —
-**`right?`** — eliminating the mirror-the-auxiliary computation. Introducing `Q` as a new
-function word is a real addition (against principle 1's "subtract first"), accepted because
-it buys a fully intonation-free, do-support-free question — recorded as a deliberate coinage,
-the one place World English adds a word rather than removing one.
+**Divergence & trade-off.** Removes do-support and inversion outright and adds **no**
+replacement word — so questions are **purely subtractive** (they drop the meaningless *do* and
+put nothing back). A yes/no question is marked by **rising intonation** in speech and a
+**leading `?`** in writing; a *wh-* question by its question word (*?Who you seed?*). Tag
+questions (*…isn't it?*) collapse to a single invariant tag — **`right?`** — eliminating the
+mirror-the-auxiliary computation. The one cost is that the yes/no question becomes the single
+construction that rides on pitch (see [P7](pronunciation.md#rule-p7--intonation-carries-only-the-question)):
+a deliberate choice to keep questions natural and the language free of coined particles,
+accepting the flat-intonation-L1 difficulty, mitigated in writing by the leading `?`.
 
 **Extension — the rest of the negation/question system.** Four related constructions follow
 from the same two moves (marker for questions, `not` before the verb):
@@ -527,7 +526,7 @@ a known trade-off.
 | Prepositions (time/place) | arbitrary at/in/on | fixed defaults (G3) |
 | Pronoun case | irregular grid, who/whom | subj + obj + obj`-s` (G4) |
 | Countability | countable vs uncountable | all countable (G5) |
-| Questions/negation | do-support + inversion | `Q`/wh-word marker + `not` (G6) |
+| Questions/negation | do-support + inversion | leading `?` + rising intonation / wh-word + `not` (G6) |
 | Modals | overlapping cluster + suppletive pasts | can / must / should / will + adverbs (G7) |
 | Conditionals | 5 shapes via backshift + would | `if` + natural tense, will/would (G8) |
 | Passive | be + irregular participle | `be` + `-ed`, optional *by* (G9) |

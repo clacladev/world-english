@@ -217,31 +217,46 @@ always understood.
 
 ---
 
-## Rule P7 — Intonation carries no grammatical load
+## Rule P7 — Intonation carries only the question
 
-**Rule.** Meaning is carried by **words and word order**, never by required pitch. Questions,
-negation, and emphasis are marked grammatically (see [grammar.md](grammar.md)), so a flat or
-L1-native intonation **never changes the literal meaning** of a sentence.
+**Rule.** Pitch is load-bearing in **exactly one place**: a **yes/no question** is told from a
+statement by **rising intonation** in speech, and by a **leading `?`** in writing (see
+[grammar.md G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)). Everywhere
+else — statements, negation, emphasis, attitude — meaning rides on **words and word order**, so
+pitch changes nothing.
 
-**Example.** In standard English *You like it.* becomes a question only by a rising pitch.
-World English marks it with a word instead (see [grammar.md](grammar.md) G6): the question
-is *Q you like it?* — so a flat, unchanging pitch reads correctly as either the statement or
-the question, told apart by the marker, not the tune.
+**Example.** *You like it.* (statement) vs *?You like it?* (question). In speech the question
+**rises** at the end; in writing the leading `?` says so. The leading `?` *is* the written
+instruction to raise the pitch, so the two channels agree — a reader and a listener reach the
+same reading, one by the mark and one by the tune.
 
-**Problem it solves.** English uses pitch movement to signal questions, contrast, and
-attitude, and learners from languages with different intonation patterns both mis-signal and
-mis-hear these (see [PAIN-POINTS §1](../resources/PAIN-POINTS.md#1-pronunciation--phonology),
-intonation). World English does not make understanding depend on hearing or producing pitch.
+**Problem it solves.** English uses pitch for many jobs at once — questions, contrast,
+sarcasm, politeness — and learners from differently-intoned languages both mis-signal and
+mis-hear them (see [PAIN-POINTS §1](../resources/PAIN-POINTS.md#1-pronunciation--phonology),
+intonation). World English load-bears pitch for **only** the yes/no question, so a learner has
+a single intonation contrast to master, not an open set — and in writing does not need even
+that, because the leading `?` carries it.
 
-**Divergence & trade-off.** Intonation still exists for naturalness and emotion, but it is
-never load-bearing: nothing a learner needs to understand or be understood rides on it.
+**Divergence & trade-off.** This is a deliberate reversal of a stricter earlier stance:
+World English *does* let the yes/no question ride on intonation, because questions are frequent
+and important enough to be worth it, and because the alternative — a coined question particle —
+adds a word the language would rather not have (so removing it keeps questions **purely
+subtractive**: they drop do-support and add nothing). The cost is real: speakers of flat- or
+differently-intoned L1s must produce and hear a rising question — the difficulty
+[PAIN-POINTS §1](../resources/PAIN-POINTS.md#1-pronunciation--phonology) documents. It is
+mitigated in **writing** by the always-present leading `?` and bounded in **speech** to one
+contrast. Note this diverges from Jenkins' Lingua Franca Core, which rates grammatical
+intonation non-essential for intelligibility (see
+[PRIOR-ART §C](../resources/PRIOR-ART.md#c-the-empirical-base-on-international-intelligibility)
+and [to-do.md](../docs/to-do.md) item 18) — a recorded tension, not a settled call.
 
 ---
 
 ## Scope note — contrasts the respelling can't remove
 
 World English regularizes the **mapping** (which sound a spelling represents) and **what is
-required** of a speaker (P5–P7). It does **not** erase the phonetic difficulty of individual
+required** of a speaker (P5–P6 make connected speech and rhythm optional; P7 requires pitch for
+the one yes/no-question contrast and nothing else). It does **not** erase the phonetic difficulty of individual
 sounds. Phonemic contrasts that carry meaning are kept — *rice*/*lice* (r vs l),
 *think*/*sink* (/θ/ vs /s/), *ship*/*sheep* (/ɪ/ vs /i/) — because collapsing them would
 lose information. What the key guarantees is that it always shows **which** sound is
@@ -335,4 +350,4 @@ keeps distinct in spelling).
 | P4 | Native stress is kept and *always* marked; only noun/verb pairs collapse |
 | P5 | Connected speech is permitted, never required |
 | P6 | Syllable-timed rhythm is always acceptable |
-| P7 | Intonation is never load-bearing — grammar carries the meaning |
+| P7 | Intonation is load-bearing for one thing only — the yes/no question (rising pitch / leading `?`) |
