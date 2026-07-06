@@ -1,0 +1,16 @@
+{
+  "name": "world-english-tools",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Tooling for World English — starting with the spec linter (to-do.md item 11).",
+  "scripts": {
+    "lint": "bun lint.ts",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "_comment": "Suppresses legitimate matches the linter would otherwise flag: homographs (a flagged form used in its non-abolished sense — e.g. `saw` the tool, `well` the adjective) and intentional mentions of a standard form. Each entry: `file` (repo-relative path, or \"*\" for any file), `form` (the flagged surface form, lowercased), and `reason`. A finding is suppressed when its file+form matches an entry (file \"*\" matches everywhere). Keep this list small and always give a reason — it is the escape hatch, not a dumping ground.",
+  "allow": []
+}

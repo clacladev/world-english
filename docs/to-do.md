@@ -51,24 +51,36 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
    load-bearing entries the specs already reference (Tables A–F) plus the schema and a
    frequency-ordered growth path; the full 2–3k word-family build is the remaining work.
 
-11. **SE→WoE translator + linter — the consistency checker.** A rough tool that applies the
+11. **SE→WoE translator + linter — the consistency checker.** A tool that applies the
     finalized `morphology.md`/`grammar.md`/`orthography.md` rules to text, and — critically —
     **flags rule violations in the specs' own example columns**. It would have caught every
     point-4 bug mechanically. The rules cannot stabilize without it, which is why it moves out
     of "tooling someday" into Priority 1.
     Source: [README "Planned tooling"](../README.md#planned-tooling),
-    [samples.md](samples.md). Status: **tooling** (was Priority 3), now a prerequisite.
+    [samples.md](samples.md).
+    Status: **linter built** (the forward *translator* still remains). The linter lives in
+    [`../tools`](../tools) (Bun/TypeScript): it sweeps every World-English example column and
+    the `samples.md` passages for abolished forms, gates CI (`bun run lint`), and ships the
+    **abolished-forms dataset** the specs never had (irregular verbs/plurals, `be`, British
+    spellings, suppletives, phrasal/dropped-prep pairs). It already caught one real
+    inconsistency prose review had missed — a possessive left unconverted in the [G11](grammar.md#rule-g11--relative-clauses)
+    relative-clause example (*My car* → **Mes car**). Low-confidence/POS-dependent classes
+    (articles, third-person `-s`, modals, homographs) are gated behind `--strict`. The
+    **SE→WoE forward translator** (POS/syntax: article insertion-drop, `-s`, preposition
+    restoration) is the remaining half of this item.
     Acceptance criteria per [README methodology step 5](../README.md#methodology): a rule is
     "done" only when it is
     statable without a hidden word list, `samples.md` stays consistent, and the example
-    columns pass the linter sweep.
+    columns pass the linter sweep — now mechanically enforced.
 
 12. **WoE→SE reverse translator — the lossless-mapping proof.** The morphology rules
     (M1 *goed*, M4 *childs*, G3's dropped prepositions) are explicitly designed to map back
     losslessly; this tool proves the claim and depends on the same core lexicon (item 8) for
     the preposition/phrasal restorations.
     Source: [README "Planned tooling"](../README.md#planned-tooling). Status: **tooling**
-    (was Priority 3), paired with item 11.
+    (was Priority 3), paired with item 11. The linter's **abolished-forms dataset**
+    ([`../tools/data`](../tools/data)) already encodes the standard↔regular pairs (irregular
+    verbs/plurals, `be`, spellings, pronouns) this restorer needs — it is the seed to build on.
 
 1. **Articles (a/an/the/zero).** Called "a universally acknowledged difficulty" and the
    single hardest grammatical feature for many learners (article-less L1s especially);
@@ -254,8 +266,8 @@ user, not decided here.
 | # | Item | Status | Tier |
 | - | ---- | ------ | ---- |
 | 8 | Core lexicon (2–3k word families) | **drafted (seed)** — hidden dependency | **P1** |
-| 11 | SE→WoE translator + linter | tooling — prerequisite | **P1** |
-| 12 | WoE→SE reverse translator | tooling — prerequisite | **P1** |
+| 11 | SE→WoE translator + linter | **linter built** (`tools/`); forward translator remains | **P1** |
+| 12 | WoE→SE reverse translator | tooling — prerequisite (dataset seed now exists) | **P1** |
 | 1 | Articles | drafted (point-4 fix applied) | P1 |
 | 2 | Pronunciation system | drafted (point-4 fix; see item 18) | P1 |
 | 3 | Spelling opacity | drafted (resolved) | P1 |
