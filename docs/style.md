@@ -49,6 +49,7 @@ verb.
 
 **Trade-off.** Slightly less idiomatic, more learnable. Phrasal verbs are not *banned* —
 the transparent ones (*sit down*, *stand up*) are fine — only the opaque ones are replaced.
+The phrasal→plain map lives in [vocabulary.md Table B](vocabulary.md#table-b--s2-phrasal--plain).
 
 **Boundary with G3.** This rule handles particles that *change* a verb's meaning (*look
 after* ≠ *look*). Meaning-neutral prepositions that a verb merely selects (*listen to*,
@@ -72,6 +73,8 @@ senses); learners may know a word yet misread it (see
 *take a bus* → **use a bus**.
 
 **Trade-off.** A little verbosity for a lot of clarity.
+
+The preferred-sense list lives in [vocabulary.md Table C](vocabulary.md#table-c--s3-preferred-sense-avoid-heavy-polysemy).
 
 ---
 
@@ -127,6 +130,8 @@ pairing instead of the arbitrary collocation); *make a decision* → **decide**;
 *do homework* → **do homework** *or* **study**.
 
 **Trade-off.** Sounds less native; removes a large memorization layer.
+
+The collocation→regular map lives in [vocabulary.md Table D](vocabulary.md#table-d--s6-collocation--regular-pairing).
 
 ---
 
