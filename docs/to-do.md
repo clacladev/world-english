@@ -47,7 +47,9 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
    plus false friends and near-synonym registers. Until this exists, G3/S2/S3/S6 cannot be
    verified or reversed.
    Source: [PAIN-POINTS §4](../resources/PAIN-POINTS.md#4-vocabulary--lexis).
-   Status: **gap** (was Priority 2). Needs a `docs/vocabulary.md` plus the actual list.
+   Status: **drafted (seed)** (was gap). [`vocabulary.md`](vocabulary.md) now records the
+   load-bearing entries the specs already reference (Tables A–F) plus the schema and a
+   frequency-ordered growth path; the full 2–3k word-family build is the remaining work.
 
 11. **SE→WoE translator + linter — the consistency checker.** A rough tool that applies the
     finalized `morphology.md`/`grammar.md`/`orthography.md` rules to text, and — critically —
@@ -251,7 +253,7 @@ user, not decided here.
 
 | # | Item | Status | Tier |
 | - | ---- | ------ | ---- |
-| 8 | Core lexicon (2–3k word families) | **gap** — hidden dependency | **P1** |
+| 8 | Core lexicon (2–3k word families) | **drafted (seed)** — hidden dependency | **P1** |
 | 11 | SE→WoE translator + linter | tooling — prerequisite | **P1** |
 | 12 | WoE→SE reverse translator | tooling — prerequisite | **P1** |
 | 1 | Articles | drafted (point-4 fix applied) | P1 |

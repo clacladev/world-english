@@ -144,6 +144,7 @@ world-english/
 │   ├── morphology.md           # regular verbs, plurals, comparatives
 │   ├── grammar.md              # tense/aspect, articles, prepositions
 │   ├── style.md                # plain-phrasing guidance
+│   ├── vocabulary.md           # core lexicon — the word list G3/S2/S3/S6 look up
 │   ├── samples.md              # dogfooded translations + regression test
 │   └── to-do.md                # prioritized problem backlog
 ├── resources/
