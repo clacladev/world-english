@@ -219,11 +219,15 @@ always understood.
 
 ## Rule P7 — Intonation carries only the question
 
-**Rule.** Pitch is load-bearing in **exactly one place**: a **yes/no question** is told from a
-statement by **rising intonation** in speech, and by a **leading `?`** in writing (see
-[grammar.md G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)). Everywhere
-else — statements, negation, emphasis, attitude — meaning rides on **words and word order**, so
-pitch changes nothing.
+**Rule.** Pitch is load-bearing only where **no word already marks the meaning** — and there is
+exactly one such place: the **yes/no question**. It has no question word (World English dropped
+do-support and inversion), so `You like it` and its question are segmentally identical, and
+**rising intonation** in speech — plus a **leading `?`** in writing — is the *only* thing that
+tells them apart (see [grammar.md G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)).
+A **wh-question is already marked by its wh-word** (*who, what, where…*), so pitch there is
+redundant: it is **permitted for naturalness but never required**, and English wh-questions
+naturally *fall* like statements anyway. Everywhere else — statements, negation, emphasis,
+attitude — meaning rides on **words and word order**, so pitch changes nothing.
 
 **Example.** *You like it.* (statement) vs *?You like it?* (question). In speech the question
 **rises** at the end; in writing the leading `?` says so. The leading `?` *is* the written
