@@ -152,8 +152,14 @@ world-english/
 │   ├── PAIN-POINTS.md          # research-backed survey of learner difficulty
 │   ├── PRIOR-ART.md            # what earlier reforms/subsets tried, and what happened
 │   └── brehe-grammar-anatomy/  # standard-English grammar baseline (reference)
-└── tools/                      # translators and pronunciation tooling (planned, not yet created)
+└── tools/                      # Bun/TypeScript tooling
+    ├── lint.ts                 # spec linter — flags abolished forms in World English example columns
+    ├── src/                    # extractor, dataset loader, scanner, morphology helpers
+    └── data/                   # the abolished-forms dataset (seeds the reverse translator too)
 ```
+
+The translators and pronunciation/speech tools remain planned; the **linter** is the first
+piece built (see [`tools/README.md`](tools/README.md)).
 
 ## Methodology
 

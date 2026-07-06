@@ -445,7 +445,7 @@ and so is the **restrictive/non-restrictive comma rule** (*that* vs *which* + co
 | the woman **who** called | **the woman that called** |
 | the book **which** is on the table | **the book that be on the table** |
 | the man **whose** car broke | **the man that hims car broked** (resumptive *hims*) |
-| My car, **which** is red, is fast. | **My car, that be red, be fast.** (no comma contrast) |
+| My car, **which** is red, is fast. | **Mes car, that be red, be fast.** (no comma contrast) |
 
 **Problem it solves.** Standard English splits relativizers by animacy (*who* vs *which*),
 by case (*who* vs *whom*), and adds a possessive relative (*whose*) plus a punctuation-borne
