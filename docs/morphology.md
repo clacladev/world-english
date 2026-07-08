@@ -73,8 +73,16 @@ removes the single biggest verb-table a learner faces.
 
 **Divergence & trade-off.** The most conspicuous divergence in the whole language — *I be*
 reads as dialectal English. We accept the jolt because *be* is so frequent that any
-irregularity here is paid constantly. (Flagged for review: an alternative keeps *is/are* as
-a minimal concession to legibility. Recorded, not yet chosen.)
+irregularity here is paid constantly.
+
+**Decision.** The full collapse (`be` / `beed`) is chosen over the alternative that keeps
+*is/are* as a legibility concession, for three reasons: (1) it is the only option with **no
+memorized exception** — `beed` derives from the [M1](#rule-m1--all-verbs-are-regular) `-ed`
+rule rather than contradicting it (design principle 4); (2) a single invariant `be` is
+**consistent with [M3](#rule-m3--no-third-person--s)** — World English abolishes verb
+agreement everywhere, so keeping *is/are* would leave *be* as the language's only surviving
+person/number agreement; (3) it is the same tradeoff already accepted for regular verbs
+(*goed*, *taked*), with *be* simply its most frequent instance, not a separate decision.
 
 ---
 

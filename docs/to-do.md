@@ -165,9 +165,12 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
    Status: drafted → [morphology.md M1](morphology.md#rule-m1--all-verbs-are-regular),
    [M2](morphology.md#rule-m2--one-verb-of-be-regularized).
    Point-4 fix: M1 now states the `-e`/`-ed` spelling sub-rule so *beed*/*gived* derive from
-   the rule. **Open decision (unresolved):** M2 is still "flagged for review" — whether to
-   keep *is/are* as a legibility concession instead of collapsing to *be/beed*. Needs a
-   decision; if it flips, re-run the example sweep.
+   the rule. **Decision resolved:** M2 keeps the **full collapse** (`be`/`beed`) rather than
+   the *is/are* legibility concession — it is the only exception-free option (`beed` derives
+   from M1), it stays consistent with M3's no-agreement design, and it is the same tradeoff
+   already accepted for regular verbs. No example re-sweep was needed: every
+   [`grammar.md`](grammar.md)/[`samples.md`](samples.md) column and both translators already
+   used `be`/`beed`.
 
 6. **Present perfect / tense-aspect system.** The single most-cited hardest tense — it
    encodes a past-with-present-relevance relationship many languages don't grammaticalize.
@@ -314,7 +317,7 @@ user, not decided here.
 | 2 | Pronunciation system | drafted (point-4 fix; see item 18) | P1 |
 | 3 | Spelling opacity | drafted (resolved) | P1 |
 | 4 | Prepositions | drafted (refined; item 8 lookup table built) | P1 |
-| 5 | Verb irregularity / *be* | drafted (open decision: M2) | P1 |
+| 5 | Verb irregularity / *be* | drafted (M2 resolved: full collapse `be`/`beed`) | P1 |
 | 6 | Present perfect / tense | drafted (largely resolved in point 4) | P1 |
 | 7 | Phrasal verbs | drafted (map built via item 8, 53 rows) | P1 |
 | 9 | Writing conventions | **gap** | P2 |
