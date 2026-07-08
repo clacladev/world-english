@@ -72,10 +72,22 @@ describe("flagged, not translated (needs POS / syntax / lexicon)", () => {
     expect(flagKeys("a dog", true)).toContain("a:article/G2");
   });
 
-  it("does not resolve phrasal verbs or dropped prepositions (S2/G3)", () => {
-    expect(woe("please give up and wait for the bus")).toBe("please give up and wait for the bus");
-    expect(flagKeys("please give up now")).toContain("give up:phrasal-verb/S2");
+  it("resolves phrasal verbs (S2) and dropped prepositions (G3), inflected forms too", () => {
+    expect(woe("please give up now")).toBe("please quit now");
+    expect(woe("she gave up yesterday")).toBe("she quitted yesterday");
+    expect(woe("he listens to music")).toBe("he listens music");
+    expect(woe("they listened to the radio")).toBe("they listened the radio");
+    expect(woe("it depends on the weather")).toBe("it depends the weather");
+  });
+
+  it("still flags `wait for` — the item-16 duration-vs-object test stays unresolved", () => {
+    expect(woe("please wait for the bus")).toBe("please wait for the bus");
+    expect(flagKeys("please give up now")).not.toContain("give up:phrasal-verb/S2");
     expect(flagKeys("wait for the bus")).toContain("wait for:dropped-prep/G3");
+  });
+
+  it("does not cross punctuation to form a phrase", () => {
+    expect(woe("Wait, for the record, I disagree.")).toBe("Wait, for the record, I disagree.");
   });
 
   it("leaves zero-past verbs alone (undetectable without POS — documented limit)", () => {

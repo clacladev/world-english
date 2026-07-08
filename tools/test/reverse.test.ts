@@ -1,6 +1,8 @@
 import { describe, expect, it } from "bun:test";
 import { join } from "node:path";
 import { buildReverseMap, reverseTranslate } from "../src/reverse.ts";
+import { translate } from "../src/translate.ts";
+import { loadCoreLexicon } from "../src/core-lexicon.ts";
 
 function se(text: string) {
   return reverseTranslate(text, { file: "x.md" }).text;
@@ -82,6 +84,39 @@ describe("leaves valid standard English untouched (per project decision)", () =>
   });
 });
 
+describe("G3 preposition restoration (core lexicon, item 8 wiring)", () => {
+  it("restores a drop verb's canonical preposition and always flags it", () => {
+    expect(se("listen music")).toBe("listen to music");
+    expect(se("wait the bus")).toBe("wait for the bus");
+    expect(se("depend the weather")).toBe("depend on the weather");
+    expect(se("look the picture")).toBe("look at the picture");
+    expect(flagKeys("listen music")).toContain("listen→listen to");
+  });
+
+  it("restores inflected forms too (3sg, -ing, past)", () => {
+    expect(se("he listens music")).toBe("he listens to music");
+    expect(se("they listened the radio")).toBe("they listened to the radio");
+  });
+
+  it("skips insertion before a stoplisted next word (preposition, adverb, -ly)", () => {
+    expect(se("wait for three minutes")).toBe("wait for three minutes");
+    expect(se("looked under the sofa")).toBe("looked under the sofa");
+    expect(se("looked there")).toBe("looked there");
+    expect(se("looked quickly")).toBe("looked quickly");
+    expect(flags("wait for three minutes")).toEqual([]);
+  });
+
+  it("skips insertion when punctuation intervenes or there is no next token", () => {
+    expect(se("Wait, the bus is coming.")).toBe("Wait, the bus is coming.");
+    expect(se("Please wait.")).toBe("Please wait.");
+  });
+
+  it("does not reverse phrasal verbs — the plain WoE verb is itself valid standard English", () => {
+    expect(se("she quitted yesterday")).toBe("she quitted yesterday");
+    expect(se("he seeks it")).toBe("he seeks it");
+  });
+});
+
 describe("lossless-mapping proof against docs/samples.md", () => {
   function samplePairs(): { se: string; woe: string }[] {
     const md = require("node:fs").readFileSync(
@@ -141,5 +176,32 @@ describe("lossless-mapping proof against docs/samples.md", () => {
     const keys = flagKeys(allWoe);
     expect(keys).toContain("beed→was");
     expect(keys).toContain("mes→my");
+  });
+});
+
+describe("G3 round-trip property (forward→reverse)", () => {
+  const lexicon = loadCoreLexicon();
+  const dropVerbs = lexicon.droppedPreps.filter((d) => d.ruling === "drop");
+
+  it("every forward-applying drop verb round-trips through forward then reverse, flagged", () => {
+    for (const d of dropVerbs) {
+      if ((d.forward ?? "apply") === "flag") continue;
+      const originalSe = `${d.verb} ${d.prep} the thing`;
+      const woe = translate(originalSe, { file: "x.md" }).text;
+      expect(woe).toBe(`${d.verb} the thing`); // forward drops the prep
+      const back = reverseTranslate(woe, { file: "x.md" });
+      expect(back.text).toBe(originalSe); // reverse restores it
+      expect(back.flags.some((f) => f.found === d.verb)).toBe(true); // and always flags the guess
+    }
+  });
+
+  it("forward:\"flag\" entries (wait) pass forward unchanged and stay flagged", () => {
+    for (const d of dropVerbs) {
+      if ((d.forward ?? "apply") !== "flag") continue;
+      const se = `${d.verb} ${d.prep} the thing`;
+      const result = translate(se, { file: "x.md" });
+      expect(result.text).toBe(se);
+      expect(result.flags.some((f) => f.found === `${d.verb} ${d.prep}`)).toBe(true);
+    }
   });
 });

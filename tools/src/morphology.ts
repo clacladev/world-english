@@ -43,11 +43,42 @@ export function regularizePlural(singular: string): string {
   return s + "s";
 }
 
+/**
+ * Standard-English third-person-singular present: add `-s`/`-es` the ordinary way (these
+ * inflections are already fully regular in standard English). Used to recognize inflected
+ * standard-English input, not to produce a World-English form.
+ * watch → watches · go → goes · try → tries · have → has.
+ */
+export function standardThirdPerson(base: string): string {
+  const b = base.toLowerCase();
+  if (b === "have") return "has";
+  if (/(s|x|z|ch|sh)$/.test(b)) return b + "es";
+  if (b.endsWith("y") && !isVowel(b.at(-2))) return b.slice(0, -1) + "ies";
+  if (b.endsWith("o") && !isVowel(b.at(-2))) return b + "es";
+  return b + "s";
+}
+
+/**
+ * Standard-English present participle: add `-ing` the ordinary way (already fully regular in
+ * standard English). Used to recognize inflected standard-English input.
+ * love → loving · stop → stopping · lie → lying · be → being.
+ */
+export function standardPresentParticiple(base: string): string {
+  const b = base.toLowerCase();
+  if (b.length <= 2 && b.endsWith("e")) return b + "ing"; // be → being
+  if (b.endsWith("ie")) return b.slice(0, -2) + "ying"; // lie → lying, tie → tying
+  if (b.endsWith("e") && !/(ee|oe|ye)$/.test(b)) return b.slice(0, -1) + "ing"; // love → loving
+  if (isCvc(b) && isMonosyllable(b)) return b + b.at(-1) + "ing"; // stop → stopping
+  return b + "ing";
+}
+
 function isCvc(word: string): boolean {
   if (word.length < 3) return false;
   const [c1, v, c2] = [word.at(-3), word.at(-2), word.at(-1)];
+  // `qu` acts as a single consonant (quit, quiz), so a `u` right after `q` isn't the vowel slot.
+  const c1IsConsonant = !isVowel(c1) || (c1 === "u" && word.at(-4) === "q");
   // last three chars are consonant–vowel–consonant, final consonant not w/x/y
-  return !isVowel(c1) && isVowel(v) && !isVowel(c2) && !["w", "x", "y"].includes(c2!);
+  return c1IsConsonant && isVowel(v) && !isVowel(c2) && !["w", "x", "y"].includes(c2!);
 }
 
 function isMonosyllable(word: string): boolean {

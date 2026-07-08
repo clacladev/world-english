@@ -47,9 +47,16 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
    plus false friends and near-synonym registers. Until this exists, G3/S2/S3/S6 cannot be
    verified or reversed.
    Source: [PAIN-POINTS §4](../resources/PAIN-POINTS.md#4-vocabulary--lexis).
-   Status: **drafted (seed)** (was gap). [`vocabulary.md`](vocabulary.md) now records the
-   load-bearing entries the specs already reference (Tables A–F) plus the schema and a
-   frequency-ordered growth path; the full 2–3k word-family build is the remaining work.
+   Status: **built**. The lexicon lives in [`../tools/data/lexicon.json`](../tools/data/lexicon.json)
+   (source of truth); [`vocabulary.md`](vocabulary.md) is its schema doc, representative
+   highlights, and a test-checked coverage statement. A full pass over the
+   [NGSL 1.2](https://www.newgeneralservicelist.com/) frequency spine (2,809 word families, six
+   ~500-word bands) is done — 35 dropped-preposition rulings, 53 phrasal verbs, 44 risky senses,
+   49 collocations, and 27 register defaults, plus the 2-row false-friends seed. It is a first
+   pass, not exhaustive: only clear, low-collision-risk cases earned a row (see
+   [`tools/README.md`](../tools/README.md#the-core-lexicon-item-8) for the criteria); growth continues
+   opportunistically. G3 and S2 are wired into both translators (items 11/12); S3/S6 stay
+   doc-only by design (applying them needs word-sense disambiguation the tools don't have).
 
 11. **SE→WoE translator + linter — the consistency checker.** A tool that applies the
     finalized `morphology.md`/`grammar.md`/`orthography.md` rules to text, and — critically —
@@ -69,11 +76,16 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
     **The SE→WoE forward translator is now built too** (`../tools/translate.ts`, `bun run
     translate`): it applies the *deterministic* closed-class transforms (spelling, `be`,
     pronouns, comparatives, and the non-homograph irregular verbs/plurals) and **flags** — never
-    guesses — the POS/syntax/lexicon-dependent cases (article drop, `-s`, preposition
-    restoration, phrasal verbs, zero-past verbs). It reuses the linter's dataset as the forward
-    map and is regression-tested against the four `samples.md` gold passages. The
-    lexicon-dependent half (article drop by syntax, preposition restoration) waits on the core
-    lexicon (item 8).
+    guesses — the POS/syntax-dependent cases (article drop, third-person `-s`, zero-past verbs).
+    It reuses the linter's dataset as the forward map and is regression-tested against the four
+    `samples.md` gold passages. **Now that the core lexicon (item 8) exists, the
+    lexicon-dependent half is wired too**: G3 dropped prepositions and S2 phrasal verbs are
+    applied — inflected forms included (*gave up* → *quitted*, *listens to* → *listens*) — via
+    `src/core-lexicon.ts`'s `buildPhraseTransforms()`. The one deliberate holdout is `wait for`
+    (`forward: "flag"` in the lexicon): its `for` competes with the duration `for` of
+    [S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect), the
+    unresolved item-16 test, so it stays flagged rather than mistranslated. Article drop by
+    syntax is still out of scope (needs a parser, not a lexicon).
     Acceptance criteria per [README methodology step 5](../README.md#methodology): a rule is
     "done" only when it is
     statable without a hidden word list, `samples.md` stays consistent, and the example
@@ -90,10 +102,17 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
     comparatives, silent letters, `ough`, unique pronouns) round-trip cleanly; the deliberate
     collapses restore a **canonical default and flag the guess** (`be`→*is*, `beed`→*was*,
     `mes`→*my*, and every verb whose `-ed` past covers both past and participle, e.g. `seed`→
-    *saw*). Valid standard forms are left alone (American spelling stays; `who` untouched), and
-    the preposition/phrasal restorations still **depend on the core lexicon (item 8)** — those
-    are left unrestored, not guessed. Proven by `test/reverse.test.ts`, which round-trips the
-    `samples.md` passages (Passage 4 returns to its exact Standard-English source).
+    *saw*). Valid standard forms are left alone (American spelling stays; `who` untouched).
+    **G3 preposition restoration is now wired too**, now that the core lexicon (item 8) exists: a
+    drop verb (`listen`, `wait`, `depend`, `look`, and the rest of the sweep's 35) gets its
+    canonical preposition re-inserted and **always flagged** as a guess — a stoplist
+    (prepositions, conjunctions, common adverbs, `-ly` words) skips insertion before a word that
+    reads as something other than the dropped object, so *"wait for three minutes"* and *"looked
+    under the sofa"* round-trip untouched. Phrasal verbs (S2) are **not** reversed — `quit`,
+    `delay`, `seek`, and the rest are themselves valid standard English, so nothing needs
+    restoring. Proven by `test/reverse.test.ts`, which round-trips the `samples.md` passages
+    (Passage 4 returns to its exact Standard-English source) and property-tests every
+    forward-applying drop verb through forward-then-reverse.
 
 1. **Articles (a/an/the/zero).** Called "a universally acknowledged difficulty" and the
    single hardest grammatical feature for many learners (article-less L1s especially);
@@ -133,9 +152,10 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
    [IRREGULARITIES §7](../resources/IRREGULARITIES.md#7-grammar-systems-articles-prepositions-tense-phrasal-verbs).
    Status: drafted → [grammar.md G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs).
    Point-4 fix: *pay for* / *believe in* removed from the drop list (they merge senses) and
-   routed to keep/replace. **Depends on item 8** for the per-verb canonical-preposition table.
-   Open sub-question logged by [samples.md](samples.md): the *for* duration-vs-object test
-   (item 16).
+   routed to keep/replace. **Item 8's core lexicon now carries the per-verb canonical-preposition
+   table** (35 rulings from the NGSL sweep), wired into both translators. Open sub-question
+   logged by [samples.md](samples.md): the *for* duration-vs-object test (item 16) — still open,
+   which is why `wait for` stays `forward: "flag"` rather than auto-dropped.
 
 5. **Verb irregularity, incl. the *be* paradigm.** ~200 irregular verbs in everyday use —
    the densest pure-memorization load in the language; *be* alone has eight forms and is
@@ -165,8 +185,11 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
    Source: [PAIN-POINTS §3](../resources/PAIN-POINTS.md#3-grammar),
    [IRREGULARITIES §7](../resources/IRREGULARITIES.md#7-grammar-systems-articles-prepositions-tense-phrasal-verbs).
    Status: drafted → [style.md S2](style.md#rule-s2--prefer-plain-verbs-over-phrasal-verbs).
-   Currently a short guideline with five examples; the full phrasal→plain map is part of the
-   **core lexicon (item 8)** — S2 cannot be exhaustive until that list exists.
+   **Item 8's core lexicon now carries the phrasal→plain map** — 53 phrasal verbs from the NGSL
+   sweep, applied by the forward translator (inflected forms included). Not exhaustive: only
+   opaque phrasals with a low collision risk earned a row; transparent ones (*sit down*) and
+   dangerously polysemous ones (*pick up*) are deliberately left out (the latter documented,
+   doc-only, in `vocabulary.md` Table C instead).
 
 ---
 
@@ -284,16 +307,16 @@ user, not decided here.
 
 | # | Item | Status | Tier |
 | - | ---- | ------ | ---- |
-| 8 | Core lexicon (2–3k word families) | **drafted (seed)** — hidden dependency | **P1** |
-| 11 | SE→WoE translator + linter | **linter + forward translator built** (`tools/`); lexicon-dependent parts flagged | **P1** |
-| 12 | WoE→SE reverse translator | **built** (`translate.ts --reverse`); lexicon-dependent restorations deferred to item 8 | **P1** |
+| 8 | Core lexicon (2–3k word families) | **built** — full NGSL sweep (`tools/data/lexicon.json`) | **P1** |
+| 11 | SE→WoE translator + linter | **built**, S2+G3 now applied (`tools/`) | **P1** |
+| 12 | WoE→SE reverse translator | **built**, G3 preposition restoration wired | **P1** |
 | 1 | Articles | drafted (point-4 fix applied) | P1 |
 | 2 | Pronunciation system | drafted (point-4 fix; see item 18) | P1 |
 | 3 | Spelling opacity | drafted (resolved) | P1 |
-| 4 | Prepositions | drafted (refined; depends on item 8) | P1 |
+| 4 | Prepositions | drafted (refined; item 8 lookup table built) | P1 |
 | 5 | Verb irregularity / *be* | drafted (open decision: M2) | P1 |
 | 6 | Present perfect / tense | drafted (largely resolved in point 4) | P1 |
-| 7 | Phrasal verbs | drafted (depends on item 8) | P1 |
+| 7 | Phrasal verbs | drafted (map built via item 8, 53 rows) | P1 |
 | 9 | Writing conventions | **gap** | P2 |
 | 10 | Sociolinguistic & pragmatics | **gap**, needs scoping | P2 |
 | 16 | Constructions surfaced by dogfooding | **gap** | P2 |

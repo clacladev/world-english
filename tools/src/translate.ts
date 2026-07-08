@@ -4,15 +4,26 @@
 // *deterministically* — a closed set of unambiguous surface-form substitutions — and FLAGGING
 // (never guessing) everything that needs part-of-speech, syntax, or the core lexicon (item 8).
 //
-// The dataset the linter already loads is exactly the forward map: loadDataset().words is keyed
-// by the standard (`abolished`) surface form, and each entry's `.woe` is its World-English
-// replacement. This reuses that map for substitution and reuses the scanner for the flag list.
+// The dataset the linter already loads is exactly the single-word forward map: loadDataset().words
+// is keyed by the standard (`abolished`) surface form, and each entry's `.woe` is its World-English
+// replacement. Multi-word transforms (dropped prepositions, phrasal verbs — the core lexicon,
+// item 8) are built separately by core-lexicon.ts's buildPhraseTransforms(), since they need
+// per-inflection generation buildForwardMap() doesn't do, and `test/translate.test.ts`'s gold
+// harness derives its expectations from buildForwardMap()'s values, so it must stay single-word.
+//
+// Still flag-only / untouched (documented, not a bug): G2 article drop (needs syntax),
+// `forward:"flag"` dropped preps (the duration-`for` vs. object-`for` test, item 16, unresolved —
+// concretely `wait for`), separated phrasals (*give it up* — needs a parser), S3/S6/false-friends/
+// register (doc-only, not even flagged).
 
 import { loadDataset, type Dataset } from "./dataset.ts";
+import { buildPhraseTransforms, type PhraseTransform } from "./core-lexicon.ts";
 import { scanSpan, type Finding } from "./scan.ts";
 import type { Span } from "./extract.ts";
 
 const defaultDataset = loadDataset();
+const defaultPhraseTransforms = buildPhraseTransforms();
+const defaultPhraseByFirst = groupByFirstToken(defaultPhraseTransforms);
 
 export interface TranslateOptions {
   /** Also flag low-confidence / POS-dependent classes (articles, modals, homographs, …). */
@@ -33,12 +44,13 @@ export interface TranslateResult {
 const WORD = /[A-Za-z]+(?:'[A-Za-z]+)?/g;
 
 /**
- * The handled substitutions: every high-confidence, single-word entry whose replacement is a
+ * The handled single-word substitutions: every high-confidence entry whose replacement is a
  * clean single form. This spans spelling (O1/O2/O5), `be` (M2), pronouns (G4/G12), comparatives
  * (M5) and the *non-homograph* irregular verbs/plurals (M1/M4) — all unambiguous surface forms.
  * Low-confidence entries (articles, modals, homographs, open-decision comparatives) and
  * multi-word / descriptive-`woe` classes (phrasal verbs, dropped prepositions) are excluded on
- * purpose; they are reported as flags instead.
+ * purpose; the latter are handled by buildPhraseTransforms() instead, and low-confidence entries
+ * are reported as flags.
  */
 export function buildForwardMap(dataset: Dataset = defaultDataset): Map<string, string> {
   const map = new Map<string, string>();
@@ -58,29 +70,92 @@ function matchCase(source: string, woe: string): string {
   return woe;
 }
 
-function substitute(text: string, forwardMap: Map<string, string>): string {
+interface LineToken {
+  word: string;
+  start: number;
+  end: number;
+}
+
+function tokenizeLine(line: string): LineToken[] {
+  return [...line.matchAll(WORD)].map((m) => ({
+    word: m[0],
+    start: m.index,
+    end: m.index + m[0].length,
+  }));
+}
+
+/** Phrase transforms grouped by their first token (lowercased), longest-first within a group. */
+function groupByFirstToken(transforms: PhraseTransform[]): Map<string, PhraseTransform[]> {
+  const map = new Map<string, PhraseTransform[]>();
+  for (const t of transforms) {
+    const key = t.tokens[0]!;
+    if (!map.has(key)) map.set(key, []);
+    map.get(key)!.push(t);
+  }
+  for (const group of map.values()) group.sort((a, b) => b.tokens.length - a.tokens.length);
+  return map;
+}
+
+/**
+ * Longest-first greedy phrase pass over whitespace-adjacent tokens (punctuation breaks a phrase,
+ * so "wait, for" or a line break never matches), then the single-word forwardMap pass on
+ * whatever the phrase pass left unconsumed. Returns the substituted line plus the set of
+ * base-form phrases ("give up", "listen to", …) that fired, so collectFlags can exclude them.
+ */
+function substituteLine(
+  line: string,
+  phraseByFirst: Map<string, PhraseTransform[]>,
+  forwardMap: Map<string, string>,
+  handledPhrases: Set<string>,
+): string {
+  const tokens = tokenizeLine(line);
   let out = "";
   let last = 0;
-  for (const m of text.matchAll(WORD)) {
-    const word = m[0];
-    const start = m.index;
-    out += text.slice(last, start);
-    const woe = forwardMap.get(word.toLowerCase());
-    out += woe ? matchCase(word, woe) : word;
-    last = start + word.length;
+  let i = 0;
+  while (i < tokens.length) {
+    const tok = tokens[i]!;
+    out += line.slice(last, tok.start);
+
+    const candidates = phraseByFirst.get(tok.word.toLowerCase()) ?? [];
+    const match = candidates.find((t) => {
+      const n = t.tokens.length;
+      if (i + n > tokens.length) return false;
+      for (let j = 1; j < n; j++) {
+        if (tokens[i + j]!.word.toLowerCase() !== t.tokens[j]) return false;
+        const gap = line.slice(tokens[i + j - 1]!.end, tokens[i + j]!.start);
+        if (!/^\s*$/.test(gap)) return false; // punctuation breaks a phrase
+      }
+      return true;
+    });
+
+    if (match) {
+      const span = match.tokens.length;
+      const spanEnd = tokens[i + span - 1]!.end;
+      handledPhrases.add(match.tokens.join(" "));
+      out += matchCase(tok.word, match.replacement);
+      last = spanEnd;
+      i += span;
+      continue;
+    }
+
+    const woe = forwardMap.get(tok.word.toLowerCase());
+    out += woe ? matchCase(tok.word, woe) : tok.word;
+    last = tok.end;
+    i += 1;
   }
-  return out + text.slice(last);
+  return out + line.slice(last);
 }
 
 /**
  * Everything the scanner finds in the *input* that we did NOT translate. The scanner already
  * matches standard forms (and, under strict, the low-confidence and multi-word classes), so the
- * flags are exactly its findings minus the handled substitutions.
+ * flags are exactly its findings minus the handled single-word and phrase substitutions.
  */
 function collectFlags(
   text: string,
   dataset: Dataset,
   forwardMap: Map<string, string>,
+  handledPhrases: Set<string>,
   opts: TranslateOptions,
 ): Finding[] {
   const file = opts.file ?? "<stdin>";
@@ -88,7 +163,9 @@ function collectFlags(
   text.split("\n").forEach((line, i) => {
     const span: Span = { file, line: i + 1, text: line, source: "table" };
     for (const f of scanSpan(span, dataset, { strict: opts.strict })) {
-      if (!forwardMap.has(f.found)) flags.push(f);
+      if (forwardMap.has(f.found)) continue;
+      if (handledPhrases.has(f.found)) continue;
+      flags.push(f);
     }
   });
   return flags;
@@ -97,8 +174,15 @@ function collectFlags(
 export function translate(text: string, opts: TranslateOptions = {}): TranslateResult {
   const dataset = opts.dataset ?? defaultDataset;
   const forwardMap = buildForwardMap(dataset);
+  const handledPhrases = new Set<string>();
+
+  const translatedText = text
+    .split("\n")
+    .map((line) => substituteLine(line, defaultPhraseByFirst, forwardMap, handledPhrases))
+    .join("\n");
+
   return {
-    text: substitute(text, forwardMap),
-    flags: collectFlags(text, dataset, forwardMap, opts),
+    text: translatedText,
+    flags: collectFlags(text, dataset, forwardMap, handledPhrases, opts),
   };
 }

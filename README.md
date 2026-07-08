@@ -154,12 +154,14 @@ world-english/
 │   └── brehe-grammar-anatomy/  # standard-English grammar baseline (reference)
 └── tools/                      # Bun/TypeScript tooling
     ├── lint.ts                 # spec linter — flags abolished forms in World English example columns
-    ├── src/                    # extractor, dataset loader, scanner, morphology helpers
-    └── data/                   # the abolished-forms dataset (seeds the reverse translator too)
+    ├── translate.ts            # SE↔WoE translators (--reverse for WoE→SE)
+    ├── pronounce.ts            # World English → respelling / IPA
+    ├── src/                    # extractor, dataset/lexicon loaders, scanner, morphology helpers
+    └── data/                   # abolished-forms dataset, the core lexicon, NGSL frequency spine
 ```
 
-The translators and pronunciation/speech tools remain planned; the **linter** is the first
-piece built (see [`tools/README.md`](tools/README.md)).
+The linter, both translators, and the respelling/IPA renderer are built (see
+[`tools/README.md`](tools/README.md)); spoken audio is still deferred.
 
 ## Methodology
 

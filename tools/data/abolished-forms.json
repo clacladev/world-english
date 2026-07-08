@@ -1,5 +1,5 @@
 {
-  "_comment": "Directly-authored abolished→WoE pairs for the classes that are NOT computed from a base form (verbs live in irregular-verbs.json, plurals in irregular-plurals.json). Each entry: `abolished` (the standard form the linter flags when it appears in a World-English column, lowercased; a space means a multi-word match), `woe` (the suggested World-English replacement, for the report), `class`, `rule` (source spec rule), and optional `confidence` (default \"high\") + `homograph`. `confidence: low` entries are POS-dependent or ride on an open design decision (to-do.md item 17) and are OFF by default — only reported under `--strict`.",
+  "_comment": "Directly-authored abolished→WoE pairs for the classes that are NOT computed from a base form (verbs live in irregular-verbs.json, plurals in irregular-plurals.json) and are NOT part of the core lexicon (phrasal verbs and dropped prepositions live in data/lexicon.json — dataset.ts merges those in via core-lexicon.ts's toAbolishedEntries()). Each entry: `abolished` (the standard form the linter flags when it appears in a World-English column, lowercased; a space means a multi-word match), `woe` (the suggested World-English replacement, for the report), `class`, `rule` (source spec rule), and optional `confidence` (default \"high\") + `homograph`. `confidence: low` entries are POS-dependent or ride on an open design decision (to-do.md item 17) and are OFF by default — only reported under `--strict`.",
   "entries": [
     { "abolished": "am", "woe": "be", "class": "be", "rule": "M2" },
     { "abolished": "is", "woe": "be", "class": "be", "rule": "M2" },
@@ -83,19 +83,6 @@
 
     { "abolished": "a", "woe": "(drop — no indefinite article)", "class": "article", "rule": "G2", "confidence": "low" },
     { "abolished": "an", "woe": "(drop — no indefinite article)", "class": "article", "rule": "G2", "confidence": "low" },
-
-    { "abolished": "give up", "woe": "quit / stop", "class": "phrasal-verb", "rule": "S2" },
-    { "abolished": "put off", "woe": "delay", "class": "phrasal-verb", "rule": "S2" },
-    { "abolished": "look after", "woe": "mind / tend", "class": "phrasal-verb", "rule": "S2" },
-    { "abolished": "come up with", "woe": "invent / devise", "class": "phrasal-verb", "rule": "S2" },
-    { "abolished": "find out", "woe": "learn / discover", "class": "phrasal-verb", "rule": "S2" },
-    { "abolished": "look for", "woe": "seek", "class": "phrasal-verb", "rule": "S2" },
-    { "abolished": "believe in", "woe": "trust", "class": "phrasal-verb", "rule": "S2" },
-
-    { "abolished": "listen to", "woe": "listen", "class": "dropped-prep", "rule": "G3" },
-    { "abolished": "wait for", "woe": "wait", "class": "dropped-prep", "rule": "G3" },
-    { "abolished": "depend on", "woe": "depend", "class": "dropped-prep", "rule": "G3" },
-    { "abolished": "look at", "woe": "look", "class": "dropped-prep", "rule": "G3" },
 
     { "abolished": "goes", "woe": "go", "class": "third-person-s", "rule": "M3", "confidence": "low" },
     { "abolished": "does", "woe": "do", "class": "third-person-s", "rule": "M3", "confidence": "low" },
