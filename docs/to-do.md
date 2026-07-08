@@ -245,8 +245,14 @@ to Priority 1 (items 11–12) because the rules depend on them; this is what is 
 13. **Pronunciation/speech tool.** Render World English text to the P1–P7 respelling, IPA,
     and spoken audio, so learners can hear the language, not just read the rules.
     Source: [README "Planned tooling"](../README.md#planned-tooling),
-    [pronunciation.md](pronunciation.md). Status: **tooling**, not started — but the
-    underlying rules (P1–P7) are fully drafted, so this is the most implementation-ready tool.
+    [pronunciation.md](pronunciation.md).
+    Status: **respelling + IPA built** (`../tools/pronounce.ts`, `bun run pronounce`; logic in
+    `src/{respell,lexicon,pronounce,check}.ts`). Word→respelling is an authored **seed lexicon**
+    (`../tools/data/pronunciation.json`, the ~40 gold words in `pronunciation.md`); respelling→IPA
+    is the deterministic P2/P3 engine, validated against the authored IPA under `--strict`. Unknown
+    words and homographs (`lead`=LED/LEED) are flagged, never guessed; regression-tested against the
+    `pronunciation.md` worked sentence. **Audio deferred** (needs `espeak-ng`; `--audio` is a stub),
+    exactly as items 11–12 split their lexicon-dependent halves.
 
 ---
 
@@ -293,6 +299,6 @@ user, not decided here.
 | 16 | Constructions surfaced by dogfooding | **gap** | P2 |
 | 17 | Open decisions from point 5 (plural-you, `-ly` comparatives, `more/most`) | **open** | P2 |
 | 18 | Research contradictions (LFC vs P3/P4) | **open** | P2 |
-| 13 | Pronunciation/speech tool | tooling | P3 |
+| 13 | Pronunciation/speech tool | **respelling + IPA built** (`tools/pronounce.ts`); seed lexicon; audio deferred (espeak-ng) | P3 |
 | 14 | Listening & speaking support | uncovered, needs scoping | P4 |
 | 15 | Psychological/motivational factors | uncovered, likely out of scope | P4 |
