@@ -107,6 +107,49 @@ The proof lives in `test/reverse.test.ts`: it reverse-translates the `samples.md
 passages and asserts every losslessly-reversible form comes back to its standard original —
 Passage 4 round-trips to its exact Standard-English source.
 
+## The pronunciation tool (`to-do.md` item 13)
+
+`pronounce.ts` renders World English text to its learner **respelling** (default) or **IPA**
+(`--ipa`), following rules P1–P7 in [`pronunciation.md`](../docs/pronunciation.md).
+
+```sh
+echo "The doctor gived the young child book about birds." | bun run pronounce
+#   → dhuh DOK-ter GIVD dhuh YUNG CHYLD BUUK uh-BOWT BERDZ.
+echo "The doctor gived the young child book about birds." | bun run pronounce --ipa
+#   → ðə ˈdɑktɚ ɡɪvd ðə jʌŋ tʃaɪld bʊk əˈbaʊt bɝdz.
+bun run pronounce notes.txt        # file args / globs
+bun run pronounce --json           # machine-readable { text, flags }
+bun run pronounce --strict         # also validate the lexicon (see below); non-zero on mismatch
+```
+
+Rendered text goes to stdout; the words it couldn't resolve go to stderr.
+
+### Lookup + a deterministic engine
+
+WoE base spelling does **not** encode pronunciation (`knight → NYT` can't be computed from the
+letters), so **word → respelling is a lookup** in an authored lexicon (`data/pronunciation.json`,
+built by `src/lexicon.ts`). But **respelling → IPA *is* a fixed rule** — the P2/P3 tables are a
+strict one-sound-per-spelling map — so it is a deterministic engine (`src/respell.ts`). This is the
+same *deterministic-where-the-rule-allows, authored-where-it-doesn't* split the translators use.
+
+The engine derives the **careful / syllable-timed** IPA (every syllable at full written value),
+which is itself spec-legal under P6. The lexicon ships the **authored** IPA (matching the spec's
+gold reading verbatim), because some words carry lexical vowel reduction the respelling can't
+express — `computer` is `kom-PYOO-ter` but `/kəmˈpjutɚ/` (unstressed `o` → `/ə/`). `--strict` runs
+`src/check.ts`, which compares the two: a schwa-only reduction is **advisory**, anything else is a
+real authoring bug and exits non-zero.
+
+### Flags, never guesses
+
+- **Unknown word** — emitted verbatim and flagged (`no respelling entry`); never guessed.
+- **Homograph** (the P-spec residue — `lead` = LED (metal) / LEED (guide), `read` = REED / RED) —
+  emits the first reading and flags the alternatives, so context can select, exactly as the
+  reverse translator flags its canonical guesses.
+
+The worked examples in `pronunciation.md` are the gold corpus: `test/pronounce.test.ts` renders the
+spec's full sentence to its exact gold respelling and IPA, and `test/respell.test.ts` asserts the
+engine reproduces the authored IPA of every non-reducing lexicon entry.
+
 ## How it works
 
 1. **`src/extract.ts`** pulls World-English text out of each markdown file. It reads only the
@@ -167,3 +210,9 @@ word. Re-run `bun test`.
   restorations (dropped prepositions, phrasal verbs) and forms outside the dataset (e.g. `said`)
   are left untouched; the deliberate collapses (`be`, possessives, verb past/participle) are
   restored to a canonical default and flagged, never silently guessed.
+- **The pronunciation lexicon is a seed.** It carries only the ~40 gold words in
+  `pronunciation.md`; any other word is emitted verbatim and flagged, not guessed. It grows
+  frequency-first, mirroring `vocabulary.md`'s seed convention.
+- **Audio is deferred.** `pronounce.ts` ships respelling + IPA only. Spoken audio needs an
+  external TTS (`espeak-ng`, which takes IPA); `--audio` prints an install hint and exits
+  non-zero until it is wired up.

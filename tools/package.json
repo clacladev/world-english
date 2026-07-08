@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Tooling for World English — the spec linter and the SE→WoE / WoE→SE translators (to-do.md items 11–12).",
+  "description": "Tooling for World English — the spec linter, the SE→WoE / WoE→SE translators (to-do.md items 11–12), and the pronunciation renderer (item 13).",
   "scripts": {
     "lint": "bun lint.ts",
     "translate": "bun translate.ts",
+    "pronounce": "bun pronounce.ts",
     "test": "bun test",
     "typecheck": "tsc --noEmit"
   },
