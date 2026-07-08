@@ -46,6 +46,12 @@ describe("planted-bug detection (the point-4 class of mistake)", () => {
     expect(classesFor("listen to music")).toContain("listen to:dropped-prep/G3");
   });
 
+  it("flags the object `wait for` but NOT the kept duration `wait for` (G3 for-test)", () => {
+    expect(classesFor("wait for the bus")).toContain("wait for:dropped-prep/G3");
+    expect(classesFor("wait for three minutes")).not.toContain("wait for:dropped-prep/G3");
+    expect(classesFor("wait for a while")).not.toContain("wait for:dropped-prep/G3");
+  });
+
   it("suggests the regularized World-English replacement", () => {
     const f = scan("I saw it").find((x) => x.found === "saw");
     expect(f?.expected).toBe("seed");

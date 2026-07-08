@@ -2,6 +2,7 @@
 
 import type { AbolishedEntry, Dataset } from "./dataset.ts";
 import type { Span } from "./extract.ts";
+import { isDurationFor } from "./core-lexicon.ts";
 import allowlistData from "../data/allowlist.json" with { type: "json" };
 
 export interface Finding {
@@ -81,6 +82,15 @@ export function scanSpan(span: Span, data: Dataset, opts: ScanOptions = {}): Fin
         }
       }
       if (!hit) continue;
+      // G3 "for" test: a dropped `for` is legitimately KEPT before a duration span (S5), so a
+      // World-English column reading "wait for three minutes" is not an abolished form.
+      if (
+        entry.class === "dropped-prep" &&
+        phrase[phrase.length - 1] === "for" &&
+        isDurationFor(tokens.slice(i + phrase.length))
+      ) {
+        continue;
+      }
       emit(span, entry, phrase.join(" "), opts, out);
       for (let j = 0; j < phrase.length; j++) consumed[i + j] = true;
     }

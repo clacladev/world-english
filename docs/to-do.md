@@ -81,11 +81,12 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
     `samples.md` gold passages. **Now that the core lexicon (item 8) exists, the
     lexicon-dependent half is wired too**: G3 dropped prepositions and S2 phrasal verbs are
     applied — inflected forms included (*gave up* → *quitted*, *listens to* → *listens*) — via
-    `src/core-lexicon.ts`'s `buildPhraseTransforms()`. The one deliberate holdout is `wait for`
-    (`forward: "flag"` in the lexicon): its `for` competes with the duration `for` of
-    [S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect), the
-    unresolved item-16 test, so it stays flagged rather than mistranslated. Article drop by
-    syntax is still out of scope (needs a parser, not a lexicon).
+    `src/core-lexicon.ts`'s `buildPhraseTransforms()`. Dropped `for` (`wait for`, `hope for`)
+    is now handled by the **G3 for-test** (item 16, resolved): the not-duration guard
+    (`isDurationFor`) drops the object-*for* (*wait the bus*) but keeps the duration-*for*
+    (*wait for three minutes*), competing cleanly with the duration `for` of
+    [S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect). Article
+    drop by syntax is still out of scope (needs a parser, not a lexicon).
     Acceptance criteria per [README methodology step 5](../README.md#methodology): a rule is
     "done" only when it is
     statable without a hidden word list, `samples.md` stays consistent, and the example
@@ -153,9 +154,10 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
    Status: drafted → [grammar.md G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs).
    Point-4 fix: *pay for* / *believe in* removed from the drop list (they merge senses) and
    routed to keep/replace. **Item 8's core lexicon now carries the per-verb canonical-preposition
-   table** (35 rulings from the NGSL sweep), wired into both translators. Open sub-question
-   logged by [samples.md](samples.md): the *for* duration-vs-object test (item 16) — still open,
-   which is why `wait for` stays `forward: "flag"` rather than auto-dropped.
+   table** (35 rulings from the NGSL sweep), wired into both translators. The *for*
+   duration-vs-object test (item 16) is now **resolved** —
+   [G3's *for* test](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs) drops
+   the object-*for* but keeps the duration-*for*, so `wait for` is auto-translated, not flagged.
 
 5. **Verb irregularity, incl. the *be* paradigm.** ~200 irregular verbs in everyday use —
    the densest pure-memorization load in the language; *be* alone has eight forms and is
@@ -217,20 +219,28 @@ yet, plus the open decisions the point-5 rules deliberately left flagged.
     low-context request/refusal templates) rather than a full spec. Worth a design discussion.
 
 16. **Constructions surfaced by dogfooding ([samples.md](samples.md)).** Translating real
-    passages exposed four gaps the specs do not yet cover — logged so they are fixed by rule,
-    not improvised:
-    - **The *for* test — duration vs. thing-awaited.** [G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs)
-      drops verb-selected *for* (*wait the bus*) but [S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect)
-      keeps duration *for* (*for three minutes*); one clause can hold both, so the specs need
-      an explicit test for which survives.
-    - **Reported speech / content clauses.** Whether tense backshifts, and how complementizer
-      *that* behaves in nominal clauses (*He said that it beed…*), is unspecified.
-    - **The *of*-genitive vs. G10 *'s*.** *the trip of hims life* vs. *hims life's trip* —
-      [G10](grammar.md#rule-g10--noun-possessive) fixes *'s* but not when the *of*-phrase is
-      preferred.
-    - **Subordinating conjunctions.** *while, because, when, if* (beyond G8's conditional) are
-      used on the standard model with no spec of their own.
-    Source: [samples.md](samples.md) "Gaps this file surfaced". Status: **gap**.
+    passages exposed four gaps — now all **resolved by rule**:
+    - **The *for* test — duration vs. thing-awaited.** ✅ **Done** —
+      [G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs) states it (keep
+      *for* only before a length of time, else drop) and it is **wired into both translators
+      and the linter** via the not-duration guard (`tools/src/core-lexicon.ts`'s
+      `isDurationFor`): *wait for the bus* → *wait the bus*, *wait for three minutes* kept.
+      `wait for` is no longer a `forward: "flag"` holdout.
+    - **Reported speech / content clauses.** ✅ **Done** —
+      [G14](grammar.md#rule-g14--content-clauses-and-reported-speech): complementizer *that* is
+      always kept (unified with G11's relative *that*), no backshift, natural tense per G1.
+      Doc-only (the translator does not insert a dropped *that* — that needs a parser).
+    - **The *of*-genitive vs. G10 *'s*.** ✅ **Done** —
+      [G10](grammar.md#rule-g10--noun-possessive) draws the boundary: `'s` for genuine
+      possession, *of* for relational / part-whole / fixed superlative frames (*trip of hims
+      life*). Keeps both (like S5's *for*/*since*); no reordering, Passage 4 unchanged.
+      Doc-only.
+    - **Subordinating conjunctions.** ✅ **Done** —
+      [G15](grammar.md#rule-g15--subordinating-conjunctions): a closed one-per-meaning set
+      (*if, unless, because, altho, when, while, before, after, until, so that, so*), natural
+      tense, fixed comma placement; register-variant synonyms route to S4/S6. Doc-only.
+    Source: [samples.md](samples.md) "Gaps this file surfaced". Status: **resolved** (G3
+    for-test tooling built; G14/G15 added; G10 boundary added).
 
 17. **Open decisions the point-5 rules left flagged.** New rules were added with their
     unresolved choices recorded rather than decided silently:
@@ -322,7 +332,7 @@ user, not decided here.
 | 7 | Phrasal verbs | drafted (map built via item 8, 53 rows) | P1 |
 | 9 | Writing conventions | **gap** | P2 |
 | 10 | Sociolinguistic & pragmatics | **gap**, needs scoping | P2 |
-| 16 | Constructions surfaced by dogfooding | **gap** | P2 |
+| 16 | Constructions surfaced by dogfooding | **resolved** — G3 for-test (tooling), G14, G15, G10 boundary | P2 |
 | 17 | Open decisions from point 5 (plural-you, `-ly` comparatives, `more/most`) | **open** | P2 |
 | 18 | Research contradictions (LFC vs P3/P4) | **open** | P2 |
 | 13 | Pronunciation/speech tool | **respelling + IPA built** (`tools/pronounce.ts`); seed lexicon; audio deferred (espeak-ng) | P3 |
