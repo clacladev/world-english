@@ -12,8 +12,17 @@
 // It also leaves alone any World-English form that is *already* valid standard English: WoE
 // mandates American spelling, so `color`/`center` are standard as-is (not reversed to British),
 // and `who` (which forward-maps from `whom`) is a valid word.
+//
+// G3 dropped prepositions (item 8's core lexicon) restore in a second per-line pass, after
+// word-level restoration: a drop-ruling verb (`listen`, `wait`, `depend`, `look`, …) gets its
+// canonical preposition re-inserted and ALWAYS flagged — a guess, since the drop is lossy and
+// nothing proves the writer meant the object reading. A stoplist skips insertion before a
+// preposition/conjunction/adverb/`-ly` word (so "wait for three minutes" and "looked under the
+// sofa" round-trip untouched) or across punctuation ("Wait, the bus…"). Phrasal verbs (S2) are
+// not reversed at all — `quit`/`delay`/`seek` are themselves valid standard English.
 
 import { regularizePlural, regularizeVerbPast } from "./morphology.ts";
+import { buildPrepRestorations } from "./core-lexicon.ts";
 import abolishedForms from "../data/abolished-forms.json" with { type: "json" };
 import irregularVerbs from "../data/irregular-verbs.json" with { type: "json" };
 import irregularPlurals from "../data/irregular-plurals.json" with { type: "json" };
@@ -113,8 +122,6 @@ export function buildReverseMap(): Map<string, ReverseEntry> {
   for (const e of abolishedForms.entries as { abolished: string; woe: string; class: string; rule: string; confidence?: string; homograph?: boolean }[]) {
     if (!confidenceHigh(e)) continue;
     if (e.class === "british-spelling") continue; // WoE spelling is already valid standard American
-    if (e.abolished.includes(" ")) continue; // phrasal verbs / dropped preps: need the lexicon (item 8),
-    // and the WoE form (wait, listen) is itself a valid standard word — leave it
     if (/[ ()/]/.test(e.woe)) continue; // descriptive replacement, not a clean form
     const woe = e.woe.toLowerCase();
     if (woe === "who") continue; // whom→who: `who` is a valid standard word, leave it
@@ -131,6 +138,7 @@ export function buildReverseMap(): Map<string, ReverseEntry> {
 }
 
 const reverseMap = buildReverseMap();
+const prepRestorations = buildPrepRestorations();
 
 /** Re-apply the source token's casing to its replacement (goed→went, Goed→Went, HIMS→HIS). */
 function matchCase(source: string, restore: string): string {
@@ -140,41 +148,125 @@ function matchCase(source: string, restore: string): string {
   return restore;
 }
 
+interface LineToken {
+  word: string;
+  start: number;
+  end: number;
+}
+
+function tokenizeLine(line: string): LineToken[] {
+  return [...line.matchAll(WORD)].map((m) => ({
+    word: m[0],
+    start: m.index,
+    end: m.index + m[0].length,
+  }));
+}
+
+/**
+ * Words after which a restored G3 drop-verb should NOT get its preposition re-inserted: the next
+ * token already reads as a preposition, conjunction/subordinator, or a common place/time/degree
+ * adverb — inserting would misparse "wait for three minutes" (duration) as "wait for for three
+ * minutes" or "looked under the sofa" as "looked at under the sofa". `-ly` adverbs are excluded
+ * by suffix rather than an exception list.
+ */
+const PREP_INSERTION_STOPLIST = new Set([
+  // prepositions
+  "to", "for", "on", "at", "in", "of", "with", "from", "by", "about", "into", "onto", "over",
+  "under", "between", "among", "through", "during", "before", "after", "above", "below", "near",
+  "around", "against", "without", "within", "along", "across", "behind", "beside", "besides",
+  "beyond", "toward", "towards", "upon", "off", "up", "down", "out", "since", "until", "per", "via",
+  // conjunctions / subordinators
+  "and", "but", "or", "nor", "so", "yet", "because", "although", "though", "while", "when", "if",
+  "unless", "whether", "that", "as", "than",
+  // common place/time/degree adverbs
+  "there", "here", "now", "then", "today", "tomorrow", "yesterday", "soon", "later", "already",
+  "still", "always", "never", "often", "sometimes", "usually", "again", "ago", "away", "back",
+  "forward", "forth", "outside", "inside", "everywhere", "somewhere", "anywhere", "nowhere",
+  "abroad", "home", "very", "too", "quite", "rather", "almost", "enough",
+]);
+
+function stopsInsertion(word: string): boolean {
+  const w = word.toLowerCase();
+  return PREP_INSERTION_STOPLIST.has(w) || w.endsWith("ly");
+}
+
+/** Word-level restoration pass: irregular verbs/plurals, comparatives, pronouns, be, etc. */
+function restoreWords(line: string, lineNo: number, file: string, flags: ReverseFinding[]): string {
+  let result = "";
+  let last = 0;
+  for (const m of line.matchAll(WORD)) {
+    const word = m[0];
+    const start = m.index;
+    result += line.slice(last, start);
+    const entry = reverseMap.get(word.toLowerCase());
+    if (entry) {
+      result += matchCase(word, entry.restore);
+      if (entry.ambiguous) {
+        flags.push({
+          file,
+          line: lineNo,
+          found: word.toLowerCase(),
+          restored: entry.restore,
+          class: entry.class,
+          rule: entry.rule,
+          note: entry.note ?? "ambiguous restoration",
+        });
+      }
+    } else {
+      result += word;
+    }
+    last = start + word.length;
+  }
+  return result + line.slice(last);
+}
+
+/**
+ * G3 preposition-restoration pass, run after word-level restoration: when a restored token is a
+ * drop-ruling verb and a whitespace-adjacent next token isn't stoplisted, insert the verb's
+ * canonical preposition and flag it — always, since (like `be`→`is`) it is a canonical guess made
+ * from a lossy drop, not proof the writer meant the object reading.
+ */
+function restorePreps(line: string, lineNo: number, file: string, flags: ReverseFinding[]): string {
+  const tokens = tokenizeLine(line);
+  let out = "";
+  let last = 0;
+  for (let i = 0; i < tokens.length; i++) {
+    const tok = tokens[i]!;
+    out += line.slice(last, tok.start) + tok.word;
+    last = tok.end;
+
+    const restoration = prepRestorations.get(tok.word.toLowerCase());
+    if (!restoration) continue;
+    const next = tokens[i + 1];
+    if (!next) continue; // no next token — e.g. end of sentence
+    const gap = line.slice(tok.end, next.start);
+    if (!/^\s*$/.test(gap)) continue; // punctuation intervenes — e.g. "Wait, the bus…"
+    if (stopsInsertion(next.word)) continue;
+
+    out += ` ${restoration.prep}`;
+    flags.push({
+      file,
+      line: lineNo,
+      found: tok.word.toLowerCase(),
+      restored: `${restoration.verb} ${restoration.prep}`,
+      class: "dropped-prep",
+      rule: "G3",
+      note: `'${restoration.prep}' restored as ${restoration.verb}'s canonical dropped preposition — a guess, not proven from context`,
+    });
+  }
+  return out + line.slice(last);
+}
+
 export function reverseTranslate(text: string, opts: ReverseOptions = {}): ReverseResult {
   const file = opts.file ?? "<stdin>";
   const flags: ReverseFinding[] = [];
 
   // Rebuild line-by-line so flag positions carry a line number, while substitution itself is
   // position-preserving within each line.
-  const lines = text.split("\n");
-  const translatedLines = lines.map((line, i) => {
+  const translatedLines = text.split("\n").map((line, i) => {
     const lineNo = i + 1;
-    let result = "";
-    let last = 0;
-    for (const m of line.matchAll(WORD)) {
-      const word = m[0];
-      const start = m.index;
-      result += line.slice(last, start);
-      const entry = reverseMap.get(word.toLowerCase());
-      if (entry) {
-        result += matchCase(word, entry.restore);
-        if (entry.ambiguous) {
-          flags.push({
-            file,
-            line: lineNo,
-            found: word.toLowerCase(),
-            restored: entry.restore,
-            class: entry.class,
-            rule: entry.rule,
-            note: entry.note ?? "ambiguous restoration",
-          });
-        }
-      } else {
-        result += word;
-      }
-      last = start + word.length;
-    }
-    return result + line.slice(last);
+    const wordRestored = restoreWords(line, lineNo, file, flags);
+    return restorePreps(wordRestored, lineNo, file, flags);
   });
 
   return { text: translatedLines.join("\n"), flags };

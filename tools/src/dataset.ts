@@ -1,8 +1,10 @@
-// Loads the three data files and builds the in-memory index the scanner matches against.
+// Loads the data files and builds the in-memory index the scanner matches against.
 // Computed classes (irregular-verb, irregular-plural) are expanded from their base/singular
-// via the M1/M4 regularizers; the pair-based classes come straight from abolished-forms.json.
+// via the M1/M4 regularizers; the pair-based classes come from abolished-forms.json, plus the
+// dropped-prep (G3) and phrasal-verb (S2) classes merged in from the core lexicon (data/lexicon.json).
 
 import { regularizePlural, regularizeVerbPast } from "./morphology.ts";
+import { loadCoreLexicon, toAbolishedEntries } from "./core-lexicon.ts";
 import abolishedForms from "../data/abolished-forms.json" with { type: "json" };
 import irregularVerbs from "../data/irregular-verbs.json" with { type: "json" };
 import irregularPlurals from "../data/irregular-plurals.json" with { type: "json" };
@@ -72,6 +74,17 @@ export function loadDataset(): Dataset {
 
   // Pair-based classes.
   for (const raw of (abolishedForms.entries as RawEntry[])) {
+    add({
+      abolished: raw.abolished,
+      woe: raw.woe,
+      class: raw.class,
+      rule: raw.rule,
+      confidence: confidenceOf(raw),
+    });
+  }
+
+  // Core lexicon: dropped prepositions (G3) and phrasal verbs (S2), from data/lexicon.json.
+  for (const raw of toAbolishedEntries(loadCoreLexicon())) {
     add({
       abolished: raw.abolished,
       woe: raw.woe,
