@@ -139,6 +139,26 @@ transitive:
 | depend **on** the weather | **depend the weather** |
 | look **at** the picture | **look the picture** |
 
+**The *for* test — duration survives, the object drops.** *for* is the one dropped
+preposition that competes with a *for* World English **keeps**: the **duration** *for* of
+[S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect) (*for three
+minutes*). The test: **keep *for* only when it introduces a length of time** (answers *how
+long?* — *for ten years*, *for a while*); in every other case it merely marks the verb's
+object (answers *wait for what?*) and is **dropped**. One clause can hold both — drop the
+object, keep the duration:
+
+| Standard English | World English |
+| ---------------- | ------------- |
+| wait **for** the bus | **wait the bus** |
+| wait **for** ten minutes | **wait for ten minutes** (duration — kept) |
+| wait **for** the bus **for** ten minutes | **wait the bus for ten minutes** |
+
+The duration set is closed and mechanical: *for* + a number (or *a* / *a few* / *several*)
+immediately followed by a time unit (*second, minute, hour, day, week, month, year*…), a bare
+time-unit plural (*for hours*), or a fixed span (*for a while*, *for a long time*, *for now*).
+This is the one dropped-*for* case the translator decides on sight; every other *for* after a
+drop-verb drops.
+
 **Keep / drop / replace — the boundary.** Every verb+preposition pairing falls into exactly
 one bucket:
 
@@ -207,14 +227,11 @@ form** built regularly. The *who/whom* distinction is removed (always **who**).
 Possessive is the object form + `-s` (regular, like the plural rule in
 [morphology M4](morphology.md)): *mes book*, *hims car*, *whos turn*.
 
-**Plural *you* — recommended `you all`.** English has no distinct plural *you*, a real gap
+**Plural *you* — `you all`.** English has no distinct plural *you*, a real gap
 (dialects fill it with *y'all*, *yous*, *you guys*). World English cannot use *yous* for the
 plural, because [the table above](#rule-g4--regular-pronoun-case) already assigns *yous* to
-the singular **possessive** (*yous book*). The recommendation is the transparent
-**`you all`** (subject and object alike; possessive *you all's*), which no other form claims.
-This is a **recommendation, not a settled rule** — it is the one spot where the regular
-pronoun grid leaves a genuine choice — so it is logged as an open decision in
-[to-do.md](to-do.md) rather than fixed silently here.
+the singular **possessive** (*yous book*). The plural is the transparent **`you all`**
+(subject and object alike; possessive *you all's*), which no other form claims.
 
 **Problem it solves.** Irregular case grids and the dying *who/whom* distinction (see
 [§6](../resources/IRREGULARITIES.md#6-pronouns)).
@@ -419,6 +436,16 @@ This is one of the few places World English keeps a standard-English form verbat
 | the child's toy | **the child's toy** |
 | the children's toys | **the childs' toys** (regular plural *childs* + `'`) |
 
+**`'s` vs the *of*-genitive.** Use **`'s`** (this rule) or the pronoun possessive
+([G4](#rule-g4--regular-pronoun-case): *mes*, *hims*) for genuine **possession** — a
+possessor that *has* or *owns* the thing (*the dog's bone*, *Mary's car*, *hims car*). Keep
+**`of`** for the non-possessive genitives it already carries: part-whole and relational (*the
+captain of the team*, *the top of the hill*) and fixed superlative frames (*the goodest trip
+of hims life*). The two are **not interchangeable**, so neither is mandated over the other —
+the same "keep the real distinction, drop only the arbitrary choice" line as S5's *for* /
+*since*. (Partitive/measure *of* is separately removed by
+[G5](#rule-g5--all-nouns-are-countable): *a piece of advice* → *one advice*.)
+
 **Problem it solves.** Nothing new to learn — but it must be *stated*, because
 [M4](morphology.md#rule-m4--all-plurals-are-regular) makes every plural end in `-s`, so
 without the apostrophe *dogs* (plural), *dog's* (singular possessive), and *dogs'* (plural
@@ -517,6 +544,76 @@ a known trade-off.
 
 ---
 
+## Rule G14 — Content clauses and reported speech
+
+**Rule.** A clause serving as the object of a reporting or mental verb (*say, think, know,
+hope*) is introduced by **`that`** — always kept, never dropped — and stands in its
+**natural tense**: no backshift. [G1](#rule-g1--a-leaner-tenseaspect-system)'s one test picks
+the reported clause's tense exactly as it does anywhere else — **still true → present,
+finished → past** — regardless of the reporting verb's own tense.
+
+| Standard English | World English |
+| ---------------- | ------------- |
+| He said (that) it **was** cold. (now over) | He sayed **that** it **beed** cold. |
+| She thinks (that) he **is** right. | She think **that** he **be** right. |
+| He said (that) he **lived** there. (and still does) | He sayed **that** he **live** there. |
+| I know (that) you **will** come. | I know **that** you **will** come. |
+
+**Problem it solves.** English **backshift** (the sequence-of-tenses rule — *say → said*
+drags *is → was*) is grammatical agreement carrying no meaning of its own, and the
+complementizer *that* is optionally droppable by a feel few learners share. World English
+removes both choices: the tense states the real time (per
+[G1](#rule-g1--a-leaner-tenseaspect-system)), and *that* is always present.
+
+**Divergence & trade-off.** Keeping *that* everywhere is a word longer than the common spoken
+drop, but it unifies the subordinate-clause marker: the **same `that`** introduces relative
+clauses ([G11](#rule-g11--relative-clauses)) and content clauses, so a learner meets one word
+— "a clause follows" — in both. Dropping backshift means *He sayed that it be true* reads
+present because the fact still holds; the reporting verb's pastness no longer drags the inner
+tense.
+
+---
+
+## Rule G15 — Subordinating conjunctions
+
+**Rule.** Adverbial clauses are joined with a **closed, one-per-meaning set** of
+subordinators, each used on the standard-English model: one word, **natural tense** (no
+backshift, per [G1](#rule-g1--a-leaner-tenseaspect-system) /
+[G8](#rule-g8--one-conditional-shape)), and one comma rule — **a leading subordinate clause
+takes a comma, a trailing one takes none.**
+
+| Meaning | World English default | Standard synonyms dropped |
+| ------- | --------------------- | ------------------------- |
+| condition | **if** (see [G8](#rule-g8--one-conditional-shape)) | — |
+| negative condition | **unless** | (*if … not* also fine) |
+| cause | **because** | *since*, *as*, *for* |
+| concession | **altho** (O5 respelling of *although*) | *though*, *even though* |
+| time — point | **when** | — |
+| time — during | **while** | *whilst*, temporal *as* |
+| time — sequence | **before**, **after**, **until** | *till* |
+| purpose | **so that** | *in order that* (same-subject purpose → *to* + verb, [G13](#rule-g13--verb-complementation)) |
+| result | **so** | *and so*, *therefore* |
+
+*If it rain, I will go. I not drink it while it be too hot. We leaved because it beed late.*
+
+Causal *since* is dropped in favour of *because*, which leaves *since* with only its
+[S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect)
+starting-point sense (*since 2015*) — removing the one real overlap.
+
+**Problem it solves.** English offers several subordinators per meaning (*because / since /
+as / for*; *although / though / even though*; *while / whilst*), split by register and subtle
+nuance a learner cannot derive. Fixing **one default per meaning** erases the choice without
+losing any meaning-bearing distinction — the register-variant synonyms route to
+[S4](style.md#rule-s4--avoid-idioms-and-culture-bound-expressions) /
+[S6](style.md#rule-s6--prefer-regular-replacements-for-collocations).
+
+**Divergence & trade-off.** The kept words are all everyday standard English used on the
+standard model — this rule *subtracts* the synonyms rather than reforming anything, so a page
+reads normally. The only loss is stylistic variety (always *because*, never *since*),
+accepted under the ease-over-entertainment priority.
+
+---
+
 ## Summary table
 
 | System | Standard English | World English rule |
@@ -534,3 +631,5 @@ a known trade-off.
 | Relative clauses | who/whom/which/that/whose + comma | invariant `that` (G11) |
 | Reflexives | possessive-self + object-self mix | object + `-self`/`-selfs` (G12) |
 | Verb complementation | lexically-fixed gerund vs infinitive | always `to` + base (G13) |
+| Content clauses | backshift + optional *that* | natural tense, `that` kept (G14) |
+| Subordinators | several per meaning, by register | one default per meaning (G15) |

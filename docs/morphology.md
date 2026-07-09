@@ -73,8 +73,16 @@ removes the single biggest verb-table a learner faces.
 
 **Divergence & trade-off.** The most conspicuous divergence in the whole language — *I be*
 reads as dialectal English. We accept the jolt because *be* is so frequent that any
-irregularity here is paid constantly. (Flagged for review: an alternative keeps *is/are* as
-a minimal concession to legibility. Recorded, not yet chosen.)
+irregularity here is paid constantly.
+
+**Decision.** The full collapse (`be` / `beed`) is chosen over the alternative that keeps
+*is/are* as a legibility concession, for three reasons: (1) it is the only option with **no
+memorized exception** — `beed` derives from the [M1](#rule-m1--all-verbs-are-regular) `-ed`
+rule rather than contradicting it (design principle 4); (2) a single invariant `be` is
+**consistent with [M3](#rule-m3--no-third-person--s)** — World English abolishes verb
+agreement everywhere, so keeping *is/are* would leave *be* as the language's only surviving
+person/number agreement; (3) it is the same tradeoff already accepted for regular verbs
+(*goed*, *taked*), with *be* simply its most frequent instance, not a separate decision.
 
 ---
 
@@ -125,9 +133,12 @@ unambiguous and instantly understood. One rule replaces a list plus a borrowed-p
 
 ## Rule M5 — One comparative rule
 
-**Rule.** Form the comparative with **`-er`** and the superlative with **`-est`** for
-**every** adjective and adverb, regardless of length. No suppletive forms, no *more/most*
-split.
+**Rule.** The regular comparative and superlative are **`-er`** and **`-est`** for **every**
+adjective and adverb — no irregular one-word suppletives (*good* → **gooder**, not *better*).
+Where the `-er`/`-est` form reads clumsy — **long adjectives, `-ly` adverbs, and the
+quantifiers *many*/*much* (and *little*/*few*)** — the periphrastic **`more`/`most`** (and
+**`less`/`least`**) is permitted as an **optional, natural-sounding alternative**. Short
+adjectives take `-er`/`-est` only (*bigger*, never *more big*).
 
 **Problem it solves.** Suppletive comparatives (*good/better/best*) and the fuzzy
 `-er`/`more` boundary (see [§5](../resources/IRREGULARITIES.md#5-adjectives--adverbs)).
@@ -138,13 +149,17 @@ split.
 | -------- | ------------- |
 | good / better / best | good / **gooder** / **goodest** |
 | bad / worse / worst | bad / **badder** / **baddest** |
-| many / more / most | many / **manyer** / **manyest** |
-| beautiful / more beautiful / most beautiful | beautiful / **beautifuler** / **beautifulest** |
+| many / more / most | many / **manyer** *or* **more** / **manyest** *or* **most** |
+| beautiful / more beautiful / most beautiful | beautiful / **beautifuler** *or* **more beautiful** / **beautifulest** *or* **most beautiful** |
 
-**Divergence & trade-off.** *gooder*, *beautifuler* are non-standard but fully transparent.
-The *more/most* periphrasis is dropped entirely, removing the syllable-count judgment call.
-(Flagged: very long adjectives produce long forms like *beautifulest*; acceptable because
-the rule is exceptionless and the form is still readable.)
+**Divergence & trade-off.** *gooder*, *beautifuler* are non-standard but fully transparent,
+and are always available as the regular form. The escape hatch deliberately lets the familiar
+*more/most* back in for the clumsy cases (long adjectives, `-ly` adverbs, quantifiers), because
+naturalness is worth it there. This re-admits the *`-er`*-vs-*more* choice M5 otherwise
+removes — but only as an **optional** aid: the regular `-er`/`-est` is always a valid,
+unambiguous fallback, so no one is *forced* to make the judgment. The one hard line is that
+irregular one-word suppletives (*better*, *worse*) stay abolished — the hatch is periphrastic
+*more/most* only, never *better*.
 
 **Two cases the base rule leaves to state.**
 
@@ -158,17 +173,19 @@ the rule is exceptionless and the form is still readable.)
   | easily | **easilier** | **easiliest** |
   | carefully | **carefullier** | **carefulliest** |
 
-  This replaces standard *more quickly* / *most quickly*. **Open decision (flagged):**
-  *carefullier* and *easilier* are exceptionless but clumsy; whether long `-ly` adverbs
-  should instead be allowed a *more/most* escape hatch is logged in
-  [to-do.md](../docs/to-do.md), not decided here.
+  So *quickly* → **quicklier** is the regular form. **Escape hatch:** because *carefullier*
+  and *easilier* are clumsy, the periphrastic **`more`/`most`** is permitted here too (*more
+  carefully*, *most easily*) as the natural-sounding alternative. Both are valid; the regular
+  `-lier`/`-liest` is always available.
 
-- **Quantifier *more* / *most*.** Because *many/much* regularize to **`manyer` / `manyest`**
-  (row above, and [G5](grammar.md#rule-g5--all-nouns-are-countable) makes every noun count),
-  the quantifier uses of *more* and *most* follow suit: *more than 100 persons* →
-  **manyer than 100 persons**; *most people* → **manyest persons**. **Open decision
-  (flagged):** as bare quantifiers (*I want more* → *I want manyer*) these read oddly; logged
-  in [to-do.md](../docs/to-do.md) in case the forms turn out too absurd to keep.
+- **Quantifier *more* / *most*.** *many/much* regularize to **`manyer` / `manyest`** (row
+  above, and [G5](grammar.md#rule-g5--all-nouns-are-countable) makes every noun count), so
+  *manyer than 100 persons* and *manyest persons* are the regular forms. But because the bare
+  quantifiers are the clumsiest cases of all (*I want manyer*), the standard **`more`/`most`**
+  are permitted here as the escape hatch (*I want more*, *more than 100 persons*, *most
+  people*); *little/few* likewise take **`less`/`least`** alongside *littler/littlest*. Both
+  are valid. The translators leave *more/most/less/least* untouched (they are valid World
+  English) and never force *manyer*.
 
 ---
 

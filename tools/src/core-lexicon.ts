@@ -156,6 +156,45 @@ export function toAbolishedEntries(lexicon: CoreLexicon = defaultLexicon): Aboli
   return out;
 }
 
+// The G3 "for" test (docs/grammar.md G3, to-do.md item 16): a dropped `for` is KEPT when it
+// introduces a duration span (S5), DROPPED when it marks the verb's object. Closed word set.
+const TIME_UNITS = new Set([
+  "second", "seconds", "minute", "minutes", "hour", "hours", "day", "days", "week", "weeks",
+  "month", "months", "year", "years", "decade", "decades", "century", "centuries",
+  "moment", "moments", "while", "ages", "night", "nights",
+]);
+const NUMBER_WORDS = new Set([
+  "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
+  "eleven", "twelve", "twenty", "thirty", "forty", "fifty", "hundred",
+  "few", "several", "couple", "many",
+]);
+// Single words that are a whole span on their own: "for now", "for ever". ("for good" is
+// handled separately in isDurationFor: only a bare span, never when `good` precedes a noun.)
+const FIXED_SPANS = new Set(["now", "ever", "forever"]);
+
+/**
+ * True when the words immediately after a dropped `for` read as a length of time — so the
+ * `for` is kept (S5 duration) rather than dropped (G3 object). Conservative: keeps only clear
+ * spans, drops otherwise. `after` is the lowercased word tokens that follow "for".
+ */
+export function isDurationFor(after: string[]): boolean {
+  const w0 = after[0];
+  if (w0 === undefined) return false;
+  if (TIME_UNITS.has(w0)) return true; // "for hours", "for minutes"
+  if (FIXED_SPANS.has(w0)) return true; // "for now", "for ever"
+  // "for good" (= permanently) counts only as a bare span; with a trailing word, `good` is an
+  // adjective and the `for` is an ordinary object-for ("hope for good news" → "hope good news").
+  if (w0 === "good" && after[1] === undefined) return true;
+  if (NUMBER_WORDS.has(w0)) return TIME_UNITS.has(after[1] ?? ""); // "for three minutes"
+  if (w0 === "a" || w0 === "an") {
+    const w1 = after[1] ?? "";
+    if (TIME_UNITS.has(w1)) return true; // "for a while", "for a moment"
+    if (w1 === "long" && after[2] === "time") return true; // "for a long time"
+    if (NUMBER_WORDS.has(w1)) return TIME_UNITS.has(after[2] ?? ""); // "for a few minutes"
+  }
+  return false;
+}
+
 export interface PhraseTransform {
   /** Whitespace-separated tokens of the standard-English surface form to match. */
   tokens: string[];
@@ -163,6 +202,13 @@ export interface PhraseTransform {
   replacement: string;
   class: "dropped-prep" | "phrasal-verb";
   rule: "G3" | "S2";
+  /**
+   * "not-duration": only fire when the tokens after the phrase are NOT a duration span.
+   * Set on every dropped `for` (G3 "for" test, to-do.md item 16): drop the object-for
+   * (*wait for the bus* → *wait the bus*) but keep the duration-for (*wait for three
+   * minutes*). translate.ts's substituteLine evaluates the guard.
+   */
+  guard?: "not-duration";
 }
 
 /**
@@ -176,8 +222,9 @@ export function buildPhraseTransforms(lexicon: CoreLexicon = defaultLexicon): Ph
     if (d.ruling !== "drop") continue;
     if (confidenceOf(d) !== "high") continue;
     if ((d.forward ?? "apply") === "flag") continue;
+    const guard = d.prep === "for" ? ("not-duration" as const) : undefined;
     for (const form of standardInflections(d.verb)) {
-      out.push({ tokens: [form, d.prep], replacement: form, class: "dropped-prep", rule: "G3" });
+      out.push({ tokens: [form, d.prep], replacement: form, class: "dropped-prep", rule: "G3", guard });
     }
   }
 

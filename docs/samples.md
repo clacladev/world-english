@@ -33,8 +33,9 @@ Rule keys: `O*` [orthography](orthography.md) · `P*` [pronunciation](pronunciat
 
 1. *…the city builded new hospital.* — `[M1]` build → **builded** · `[G1]` present perfect
    → simple past (finished action; the hospital now exists, no time word needed) · `[G2]`
-   drop indefinite article (*a new hospital* → **new hospital**). *announced* is already
-   regular (`[M1]`, no change).
+   drop indefinite article (*a new hospital* → **new hospital**) · `[G14]` content clause:
+   complementizer **that** kept after *announced*. *announced* is already regular (`[M1]`, no
+   change).
 2. *It beed designed by famous architect and costed fifty million dollars.* — `[G9]` passive
    *be + -ed* (**beed designed**) · `[M2]` was → **beed** · `[G2]` drop *a* · `[M1]` cost →
    **costed** (no more zero-past).
@@ -45,9 +46,9 @@ Rule keys: `O*` [orthography](orthography.md) · `P*` [pronunciation](pronunciat
    `[M4]` **residents** · `[G1]` present perfect *still ongoing* → **present tense** (they
    are still waiting) · `[G3]` drop verb-selected *for* (*wait for X* → **wait X**) · `[M5]`
    better → **gooder** · `[S5]` duration keeps **for** (*for years*).
-   ⚠ **Flag:** *wait X* (dropped *for*) and *for years* (kept *for*) sit in one clause — the
-   rule that decides which *for* survives (duration vs. thing-awaited) is only implicit. See
-   [to-do.md](to-do.md).
+   ✅ **Resolved** ([G3 *for* test](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs)):
+   *wait X* (dropped object-*for*) and *for years* (kept duration-*for*) both follow the rule —
+   keep *for* only before a length of time, drop it otherwise.
 
 ---
 
@@ -109,16 +110,12 @@ Rule keys: `O*` [orthography](orthography.md) · `P*` [pronunciation](pronunciat
    stays definite.
 3. *Wait for three minutes, then remove the bag.* — `[S5]` keep **for** (it marks a
    **duration**, so it is not the droppable verb-selected *for*) · **the bag** definite.
-   ⚠ **Flag:** same *for*-ambiguity as Passage 1.4 — here *for* is kept because *three
-   minutes* is a span, not the thing awaited. The specs need to state that test. See
-   [to-do.md](to-do.md).
+   ✅ **Resolved** ([G3 *for* test](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs)):
+   *for* is kept because *three minutes* is a span, not the thing awaited.
 4. *Add milk or sugar if you like.* — `[G2]` no article on **milk** / **sugar** (indefinite) ·
-   `[G8]` *if* + natural present tense.
-   ⚠ **Flag:** *if you like* uses a subordinate clause and the general conjunction *if* beyond
-   the [G8](grammar.md#rule-g8--one-conditional-shape) conditional frame; the inventory of
-   subordinators (*while*, *because*, *when*) is not yet specified. See [to-do.md](to-do.md).
+   `[G8]` *if* + natural present tense · `[G15]` *if* as the condition subordinator.
 5. *Not drink it while it be too hot.* — `[G6]` negative imperative **Not drink** (no
-   *do*-support) · `[M2]` is → **be**. Uses subordinator *while* (flagged above).
+   *do*-support) · `[M2]` is → **be** · `[G15]` *while* (time — during), trailing clause, no comma.
 
 ---
 
@@ -127,14 +124,14 @@ Rule keys: `O*` [orthography](orthography.md) · `P*` [pronunciation](pronunciat
 **Standard English**
 
 > Last year I went to Japan with my two children. We took the train from Tokyo to Kyoto. The
-> food was better than I expected, and the people were very kind. My son said it was the best
-> trip of his life. We have already booked our tickets to go again next spring.
+> food was better than I expected, and the people were very kind. My son said that it was the
+> best trip of his life. We have already booked our tickets to go again next spring.
 
 **World English**
 
 > Last year I goed to Japan with mes two childs. We taked the train from Tokyo to Kyoto. The
-> food beed gooder than I expected, and the persons beed very kind. Mes son sayed it beed the
-> goodest trip of hims life. We already booked uss tickets to go again next spring.
+> food beed gooder than I expected, and the persons beed very kind. Mes son sayed that it beed
+> the goodest trip of hims life. We already booked uss tickets to go again next spring.
 
 **Annotations**
 
@@ -148,35 +145,63 @@ Rule keys: `O*` [orthography](orthography.md) · `P*` [pronunciation](pronunciat
    expect → **expected**.
 4. *Mes son sayed it beed the goodest trip of hims life.* — `[G4]` my → **mes**, his →
    **hims** · `[M1]` say → **sayed** · `[M2]` was → **beed** · `[M5]` best → **goodest** ·
-   `[G3]` keep **of** (relation).
-   ⚠ **Flag:** *sayed it beed…* is **reported speech**, and *of hims life* is an
-   **of-genitive** competing with the [G10](grammar.md#rule-g10--noun-possessive) *'s*
-   possessive (*hims life's goodest trip*?). Neither reported speech (backshift or not) nor
-   the *of* vs *'s* choice is specified. Rendered here with no backshift, on the
-   [G8](grammar.md#rule-g8--one-conditional-shape) "natural tense" model. See
-   [to-do.md](to-do.md).
+   `[G14]` reported speech: complementizer **that** kept, natural tense (no backshift) ·
+   `[G10]` keep **of** — a fixed superlative frame (*trip of hims life*), not a possession, so
+   the *of*-genitive is preferred over *hims life's*.
+   ✅ **Resolved:** [G14](grammar.md#rule-g14--content-clauses-and-reported-speech) settles the
+   reported clause (keep *that*, no backshift — *beed* is past because the trip is over), and
+   [G10](grammar.md#rule-g10--noun-possessive)'s `'s`-vs-*of* boundary keeps *of* here.
 5. *We already booked uss tickets to go again next spring.* — `[S5]` **already** (dropped
    perfect) · `[M1]` book → **booked** · `[G4]` our → **uss** · `[G13]` *to go* plain
    infinitive of purpose.
 
 ---
 
-## Gaps this file surfaced
+## Passage 5 — Feedback note
 
-Dogfooding turned up constructions the specs do not yet cover. Each is logged in
-[`to-do.md`](to-do.md) so it is fixed by rule, not by improvisation:
+**Standard English**
 
-1. **The *for* test — duration vs. thing-awaited.** [G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs)
-   drops verb-selected *for* (*wait for the bus* → *wait the bus*) while
-   [S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect) keeps
-   duration *for* (*for three minutes*). One clause can hold both; the specs need an explicit
-   test for which *for* survives.
-2. **Reported speech / content clauses.** *He said (that) it was…* — whether tense
-   backshifts, and how the complementizer *that* behaves in nominal clauses, is unspecified.
-3. **The *of*-genitive vs. G10 *'s*.** *the trip of his life* vs. *his life's trip* — G10
-   fixes the *'s* possessive but does not say when the *of*-phrase is preferred.
-4. **Subordinating conjunctions.** *while*, *because*, *when*, *if* (beyond G8's conditional)
-   are used on the standard-English model but have no spec of their own.
+> You all worked more quickly this year, so more of you passed the test. Next time, plan
+> more carefully.
+
+**World English**
+
+> You all worked more quickly this year, so more of you all passed the test. Next time, plan
+> more carefully.
+
+**Annotations**
+
+1. *You all worked more quickly this year, so more of you all passed the test.* — `[G4]`
+   plural *you* → **you all** (subject and object alike) · `[M1]` **worked** / **passed**
+   (already regular) · `[M5]` `-ly` adverb comparative via the **optional *more/most* escape
+   hatch** (*more quickly* kept, over the regular *quicklier*) · `[M5]` quantifier **more of**
+   (escape hatch, over the regular *manyer of*) · `[G15]` *so* (result) subordinator.
+2. *Next time, plan more carefully.* — `[M5]` `-ly` adverb comparative, again the **escape
+   hatch** *more carefully* (over *carefullier*). This passage exercises item-17: `you all`
+   plus the optional `more/most` hatch — *more/most* is valid World English, so the linter
+   does not flag it.
+
+---
+
+## Gaps this file surfaced — now closed
+
+Dogfooding turned up four constructions the specs did not cover. Each was logged in
+[`to-do.md`](to-do.md) (item 16) and has since been **fixed by rule**:
+
+1. ✅ **The *for* test — duration vs. thing-awaited.**
+   [G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs) now states it: keep
+   *for* only before a length of time (*for three minutes*), drop it otherwise (*wait the
+   bus*). Wired into both translators.
+2. ✅ **Reported speech / content clauses.**
+   [G14](grammar.md#rule-g14--content-clauses-and-reported-speech): complementizer *that* is
+   always kept, and the reported clause takes its natural tense (no backshift, per G1).
+3. ✅ **The *of*-genitive vs. G10 *'s*.**
+   [G10](grammar.md#rule-g10--noun-possessive) now draws the boundary: `'s` for genuine
+   possession, *of* for relational and fixed superlative frames (*trip of hims life*).
+4. ✅ **Subordinating conjunctions.**
+   [G15](grammar.md#rule-g15--subordinating-conjunctions): a closed, one-per-meaning set
+   (*if, unless, because, altho, when, while, before, after, until, so that, so*), natural
+   tense, fixed comma placement.
 
 ---
 

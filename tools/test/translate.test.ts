@@ -80,10 +80,25 @@ describe("flagged, not translated (needs POS / syntax / lexicon)", () => {
     expect(woe("it depends on the weather")).toBe("it depends the weather");
   });
 
-  it("still flags `wait for` — the item-16 duration-vs-object test stays unresolved", () => {
-    expect(woe("please wait for the bus")).toBe("please wait for the bus");
-    expect(flagKeys("please give up now")).not.toContain("give up:phrasal-verb/S2");
-    expect(flagKeys("wait for the bus")).toContain("wait for:dropped-prep/G3");
+  it("resolves the `for` test (G3, item 16): drops object-for, keeps duration-for", () => {
+    expect(woe("please wait for the bus")).toBe("please wait the bus");
+    expect(woe("wait for three minutes")).toBe("wait for three minutes");
+    expect(woe("wait for the bus for ten minutes")).toBe("wait the bus for ten minutes");
+    expect(woe("I hope for rain")).toBe("I hope rain");
+    // fixed and determiner-led spans are kept…
+    expect(woe("wait for a while")).toBe("wait for a while");
+    expect(woe("wait for a long time")).toBe("wait for a long time");
+    expect(woe("wait for now")).toBe("wait for now");
+    // …but a time-unit noun buried behind an adjective is an object, not a span → dropped
+    // (better → gooder is the unrelated M5 comparative)
+    expect(woe("hope for a better year")).toBe("hope a gooder year");
+    // "for good" (= permanently) is a bare span, kept; but "good" before a noun is an
+    // adjective, so the object-for drops
+    expect(woe("I hope for good")).toBe("I hope for good");
+    expect(woe("I hope for good news")).toBe("I hope good news");
+    // neither the dropped nor the deliberately-kept `for` is flagged
+    expect(flagKeys("wait for the bus")).not.toContain("wait for:dropped-prep/G3");
+    expect(flagKeys("wait for three minutes")).not.toContain("wait for:dropped-prep/G3");
   });
 
   it("does not cross punctuation to form a phrase", () => {
@@ -142,8 +157,8 @@ describe("gold round-trip against docs/samples.md", () => {
   const pairs = samplePairs();
   const forwardValues = new Set(buildForwardMap(data).values());
 
-  it("finds the four gold passages", () => {
-    expect(pairs.length).toBe(4);
+  it("finds the five gold passages", () => {
+    expect(pairs.length).toBe(5);
   });
 
   it("produces every handled World-English form the gold passage contains", () => {
@@ -163,10 +178,11 @@ describe("gold round-trip against docs/samples.md", () => {
     }
   });
 
-  it("flags the out-of-scope constructions the gold passages needed (a, wait for)", () => {
+  it("flags the out-of-scope constructions the gold passages needed (article 'a')", () => {
     const allSe = pairs.map((p) => p.se).join("\n");
-    // dropped-prep is high-confidence → flagged by default (Passage 1 & 3: 'wait for').
-    expect(flagKeys(allSe)).toContain("wait for:dropped-prep/G3");
+    // Passage 3's only dropped-prep is the duration 'wait for three minutes' — now RESOLVED by
+    // the G3 for-test (kept, not flagged), so no 'wait for' flag survives.
+    expect(flagKeys(allSe)).not.toContain("wait for:dropped-prep/G3");
     // articles are low-confidence → flagged under strict (every passage drops 'a').
     expect(flagKeys(allSe, true)).toContain("a:article/G2");
   });

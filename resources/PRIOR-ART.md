@@ -237,7 +237,9 @@ actually helps or hurts understanding between non-native speakers. It is where p
   placement. **Non-core** (variation tolerated, treat as accent): **the *th* sounds /θ/ and
   /ð/**, fine **vowel quality**, **lexical word-stress** placement, weak forms/schwa,
   stress-timed rhythm, and attitudinal intonation.
-- **Where it contradicts WoE.** Three places, recorded honestly:
+- **Where it contradicts WoE.** Three places, recorded honestly — and now **resolved
+  deliberately** (see [to-do.md](../docs/to-do.md) item 18): P3 and P4 are kept on
+  reading-aid grounds, P7's spoken divergence is accepted.
   1. **The *th* split.** Jenkins found /θ/ and /ð/ are **non-core and safely substitutable**
      (with /t d/, /s z/, /f v/) without harming international intelligibility. Yet
      [P3](../docs/pronunciation.md#rule-p3--th-is-split-in-the-key) *keeps and distinguishes*
@@ -245,13 +247,16 @@ actually helps or hurts understanding between non-native speakers. It is where p
      *th*/*dh* key marks minimal pairs like *breath*/*breathe*) and its
      [scope note](../docs/pronunciation.md#scope-note--contrasts-the-respelling-cant-remove)
      already concedes that *producing* /θ/ stays ordinary learner effort. **The LFC says that
-     effort is unnecessary for being understood.** This is a genuine, citable tension — a
-     candidate to revisit — not something the specs should paper over.
+     effort is unnecessary for being understood** — and WoE agrees on the spoken axis: a
+     speaker may substitute and still be understood. **Resolved: the split is kept** because
+     it lives on the reading-aid axis (marking minimal pairs in the key), which the LFC's
+     spoken finding does not bear on.
   2. **Word stress.** [P4](../docs/pronunciation.md#rule-p4--stress-is-always-marked-never-guessed)
      invests heavily in marking lexical stress on every word; the LFC rates *lexical* stress
      **non-core** (only *nuclear/contrastive* stress is essential). World English's marking is
      still defensible as a *reading aid*, but it is not, per Jenkins, load-bearing for
-     intelligibility.
+     intelligibility. **Resolved: the marking is kept** as a reading aid, not claimed as an
+     intelligibility requirement.
   3. **Question intonation.** The LFC rates **grammatical intonation non-core**, yet
      [P7](../docs/pronunciation.md#rule-p7--intonation-carries-only-the-question) — as
      redesigned — deliberately *load-bears* rising intonation for the yes/no question. This one
@@ -259,7 +264,8 @@ actually helps or hurts understanding between non-native speakers. It is where p
      LFC *supported*; the choice to let questions ride on pitch (rather than coin a particle)
      turned it into a divergence. World English still treats *attitudinal* intonation as
      non-load-bearing (aligned with the LFC); only the *question* now rides on pitch, and it is
-     mitigated in writing by the leading `?`.
+     mitigated in writing by the leading `?`. **Resolved: the divergence is accepted** — one
+     bounded pitch contrast is worth avoiding a coined question particle.
 - **Where it agrees with WoE.** The LFC rates **stress-timed rhythm** non-core — direct
   empirical support for
   [P6](../docs/pronunciation.md#rule-p6--sentence-rhythm-is-optional-syllable-timing-is-acceptable)
@@ -312,7 +318,7 @@ actually helps or hurts understanding between non-native speakers. It is where p
 | Basic English, VOA, STE, Globish, Plain English | **survived** | Subsets in a bounded domain, backed by institutions, work. Don't reform spelling; constrain vocabulary and grammar and stay legible. |
 | Webster (radical set), SSB, Cut Spelling, ITA | **failed** | Public respelling fails; only the conservative subset ever sticks. Adopt existing forms, never coin; keep the phonetic layer separate from the orthography. |
 | Quirk's Nuclear English | **stalled** | A proposal that is never built changes nothing. Ship specs, dogfood, and tool. |
-| Jenkins' LFC | **contradicts (th, word-stress, question intonation)** | Keeping /θ/–/ð/, marking lexical stress, and load-bearing question intonation are not required for intelligibility — a flagged tension, not settled truth. |
+| Jenkins' LFC | **contradicts (th, word-stress, question intonation)** | Keeping /θ/–/ð/, marking lexical stress, and load-bearing question intonation are not required for intelligibility — the tension is now **resolved** (item 18): P3/P4 kept as reading aids, P7's spoken divergence accepted. |
 | Creole / interlanguage convergence | **corroborates** | No 3rd-sg *-s*, preverbal negation, invariant tags, regularized past are what English becomes when simplified — natural, not arbitrary. |
 
 ---
@@ -352,5 +358,6 @@ actually helps or hurts understanding between non-native speakers. It is where p
 > **Caveat.** Dates and outcomes above were web-verified (2026), but several figures (Carnegie's
 > SSB funding, STE's "2025 standard" status) and one theoretical claim (Bickerton's bioprogram)
 > are flagged as source-dependent or contested. Where prior art contradicts a World English rule
-> — most importantly the LFC on /θ/–/ð/ — the contradiction is recorded, not resolved; see the
-> [to-do backlog](../docs/to-do.md) for whether to revisit those rules.
+> — most importantly the LFC on /θ/–/ð/ — the contradiction was recorded honestly and is now
+> resolved deliberately (§C; [to-do.md](../docs/to-do.md) item 18): the diverging rules are
+> kept, on reading-aid grounds for P3/P4 and as an accepted spoken trade-off for P7.

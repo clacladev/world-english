@@ -46,6 +46,12 @@ describe("planted-bug detection (the point-4 class of mistake)", () => {
     expect(classesFor("listen to music")).toContain("listen to:dropped-prep/G3");
   });
 
+  it("flags the object `wait for` but NOT the kept duration `wait for` (G3 for-test)", () => {
+    expect(classesFor("wait for the bus")).toContain("wait for:dropped-prep/G3");
+    expect(classesFor("wait for three minutes")).not.toContain("wait for:dropped-prep/G3");
+    expect(classesFor("wait for a while")).not.toContain("wait for:dropped-prep/G3");
+  });
+
   it("suggests the regularized World-English replacement", () => {
     const f = scan("I saw it").find((x) => x.found === "saw");
     expect(f?.expected).toBe("seed");
@@ -72,11 +78,9 @@ describe("confidence gating", () => {
     // "well" is a homograph → low confidence.
     expect(classesFor("she sings well")).toEqual([]);
     expect(classesFor("she sings well", { strict: true })).toContain("well:suppletive-adverb/M6");
-    // "more" rides on an open decision (item 17) → low.
+    // "more" is a valid M5 escape-hatch/quantifier form (item 17 resolved) → never flagged.
     expect(classesFor("I want more")).toEqual([]);
-    expect(classesFor("I want more", { strict: true })).toContain(
-      "more:suppletive-comparative/M5",
-    );
+    expect(classesFor("I want more", { strict: true })).toEqual([]);
   });
 
   it("treats homograph verb pasts as low confidence (the noun 'ground')", () => {

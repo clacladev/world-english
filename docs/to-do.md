@@ -81,11 +81,12 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
     `samples.md` gold passages. **Now that the core lexicon (item 8) exists, the
     lexicon-dependent half is wired too**: G3 dropped prepositions and S2 phrasal verbs are
     applied — inflected forms included (*gave up* → *quitted*, *listens to* → *listens*) — via
-    `src/core-lexicon.ts`'s `buildPhraseTransforms()`. The one deliberate holdout is `wait for`
-    (`forward: "flag"` in the lexicon): its `for` competes with the duration `for` of
-    [S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect), the
-    unresolved item-16 test, so it stays flagged rather than mistranslated. Article drop by
-    syntax is still out of scope (needs a parser, not a lexicon).
+    `src/core-lexicon.ts`'s `buildPhraseTransforms()`. Dropped `for` (`wait for`, `hope for`)
+    is now handled by the **G3 for-test** (item 16, resolved): the not-duration guard
+    (`isDurationFor`) drops the object-*for* (*wait the bus*) but keeps the duration-*for*
+    (*wait for three minutes*), competing cleanly with the duration `for` of
+    [S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect). Article
+    drop by syntax is still out of scope (needs a parser, not a lexicon).
     Acceptance criteria per [README methodology step 5](../README.md#methodology): a rule is
     "done" only when it is
     statable without a hidden word list, `samples.md` stays consistent, and the example
@@ -132,9 +133,11 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
    (deterministic noun-stress merger, homograph residue, valid worked sentence); **P7
    redesigned** — intonation now load-bears the yes/no question (rising pitch in speech,
    leading `?` in writing), replacing the coined `Q` particle.
-   **Open decision (see item 18):** [`PRIOR-ART.md`](../resources/PRIOR-ART.md) surfaced
+   **Decision resolved (item 18):** [`PRIOR-ART.md`](../resources/PRIOR-ART.md) surfaced
    that Jenkins' Lingua Franca Core rates /θ/–/ð/, lexical stress, *and* grammatical intonation
-   *non-core* for intelligibility — a research contradiction with P3/P4/P7 worth revisiting.
+   *non-core* for intelligibility — a research contradiction with P3/P4/P7. Settled: P3/P4 are
+   kept as reading aids (the LFC concerns *spoken* intelligibility, which WoE makes optional),
+   and P7's question-intonation divergence is accepted deliberately.
 
 3. **Spelling opacity.** One of the least phonetically transparent alphabetic systems;
    ~25% of common words have unpredictable spelling.
@@ -153,9 +156,10 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
    Status: drafted → [grammar.md G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs).
    Point-4 fix: *pay for* / *believe in* removed from the drop list (they merge senses) and
    routed to keep/replace. **Item 8's core lexicon now carries the per-verb canonical-preposition
-   table** (35 rulings from the NGSL sweep), wired into both translators. Open sub-question
-   logged by [samples.md](samples.md): the *for* duration-vs-object test (item 16) — still open,
-   which is why `wait for` stays `forward: "flag"` rather than auto-dropped.
+   table** (35 rulings from the NGSL sweep), wired into both translators. The *for*
+   duration-vs-object test (item 16) is now **resolved** —
+   [G3's *for* test](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs) drops
+   the object-*for* but keeps the duration-*for*, so `wait for` is auto-translated, not flagged.
 
 5. **Verb irregularity, incl. the *be* paradigm.** ~200 irregular verbs in everyday use —
    the densest pure-memorization load in the language; *be* alone has eight forms and is
@@ -165,9 +169,12 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
    Status: drafted → [morphology.md M1](morphology.md#rule-m1--all-verbs-are-regular),
    [M2](morphology.md#rule-m2--one-verb-of-be-regularized).
    Point-4 fix: M1 now states the `-e`/`-ed` spelling sub-rule so *beed*/*gived* derive from
-   the rule. **Open decision (unresolved):** M2 is still "flagged for review" — whether to
-   keep *is/are* as a legibility concession instead of collapsing to *be/beed*. Needs a
-   decision; if it flips, re-run the example sweep.
+   the rule. **Decision resolved:** M2 keeps the **full collapse** (`be`/`beed`) rather than
+   the *is/are* legibility concession — it is the only exception-free option (`beed` derives
+   from M1), it stays consistent with M3's no-agreement design, and it is the same tradeoff
+   already accepted for regular verbs. No example re-sweep was needed: every
+   [`grammar.md`](grammar.md)/[`samples.md`](samples.md) column and both translators already
+   used `be`/`beed`.
 
 6. **Present perfect / tense-aspect system.** The single most-cited hardest tense — it
    encodes a past-with-present-relevance relationship many languages don't grammaticalize.
@@ -193,10 +200,11 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
 
 ---
 
-## Priority 2 — Fill the documented-but-unspecified gaps, and the new open decisions
+## Priority 2 — Fill the documented-but-unspecified gaps (decision items now resolved)
 
 `PAIN-POINTS.md` gives these categories real research weight but no `docs/` spec covers them
-yet, plus the open decisions the point-5 rules deliberately left flagged.
+yet (items 9, 10 — the remaining open work in this tier). The decision items 16, 17, and 18
+are now **resolved** and kept here for the record.
 
 9. **Writing conventions.** Register/tone, punctuation conventions, paragraph/essay
    structure, and coherence/cohesion (Kaplan's contrastive rhetoric; Halliday & Hasan) —
@@ -214,49 +222,67 @@ yet, plus the open decisions the point-5 rules deliberately left flagged.
     low-context request/refusal templates) rather than a full spec. Worth a design discussion.
 
 16. **Constructions surfaced by dogfooding ([samples.md](samples.md)).** Translating real
-    passages exposed four gaps the specs do not yet cover — logged so they are fixed by rule,
-    not improvised:
-    - **The *for* test — duration vs. thing-awaited.** [G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs)
-      drops verb-selected *for* (*wait the bus*) but [S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect)
-      keeps duration *for* (*for three minutes*); one clause can hold both, so the specs need
-      an explicit test for which survives.
-    - **Reported speech / content clauses.** Whether tense backshifts, and how complementizer
-      *that* behaves in nominal clauses (*He said that it beed…*), is unspecified.
-    - **The *of*-genitive vs. G10 *'s*.** *the trip of hims life* vs. *hims life's trip* —
-      [G10](grammar.md#rule-g10--noun-possessive) fixes *'s* but not when the *of*-phrase is
-      preferred.
-    - **Subordinating conjunctions.** *while, because, when, if* (beyond G8's conditional) are
-      used on the standard model with no spec of their own.
-    Source: [samples.md](samples.md) "Gaps this file surfaced". Status: **gap**.
+    passages exposed four gaps — now all **resolved by rule**:
+    - **The *for* test — duration vs. thing-awaited.** ✅ **Done** —
+      [G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs) states it (keep
+      *for* only before a length of time, else drop) and it is **wired into both translators
+      and the linter** via the not-duration guard (`tools/src/core-lexicon.ts`'s
+      `isDurationFor`): *wait for the bus* → *wait the bus*, *wait for three minutes* kept.
+      `wait for` is no longer a `forward: "flag"` holdout.
+    - **Reported speech / content clauses.** ✅ **Done** —
+      [G14](grammar.md#rule-g14--content-clauses-and-reported-speech): complementizer *that* is
+      always kept (unified with G11's relative *that*), no backshift, natural tense per G1.
+      Doc-only (the translator does not insert a dropped *that* — that needs a parser).
+    - **The *of*-genitive vs. G10 *'s*.** ✅ **Done** —
+      [G10](grammar.md#rule-g10--noun-possessive) draws the boundary: `'s` for genuine
+      possession, *of* for relational / part-whole / fixed superlative frames (*trip of hims
+      life*). Keeps both (like S5's *for*/*since*); no reordering, Passage 4 unchanged.
+      Doc-only.
+    - **Subordinating conjunctions.** ✅ **Done** —
+      [G15](grammar.md#rule-g15--subordinating-conjunctions): a closed one-per-meaning set
+      (*if, unless, because, altho, when, while, before, after, until, so that, so*), natural
+      tense, fixed comma placement; register-variant synonyms route to S4/S6. Doc-only.
+    Source: [samples.md](samples.md) "Gaps this file surfaced". Status: **resolved** (G3
+    for-test tooling built; G14/G15 added; G10 boundary added).
 
-17. **Open decisions the point-5 rules left flagged.** New rules were added with their
-    unresolved choices recorded rather than decided silently:
-    - **Plural *you*.** [G4](grammar.md#rule-g4--regular-pronoun-case) recommends **`you all`**
-      (since *yous* is taken by the singular possessive) but flags it as not settled.
-    - **`-ly` adverb comparatives.** [M5](morphology.md#rule-m5--one-comparative-rule) gives
-      *quicklier/carefullier*; whether long `-ly` adverbs should get a *more/most* escape hatch
-      is open (the forms are exceptionless but clumsy).
-    - **Quantifier *more/most*.** M5 gives *manyer/manyest* (*manyer than 100 persons*); as bare
-      quantifiers (*I want manyer*) these may be too absurd to keep.
+17. **Open decisions the point-5 rules left flagged — now resolved.** Three choices were
+    recorded rather than decided silently; now settled — the pronoun on the exceptionless line,
+    the comparatives with a deliberate naturalness concession:
+    - **Plural *you* → `you all`.** ✅ **Done** — [G4](grammar.md#rule-g4--regular-pronoun-case)
+      fixes **`you all`** (subject/object; possessive *you all's*); *yous* stays the singular
+      possessive, so nothing collides. The "recommendation, not a settled rule" hedge is removed.
+    - **`-ly` adverb comparatives → regular `-lier`, with an optional `more/most` hatch.**
+      ✅ **Done** — [M5](morphology.md#rule-m5--one-comparative-rule) keeps *quicklier/carefullier*
+      as the regular form but **permits periphrastic *more/most*** (*more carefully*) as an
+      optional, natural-sounding alternative for the clumsy `-ly` (and long-adjective) cases.
+    - **Quantifier *more/most* → `manyer/manyest`, with *more/most* permitted.** ✅ **Done** —
+      M5 keeps *manyer/manyest* as the regular form but lets the standard **`more/most`** back
+      in for the bare-quantifier cases (*I want more*); *little/few* likewise take *less/least*.
+      *more/most/less/least* are valid World English, so the linter no longer flags them (the
+      low-confidence rows were removed from `abolished-forms.json`).
+    The escape hatch re-admits the *`-er`*-vs-*more* choice as an **optional** aid only — the
+    regular `-er`/`-est` stays available and unambiguous; irregular one-word suppletives
+    (*better*, *worse*) remain abolished.
     Source: [grammar.md G4](grammar.md#rule-g4--regular-pronoun-case),
-    [morphology.md M5](morphology.md#rule-m5--one-comparative-rule). Status: **open decisions**.
+    [morphology.md M5](morphology.md#rule-m5--one-comparative-rule). Status: **resolved**.
 
-18. **Research contradictions from [`PRIOR-ART.md`](../resources/PRIOR-ART.md).** The
-    intelligibility research disagrees with three pronunciation rules, recorded for a decision:
-    - Jenkins' **Lingua Franca Core rates /θ/–/ð/ non-core** and safely substitutable, yet
-      [P3](pronunciation.md#rule-p3--th-is-split-in-the-key) keeps and marks the contrast.
-    - The **LFC rates lexical word-stress non-core** (only nuclear stress is essential), yet
-      [P4](pronunciation.md#rule-p4--stress-is-always-marked-never-guessed) marks it on every
-      word.
-    - The **LFC rates grammatical intonation non-core**, yet
-      [P7](pronunciation.md#rule-p7--intonation-carries-only-the-question) — as redesigned —
-      now *load-bears* rising intonation for the yes/no question. (This one flipped: before the
-      P7 redesign it *supported* the LFC; the deliberate choice to make questions ride on pitch
-      turned it into a divergence. Mitigated in writing by the leading `?`.)
-    None is a bug — all are defensible on writing-side/reading-aid grounds — but the tension
-    with the empirical evidence should be resolved deliberately, not ignored.
+18. **Research contradictions from [`PRIOR-ART.md`](../resources/PRIOR-ART.md) — now resolved.**
+    The intelligibility research disagrees with three pronunciation rules; each is now settled
+    on the reading-aid vs. spoken-intelligibility distinction (the LFC is about *spoken*
+    intelligibility, which WoE already makes optional via P5/P6):
+    - **/θ/–/ð/ (P3) → kept.** ✅ **Done** — the LFC rates it non-core and safely substitutable,
+      and WoE agrees on the spoken axis (a speaker may substitute and be understood); the
+      *th*/*dh* split is kept as a **reading-aid** distinction (minimal pairs in the key), which
+      the spoken finding does not touch. [P3](pronunciation.md#rule-p3--th-is-split-in-the-key).
+    - **Lexical word-stress (P4) → kept.** ✅ **Done** — marked stress is a **reading aid**, not
+      claimed load-bearing for intelligibility (the LFC rates lexical stress non-core).
+      [P4](pronunciation.md#rule-p4--stress-is-always-marked-never-guessed).
+    - **Question intonation (P7) → divergence accepted.** ✅ **Done** — the one genuine *spoken*
+      divergence, kept deliberately: one bounded pitch contrast is worth avoiding a coined
+      question particle, and writing carries it with the leading `?`.
+      [P7](pronunciation.md#rule-p7--intonation-carries-only-the-question).
     Source: [PRIOR-ART.md §C](../resources/PRIOR-ART.md#c-the-empirical-base-on-international-intelligibility).
-    Status: **open decision**.
+    Status: **resolved** (rules kept; reconciliation recorded in P3/P4/P7 and PRIOR-ART §C).
 
 ---
 
@@ -314,14 +340,14 @@ user, not decided here.
 | 2 | Pronunciation system | drafted (point-4 fix; see item 18) | P1 |
 | 3 | Spelling opacity | drafted (resolved) | P1 |
 | 4 | Prepositions | drafted (refined; item 8 lookup table built) | P1 |
-| 5 | Verb irregularity / *be* | drafted (open decision: M2) | P1 |
+| 5 | Verb irregularity / *be* | drafted (M2 resolved: full collapse `be`/`beed`) | P1 |
 | 6 | Present perfect / tense | drafted (largely resolved in point 4) | P1 |
 | 7 | Phrasal verbs | drafted (map built via item 8, 53 rows) | P1 |
 | 9 | Writing conventions | **gap** | P2 |
 | 10 | Sociolinguistic & pragmatics | **gap**, needs scoping | P2 |
-| 16 | Constructions surfaced by dogfooding | **gap** | P2 |
-| 17 | Open decisions from point 5 (plural-you, `-ly` comparatives, `more/most`) | **open** | P2 |
-| 18 | Research contradictions (LFC vs P3/P4) | **open** | P2 |
+| 16 | Constructions surfaced by dogfooding | **resolved** — G3 for-test (tooling), G14, G15, G10 boundary | P2 |
+| 17 | Open decisions from point 5 (plural-you, `-ly` comparatives, `more/most`) | **resolved** — `you all`; `-lier`/`manyer` regular, with an optional `more/most` escape hatch | P2 |
+| 18 | Research contradictions (LFC vs P3/P4/P7) | **resolved** — P3/P4 kept as reading aids; P7 divergence accepted | P2 |
 | 13 | Pronunciation/speech tool | **respelling + IPA built** (`tools/pronounce.ts`); seed lexicon; audio deferred (espeak-ng) | P3 |
 | 14 | Listening & speaking support | uncovered, needs scoping | P4 |
 | 15 | Psychological/motivational factors | uncovered, likely out of scope | P4 |

@@ -109,10 +109,16 @@ describe("toAbolishedEntries", () => {
 describe("buildPhraseTransforms", () => {
   const transforms = buildPhraseTransforms();
 
-  it("covers dropped-prep base and inflected forms, but not the forward:flag verb (wait)", () => {
+  it("covers dropped-prep base and inflected forms, with the not-duration guard on `for` drops", () => {
     expect(transforms.some((t) => t.tokens.join(" ") === "listen to" && t.replacement === "listen")).toBe(true);
     expect(transforms.some((t) => t.tokens.join(" ") === "listened to" && t.replacement === "listened")).toBe(true);
-    expect(transforms.some((t) => t.tokens[0] === "wait" || t.tokens[0] === "waited")).toBe(false);
+    // `for` drops (wait/hope/…) are now covered, carrying the not-duration guard (G3 "for" test)
+    expect(transforms.find((t) => t.tokens.join(" ") === "wait for")).toMatchObject({
+      replacement: "wait",
+      guard: "not-duration",
+    });
+    // non-`for` drops carry no guard
+    expect(transforms.find((t) => t.tokens.join(" ") === "listen to")!.guard).toBeUndefined();
   });
 
   it("covers phrasal-verb inflections, mapping the head's paradigm to the plain verb's", () => {
@@ -137,8 +143,8 @@ describe("buildPrepRestorations", () => {
     expect(restorations.get("listened")).toEqual({ verb: "listen", prep: "to" });
   });
 
-  it("includes the forward:flag verb (wait) too — reverse doesn't gate on forward mode; the", () => {
-    // stoplist (reverse.ts) is what keeps "wait for three minutes" untouched, not this map.
+  it("includes every `for`-drop verb (wait); the reverse stoplist, not this map, keeps", () => {
+    // "wait for three minutes" untouched by skipping insertion before a preposition.
     expect(restorations.get("wait")).toEqual({ verb: "wait", prep: "for" });
   });
 });
