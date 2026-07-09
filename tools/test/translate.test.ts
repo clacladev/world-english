@@ -157,8 +157,8 @@ describe("gold round-trip against docs/samples.md", () => {
   const pairs = samplePairs();
   const forwardValues = new Set(buildForwardMap(data).values());
 
-  it("finds the five gold passages", () => {
-    expect(pairs.length).toBe(5);
+  it("finds the six gold passages", () => {
+    expect(pairs.length).toBe(6);
   });
 
   it("produces every handled World-English form the gold passage contains", () => {

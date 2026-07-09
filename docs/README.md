@@ -23,6 +23,7 @@ Every rule in these specs follows the same template, per the project
 | [morphology.md](morphology.md) | Regular verbs, plurals, comparatives, adverbs | §3, §4, §5 |
 | [grammar.md](grammar.md) | Tense/aspect, articles, prepositions, pronouns, countability, questions, negation, modals, conditionals, passive, possessive, relative clauses, reflexives, complementation | §4, §6, §7, §8 |
 | [style.md](style.md) | Plain, unambiguous phrasing; word order; adverb placement; avoiding idiom | §7, §8 |
+| [writing.md](writing.md) | Document-level conventions — punctuation set, one register, thesis-first structure, paragraph shape, cohesion | [PP §6](../resources/PAIN-POINTS.md#6-writing) |
 | [vocabulary.md](vocabulary.md) | Core lexicon — the per-word list G3/S2/S3/S6 look up (canonical prepositions, phrasal→plain, preferred sense, collocations, false friends, register) | §4 |
 | [samples.md](samples.md) | Dogfooded translations, annotated rule-by-rule — the regression test | all |
 
@@ -41,6 +42,11 @@ decisions inside existing specs, and planned tooling — ranked by learner impac
   just removes the exceptions.
 - **grammar.md and style.md overlap** on phrasal verbs and word order — grammar.md states
   the rule, style.md gives the usage guidance.
+- **writing.md sits above style.md.** style.md governs the sentence (word order, phrasing);
+  writing.md governs everything above it (punctuation that joins clauses, paragraph shape,
+  cohesion). Its source is [PAIN-POINTS §6](../resources/PAIN-POINTS.md#6-writing), a
+  research-documented difficulty rather than a form-irregularity in the catalogue — which is
+  why its row cites PAIN-POINTS, not IRREGULARITIES.
 - **vocabulary.md is the data behind four rules.** G3, S2, S3, and S6 each resolve a word by
   lookup; `vocabulary.md` holds that per-word list, so those rules are only as complete as it
   is. It is what the planned linter and reverse translator will read.

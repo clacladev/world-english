@@ -5,6 +5,8 @@
 > and [§8 Sentence structure](../resources/IRREGULARITIES.md#8-sentence-structure).
 > Where [grammar.md](grammar.md) states the *rules*, this spec gives the *guidance* a
 > writer follows to keep World English easy to read and hard to misread.
+> This spec governs the **sentence**; document-level conventions — punctuation, paragraph shape,
+> and cohesion — live in [writing.md](writing.md).
 
 These are **guidelines**, not hard grammar — but they are the difference between technically
 regular text and genuinely *easy* text.
