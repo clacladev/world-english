@@ -24,8 +24,9 @@ job**:
   (*If it rain, we stay* — same comma [G15](grammar.md#rule-g15--subordinating-conjunctions)
   fixes), (b) before a coordinator (*and, but, so*) joining two independent clauses, and (c)
   between every item of a list, **including the last** — the serial comma is always present.
-- **question mark** — but [G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)
-  places it at the **start** of the clause (the leading `?`), not the end.
+- **question mark** — [G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)
+  brackets a question with a `?` at **both ends**: a **leading `?`** opens it (and the next word
+  is capitalized) and the usual `?` closes it — *?You like it?*
 - **quotation marks** — mark speech.
 - **colon `:`** — **one job only: introduce a list.**
 
