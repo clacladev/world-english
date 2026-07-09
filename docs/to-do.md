@@ -203,9 +203,10 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
 ## Priority 2 — Fill the documented-but-unspecified gaps (decision items now resolved)
 
 `PAIN-POINTS.md` gives these categories real research weight but no `docs/` spec covered them
-yet. Item 9 (writing conventions) is now **drafted** → [`writing.md`](writing.md), leaving item
-10 (sociolinguistic & pragmatics) as the remaining open work in this tier. The decision items
-16, 17, and 18 are now **resolved** and kept here for the record.
+yet. Both are now **drafted**: item 9 (writing conventions) → [`writing.md`](writing.md), and
+item 10 (sociolinguistic & pragmatics) → [`style.md`](style.md) S8–S9 (minimal Option A). **No
+`gap` items remain in this tier.** The decision items 16, 17, and 18 are now **resolved** and
+kept here for the record.
 
 9. **Writing conventions.** Register/tone, punctuation conventions, paragraph/essay
    structure, and coherence/cohesion (Kaplan's contrastive rhetoric; Halliday & Hasan) —
@@ -229,8 +230,19 @@ yet. Item 9 (writing conventions) is now **drafted** → [`writing.md`](writing.
     appropriateness, speech acts (refusals, apologies) — pragmatic failure, not grammar
     error, is the most-cited source of cross-cultural miscommunication.
     Source: [PAIN-POINTS §7](../resources/PAIN-POINTS.md#7-sociolinguistic--pragmatic-issues).
-    Status: **gap** — needs scoping first. May end up as `style.md` guidance (plain,
-    low-context request/refusal templates) rather than a full spec. Worth a design discussion.
+    Status: **drafted (minimal Option A)** → [`style.md`](style.md) S8–S9, not a separate spec.
+    **Scoping decision:** the tractable half of §7 becomes fixed `style.md` guidance —
+    [S8](style.md#rule-s8--fixed-politeness-markers-not-graded-indirectness) (courtesy by a fixed
+    marker — *please*/*sorry*/*thank you* — never graded indirectness; directness is the neutral,
+    non-rude default) and [S9](style.md#rule-s9--plain-templates-for-the-hard-speech-acts) (one
+    plain template per speech act: request, refusal — **No.** + reason, with an **optional
+    *Sorry* softener** — apology, thanks, and email open/close). The rest of §7 is handled
+    elsewhere or **deliberately descoped**: cultural references and humour already fall to
+    [S4](style.md#rule-s4--avoid-idioms-and-culture-bound-expressions) (say the literal thing),
+    and deep target-culture norm mastery is left out on the same logic as items 14/15 (a property
+    of culture and the speaker, not of the language's regularity). Dogfooded by a new email
+    [`samples.md`](samples.md) Passage 7; example columns pass the linter. A fuller pragmatics
+    spec is **not** planned — this minimal guidance is the intended scope.
 
 16. **Constructions surfaced by dogfooding ([samples.md](samples.md)).** Translating real
     passages exposed four gaps — now all **resolved by rule**:
@@ -355,7 +367,7 @@ user, not decided here.
 | 6 | Present perfect / tense | drafted (largely resolved in point 4) | P1 |
 | 7 | Phrasal verbs | drafted (map built via item 8, 53 rows) | P1 |
 | 9 | Writing conventions | **drafted** → [`writing.md`](writing.md) W1–W6 (semicolon abolished, colon for lists only; paragraph-level; essay template logged as follow-up) | P2 |
-| 10 | Sociolinguistic & pragmatics | **gap**, needs scoping | P2 |
+| 10 | Sociolinguistic & pragmatics | **drafted (minimal Option A)** → [`style.md`](style.md) S8–S9 (fixed politeness markers + plain speech-act templates); cultural mastery descoped | P2 |
 | 16 | Constructions surfaced by dogfooding | **resolved** — G3 for-test (tooling), G14, G15, G10 boundary | P2 |
 | 17 | Open decisions from point 5 (plural-you, `-ly` comparatives, `more/most`) | **resolved** — `you all`; `-lier`/`manyer` regular, with an optional `more/most` escape hatch | P2 |
 | 18 | Research contradictions (LFC vs P3/P4/P7) | **resolved** — P3/P4 kept as reading aids; P7 divergence accepted | P2 |

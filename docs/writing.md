@@ -75,7 +75,8 @@ to a friend.
 *I'm sorry to say* vs *bad news* — a native-intuition skill and a documented ESL difficulty
 (PAIN-POINTS §6, "register and tone"). Removing the axis removes the calibration. The related
 question of **politeness and indirectness** — *how* to soften a request or refusal — is a
-pragmatics concern (`to-do.md` item 10), deliberately out of scope here.
+pragmatics concern handled by [style.md S8–S9](style.md#rule-s8--fixed-politeness-markers-not-graded-indirectness)
+(fixed markers and plain speech-act templates), not here.
 
 **Examples.**
 

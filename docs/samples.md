@@ -246,6 +246,54 @@ reference resolved by rule.
 
 ---
 
+## Passage 7 — Email (exercises the pragmatics rules)
+
+A short email — the setting §7 singles out (*"students who omit greetings and closings are
+perceived as impolite"*). It exercises the [style.md](style.md) pragmatics rules inside a real
+message: the fixed politeness markers ([S8](style.md#rule-s8--fixed-politeness-markers-not-graded-indirectness))
+and the plain speech-act templates ([S9](style.md#rule-s9--plain-templates-for-the-hard-speech-acts)).
+
+**Standard English**
+
+> Hello Sara,
+>
+> Thank you. I saw your message about the meeting on Friday. I am sorry, but I cannot come,
+> because I will be away. Could you please send me the notes? I will read them next week.
+>
+> Goodbye,
+> Tom
+
+**World English**
+
+> Hello Sara,
+>
+> Thank you. I seed yous message about the meeting on Friday. Sorry, I can not come, because I
+> will be away. Please send me the notes. I will read them next week.
+>
+> Goodbye,
+> Tom
+
+**Annotations**
+
+1. *Hello Sara,* — `[S9]` fixed email **greeting** (omitting it reads as impolite).
+2. *Thank you.* — `[S9]` invariant **thanks**.
+3. *I seed yous message about the meeting on Friday.* — `[M1]` see → **seed** · `[G4]` your →
+   **yous** · `[G3]` keep **about**/**on** (real relations) · `[G1]` finished action → past tense.
+4. *Sorry, I can not come, because I will be away.* — `[S8]`/`[S9]` **refusal** carried by the
+   **Sorry** softener (optional, permitted) plus a plain reason, not graded indirectness
+   (standard *I'm terribly sorry, but I'm afraid I won't be able to…* → direct) · `[G6]` modal
+   negation **can not** · `[W5]`/`[G15]` explicit **because** · `[G7]` future **will**.
+5. *Please send me the notes.* — `[S8]`/`[S9]` **request** template: **please** + plain
+   imperative (`[G6]`, no *do*), replacing the graded *Could you possibly…?* · `[G4]` **me**.
+6. *I will read them next week.* — `[G7]` **will** · `[G4]` **them** (object) · time adjunct
+   *next week* stays clause-final.
+7. *Goodbye, Tom* — `[S9]` fixed email **closing**.
+
+This passage needed no construction the specs do not cover — every speech act resolved by an
+S8/S9 template.
+
+---
+
 ## Gaps this file surfaced — now closed
 
 Dogfooding turned up four constructions the specs did not cover. Each was logged in

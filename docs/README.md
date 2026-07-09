@@ -22,7 +22,7 @@ Every rule in these specs follows the same template, per the project
 | [pronunciation.md](pronunciation.md) | Sound↔spelling mapping, respelling key, stress rule | §1, §2 |
 | [morphology.md](morphology.md) | Regular verbs, plurals, comparatives, adverbs | §3, §4, §5 |
 | [grammar.md](grammar.md) | Tense/aspect, articles, prepositions, pronouns, countability, questions, negation, modals, conditionals, passive, possessive, relative clauses, reflexives, complementation | §4, §6, §7, §8 |
-| [style.md](style.md) | Plain, unambiguous phrasing; word order; adverb placement; avoiding idiom | §7, §8 |
+| [style.md](style.md) | Plain, unambiguous phrasing; word order; adverb placement; avoiding idiom; politeness markers & speech-act templates | §7, §8 |
 | [writing.md](writing.md) | Document-level conventions — punctuation set, one register, thesis-first structure, paragraph shape, cohesion | [PP §6](../resources/PAIN-POINTS.md#6-writing) |
 | [vocabulary.md](vocabulary.md) | Core lexicon — the per-word list G3/S2/S3/S6 look up (canonical prepositions, phrasal→plain, preferred sense, collocations, false friends, register) | §4 |
 | [samples.md](samples.md) | Dogfooded translations, annotated rule-by-rule — the regression test | all |

@@ -151,8 +151,8 @@ describe("lossless-mapping proof against docs/samples.md", () => {
   const pairs = samplePairs();
   const reverseMap = buildReverseMap();
 
-  it("finds the six gold passages", () => {
-    expect(pairs.length).toBe(6);
+  it("finds the seven gold passages", () => {
+    expect(pairs.length).toBe(7);
   });
 
   it("restores every losslessly-reversible WoE form back to its standard original", () => {
