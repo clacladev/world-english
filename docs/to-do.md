@@ -133,9 +133,11 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
    (deterministic noun-stress merger, homograph residue, valid worked sentence); **P7
    redesigned** — intonation now load-bears the yes/no question (rising pitch in speech,
    leading `?` in writing), replacing the coined `Q` particle.
-   **Open decision (see item 18):** [`PRIOR-ART.md`](../resources/PRIOR-ART.md) surfaced
+   **Decision resolved (item 18):** [`PRIOR-ART.md`](../resources/PRIOR-ART.md) surfaced
    that Jenkins' Lingua Franca Core rates /θ/–/ð/, lexical stress, *and* grammatical intonation
-   *non-core* for intelligibility — a research contradiction with P3/P4/P7 worth revisiting.
+   *non-core* for intelligibility — a research contradiction with P3/P4/P7. Settled: P3/P4 are
+   kept as reading aids (the LFC concerns *spoken* intelligibility, which WoE makes optional),
+   and P7's question-intonation divergence is accepted deliberately.
 
 3. **Spelling opacity.** One of the least phonetically transparent alphabetic systems;
    ~25% of common words have unpredictable spelling.
@@ -198,10 +200,11 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
 
 ---
 
-## Priority 2 — Fill the documented-but-unspecified gaps, and the new open decisions
+## Priority 2 — Fill the documented-but-unspecified gaps (decision items now resolved)
 
 `PAIN-POINTS.md` gives these categories real research weight but no `docs/` spec covers them
-yet, plus the open decisions the point-5 rules deliberately left flagged.
+yet (items 9, 10 — the remaining open work in this tier). The decision items 16, 17, and 18
+are now **resolved** and kept here for the record.
 
 9. **Writing conventions.** Register/tone, punctuation conventions, paragraph/essay
    structure, and coherence/cohesion (Kaplan's contrastive rhetoric; Halliday & Hasan) —
@@ -242,34 +245,44 @@ yet, plus the open decisions the point-5 rules deliberately left flagged.
     Source: [samples.md](samples.md) "Gaps this file surfaced". Status: **resolved** (G3
     for-test tooling built; G14/G15 added; G10 boundary added).
 
-17. **Open decisions the point-5 rules left flagged.** New rules were added with their
-    unresolved choices recorded rather than decided silently:
-    - **Plural *you*.** [G4](grammar.md#rule-g4--regular-pronoun-case) recommends **`you all`**
-      (since *yous* is taken by the singular possessive) but flags it as not settled.
-    - **`-ly` adverb comparatives.** [M5](morphology.md#rule-m5--one-comparative-rule) gives
-      *quicklier/carefullier*; whether long `-ly` adverbs should get a *more/most* escape hatch
-      is open (the forms are exceptionless but clumsy).
-    - **Quantifier *more/most*.** M5 gives *manyer/manyest* (*manyer than 100 persons*); as bare
-      quantifiers (*I want manyer*) these may be too absurd to keep.
+17. **Open decisions the point-5 rules left flagged — now resolved.** Three choices were
+    recorded rather than decided silently; now settled — the pronoun on the exceptionless line,
+    the comparatives with a deliberate naturalness concession:
+    - **Plural *you* → `you all`.** ✅ **Done** — [G4](grammar.md#rule-g4--regular-pronoun-case)
+      fixes **`you all`** (subject/object; possessive *you all's*); *yous* stays the singular
+      possessive, so nothing collides. The "recommendation, not a settled rule" hedge is removed.
+    - **`-ly` adverb comparatives → regular `-lier`, with an optional `more/most` hatch.**
+      ✅ **Done** — [M5](morphology.md#rule-m5--one-comparative-rule) keeps *quicklier/carefullier*
+      as the regular form but **permits periphrastic *more/most*** (*more carefully*) as an
+      optional, natural-sounding alternative for the clumsy `-ly` (and long-adjective) cases.
+    - **Quantifier *more/most* → `manyer/manyest`, with *more/most* permitted.** ✅ **Done** —
+      M5 keeps *manyer/manyest* as the regular form but lets the standard **`more/most`** back
+      in for the bare-quantifier cases (*I want more*); *little/few* likewise take *less/least*.
+      *more/most/less/least* are valid World English, so the linter no longer flags them (the
+      low-confidence rows were removed from `abolished-forms.json`).
+    The escape hatch re-admits the *`-er`*-vs-*more* choice as an **optional** aid only — the
+    regular `-er`/`-est` stays available and unambiguous; irregular one-word suppletives
+    (*better*, *worse*) remain abolished.
     Source: [grammar.md G4](grammar.md#rule-g4--regular-pronoun-case),
-    [morphology.md M5](morphology.md#rule-m5--one-comparative-rule). Status: **open decisions**.
+    [morphology.md M5](morphology.md#rule-m5--one-comparative-rule). Status: **resolved**.
 
-18. **Research contradictions from [`PRIOR-ART.md`](../resources/PRIOR-ART.md).** The
-    intelligibility research disagrees with three pronunciation rules, recorded for a decision:
-    - Jenkins' **Lingua Franca Core rates /θ/–/ð/ non-core** and safely substitutable, yet
-      [P3](pronunciation.md#rule-p3--th-is-split-in-the-key) keeps and marks the contrast.
-    - The **LFC rates lexical word-stress non-core** (only nuclear stress is essential), yet
-      [P4](pronunciation.md#rule-p4--stress-is-always-marked-never-guessed) marks it on every
-      word.
-    - The **LFC rates grammatical intonation non-core**, yet
-      [P7](pronunciation.md#rule-p7--intonation-carries-only-the-question) — as redesigned —
-      now *load-bears* rising intonation for the yes/no question. (This one flipped: before the
-      P7 redesign it *supported* the LFC; the deliberate choice to make questions ride on pitch
-      turned it into a divergence. Mitigated in writing by the leading `?`.)
-    None is a bug — all are defensible on writing-side/reading-aid grounds — but the tension
-    with the empirical evidence should be resolved deliberately, not ignored.
+18. **Research contradictions from [`PRIOR-ART.md`](../resources/PRIOR-ART.md) — now resolved.**
+    The intelligibility research disagrees with three pronunciation rules; each is now settled
+    on the reading-aid vs. spoken-intelligibility distinction (the LFC is about *spoken*
+    intelligibility, which WoE already makes optional via P5/P6):
+    - **/θ/–/ð/ (P3) → kept.** ✅ **Done** — the LFC rates it non-core and safely substitutable,
+      and WoE agrees on the spoken axis (a speaker may substitute and be understood); the
+      *th*/*dh* split is kept as a **reading-aid** distinction (minimal pairs in the key), which
+      the spoken finding does not touch. [P3](pronunciation.md#rule-p3--th-is-split-in-the-key).
+    - **Lexical word-stress (P4) → kept.** ✅ **Done** — marked stress is a **reading aid**, not
+      claimed load-bearing for intelligibility (the LFC rates lexical stress non-core).
+      [P4](pronunciation.md#rule-p4--stress-is-always-marked-never-guessed).
+    - **Question intonation (P7) → divergence accepted.** ✅ **Done** — the one genuine *spoken*
+      divergence, kept deliberately: one bounded pitch contrast is worth avoiding a coined
+      question particle, and writing carries it with the leading `?`.
+      [P7](pronunciation.md#rule-p7--intonation-carries-only-the-question).
     Source: [PRIOR-ART.md §C](../resources/PRIOR-ART.md#c-the-empirical-base-on-international-intelligibility).
-    Status: **open decision**.
+    Status: **resolved** (rules kept; reconciliation recorded in P3/P4/P7 and PRIOR-ART §C).
 
 ---
 
@@ -333,8 +346,8 @@ user, not decided here.
 | 9 | Writing conventions | **gap** | P2 |
 | 10 | Sociolinguistic & pragmatics | **gap**, needs scoping | P2 |
 | 16 | Constructions surfaced by dogfooding | **resolved** — G3 for-test (tooling), G14, G15, G10 boundary | P2 |
-| 17 | Open decisions from point 5 (plural-you, `-ly` comparatives, `more/most`) | **open** | P2 |
-| 18 | Research contradictions (LFC vs P3/P4) | **open** | P2 |
+| 17 | Open decisions from point 5 (plural-you, `-ly` comparatives, `more/most`) | **resolved** — `you all`; `-lier`/`manyer` regular, with an optional `more/most` escape hatch | P2 |
+| 18 | Research contradictions (LFC vs P3/P4/P7) | **resolved** — P3/P4 kept as reading aids; P7 divergence accepted | P2 |
 | 13 | Pronunciation/speech tool | **respelling + IPA built** (`tools/pronounce.ts`); seed lexicon; audio deferred (espeak-ng) | P3 |
 | 14 | Listening & speaking support | uncovered, needs scoping | P4 |
 | 15 | Psychological/motivational factors | uncovered, likely out of scope | P4 |

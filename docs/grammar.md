@@ -227,14 +227,11 @@ form** built regularly. The *who/whom* distinction is removed (always **who**).
 Possessive is the object form + `-s` (regular, like the plural rule in
 [morphology M4](morphology.md)): *mes book*, *hims car*, *whos turn*.
 
-**Plural *you* — recommended `you all`.** English has no distinct plural *you*, a real gap
+**Plural *you* — `you all`.** English has no distinct plural *you*, a real gap
 (dialects fill it with *y'all*, *yous*, *you guys*). World English cannot use *yous* for the
 plural, because [the table above](#rule-g4--regular-pronoun-case) already assigns *yous* to
-the singular **possessive** (*yous book*). The recommendation is the transparent
-**`you all`** (subject and object alike; possessive *you all's*), which no other form claims.
-This is a **recommendation, not a settled rule** — it is the one spot where the regular
-pronoun grid leaves a genuine choice — so it is logged as an open decision in
-[to-do.md](to-do.md) rather than fixed silently here.
+the singular **possessive** (*yous book*). The plural is the transparent **`you all`**
+(subject and object alike; possessive *you all's*), which no other form claims.
 
 **Problem it solves.** Irregular case grids and the dying *who/whom* distinction (see
 [§6](../resources/IRREGULARITIES.md#6-pronouns)).

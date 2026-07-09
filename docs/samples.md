@@ -157,6 +157,32 @@ Rule keys: `O*` [orthography](orthography.md) · `P*` [pronunciation](pronunciat
 
 ---
 
+## Passage 5 — Feedback note
+
+**Standard English**
+
+> You all worked more quickly this year, so more of you passed the test. Next time, plan
+> more carefully.
+
+**World English**
+
+> You all worked more quickly this year, so more of you all passed the test. Next time, plan
+> more carefully.
+
+**Annotations**
+
+1. *You all worked more quickly this year, so more of you all passed the test.* — `[G4]`
+   plural *you* → **you all** (subject and object alike) · `[M1]` **worked** / **passed**
+   (already regular) · `[M5]` `-ly` adverb comparative via the **optional *more/most* escape
+   hatch** (*more quickly* kept, over the regular *quicklier*) · `[M5]` quantifier **more of**
+   (escape hatch, over the regular *manyer of*) · `[G15]` *so* (result) subordinator.
+2. *Next time, plan more carefully.* — `[M5]` `-ly` adverb comparative, again the **escape
+   hatch** *more carefully* (over *carefullier*). This passage exercises item-17: `you all`
+   plus the optional `more/most` hatch — *more/most* is valid World English, so the linter
+   does not flag it.
+
+---
+
 ## Gaps this file surfaced — now closed
 
 Dogfooding turned up four constructions the specs did not cover. Each was logged in

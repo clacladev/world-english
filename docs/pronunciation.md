@@ -129,7 +129,13 @@ likewise guard `s-h`, `n-g` boundaries): a digraph never straddles a hyphen, so 
 MIS-hap, not "mi-shap." The hyphen is the key's disambiguation mechanism.
 
 **Divergence & trade-off.** Base spelling keeps `th`; only the key disambiguates. No new
-letters in running text.
+letters in running text. **Settled against the LFC.** Jenkins' Lingua Franca Core rates
+/θ/–/ð/ non-core and safely substitutable (with /t d/, /s z/, /f v/) without harming
+*spoken* intelligibility (see [PRIOR-ART §C](../resources/PRIOR-ART.md#c-the-empirical-base-on-international-intelligibility)),
+and World English agrees on that axis — a speaker may substitute and still be understood.
+The split is kept deliberately because it lives on the **reading-aid** axis: the `th`/`dh`
+key marks minimal pairs like *breath*/*breathe* for the reader, which the LFC's spoken
+finding does not touch.
 
 ---
 
@@ -167,6 +173,12 @@ The CAPITALS place the stress for you every time, so none of this has to be memo
 context and word order, per [grammar.md](grammar.md)). It does *not* regularize all stress
 to one syllable — doing so would make many words unrecognizable, breaking legibility
 (principle 3). The gain is that stress is never a guess: it is on the page for every word.
+**Settled against the LFC.** The Lingua Franca Core rates *lexical* word-stress non-core
+(only nuclear/contrastive stress is essential for *spoken* intelligibility; see
+[PRIOR-ART §C](../resources/PRIOR-ART.md#c-the-empirical-base-on-international-intelligibility)).
+The marking is kept anyway, and not claimed to be load-bearing for intelligibility: it is a
+**reading aid** that shows how the word sounds in the reference accent, on the same
+writing-side axis as P3.
 
 ---
 
@@ -249,10 +261,15 @@ subtractive**: they drop do-support and add nothing). The cost is real: speakers
 differently-intoned L1s must produce and hear a rising question — the difficulty
 [PAIN-POINTS §1](../resources/PAIN-POINTS.md#1-pronunciation--phonology) documents. It is
 mitigated in **writing** by the always-present leading `?` and bounded in **speech** to one
-contrast. Note this diverges from Jenkins' Lingua Franca Core, which rates grammatical
+contrast. This diverges from Jenkins' Lingua Franca Core, which rates grammatical
 intonation non-essential for intelligibility (see
 [PRIOR-ART §C](../resources/PRIOR-ART.md#c-the-empirical-base-on-international-intelligibility)
-and [to-do.md](../docs/to-do.md) item 18) — a recorded tension, not a settled call.
+and [to-do.md](../docs/to-do.md) item 18) — and the divergence is **settled: accepted, not
+open.** The yes/no question is frequent and important enough to load-bear one pitch
+contrast; the alternative (a coined particle) is a word the language would rather not add,
+so questions stay purely subtractive; and the cost is bounded — one contrast in speech,
+carried by the leading `?` in writing. Attitudinal intonation stays non-load-bearing,
+aligned with the LFC.
 
 ---
 

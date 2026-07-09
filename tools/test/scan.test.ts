@@ -78,11 +78,9 @@ describe("confidence gating", () => {
     // "well" is a homograph → low confidence.
     expect(classesFor("she sings well")).toEqual([]);
     expect(classesFor("she sings well", { strict: true })).toContain("well:suppletive-adverb/M6");
-    // "more" rides on an open decision (item 17) → low.
+    // "more" is a valid M5 escape-hatch/quantifier form (item 17 resolved) → never flagged.
     expect(classesFor("I want more")).toEqual([]);
-    expect(classesFor("I want more", { strict: true })).toContain(
-      "more:suppletive-comparative/M5",
-    );
+    expect(classesFor("I want more", { strict: true })).toEqual([]);
   });
 
   it("treats homograph verb pasts as low confidence (the noun 'ground')", () => {
