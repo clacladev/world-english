@@ -92,6 +92,10 @@ describe("flagged, not translated (needs POS / syntax / lexicon)", () => {
     // …but a time-unit noun buried behind an adjective is an object, not a span → dropped
     // (better → gooder is the unrelated M5 comparative)
     expect(woe("hope for a better year")).toBe("hope a gooder year");
+    // "for good" (= permanently) is a bare span, kept; but "good" before a noun is an
+    // adjective, so the object-for drops
+    expect(woe("I hope for good")).toBe("I hope for good");
+    expect(woe("I hope for good news")).toBe("I hope good news");
     // neither the dropped nor the deliberately-kept `for` is flagged
     expect(flagKeys("wait for the bus")).not.toContain("wait for:dropped-prep/G3");
     expect(flagKeys("wait for three minutes")).not.toContain("wait for:dropped-prep/G3");

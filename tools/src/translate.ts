@@ -12,9 +12,10 @@
 // harness derives its expectations from buildForwardMap()'s values, so it must stay single-word.
 //
 // Still flag-only / untouched (documented, not a bug): G2 article drop (needs syntax),
-// `forward:"flag"` dropped preps (the duration-`for` vs. object-`for` test, item 16, unresolved —
-// concretely `wait for`), separated phrasals (*give it up* — needs a parser), S3/S6/false-friends/
-// register (doc-only, not even flagged).
+// separated phrasals (*give it up* — needs a parser), S3/S6/false-friends/register (doc-only,
+// not even flagged). The duration-`for` vs. object-`for` test (item 16) is now resolved: dropped
+// `for` auto-translates via the not-duration guard (isDurationFor) — object-`for` drops (`wait
+// for the bus` → `wait the bus`), duration-`for` is kept (`wait for three minutes`).
 
 import { loadDataset, type Dataset } from "./dataset.ts";
 import { buildPhraseTransforms, isDurationFor, type PhraseTransform } from "./core-lexicon.ts";

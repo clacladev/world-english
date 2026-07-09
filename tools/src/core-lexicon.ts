@@ -168,8 +168,9 @@ const NUMBER_WORDS = new Set([
   "eleven", "twelve", "twenty", "thirty", "forty", "fifty", "hundred",
   "few", "several", "couple", "many",
 ]);
-// Single words that are a whole span on their own: "for now", "for ever", "for good".
-const FIXED_SPANS = new Set(["now", "ever", "forever", "good"]);
+// Single words that are a whole span on their own: "for now", "for ever". ("for good" is
+// handled separately in isDurationFor: only a bare span, never when `good` precedes a noun.)
+const FIXED_SPANS = new Set(["now", "ever", "forever"]);
 
 /**
  * True when the words immediately after a dropped `for` read as a length of time — so the
@@ -179,9 +180,11 @@ const FIXED_SPANS = new Set(["now", "ever", "forever", "good"]);
 export function isDurationFor(after: string[]): boolean {
   const w0 = after[0];
   if (w0 === undefined) return false;
-  if (/^\d+$/.test(w0)) return true; // "for 3", "for 3 minutes"
   if (TIME_UNITS.has(w0)) return true; // "for hours", "for minutes"
   if (FIXED_SPANS.has(w0)) return true; // "for now", "for ever"
+  // "for good" (= permanently) counts only as a bare span; with a trailing word, `good` is an
+  // adjective and the `for` is an ordinary object-for ("hope for good news" → "hope good news").
+  if (w0 === "good" && after[1] === undefined) return true;
   if (NUMBER_WORDS.has(w0)) return TIME_UNITS.has(after[1] ?? ""); // "for three minutes"
   if (w0 === "a" || w0 === "an") {
     const w1 = after[1] ?? "";
