@@ -11,7 +11,8 @@ Where a sentence needs a construction the specs do **not** yet cover, it is **fl
 and logged in [`to-do.md`](to-do.md) — never silently improvised.
 
 Rule keys: `O*` [orthography](orthography.md) · `P*` [pronunciation](pronunciation.md) ·
-`M*` [morphology](morphology.md) · `G*` [grammar](grammar.md) · `S*` [style](style.md).
+`M*` [morphology](morphology.md) · `G*` [grammar](grammar.md) · `S*` [style](style.md) ·
+`W*` [writing](writing.md).
 
 ---
 
@@ -180,6 +181,116 @@ Rule keys: `O*` [orthography](orthography.md) · `P*` [pronunciation](pronunciat
    hatch** *more carefully* (over *carefullier*). This passage exercises item-17: `you all`
    plus the optional `more/most` hatch — *more/most* is valid World English, so the linter
    does not flag it.
+
+---
+
+## Passage 6 — Multi-paragraph text (exercises the writing rules)
+
+Passages 1–5 are single paragraphs, so they cannot test the document-level rules
+([writing.md](writing.md) W1–W6). This passage is two paragraphs, chosen to exercise the
+punctuation set, thesis-first shape, topic sentences, explicit connectives, and repeat-don't-vary
+reference.
+
+**Standard English**
+
+> The new library is very popular. The university built it because students needed a quiet place
+> to study. The library offers three things: fast internet, long hours, and many books. Students
+> use the facility every day.
+>
+> The building was expensive; however, the university thinks it was worth the cost. Donors gave
+> most of the money, so tuition stayed low. Also, it created many jobs. For example, it hired
+> twenty students last term.
+
+**World English**
+
+> The new library be very popular. The university builded it because students needed quiet place
+> to study. The library offer three things: fast internet, long hours, and many books. Students
+> use the library every day.
+>
+> The building beed expensive. But the university think it beed worth the cost. Donors gaved most
+> of the money, so tuition stayed low. Also, the library created many jobs. For example, the
+> library hired twenty students last term.
+
+**Annotations**
+
+*Paragraph 1 — one idea (the library is popular), point first.*
+
+1. *The new library be very popular.* — `[W3]`/`[W4]` topic sentence states the paragraph's one
+   idea first · `[M2]` is → **be**.
+2. *The university builded it because students needed quiet place to study.* — `[M1]` build →
+   **builded** · `[G2]` drop *a* (**quiet place**) · `[W5]`/`[G15]` explicit **because** carries
+   the reason · `[G13]` *to study* plain infinitive.
+3. *The library offer three things: fast internet, long hours, and many books.* — `[W1]` the
+   **colon** is kept — a **list** follows — with the always-present serial comma · `[G5]`
+   **many** (all nouns count) · `[M4]` **hours**/**books** · third-person *offers* → **offer**
+   ([M3](morphology.md), no agreement).
+4. *Students use the library every day.* — `[W6]` **repeat the noun** *the library* instead of
+   the elegant variation *the facility*.
+
+*Paragraph 2 — one idea (it was worth the cost).*
+
+5. *The building beed expensive.* — `[M2]` was → **beed** · `[W3]`/`[W4]` topic sentence leads.
+6. *But the university think it beed worth the cost.* — `[W1]` the standard **semicolon** is
+   abolished → new sentence · `[W5]` *however* → **but** (one connective per relation) · `[M2]`
+   was → **beed** · third-person *thinks* → **think** ([M3](morphology.md)).
+7. *Donors gaved most of the money, so tuition stayed low.* — `[M1]` give → **gaved** · `[W5]`
+   result connective **so**, with the `[W1]` comma before a coordinator joining two independent
+   clauses.
+8. *Also, the library created many jobs. For example, the library hired twenty students last
+   term.* — `[W5]` addition **also** and illustration **for example** · `[W6]` *it* → **the
+   library** repeated for an unmistakable reference · `[M1]` **created**/**hired** (already
+   regular).
+
+This passage needed no construction the specs do not cover — every mark, connective, and
+reference resolved by rule.
+
+---
+
+## Passage 7 — Email (exercises the pragmatics rules)
+
+A short email — the setting §7 singles out (*"students who omit greetings and closings are
+perceived as impolite"*). It exercises the [style.md](style.md) pragmatics rules inside a real
+message: the fixed politeness markers ([S8](style.md#rule-s8--fixed-politeness-markers-not-graded-indirectness))
+and the plain speech-act templates ([S9](style.md#rule-s9--plain-templates-for-the-hard-speech-acts)).
+
+**Standard English**
+
+> Hello Sara,
+>
+> Thank you. I saw your message about the meeting on Friday. I am sorry, but I cannot come,
+> because I will be away. Could you please send me the notes? I will read them next week.
+>
+> Goodbye,
+> Tom
+
+**World English**
+
+> Hello Sara,
+>
+> Thank you. I seed yous message about the meeting on Friday. Sorry, I can not come, because I
+> will be away. Please send me the notes. I will read them next week.
+>
+> Goodbye,
+> Tom
+
+**Annotations**
+
+1. *Hello Sara,* — `[S9]` fixed email **greeting** (omitting it reads as impolite).
+2. *Thank you.* — `[S9]` invariant **thanks**.
+3. *I seed yous message about the meeting on Friday.* — `[M1]` see → **seed** · `[G4]` your →
+   **yous** · `[G3]` keep **about**/**on** (real relations) · `[G1]` finished action → past tense.
+4. *Sorry, I can not come, because I will be away.* — `[S8]`/`[S9]` **refusal** carried by the
+   **Sorry** softener (optional, permitted) plus a plain reason, not graded indirectness
+   (standard *I'm terribly sorry, but I'm afraid I won't be able to…* → direct) · `[G6]` modal
+   negation **can not** · `[W5]`/`[G15]` explicit **because** · `[G7]` future **will**.
+5. *Please send me the notes.* — `[S8]`/`[S9]` **request** template: **please** + plain
+   imperative (`[G6]`, no *do*), replacing the graded *Could you possibly…?* · `[G4]` **me**.
+6. *I will read them next week.* — `[G7]` **will** · `[G4]` **them** (object) · time adjunct
+   *next week* stays clause-final.
+7. *Goodbye, Tom* — `[S9]` fixed email **closing**.
+
+This passage needed no construction the specs do not cover — every speech act resolved by an
+S8/S9 template.
 
 ---
 

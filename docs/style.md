@@ -5,6 +5,8 @@
 > and [§8 Sentence structure](../resources/IRREGULARITIES.md#8-sentence-structure).
 > Where [grammar.md](grammar.md) states the *rules*, this spec gives the *guidance* a
 > writer follows to keep World English easy to read and hard to misread.
+> This spec governs the **sentence**; document-level conventions — punctuation, paragraph shape,
+> and cohesion — live in [writing.md](writing.md).
 
 These are **guidelines**, not hard grammar — but they are the difference between technically
 regular text and genuinely *easy* text.
@@ -167,6 +169,65 @@ it is one predictable position instead of several.
 
 ---
 
+## Rule S8 — Fixed politeness markers, not graded indirectness
+
+**Rule.** Mark courtesy with a small **closed set of explicit words** — **please** (a request),
+**sorry** (an apology), **thank you** (thanks) — never by grading indirectness. World English
+does **not** soften through longer, less direct phrasings (*Could you possibly…*, *I was
+wondering if you might…*); it says the direct thing and adds the marker. **Directness is the
+neutral default and is not rude** — the marker, not the indirectness, carries the courtesy.
+
+**Problem it solves.** Politeness and indirectness calibration — *how much* to soften a request,
+refusal, or apology — is the least explicitly taught and most L1-transferred part of
+[§7 pragmatics](../resources/PAIN-POINTS.md#7-sociolinguistic--pragmatic-issues), and pragmatic
+failure (not grammar error) is the most-cited source of cross-cultural miscommunication. One
+fixed marker per function removes the grading entirely.
+
+**Examples.**
+
+| Standard English (graded / indirect) | World English (marker + direct) |
+| ------------------------------------ | ------------------------------- |
+| Could you possibly send me the file? | **Please send the file.** |
+| I'm terribly sorry to bother you, but… | **Sorry.** … |
+| I was wondering if you might help. | **Please help.** |
+
+**Trade-off.** Loses deference shading and the signalling indirectness carries; gains a politeness
+rule a learner applies without reading the social context. Register itself is fixed separately by
+[writing.md W2](writing.md#rule-w2--one-plain-register); cultural references and humour stay out by
+[S4](#rule-s4--avoid-idioms-and-culture-bound-expressions).
+
+---
+
+## Rule S9 — Plain templates for the hard speech acts
+
+**Rule.** Use **one fixed, low-context frame** per speech act, so the "how do I phrase this"
+question never arises:
+
+| Speech act | Template | Example |
+| ---------- | -------- | ------- |
+| request | **please** + plain imperative | **Please send the file.** |
+| refusal | **No.** + plain reason (optional softener **Sorry**) | **No. I be busy.** / **No. Sorry, I be busy.** |
+| apology | **Sorry.** + what happened or the repair | **Sorry. I be late.** |
+| thanks | invariant | **Thank you.** |
+| email open / close | fixed greeting + closing | **Hello Sara,** … **Goodbye,** |
+
+**Problem it solves.** Speech acts — refusals and apologies especially — are the hardest part of
+[§7](../resources/PAIN-POINTS.md#7-sociolinguistic--pragmatic-issues): they demand target-culture
+norms, and omitting an email greeting or closing is itself read as impolite. A fixed template per
+act removes the norm-mastery requirement.
+
+**Examples.** A refusal keeps
+[G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)'s invariant **No.** and adds
+a plain reason with a [W5](writing.md#rule-w5--make-every-connection-explicit) connective:
+*No. Sorry, I can not come, because I be busy.* A request is just that same imperative with
+**please**: *Please close the door.*
+
+**Trade-off.** Blunter than native usage and less personal; every speech act is unambiguous and
+needs no cultural calibration. The **optional `Sorry` softener** on a refusal is the one permitted
+concession to warmth — allowed, never required.
+
+---
+
 ## Summary
 
 | Guideline | Keep it... |
@@ -178,3 +239,5 @@ it is one predictable position instead of several.
 | S5 relevance | explicit time words (no perfect) |
 | S6 collocations | regular literal pairings allowed |
 | S7 adverb position | one slot: before the main verb |
+| S8 politeness | fixed marker (please / sorry / thank you), not graded indirectness |
+| S9 speech acts | one plain template each (request / refusal / apology / thanks / email) |
