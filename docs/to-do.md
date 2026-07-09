@@ -318,13 +318,20 @@ to Priority 1 (items 11–12) because the rules depend on them; this is what is 
     and spoken audio, so learners can hear the language, not just read the rules.
     Source: [README "Planned tooling"](../README.md#planned-tooling),
     [pronunciation.md](pronunciation.md).
-    Status: **respelling + IPA built** (`../tools/pronounce.ts`, `bun run pronounce`; logic in
-    `src/{respell,lexicon,pronounce,check}.ts`). Word→respelling is an authored **seed lexicon**
-    (`../tools/data/pronunciation.json`, the ~40 gold words in `pronunciation.md`); respelling→IPA
-    is the deterministic P2/P3 engine, validated against the authored IPA under `--strict`. Unknown
-    words and homographs (`lead`=LED/LEED) are flagged, never guessed; regression-tested against the
-    `pronunciation.md` worked sentence. **Audio deferred** (needs `espeak-ng`; `--audio` is a stub),
-    exactly as items 11–12 split their lexicon-dependent halves.
+    Status: **built — respelling, IPA, and audio** (`../tools/pronounce.ts`, `bun run pronounce`;
+    logic in `src/{respell,lexicon,pronounce,check,espeak}.ts`). Word→respelling is an authored
+    **seed lexicon** (`../tools/data/pronunciation.json`, the ~40 gold words in `pronunciation.md`);
+    respelling→IPA is the deterministic P2/P3 engine, validated against the authored IPA under
+    `--strict`. Unknown words and homographs (`lead`=LED/LEED) are flagged, never guessed;
+    regression-tested against the `pronunciation.md` worked sentence. **Audio is now wired**
+    (`--audio -o out.wav`): rather than let the synthesizer re-guess English — which would contradict
+    the respelling the learner sees — `src/espeak.ts` mirrors the P2/P3 engine to convert each
+    respelling into `espeak-ng`'s own phoneme mnemonics and speaks *those* through the rhotic
+    `en-us` voice (the map was validated segment-by-segment against `espeak-ng --ipa` readback of the
+    gold sentence). `espeak-ng` is an external dependency, so `--audio` prints an install hint and
+    exits non-zero when it is not on PATH; unknown words fall back to espeak's own reading and stay
+    flagged. The engine has unit tests (`test/espeak.test.ts`); the synthesis path is CLI-tested when
+    the binary is present.
 
 ---
 
@@ -371,6 +378,6 @@ user, not decided here.
 | 16 | Constructions surfaced by dogfooding | **resolved** — G3 for-test (tooling), G14, G15, G10 boundary | P2 |
 | 17 | Open decisions from point 5 (plural-you, `-ly` comparatives, `more/most`) | **resolved** — `you all`; `-lier`/`manyer` regular, with an optional `more/most` escape hatch | P2 |
 | 18 | Research contradictions (LFC vs P3/P4/P7) | **resolved** — P3/P4 kept as reading aids; P7 divergence accepted | P2 |
-| 13 | Pronunciation/speech tool | **respelling + IPA built** (`tools/pronounce.ts`); seed lexicon; audio deferred (espeak-ng) | P3 |
+| 13 | Pronunciation/speech tool | **built — respelling + IPA + audio** (`tools/pronounce.ts`); seed lexicon; `--audio` speaks our phonemes via espeak-ng | P3 |
 | 14 | Listening & speaking support | uncovered, needs scoping | P4 |
 | 15 | Psychological/motivational factors | uncovered, likely out of scope | P4 |

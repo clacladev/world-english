@@ -6,18 +6,22 @@
 // word up in the authored seed lexicon. Nothing is guessed: an unknown word is emitted verbatim
 // and flagged; a homograph (lead = LED/LEED) emits its first entry and flags the alternatives.
 // --strict additionally validates the lexicon (derived-vs-authored IPA) and exits non-zero on a
-// real mismatch. Audio is deferred: --audio prints an install hint and exits non-zero.
+// real mismatch. --audio speaks the text to a WAV file via espeak-ng (see src/espeak.ts): it feeds
+// espeak *our* phonemes, so the audio matches the respelling, and falls back to a helpful install
+// hint (exit 2) when espeak-ng is not on PATH.
 //
 //   echo "The doctor gived the young child book about birds." | bun pronounce.ts
 //   echo "..." | bun pronounce.ts --ipa            respelling → IPA
 //   bun pronounce.ts notes.txt                      file args / globs
 //   bun pronounce.ts --json                         machine-readable [{ word, respelling, ipa, found }]
 //   bun pronounce.ts --strict                       also validate the lexicon; non-zero on mismatch
+//   bun pronounce.ts --audio -o hello.wav           speak to a WAV (needs espeak-ng); default pronounce.wav
 
 import { resolve } from "node:path";
 import { pronounce, type PronFlag } from "./src/pronounce.ts";
 import { defaultLexicon } from "./src/lexicon.ts";
 import { validateLexicon } from "./src/check.ts";
+import { espeakAvailable, synthesizeToWav, ESPEAK_VOICE } from "./src/espeak.ts";
 
 interface Args {
   globs: string[];
@@ -25,6 +29,10 @@ interface Args {
   json: boolean;
   strict: boolean;
   audio: boolean;
+  /** WAV output path for --audio. */
+  out: string;
+  /** espeak-ng voice for --audio. */
+  voice: string;
 }
 
 function parseArgs(argv: string[]): Args {
@@ -33,15 +41,26 @@ function parseArgs(argv: string[]): Args {
   let json = false;
   let strict = false;
   let audio = false;
-  for (const arg of argv) {
+  let out = "pronounce.wav";
+  let voice = ESPEAK_VOICE;
+  for (let i = 0; i < argv.length; i++) {
+    const arg = argv[i]!;
     if (arg === "--ipa") ipa = true;
     else if (arg === "--json") json = true;
     else if (arg === "--strict") strict = true;
     else if (arg === "--audio") audio = true;
-    else if (arg.startsWith("--")) throw new Error(`unknown flag: ${arg}`);
+    else if (arg === "-o" || arg === "--out") {
+      const value = argv[++i];
+      if (value === undefined) throw new Error(`${arg} needs a file path`);
+      out = value;
+    } else if (arg === "--voice") {
+      const value = argv[++i];
+      if (value === undefined) throw new Error(`${arg} needs a voice name`);
+      voice = value;
+    } else if (arg.startsWith("-")) throw new Error(`unknown flag: ${arg}`);
     else globs.push(arg);
   }
-  return { globs, ipa, json, strict, audio };
+  return { globs, ipa, json, strict, audio, out, voice };
 }
 
 async function resolveFiles(globs: string[]): Promise<string[]> {
@@ -96,8 +115,12 @@ function reportValidation(): boolean {
 async function main(): Promise<void> {
   const args = parseArgs(Bun.argv.slice(2));
 
-  if (args.audio) {
-    console.error("pronounce: audio is not built yet — needs espeak-ng (see docs/to-do.md item 13)");
+  // Fail fast before blocking on stdin: --audio is useless without the synthesizer.
+  if (args.audio && !(await espeakAvailable())) {
+    console.error(
+      "pronounce: --audio needs the espeak-ng synthesizer, which is not on PATH.\n" +
+        "  install it, then re-run:  apt-get install espeak-ng  ·  brew install espeak-ng",
+    );
     process.exit(2);
   }
 
@@ -108,6 +131,15 @@ async function main(): Promise<void> {
     for (const file of await resolveFiles(args.globs)) {
       inputs.push({ file, text: await Bun.file(file).text() });
     }
+  }
+
+  if (args.audio) {
+    // Speak all inputs into one WAV, feeding espeak our own phonemes (see src/espeak.ts).
+    const text = inputs.map((i) => i.text).join("\n");
+    const { flags } = await synthesizeToWav(text, { file: inputs[0]!.file, out: args.out, voice: args.voice });
+    console.error(`pronounce: wrote ${resolve(args.out)}`);
+    reportFlags(flags);
+    return;
   }
 
   const results = inputs.map((i) => ({ file: i.file, ...pronounce(i.text, { ipa: args.ipa, file: i.file }) }));
