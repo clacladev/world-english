@@ -1,7 +1,9 @@
 import { describe, expect, it } from "bun:test";
 import { join } from "node:path";
+import { espeakAvailable } from "../src/espeak.ts";
 
 const pronounceTs = join(import.meta.dir, "..", "pronounce.ts");
+const hasEspeak = await espeakAvailable();
 
 async function runPronounce(args: string[], input = "") {
   const proc = Bun.spawn(["bun", pronounceTs, ...args], {
@@ -38,7 +40,23 @@ describe("pronounce cli", () => {
     expect(result.flags[0]).toMatchObject({ word: "lead", kind: "homograph" });
   });
 
-  it("--audio exits non-zero with an espeak-ng hint (deferred)", async () => {
+  // --audio drives espeak-ng, which may not be installed (e.g. in CI). Test the path that matches
+  // this machine: synthesis when the binary is present, the install hint when it is not.
+  it.skipIf(!hasEspeak)("--audio writes a valid WAV when espeak-ng is present", async () => {
+    const out = join(import.meta.dir, "cli-audio.wav");
+    try {
+      const { stderr, exitCode } = await runPronounce(["--audio", "-o", out], SENTENCE);
+      expect(exitCode).toBe(0);
+      expect(stderr).toContain("wrote");
+      const bytes = new Uint8Array(await Bun.file(out).arrayBuffer());
+      expect(bytes.length).toBeGreaterThan(44); // more than a bare WAV header
+      expect(String.fromCharCode(...bytes.slice(0, 4))).toBe("RIFF");
+    } finally {
+      await Bun.file(out).unlink().catch(() => {});
+    }
+  });
+
+  it.skipIf(hasEspeak)("--audio exits non-zero with an install hint when espeak-ng is absent", async () => {
     const { stderr, exitCode } = await runPronounce(["--audio"], SENTENCE);
     expect(exitCode).toBe(2);
     expect(stderr).toContain("espeak-ng");

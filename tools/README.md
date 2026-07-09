@@ -198,6 +198,7 @@ echo "The doctor gived the young child book about birds." | bun run pronounce --
 bun run pronounce notes.txt        # file args / globs
 bun run pronounce --json           # machine-readable { text, flags }
 bun run pronounce --strict         # also validate the lexicon (see below); non-zero on mismatch
+echo "..." | bun run pronounce --audio -o hello.wav   # speak it to a WAV (needs espeak-ng)
 ```
 
 Rendered text goes to stdout; the words it couldn't resolve go to stderr.
@@ -227,6 +228,21 @@ real authoring bug and exits non-zero.
 The worked examples in `pronunciation.md` are the gold corpus: `test/pronounce.test.ts` renders the
 spec's full sentence to its exact gold respelling and IPA, and `test/respell.test.ts` asserts the
 engine reproduces the authored IPA of every non-reducing lexicon entry.
+
+### Audio (`--audio`)
+
+`--audio -o out.wav` speaks the text to a WAV file with the external **`espeak-ng`** synthesizer.
+The point of the project is that the respelling/IPA *is* the pronunciation, so the audio must speak
+*our* phonemes — letting `espeak-ng` re-guess the English would contradict the respelling on screen.
+`espeak-ng` does not parse IPA symbols, but it does speak its own ASCII phoneme mnemonics inside
+`[[...]]`, so `src/espeak.ts` mirrors the P2/P3 engine one more time: the same syllable/grapheme
+tokenizer, but emitting espeak's phonemes (`GRAPHEME_TO_ESPEAK`, the audio twin of
+`GRAPHEME_TO_IPA`) with `'` before the stressed syllable, driving the rhotic **`en-us`** voice that
+matches our General-American vowels. The map was validated segment-by-segment against
+`espeak-ng -v en-us --ipa` readback of the gold sentence, and a module-load guard fails fast if a
+grapheme the IPA engine knows has no espeak phoneme. Unknown words fall back to espeak's own reading
+and stay flagged, exactly as the renderer emits them verbatim. `espeak-ng` is an external
+dependency: when it is not on PATH, `--audio` prints an install hint and exits non-zero.
 
 ## How it works
 
@@ -307,6 +323,7 @@ word. Re-run `bun test`.
 - **The pronunciation lexicon is a seed.** It carries only the ~40 gold words in
   `pronunciation.md`; any other word is emitted verbatim and flagged, not guessed. It grows
   frequency-first, mirroring `vocabulary.md`'s seed convention.
-- **Audio is deferred.** `pronounce.ts` ships respelling + IPA only. Spoken audio needs an
-  external TTS (`espeak-ng`, which takes IPA); `--audio` prints an install hint and exits
-  non-zero until it is wired up.
+- **Audio needs an external synthesizer.** `--audio` drives `espeak-ng`, which is not bundled;
+  when it is absent the flag prints an install hint and exits non-zero. The audio speaks *our*
+  phonemes (never espeak's re-guessed English) via the `en-us` voice — see
+  [Audio](#audio---audio) above.
