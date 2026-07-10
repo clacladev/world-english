@@ -82,7 +82,7 @@ lexicon's per-entry `forward` mode:
   High-confidence flags (dropped-prep, and any low-confidence lexicon entry) show by default;
   the low-confidence classes are advisory and only shown under `--strict`.
 
-The four `../docs/samples.md` passages are the translator's gold regression corpus:
+The eight `../docs/samples.md` passages are the translator's gold regression corpus:
 `test/translate.test.ts` translates each Standard-English passage and asserts it produces every
 handled World-English form the human gold contains.
 

@@ -86,10 +86,11 @@ where that evidence backs or challenges World English's own rules.
 - Not a "dumbed-down" English — it aims to express the same ideas, just with less
   arbitrary machinery.
 - Not a phonetic rewrite. Spelling changes are conservative and recognizable.
-- Not finished. The design is underway: five specifications are drafted under `docs/`
-  (orthography, pronunciation, morphology, grammar, style), backed by the research in
-  `resources/`. The rules will keep changing as they are worked out — and the tooling has
-  not started.
+- Not finished. The design is underway: seven specifications are drafted under `docs/`
+  (orthography, pronunciation, morphology, grammar, style, writing, vocabulary), backed by the
+  research in `resources/`. The rules will keep changing as they are worked out — and the
+  tooling (linter, translators, pronunciation renderer) is built and documented in
+  [`tools/README.md`](tools/README.md).
 
 ## Scope of the reform
 
@@ -119,18 +120,19 @@ Pronunciation will be documented two ways, for two audiences:
 
 Both will accompany the spelling rules and feed the pronunciation tooling.
 
-## Planned tooling
+## Tooling
 
-The end goal is not just documentation but working tools:
+The end goal is not just documentation but working tools — now built and documented in
+[`tools/README.md`](tools/README.md):
 
-- **Translators** — convert British English, American English, and other variants
-  *into* World English (and ideally back), so existing text can be experienced in
-  the simplified form.
-- **Pronunciation / speech** — render World English text to its respelling, IPA,
-  and spoken audio, so learners can *hear* the language, not just read it.
-
-These are goals, not yet implementations. Their design will be specified before any
-code is written.
+- **Translators** — convert standard English *into* World English (`bun run translate`)
+  and back (`bun run translate --reverse`), applying the deterministic rules and flagging
+  everything that needs part-of-speech or syntax.
+- **Pronunciation / speech** — render World English text to its respelling, IPA
+  (`bun run pronounce`), and spoken audio (`--audio`, via `espeak-ng`), so learners can
+  *hear* the language, not just read it.
+- **Linter** — sweeps the specs' own World-English example columns for abolished forms
+  (`bun run lint`), gating the rules against the contradictions a first design pass produced.
 
 ## Repository layout
 
@@ -144,6 +146,7 @@ world-english/
 │   ├── morphology.md           # regular verbs, plurals, comparatives
 │   ├── grammar.md              # tense/aspect, articles, prepositions
 │   ├── style.md                # plain-phrasing guidance
+│   ├── writing.md              # document-level conventions — punctuation, paragraph shape
 │   ├── vocabulary.md           # core lexicon — the word list G3/S2/S3/S6 look up
 │   ├── samples.md              # dogfooded translations + regression test
 │   └── to-do.md                # prioritized problem backlog
@@ -151,6 +154,8 @@ world-english/
 │   ├── IRREGULARITIES.md       # catalogue of what English forces you to memorize
 │   ├── PAIN-POINTS.md          # research-backed survey of learner difficulty
 │   ├── PRIOR-ART.md            # what earlier reforms/subsets tried, and what happened
+│   ├── index.html              # Brehe's Grammar Anatomy — entry page
+│   ├── style.css               # Brehe's Grammar Anatomy — stylesheet
 │   └── brehe-grammar-anatomy/  # standard-English grammar baseline (reference)
 └── tools/                      # Bun/TypeScript tooling
     ├── lint.ts                 # spec linter — flags abolished forms in World English example columns
@@ -160,8 +165,8 @@ world-english/
     └── data/                   # abolished-forms dataset, the core lexicon, NGSL frequency spine
 ```
 
-The linter, both translators, and the respelling/IPA renderer are built (see
-[`tools/README.md`](tools/README.md)); spoken audio is still deferred.
+The linter, both translators, and the respelling/IPA/audio renderer are built (see
+[`tools/README.md`](tools/README.md)); audio requires `espeak-ng` on PATH.
 
 ## Methodology
 
