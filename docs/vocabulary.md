@@ -76,10 +76,10 @@ say about it (a fully regular word like *table* needs none).
 
 | Array | Rows |
 | ----- | ---- |
-| `droppedPreps` | 35 |
-| `phrasalVerbs` | 53 |
+| `droppedPreps` | 37 |
+| `phrasalVerbs` | 56 |
 | `sensePreferences` | 44 |
-| `collocations` | 49 |
+| `collocations` | 52 |
 | `falseFriends` | 2 |
 | `registerDefaults` | 27 |
 

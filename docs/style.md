@@ -98,8 +98,9 @@ conversation**; *piece of cake* → **very easy**.
 ## Rule S5 — State relevance explicitly (cover for the dropped perfect)
 
 **Rule.** Because World English drops the present perfect ([grammar.md G1](grammar.md)), use
-explicit time words to carry "past with present relevance": *already, since, still, until
-now, so far*.
+explicit time words to carry "past with present relevance": *already, since, still, just, yet,
+until now, so far*. The list is illustrative, not closed — any plain time word that pins down
+the relevance is fine.
 
 **Problem it solves.** Recovers the nuance the perfect used to encode, without its
 irregular form.

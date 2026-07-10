@@ -11,14 +11,18 @@
 // per-inflection generation buildForwardMap() doesn't do, and `test/translate.test.ts`'s gold
 // harness derives its expectations from buildForwardMap()'s values, so it must stay single-word.
 //
-// Still flag-only / untouched (documented, not a bug): G2 article drop (needs syntax),
-// separated phrasals (*give it up* — needs a parser), S3/S6/false-friends/register (doc-only,
-// not even flagged). The duration-`for` vs. object-`for` test (item 16) is now resolved: dropped
-// `for` auto-translates via the not-duration guard (isDurationFor) — object-`for` drops (`wait
-// for the bus` → `wait the bus`), duration-`for` is kept (`wait for three minutes`).
+// Now handled conservatively by the pos.ts detectors: G2 indefinite-article drop (a/an → ∅, with
+// sentence-initial recapitalization), G14 dropped-`that` restoration in reported speech, and the
+// coordinated-shape zero-past auto-convert (M1). Still flag-only / untouched (documented, not a
+// bug): generic-`the` → bare plural (needs semantics), separated phrasals (*give it up* — needs a
+// parser), non-coordinated zero-past, S3/S6/false-friends/register (doc-only, not even flagged).
+// The duration-`for` vs. object-`for` test (item 16) is resolved: dropped `for` auto-translates
+// via the not-duration guard (isDurationFor) — object-`for` drops (`wait for the bus` → `wait the
+// bus`), duration-`for` is kept (`wait for three minutes`).
 
 import { loadDataset, type Dataset } from "./dataset.ts";
 import { buildPhraseTransforms, isDurationFor, type PhraseTransform } from "./core-lexicon.ts";
+import { thirdPersonSDrop, articleDrop, droppedThat, zeroPastConvert } from "./pos.ts";
 import { scanSpan, type Finding } from "./scan.ts";
 import type { Span } from "./extract.ts";
 
@@ -71,6 +75,23 @@ function matchCase(source: string, woe: string): string {
   return woe;
 }
 
+/** Uppercase the first alphabetic character — used when a dropped sentence-initial article's noun
+ * becomes the new leading word (G2). */
+function capitalizeFirst(s: string): string {
+  const m = /[A-Za-z]/.exec(s);
+  if (!m) return s;
+  return s.slice(0, m.index) + s[m.index]!.toUpperCase() + s.slice(m.index + 1);
+}
+
+/** True when `pos` begins a sentence: only whitespace precedes it on the line, or the previous
+ * non-space character is a sentence-ender or an opening quote. */
+function isSentenceInitial(line: string, pos: number): boolean {
+  let j = pos - 1;
+  while (j >= 0 && /\s/.test(line[j]!)) j--;
+  if (j < 0) return true;
+  return ".!?\"'“‘(".includes(line[j]!);
+}
+
 interface LineToken {
   word: string;
   start: number;
@@ -110,12 +131,23 @@ function substituteLine(
   handledPhrases: Set<string>,
 ): string {
   const tokens = tokenizeLine(line);
+  const lowerWords = tokens.map((t) => t.word.toLowerCase());
   let out = "";
   let last = 0;
   let i = 0;
+  let capitalizeNext = false; // a sentence-initial article was dropped → recapitalize the next word
+  const applyCap = (s: string): string => {
+    if (!capitalizeNext) return s;
+    capitalizeNext = false;
+    return capitalizeFirst(s);
+  };
   while (i < tokens.length) {
     const tok = tokens[i]!;
     out += line.slice(last, tok.start);
+
+    // Dropped-`that` restoration (G14): insert the complementizer before a reported-clause pronoun,
+    // then let the pronoun itself be processed normally below.
+    if (droppedThat(lowerWords, i)) out += "that ";
 
     const candidates = phraseByFirst.get(tok.word.toLowerCase()) ?? [];
     const match = candidates.find((t) => {
@@ -137,14 +169,55 @@ function substituteLine(
       const keepDurationFor =
         match.guard === "not-duration" &&
         isDurationFor(tokens.slice(i + span).map((tk) => tk.word.toLowerCase()));
-      out += keepDurationFor ? line.slice(tok.start, spanEnd) : matchCase(tok.word, match.replacement);
+      out += applyCap(
+        keepDurationFor ? line.slice(tok.start, spanEnd) : matchCase(tok.word, match.replacement),
+      );
       last = spanEnd;
       i += span;
       continue;
     }
 
+    // Indefinite article drop (G2): drop `a`/`an` heading a whitespace-adjacent noun phrase; a
+    // capitalized sentence-initial article recapitalizes the now-leading word. The dropped form is
+    // added to handledPhrases so collectFlags no longer emits its low-confidence G2 flag.
+    if (articleDrop(lowerWords, i)) {
+      const nextTok = tokens[i + 1]!;
+      if (/^\s*$/.test(line.slice(tok.end, nextTok.start))) {
+        handledPhrases.add(lowerWords[i]!);
+        if (/^[A-Z]/.test(tok.word) && isSentenceInitial(line, tok.start)) capitalizeNext = true;
+        last = nextTok.start; // drop the article and the whitespace before the noun
+        i += 1;
+        continue;
+      }
+    }
+
+    // Coordinated zero-past auto-convert (M1): `[past] and/then/but [zero-past]` → regular WoE past.
+    if (!forwardMap.has(lowerWords[i]!)) {
+      const zeroPast = zeroPastConvert(lowerWords, i);
+      if (zeroPast) {
+        out += applyCap(matchCase(tok.word, zeroPast.past));
+        last = tok.end;
+        i += 1;
+        continue;
+      }
+    }
+
+    // Third-person -s drop (M3): only after a he/she/it subject, and never over a form the
+    // forwardMap already owns (be-forms etc. take priority). The converted surface form is added
+    // to handledPhrases so collectFlags does not also flag it (e.g. goes/does/has under --strict).
+    if (!forwardMap.has(lowerWords[i]!)) {
+      const sDrop = thirdPersonSDrop(lowerWords, i);
+      if (sDrop) {
+        handledPhrases.add(lowerWords[i]!);
+        out += applyCap(matchCase(tok.word, sDrop.base));
+        last = tok.end;
+        i += 1;
+        continue;
+      }
+    }
+
     const woe = forwardMap.get(tok.word.toLowerCase());
-    out += woe ? matchCase(tok.word, woe) : tok.word;
+    out += applyCap(woe ? matchCase(tok.word, woe) : tok.word);
     last = tok.end;
     i += 1;
   }
