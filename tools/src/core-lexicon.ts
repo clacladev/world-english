@@ -195,6 +195,12 @@ export function isDurationFor(after: string[]): boolean {
   return false;
 }
 
+// Zero-past verbs (SE past spelled like the base — see irregular-verbs.json's _comment) that
+// also head a high-confidence phrasal verb (set up, put off, cut down, shut down, split up).
+// Mirrors pos.ts's ZERO_PAST set; kept local to avoid a circular import between core-lexicon.ts
+// and pos.ts (pos.ts already imports loadCoreLexicon from here).
+const ZERO_PAST_PHRASAL_HEADS = new Set(["set", "put", "cut", "shut", "quit", "split"]);
+
 export interface PhraseTransform {
   /** Whitespace-separated tokens of the standard-English surface form to match. */
   tokens: string[];
@@ -268,9 +274,10 @@ export function buildPhraseTransforms(lexicon: CoreLexicon = defaultLexicon): Ph
     const head = p.phrasal.split(/\s+/)[0]!;
     // A zero-past head (set/put/cut/shut/quit/split up, …) has an SE past spelled exactly like
     // its base, so the base-form pair below is reached by BOTH present- and past-tense uses
-    // (#59). Detect that collision so the base pair can defer to a past-tense signal instead of
-    // always guessing present tense.
-    const isZeroPastHead = standardPast(head) === head.toLowerCase();
+    // (#59). These verbs are deliberately absent from irregular-verbs.json (their past is
+    // undetectable in isolation), so `standardPast` can't be used to detect them here — it would
+    // fall through to `regularizeVerbPast` and compute a form ("setted") that never occurs in SE.
+    const isZeroPastHead = ZERO_PAST_PHRASAL_HEADS.has(head.toLowerCase());
     const pairs: [string, string][] = [
       [head.toLowerCase(), p.plain],
       [standardThirdPerson(head), standardThirdPerson(p.plain)],

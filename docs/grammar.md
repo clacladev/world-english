@@ -207,7 +207,7 @@ verb's preposition, or reach for a plain verb.
 change. *On Monday*, *on July*, and *listen music* read slightly off to a native ear but are
 never ambiguous. The drop is lossy on the surface yet **reversible**: each verb has one
 canonical preposition, so a reverse translator restores it by lookup (*listen* → *listen
-to*) — the per-verb list lives in [vocabulary.md Table A](vocabulary.md#table-a--g3-canonical-prepositions-drop-and-reverse-map) — consistent with the map-back-losslessly goal of
+to*) — the per-verb list lives in [vocabulary.md Table A](vocabulary.md#table-a--g3-canonical-prepositions-droppedpreps) — consistent with the map-back-losslessly goal of
 [morphology M1](morphology.md#rule-m1--all-verbs-are-regular). The one real risk — two
 senses collapsing onto one verb — is handled by routing meaning-changing particles to S2
 rather than dropping them.
