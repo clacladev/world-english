@@ -19,7 +19,11 @@ up*), and so on.
 This is the class of mistake the point-4 critique found by hand — a standard form sitting in
 a World-English column — and the reason the linter was pulled forward to Priority 1: per the
 [README methodology](../README.md#methodology), a rule is only "done" when *its example
-columns pass this sweep*. It is meant to run in CI so a spec edit that reintroduces an
+columns pass this sweep*. (Editorial note: this refers to point 4 of a critique document from
+PR #7, which addressed "points 2–6" of that critique. The critique document itself was never
+committed, and what point 1 was — fixed, rejected, or simply not written down — is lost to
+history; it cannot be reconstructed from the repository and this note does not attempt to
+invent content for it.) It is meant to run in CI so a spec edit that reintroduces an
 abolished form fails the build.
 
 ### Run
@@ -307,8 +311,9 @@ word. Re-run `bun test`.
   adjectives out (`he was tired and hurt`, `the red and cut flowers` are left untouched); every
   other occurrence is left alone.
 - **Only World-English *columns* and sample blockquotes are scanned**, not arbitrary prose
-  (which legitimately names abolished forms when explaining them). `--strict` additionally
-  reads bolded forms in `**Examples.**` prose.
+  (which legitimately names abolished forms when explaining them). `--strict` does not change
+  *what* is scanned — extraction scope is the same in both modes — it only turns on the
+  low-confidence, POS-dependent classes described under [Confidence](#confidence) above.
 - **The forward translator applies only high-precision transforms.** It has no full POS tagger
   or parser; beyond the deterministic closed-class substitutions it adds a few **conservative,
   low-recall** syntactic detectors (`src/pos.ts`), each firing only on one unambiguous shape and

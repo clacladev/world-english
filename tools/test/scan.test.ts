@@ -21,9 +21,13 @@ describe("planted-bug detection (the point-4 class of mistake)", () => {
   });
 
   it("flags an irregular verb past/participle", () => {
-    expect(classesFor("I saw it")).toContain("saw:irregular-verb/M1");
     expect(classesFor("he gave me a book")).toContain("gave:irregular-verb/M1");
     expect(classesFor("it was written")).toContain("written:irregular-verb/M1");
+  });
+
+  it("treats `saw` (also 'the tool') as a homograph, flagged only under --strict", () => {
+    expect(classesFor("I saw it")).toEqual([]);
+    expect(classesFor("I saw it", { strict: true })).toContain("saw:irregular-verb/M1");
   });
 
   it("flags an irregular plural", () => {
@@ -53,7 +57,7 @@ describe("planted-bug detection (the point-4 class of mistake)", () => {
   });
 
   it("suggests the regularized World-English replacement", () => {
-    const f = scan("I saw it").find((x) => x.found === "saw");
+    const f = scan("I saw it", { strict: true }).find((x) => x.found === "saw");
     expect(f?.expected).toBe("seed");
     const p = scan("the children").find((x) => x.found === "children");
     expect(p?.expected).toBe("childs");
@@ -92,7 +96,7 @@ describe("confidence gating", () => {
 describe("allowlist", () => {
   it("suppresses a matched file+form and leaves others", () => {
     const allow = [{ file: "x.md", form: "saw", reason: "the tool, not past-of-see" }];
-    const found = scan("I saw it was here", { allow }).map((f) => f.found);
+    const found = scan("I saw it was here", { allow, strict: true }).map((f) => f.found);
     expect(found).not.toContain("saw");
     expect(found).toContain("was");
   });

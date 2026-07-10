@@ -63,11 +63,19 @@ describe("lossy reverse: canonical default + flag", () => {
   });
 
   it("restores an irregular past canonically but flags the past/participle collapse", () => {
-    // `seed` collapsed `saw` (past) and `seen` (participle); canonical restore is the past.
-    expect(se("I seed it")).toBe("I saw it");
-    const f = flags("I seed it").find((x) => x.found === "seed");
-    expect(f?.restored).toBe("saw");
-    expect(f?.note).toContain("saw/seen");
+    // `singed` (past of `sing`) collapses `sang` (past) and `sung` (participle); canonical
+    // restore is the past.
+    expect(se("I singed it")).toBe("I sang it");
+    const f = flags("I singed it").find((x) => x.found === "singed");
+    expect(f?.restored).toBe("sang");
+    expect(f?.note).toContain("sang/sung");
+  });
+
+  it("does not reverse `seed` — `see`'s past is a homograph with the valid WoE noun `seed`", () => {
+    // `seed` collides with a common, legitimate World-English noun (the plant part), so the
+    // reverse map leaves it untouched rather than guessing it always means `saw` (past of see).
+    expect(se("the seed grows in spring")).toBe("the seed grows in spring");
+    expect(flags("I seed it")).toEqual([]);
   });
 });
 

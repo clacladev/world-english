@@ -27,11 +27,26 @@ export function regularizeVerbPast(base: string): string {
   // Consonant + y → -ied (try → tried, carry → carried).
   if (b.endsWith("y") && !isVowel(b.at(-2))) return b.slice(0, -1) + "ied";
 
-  // Stressed single-syllable CVC → double the final consonant (stop → stopped, plan → planned).
-  if (isCvc(b) && isMonosyllable(b)) return b + b.at(-1) + "ed";
+  // Stressed CVC → double the final consonant: single syllable (stop → stopped, plan → planned)
+  // or a stress-final polysyllable (begin → beginned, refer → referred, occur → occurred).
+  if (isCvc(b) && (isMonosyllable(b) || STRESS_FINAL_POLYSYLLABLES.has(b))) {
+    return b + b.at(-1) + "ed";
+  }
 
   return b + "ed";
 }
+
+// Common polysyllabic verbs whose final syllable is stressed, so the CVC-doubling rule (M1/O3)
+// applies to them the same as monosyllables (begin → beginned, refer → referred). Stress isn't
+// mechanically derivable from spelling alone, so this is a small curated set of the frequent
+// cases named in the spec/review, not an attempt at a general stress algorithm — the rule's
+// authoritative source stays the data files; this only feeds the hint text and the phrase-table
+// generation in core-lexicon.ts.
+const STRESS_FINAL_POLYSYLLABLES = new Set([
+  "begin", "refer", "occur", "prefer", "admit", "commit", "permit", "submit", "transmit",
+  "regret", "equip", "control", "acquit", "incur", "infer", "transfer", "deter", "recur",
+  "expel", "compel", "propel", "rebel", "extol", "concur", "defer", "confer", "abhor",
+]);
 
 /**
  * Regular plural under M4: add `-s`, or `-es` after a sibilant.
@@ -68,7 +83,9 @@ export function standardPresentParticiple(base: string): string {
   if (b.length <= 2 && b.endsWith("e")) return b + "ing"; // be → being
   if (b.endsWith("ie")) return b.slice(0, -2) + "ying"; // lie → lying, tie → tying
   if (b.endsWith("e") && !/(ee|oe|ye)$/.test(b)) return b.slice(0, -1) + "ing"; // love → loving
-  if (isCvc(b) && isMonosyllable(b)) return b + b.at(-1) + "ing"; // stop → stopping
+  if (isCvc(b) && (isMonosyllable(b) || STRESS_FINAL_POLYSYLLABLES.has(b))) {
+    return b + b.at(-1) + "ing"; // stop → stopping, begin → beginning
+  }
   return b + "ing";
 }
 

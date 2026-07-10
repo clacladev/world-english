@@ -228,25 +228,25 @@ irregular one-word suppletives (*better*, *worse*) stay abolished — the hatch 
 ## Rule M6 — One adverb rule
 
 **Rule.** Form an adverb from an adjective by adding **`-ly`**, always. No suppletive
-adverbs, no zero-derived adverbs.
+adverbs, no zero-derived adverbs — with **one stated exception, `hard`**, held back
+specifically to avoid a meaning clash (see below).
 
 **Problem it solves.** Irregular adverb formation: *good → well*, *fast → fast*,
 *hard → hard* (see [§5](../resources/IRREGULARITIES.md#5-adjectives--adverbs)).
 
 **Examples.** *quick → **quickly***, *easy → **easily***, *careful → **carefully***,
-*good → **goodly*** (= "well"), *fast → **fastly***, *hard → **hard*** (unchanged; see
-below). **`hardly` is reassigned, directly, to mean "barely":** M6 would otherwise regularly
-derive *hardly* as the manner adverb of *hard* ("in a hard manner"), but that collides with
-*hardly*'s existing, everyday meaning of "barely." World English keeps that everyday
-meaning and drops the compositional one: **`hardly` means only "barely"** (*She hardly
-finished* = "she barely finished"). The manner sense of *hard* does not need *hardly* at
-all — *hard* is already a flat (zero-derived) adverb in standard English (*hit hard*, *work
-hard*), and World English keeps that flat form for the manner sense, so no form is lost:
-*hard* covers the manner, *hardly* covers "barely," and the two never compete.
+*good → **goodly*** (= "well"), *fast → **fastly***. **`hard` is the one exception:** the
+regular derivation would give *hard → hardly* for the manner sense ("in a hard manner"),
+but *hardly* already carries the common, everyday meaning "barely" (*she hardly finished*).
+Rather than let the two senses collide, World English **reassigns `hardly` to mean only
+"barely,"** directly, as its sole meaning — and keeps the manner sense on the flat,
+zero-derived form **`hard`** (*hit hard*, *work hard*), the one deliberate carve-out from
+the "always `-ly`" rule.
 
-**Divergence & trade-off.** Regular and predictable; the one collision (*hardly*) is
-resolved directly above by keeping *hardly*'s familiar "barely" sense and routing the
-manner sense through the flat adverb *hard* instead of manufacturing a clash.
+**Divergence & trade-off.** Regular and predictable, apart from the single stated exception
+above: *hardly* keeps its familiar "barely" sense instead of becoming a second, colliding
+form for "in a hard manner," and *hard* stays zero-derived to carry that manner sense
+instead.
 
 ---
 

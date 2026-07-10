@@ -88,7 +88,11 @@ Even setting spelling aside, the spoken system has irregularities a learner cann
 misunderstood.
 
 **World English target →** [`docs/pronunciation.md`](../docs/pronunciation.md) (a regular
-sound↔spelling mapping, a learner respelling key, and a single predictable stress rule).
+sound↔spelling mapping, a learner respelling key, and stress that is *always marked* rather
+than moved to one predictable position — see
+[P4](../docs/pronunciation.md#rule-p4--stress-is-always-marked-never-guessed), which
+deliberately keeps each word's native stress instead of regularizing its placement, since a
+single fixed-position rule would make many words unrecognizable).
 
 ---
 

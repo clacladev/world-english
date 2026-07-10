@@ -60,11 +60,14 @@ describe("deterministic closed-class substitution", () => {
 describe("flagged, not translated (needs POS / syntax / lexicon)", () => {
   it("leaves genuine homographs untouched, flagging them only under --strict", () => {
     // `ground` (past of grind) is marked homograph → low confidence, so it is neither
-    // translated nor flagged by default. `saw`, by contrast, is high-confidence in the dataset
-    // (the linter flags it too) and *is* translated → seed.
+    // translated nor flagged by default. `saw` (past of see, also "the tool") is marked
+    // homograph the same way — it is risky to guess-translate, so it stays untouched too.
     expect(woe("on the ground")).toBe("on the ground");
     expect(flagKeys("on the ground")).toEqual([]); // low-confidence: quiet by default
     expect(flagKeys("on the ground", true)).toContain("ground:irregular-verb/M1");
+    expect(woe("he used the saw to cut wood")).toBe("he used the saw to cut wood");
+    expect(flagKeys("he used the saw to cut wood")).toEqual([]);
+    expect(flagKeys("he used the saw to cut wood", true)).toContain("saw:irregular-verb/M1");
   });
 
   it("drops the indefinite article a/an and no longer flags it (G2)", () => {
