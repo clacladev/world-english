@@ -205,7 +205,7 @@ An entry is "done" only when:
    entry, `phrasalVerbs.plain` is a single word and isn't itself a dropped form, and G3-drop /
    S2-phrasal bigrams don't collide.
 3. It stays **consistent with [`samples.md`](samples.md)** — e.g. *listen music* / *wait the bus*
-   agree with Passage 1.
+   agree with [Passage 9](samples.md#passage-9--short-exchange-closes-dogfooding-blind-spots).
 4. The forward/reverse **round-trip property** holds: every `drop` + `forward: "apply"` verb
    translates SE→WoE by dropping its preposition, and WoE→SE restores it, flagged
    (`tools/test/reverse.test.ts`).

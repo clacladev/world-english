@@ -161,7 +161,22 @@ default removes the choice and matches the fixed word order of
 
 Sentence adverbs lead or take the same slot: **Maybe it will rain.** / **It will maybe rain.**
 Time and place adjuncts (*today*, *here*, *in the shop*) keep their natural clause-final spot
-— they are not the adverbs that scatter, so the rule leaves them alone. The pre-verb slot is
+— they are not the adverbs that scatter, so the rule leaves them alone. A time or place
+adjunct may also be **fronted** for topicalization or emphasis (*Next time, plan carefully.* /
+*Last year, I traveled to Japan.*) — clause-final is the unmarked position, but fronting one
+adjunct to open the sentence is common, natural English and this rule does not forbid it; it
+only fixes where the adjunct sits when it is *not* fronted.
+
+**Comparative adverb phrases.** The one fixed pre-verb slot is sized for a **single-word**
+adverb. A **multi-word comparative phrase** built with the *more/most* escape hatch
+([morphology M5](morphology.md#rule-m5--regular-comparatives-and-superlatives): *more quickly*,
+*more carefully*) is exempt and stays in its natural **post-verb** position instead: *She
+worked **more quickly**.*, *Plan **more carefully**.* — not *she more quickly worked*, which
+fronts a two-word phrase in front of the verb and reads worse than the order it would replace.
+This is the one stated exception to the fixed slot, scoped narrowly to multi-word comparative
+adverb phrases.
+
+The pre-verb slot is
 the same one `not` occupies ([grammar G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)),
 so negation and adverb placement share one position rule — with one priority rule where both
 land in the same slot: **`not` always comes first**, immediately before the verb, and any
