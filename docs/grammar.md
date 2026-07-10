@@ -170,9 +170,10 @@ one bucket:
 
 **The test** that separates *drop* from *replace*: drop the preposition only when the verb's
 meaning is unchanged without it. If removing it would merge two distinct senses — *look
-**at*** (view) vs *look **for*** (search) — the particle carries meaning, so it is a phrasal
-verb and S2 swaps in a plain verb (*seek*) instead. This keeps G3 and S2 from claiming the
-same forms.
+**for*** (search) vs *look* (sight) — the particle carries meaning, so it is a phrasal
+verb and S2 swaps in a plain verb (*seek*) instead. So *look at* (view) drops — the verb
+means the same thing without *at* — but *look for* replaces. This keeps G3 and S2 from
+claiming the same forms.
 
 **Two the test explicitly excludes from the drop list.** *believe **in*** and *pay **for***
 fail it, so they are **not** dropped: *believe* (accept as true) and *believe in* (have faith
@@ -409,7 +410,7 @@ present and one past, the passive needs **no separate participle and no auxiliar
 | The house was built by them. | **The house beed builded by them.** |
 | The house was built. (agent unknown/unimportant) | **The house beed builded.** |
 | The car is washed every week. | **The car be washed every week.** |
-| The window will be broken. | **The window will be broked.** |
+| The window will be broken. | **The window will be breaked.** |
 
 **Problem it solves.** Standard passives ride on the irregular past *participle* — the third
 principal part a learner must memorize per verb (*build → built*, *break → broken*) — stacked
@@ -471,7 +472,7 @@ and so is the **restrictive/non-restrictive comma rule** (*that* vs *which* + co
 | the man **whom** I saw | **the man that I seed** |
 | the woman **who** called | **the woman that called** |
 | the book **which** is on the table | **the book that be on the table** |
-| the man **whose** car broke | **the man that hims car broked** (resumptive *hims*) |
+| the man **whose** car broke | **the man that hims car breaked** (resumptive *hims*) |
 | My car, **which** is red, is fast. | **Mes car, that be red, be fast.** (no comma contrast) |
 
 **Problem it solves.** Standard English splits relativizers by animacy (*who* vs *which*),
@@ -482,7 +483,7 @@ can state." All of it collapses to one word.
 
 **Divergence & trade-off.** *that* for people (*the man that I seed*) is already everyday
 spoken English. Possessive relatives use a **resumptive pronoun** (*the man that hims car
-broked*) instead of *whose* — slightly longer but fully regular. The lost
+breaked*) instead of *whose* — slightly longer but fully regular. The lost
 restrictive/non-restrictive nuance is recovered, when it matters, by rephrasing into two
 sentences ([S1](style.md#rule-s1--fixed-subjectverbobject-order)).
 

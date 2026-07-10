@@ -203,7 +203,7 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
    Source: [PAIN-POINTS §3](../resources/PAIN-POINTS.md#3-grammar),
    [IRREGULARITIES §7](../resources/IRREGULARITIES.md#7-grammar-systems-articles-prepositions-tense-phrasal-verbs).
    Status: drafted → [style.md S2](style.md#rule-s2--prefer-plain-verbs-over-phrasal-verbs).
-   **Item 8's core lexicon now carries the phrasal→plain map** — 53 phrasal verbs from the NGSL
+   **Item 8's core lexicon now carries the phrasal→plain map** — 56 phrasal verbs from the NGSL
    sweep, applied by the forward translator (inflected forms included). Not exhaustive: only
    opaque phrasals with a low collision risk earned a row; transparent ones (*sit down*) and
    dangerously polysemous ones (*pick up*) are deliberately left out (the latter documented,
@@ -400,7 +400,7 @@ item 14); anything remaining is a learner/pedagogy or tooling concern, not a spe
 | 4 | Prepositions | drafted (refined; item 8 lookup table built) | P1 |
 | 5 | Verb irregularity / *be* | drafted (M2 resolved: full collapse `be`/`beed`) | P1 |
 | 6 | Present perfect / tense | **resolved** — G1 deterministic renderings + S5 time words, full range dogfooded in [`samples.md`](samples.md) Passage 8 | P1 |
-| 7 | Phrasal verbs | drafted (map built via item 8, 53 rows) | P1 |
+| 7 | Phrasal verbs | drafted (map built via item 8, 56 rows) | P1 |
 | 9 | Writing conventions | **resolved** → [`writing.md`](writing.md) W1–W6 (semicolon abolished, colon for lists only); essay template **descoped** — W3/W4 already cover document scope; a fixed template would prescribe rhetoric | P2 |
 | 10 | Sociolinguistic & pragmatics | **drafted (minimal Option A)** → [`style.md`](style.md) S8–S9 (fixed politeness markers + plain speech-act templates); cultural mastery descoped | P2 |
 | 16 | Constructions surfaced by dogfooding | **resolved** — G3 for-test (tooling), G14, G15, G10 boundary | P2 |

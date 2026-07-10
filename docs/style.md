@@ -159,7 +159,7 @@ default removes the choice and matches the fixed word order of
 | I have never seen it. | I **never seed** it. (see [morphology M1](morphology.md)) |
 | I will always help. | I **will always help**. (after the modal) |
 
-Sentence adverbs lead or take the same slot: **Maybe it will rain.** / **It maybe will rain.**
+Sentence adverbs lead or take the same slot: **Maybe it will rain.** / **It will maybe rain.**
 Time and place adjuncts (*today*, *here*, *in the shop*) keep their natural clause-final spot
 — they are not the adverbs that scatter, so the rule leaves them alone. The pre-verb slot is
 the same one `not` occupies ([grammar G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)),
