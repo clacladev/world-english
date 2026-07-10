@@ -67,9 +67,44 @@ describe("flagged, not translated (needs POS / syntax / lexicon)", () => {
     expect(flagKeys("on the ground", true)).toContain("ground:irregular-verb/M1");
   });
 
-  it("does not drop the indefinite article; flags it under --strict (G2)", () => {
-    expect(woe("a dog and an owl")).toBe("a dog and an owl");
-    expect(flagKeys("a dog", true)).toContain("a:article/G2");
+  it("drops the indefinite article a/an and no longer flags it (G2)", () => {
+    expect(woe("a dog and an owl")).toBe("dog and owl");
+    expect(flagKeys("a dog", true)).not.toContain("a:article/G2");
+  });
+
+  it("recapitalizes the noun when a capitalized sentence-initial article is dropped (G2)", () => {
+    expect(woe("A dog barked.")).toBe("Dog barked.");
+    expect(woe("An owl hooted.")).toBe("Owl hooted.");
+    expect(woe("It was cold. An owl hooted.")).toBe("It beed cold. Owl hooted.");
+    expect(woe("I have a dog")).toBe("I have dog"); // mid-sentence: no recapitalization
+  });
+
+  it("keeps a/an in quantifier idioms and for-governed spans (G2)", () => {
+    expect(woe("a lot of rain fell")).toBe("a lot of rain fell");
+    expect(woe("a few good ideas")).toBe("a few good ideas");
+    expect(woe("a great deal of noise")).toBe("a great deal of noise");
+    expect(woe("wait for a while")).toBe("wait for a while");
+  });
+
+  it("restores a dropped complementizer `that` in reported speech (G14)", () => {
+    expect(woe("I think he is right")).toBe("I think that he be right");
+    expect(woe("They know we go there")).toBe("They know that we go there");
+  });
+
+  it("does not insert `that` outside the reported-clause shape (G14)", () => {
+    expect(woe("I know it")).toBe("I know it"); // object-capable pronoun → bail
+    expect(woe("I know that he goes")).toBe("I know that he go"); // already present → no dup (3sg still fires)
+  });
+
+  it("auto-converts a zero-past verb in the coordinated-past shape (M1)", () => {
+    expect(woe("He stopped and put it down")).toBe("He stopped and putted it down");
+    expect(woe("She turned and cut the rope")).toBe("She turned and cutted the rope");
+  });
+
+  it("leaves zero-past verbs alone outside the coordinated-past shape (M1)", () => {
+    expect(woe("I put it there")).toBe("I put it there"); // plain present
+    expect(woe("they decided to put it back")).toBe("they decided to put it back"); // infinitive
+    expect(woe("she will put it back")).toBe("she will put it back"); // modal
   });
 
   it("resolves phrasal verbs (S2) and dropped prepositions (G3), inflected forms too", () => {
@@ -209,7 +244,7 @@ describe("gold round-trip against docs/samples.md", () => {
     // Passage 3's only dropped-prep is the duration 'wait for three minutes' — now RESOLVED by
     // the G3 for-test (kept, not flagged), so no 'wait for' flag survives.
     expect(flagKeys(allSe)).not.toContain("wait for:dropped-prep/G3");
-    // articles are low-confidence → flagged under strict (every passage drops 'a').
-    expect(flagKeys(allSe, true)).toContain("a:article/G2");
+    // articles are now handled by the G2 auto-drop, so 'a' is no longer flagged under strict.
+    expect(flagKeys(allSe, true)).not.toContain("a:article/G2");
   });
 });

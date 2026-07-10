@@ -6,7 +6,7 @@
 import ngsl from "../data/ngsl.json" with { type: "json" };
 import irregularVerbs from "../data/irregular-verbs.json" with { type: "json" };
 import { loadCoreLexicon } from "./core-lexicon.ts";
-import { standardThirdPerson } from "./morphology.ts";
+import { standardThirdPerson, regularizeVerbPast } from "./morphology.ts";
 
 /**
  * The base-word whitelist the inverted 3sg base must hit before we convert. Union of the irregular
@@ -75,4 +75,130 @@ export function thirdPersonSDrop(
   const bases = invertThirdPerson(word).filter((b) => verbs.has(b));
   if (bases.length !== 1) return null; // unknown (0) or ambiguous (>1) → flag, don't guess
   return { base: bases[0]! };
+}
+
+// ── Indefinite article drop (docs/grammar.md G2) ──────────────────────────────────────────────
+// World English has ONE article, `the`; the indefinite `a`/`an` are dropped. This decides only
+// *whether* an article may be dropped — it fires whenever the article heads a following word (its
+// noun phrase), except a fixed quantifier idiom or a `for`-governed span where a bare noun reads
+// wrong. translate.ts owns the whitespace-gap check and any sentence-initial recapitalization.
+
+// Quantifier idioms where dropping the article reads wrong, matched on the token(s) after it.
+const QUANTIFIER_IDIOMS = new Set([
+  "lot", "few", "little", "bit", "couple", "half", "dozen", "number", "bunch",
+]);
+
+export function articleDrop(tokens: string[], i: number): boolean {
+  const word = tokens[i]!;
+  if (word !== "a" && word !== "an") return false;
+  const next = tokens[i + 1];
+  if (next === undefined) return false; // dangling article, nothing to head — leave it
+  if (QUANTIFIER_IDIOMS.has(next)) return false; // "a lot", "a few", …
+  if (next === "great" && tokens[i + 2] === "deal") return false; // "a great deal"
+  // Leave the article intact anywhere a preceding `for` governs it: a kept duration span keeps its
+  // article ("for a while", S5), and the object-`for` drop zone (G3) stays untouched — so the
+  // delicate for-handling in the phrase pass is never disturbed.
+  if (tokens[i - 1] === "for") return false;
+  return true;
+}
+
+// ── Dropped-`that` restoration (docs/grammar.md G14) ──────────────────────────────────────────
+// Content / reported clauses ALWAYS keep the complementizer `that`; standard English optionally
+// drops it. Restore it in the one unambiguous shape: a reporting/mental verb, an immediately
+// following NOMINATIVE-only subject pronoun, then a clause verb. `it`/`you` are excluded on
+// purpose (also object pronouns → too risky). Fires at the pronoun; bails on any uncertainty.
+
+// Reporting / mental-state verbs, base + inflected surface forms. Closed set.
+const REPORTING_VERBS = new Set([
+  "say", "says", "said",
+  "think", "thinks", "thought",
+  "know", "knows", "knew",
+  "hope", "hopes", "hoped",
+  "believe", "believes", "believed",
+  "feel", "feels", "felt",
+  "guess", "guesses", "guessed",
+  "suppose", "supposes", "supposed",
+  "mean", "means", "meant",
+  "agree", "agrees", "agreed",
+  "hear", "hears", "heard",
+  "notice", "notices", "noticed",
+  "realize", "realizes", "realized", "realise", "realises", "realised",
+  "understand", "understands", "understood",
+  "wish", "wishes", "wished",
+  "decide", "decides", "decided",
+  "remember", "remembers", "remembered",
+  "forget", "forgets", "forgot",
+  "expect", "expects", "expected",
+  "assume", "assumes", "assumed",
+  "doubt", "doubts", "doubted",
+  "admit", "admits", "admitted",
+  "claim", "claims", "claimed",
+  "reckon", "reckons", "reckoned",
+]);
+
+// Nominative-only subject pronouns (exclude it/you: also object pronouns → ambiguous).
+const THAT_SUBJECT_PRONOUNS = new Set(["he", "she", "they", "i", "we"]);
+
+// Be-forms, auxiliaries and modals that count as the clause verb but aren't in the verb whitelist.
+const CLAUSE_VERB_AUX = new Set([
+  "am", "is", "are", "was", "were", "be", "been", "being",
+  "do", "does", "did", "have", "has", "had",
+  "will", "would", "can", "could", "shall", "should", "may", "might", "must",
+]);
+
+/** Whether `token` reads as a clause verb — the precision guard that a real clause follows. */
+function isClauseVerb(token: string, verbs: Set<string>): boolean {
+  if (CLAUSE_VERB_AUX.has(token)) return true;
+  if (verbs.has(token)) return true;
+  if (invertThirdPerson(token).some((b) => verbs.has(b))) return true; // goes → go
+  if (token.endsWith("ed") && (verbs.has(token.slice(0, -2)) || verbs.has(token.slice(0, -1)))) {
+    return true; // walked → walk, liked → like
+  }
+  return false;
+}
+
+export function droppedThat(
+  tokens: string[],
+  i: number,
+  verbs: Set<string> = defaultVerbSet,
+): boolean {
+  if (i < 1) return false;
+  if (!THAT_SUBJECT_PRONOUNS.has(tokens[i]!)) return false;
+  if (!REPORTING_VERBS.has(tokens[i - 1]!)) return false; // reporting verb right before the pronoun
+  const clauseVerb = tokens[i + 1];
+  if (clauseVerb === undefined) return false; // nothing follows the pronoun
+  return isClauseVerb(clauseVerb, verbs); // confirm a verb follows; bail if unsure
+}
+
+// ── Coordinated zero-past auto-convert (docs/morphology.md M1) ─────────────────────────────────
+// Zero-past verbs (SE past spelled like the base) are omitted from the dataset — blanket-flagging
+// floods false positives. Convert one to its regular WoE past ONLY in the unambiguous coordinated
+// shape `[past verb] [and|then|but] [zero-past verb]`, where the conjunct verb is clearly past
+// (ends in -ed, or a common irregular past). Bails everywhere else; near-zero false positives.
+
+const ZERO_PAST = new Set([
+  "cost", "put", "hit", "cut", "set", "let", "read", "shut", "cast",
+  "spread", "burst", "hurt", "bet", "quit", "split", "bid",
+]);
+const PAST_COORDINATORS = new Set(["and", "then", "but"]);
+// A few common irregular pasts, so the conjunct verb needn't be a regular -ed past.
+const COMMON_IRREGULAR_PASTS = new Set([
+  "went", "came", "took", "saw", "got", "made", "gave", "told", "found", "ran",
+]);
+// The whole shape must open with a subject pronoun (see the guard below).
+const ZERO_PAST_SUBJECTS = new Set(["i", "you", "he", "she", "it", "we", "they"]);
+
+export function zeroPastConvert(tokens: string[], i: number): { past: string } | null {
+  if (i < 3) return null;
+  if (!ZERO_PAST.has(tokens[i]!)) return null;
+  if (!PAST_COORDINATORS.has(tokens[i - 1]!)) return null; // only the coordinated shape
+  const conjunct = tokens[i - 2]!;
+  if (!conjunct.endsWith("ed") && !COMMON_IRREGULAR_PASTS.has(conjunct)) return null; // conjunct past?
+  // The conjunct must sit DIRECTLY after a subject pronoun (`she stopped and put …`). That forces
+  // a finite past reading of both verbs and structurally rules out the killer false positive: an
+  // `-ed` deverbal ADJECTIVE in predicate or attributive position (`he was tired and hurt`, `the
+  // red and cut flowers`), which no surface test can tell from a real past. Low recall, but the
+  // conversions it does make are unambiguous — the bar this module sets for itself.
+  if (!ZERO_PAST_SUBJECTS.has(tokens[i - 3]!)) return null;
+  return { past: regularizeVerbPast(tokens[i]!) };
 }

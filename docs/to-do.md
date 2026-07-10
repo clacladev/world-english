@@ -51,11 +51,12 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
    (source of truth); [`vocabulary.md`](vocabulary.md) is its schema doc, representative
    highlights, and a test-checked coverage statement. A full pass over the
    [NGSL 1.2](https://www.newgeneralservicelist.com/) frequency spine (2,809 word families, six
-   ~500-word bands) is done — 35 dropped-preposition rulings, 53 phrasal verbs, 44 risky senses,
-   49 collocations, and 27 register defaults, plus the 2-row false-friends seed. It is a first
-   pass, not exhaustive: only clear, low-collision-risk cases earned a row (see
-   [`tools/README.md`](../tools/README.md#the-core-lexicon-item-8) for the criteria); growth continues
-   opportunistically. G3 and S2 are wired into both translators (items 11/12); S3/S6 stay
+   ~500-word bands) is done, plus opportunistic growth on top — 37 dropped-preposition rulings,
+   56 phrasal verbs, 44 risky senses, 52 collocations, and 27 register defaults, plus the 2-row
+   false-friends seed. It is a first pass, not exhaustive: only clear, low-collision-risk cases
+   earned a row (see [`tools/README.md`](../tools/README.md#the-core-lexicon-item-8) for the
+   criteria); growth continues opportunistically (the latest pass also filled the `say`/`said`
+   and `lay`/`laid` irregular-verb gaps). G3 and S2 are wired into both translators (items 11/12); S3/S6 stay
    doc-only by design (applying them needs word-sense disambiguation the tools don't have).
 
 11. **SE→WoE translator + linter — the consistency checker.** A tool that applies the
@@ -75,18 +76,24 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
     (articles, third-person `-s`, modals, homographs) are gated behind `--strict`.
     **The SE→WoE forward translator is now built too** (`../tools/translate.ts`, `bun run
     translate`): it applies the *deterministic* closed-class transforms (spelling, `be`,
-    pronouns, comparatives, and the non-homograph irregular verbs/plurals) and **flags** — never
-    guesses — the POS/syntax-dependent cases (article drop, third-person `-s`, zero-past verbs).
-    It reuses the linter's dataset as the forward map and is regression-tested against the four
-    `samples.md` gold passages. **Now that the core lexicon (item 8) exists, the
+    pronouns, comparatives, and the non-homograph irregular verbs/plurals), plus a set of
+    **conservative, low-recall POS detectors** (`src/pos.ts`) that each fire only on one
+    unambiguous shape and bail otherwise — indefinite-article drop (`a`/`an`), third-person `-s`
+    drop after a `he`/`she`/`it` subject (M3), dropped-`that` restoration after a reporting verb
+    + nominative pronoun (G14), and coordinated zero-past (M1) — and **flags** — never guesses —
+    everything outside those shapes (generic-`the` → bare plural, separated phrasals,
+    non-coordinated zero-past). It reuses the linter's dataset as the forward map and is
+    regression-tested against the eight `samples.md` gold passages. **Now that the core lexicon (item 8) exists, the
     lexicon-dependent half is wired too**: G3 dropped prepositions and S2 phrasal verbs are
     applied — inflected forms included (*gave up* → *quitted*, *listens to* → *listens*) — via
     `src/core-lexicon.ts`'s `buildPhraseTransforms()`. Dropped `for` (`wait for`, `hope for`)
     is now handled by the **G3 for-test** (item 16, resolved): the not-duration guard
     (`isDurationFor`) drops the object-*for* (*wait the bus*) but keeps the duration-*for*
     (*wait for three minutes*), competing cleanly with the duration `for` of
-    [S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect). Article
-    drop by syntax is still out of scope (needs a parser, not a lexicon).
+    [S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect). Indefinite-
+    article drop (`a`/`an` → ∅) is now handled by the conservative `articleDrop` detector (it
+    keeps quantifier idioms like *a few* and any article after `for`, so the duration spans
+    survive); only the *generic-`the`* → bare-plural case still needs semantics and stays flagged.
     Acceptance criteria per [README methodology step 5](../README.md#methodology): a rule is
     "done" only when it is
     statable without a hidden word list, `samples.md` stays consistent, and the example
@@ -266,7 +273,10 @@ kept here for the record.
     - **Reported speech / content clauses.** ✅ **Done** —
       [G14](grammar.md#rule-g14--content-clauses-and-reported-speech): complementizer *that* is
       always kept (unified with G11's relative *that*), no backshift, natural tense per G1.
-      Doc-only (the translator does not insert a dropped *that* — that needs a parser).
+      The forward translator now **restores** a dropped *that* in the one unambiguous shape —
+      reporting verb + nominative pronoun (`he`/`she`/`they`/`I`/`we`) + clause verb — via the
+      conservative `droppedThat` detector (`src/pos.ts`); the ambiguous `it`/`you` subjects and
+      every other shape stay untouched.
     - **The *of*-genitive vs. G10 *'s*.** ✅ **Done** —
       [G10](grammar.md#rule-g10--noun-possessive) draws the boundary: `'s` for genuine
       possession, *of* for relational / part-whole / fixed superlative frames (*trip of hims

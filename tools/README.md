@@ -299,20 +299,31 @@ word. Re-run `bun test`.
 ## Limitations (by design)
 
 - **Detection needs a closed spelling.** Zero-past verbs and zero-plurals whose form equals a
-  valid World-English word are not detectable without parsing, and are omitted.
+  valid World-English word are not detectable by the *linter/dataset* without parsing, so they
+  are omitted from `irregular-verbs.json`. The *forward translator* does convert a zero-past
+  verb in the one unambiguous shape — a subject pronoun, a past verb, a coordinator, then the
+  zero-past verb (`she stopped and put it down` → `she stopped and putted it down`) — via a
+  hardcoded closed list in `src/pos.ts`. The subject-pronoun anchor is what keeps `-ed`
+  adjectives out (`he was tired and hurt`, `the red and cut flowers` are left untouched); every
+  other occurrence is left alone.
 - **Only World-English *columns* and sample blockquotes are scanned**, not arbitrary prose
   (which legitimately names abolished forms when explaining them). `--strict` additionally
   reads bolded forms in `**Examples.**` prose.
-- **The forward translator is deterministic-only.** It does not tag part-of-speech or parse
-  syntax, so it leaves — and flags — article drops, third-person `-s`, and zero-past verbs
-  (`cost`→`costed`, undetectable without POS). It also can only convert forms the dataset or
-  lexicon actually carry: a standard irregular the dataset is missing (e.g. `said`, not yet in
-  `irregular-verbs.json`), or a phrasal/dropped-prep pair the sweep hasn't reached, passes through
-  untouched. `wait for` is a deliberate exception even though it's in the lexicon — see
+- **The forward translator applies only high-precision transforms.** It has no full POS tagger
+  or parser; beyond the deterministic closed-class substitutions it adds a few **conservative,
+  low-recall** syntactic detectors (`src/pos.ts`), each firing only on one unambiguous shape and
+  bailing to "leave it alone" everywhere else: indefinite-article drop (`a`/`an` → ∅, keeping
+  quantifier idioms and the duration-`for` span), third-person `-s` drop after a `he`/`she`/`it`
+  subject (M3), dropped-`that` restoration after a reporting verb + nominative pronoun (G14), and
+  the coordinated zero-past above (M1). Cases outside those shapes stay flagged/untouched:
+  generic-`the` → bare plural (needs semantics), separated phrasals (`give it up`), and any
+  non-coordinated zero-past. It also can only convert forms the dataset or lexicon actually
+  carry: a phrasal/dropped-prep pair the sweep hasn't reached passes through untouched. `wait
+  for` is a deliberate exception even though it's in the lexicon — see
   [above](#the-core-lexicon-item-8).
 - **The reverse translator restores what the dataset and lexicon carry, and only that.** A
-  dropped preposition not in the lexicon's `droppedPreps`, or a form outside the dataset (e.g.
-  `said`), is left untouched. Phrasal verbs are never restored (their plain replacements are
+  dropped preposition not in the lexicon's `droppedPreps`, or a form outside the dataset, is
+  left untouched. Phrasal verbs are never restored (their plain replacements are
   themselves valid standard English). The deliberate collapses (`be`, possessives, verb
   past/participle, and G3's re-inserted prepositions) are restored to a canonical default and
   flagged, never silently guessed.

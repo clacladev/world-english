@@ -1,5 +1,5 @@
 import { describe, expect, it } from "bun:test";
-import { thirdPersonSDrop } from "../src/pos.ts";
+import { thirdPersonSDrop, articleDrop, droppedThat, zeroPastConvert } from "../src/pos.ts";
 
 // Detector-in-isolation tests. It works on lowercased word tokens + the verb's index; a hit
 // returns the base to emit, a miss returns null (→ the form stays flagged elsewhere).
@@ -44,5 +44,74 @@ describe("thirdPersonSDrop", () => {
     expect(detect("give it names", 2)).toBeNull();
     // but a clause-starter or sentence start makes `it` a subject again
     expect(detect("and it works", 2)).toEqual({ base: "work" });
+  });
+});
+
+describe("articleDrop (G2)", () => {
+  it("drops a/an heading a following word", () => {
+    expect(articleDrop(["a", "dog"], 0)).toBe(true);
+    expect(articleDrop(["an", "owl"], 0)).toBe(true);
+  });
+
+  it("keeps a/an in fixed quantifier idioms", () => {
+    expect(articleDrop(["a", "lot"], 0)).toBe(false);
+    expect(articleDrop(["a", "few"], 0)).toBe(false);
+    expect(articleDrop(["a", "great", "deal"], 0)).toBe(false);
+  });
+
+  it("keeps a dangling article with nothing to head", () => {
+    expect(articleDrop(["a"], 0)).toBe(false);
+  });
+
+  it("keeps the article when a preceding `for` governs it", () => {
+    expect(articleDrop(["for", "a", "while"], 1)).toBe(false);
+    expect(articleDrop(["hope", "for", "a", "year"], 2)).toBe(false);
+  });
+});
+
+describe("droppedThat (G14)", () => {
+  it("fires on reporting verb + nominative pronoun + clause verb", () => {
+    expect(droppedThat(["i", "think", "he", "is", "right"], 2)).toBe(true);
+    expect(droppedThat(["they", "know", "we", "go", "there"], 2)).toBe(true);
+  });
+
+  it("bails on object-capable pronouns it/you", () => {
+    expect(droppedThat(["i", "know", "it"], 2)).toBe(false);
+    expect(droppedThat(["i", "know", "you", "well"], 2)).toBe(false);
+  });
+
+  it("bails when `that` is already present or no verb follows", () => {
+    expect(droppedThat(["i", "think", "that", "he", "is"], 3)).toBe(false); // preceded by `that`
+    expect(droppedThat(["i", "think", "he"], 2)).toBe(false); // nothing follows the pronoun
+  });
+
+  it("bails when the preceding word is not a reporting verb", () => {
+    expect(droppedThat(["i", "saw", "he", "left"], 2)).toBe(false);
+  });
+});
+
+describe("zeroPastConvert (M1)", () => {
+  it("converts in the coordinated past shape (subject pronoun + past verb + conjunction)", () => {
+    expect(zeroPastConvert(["she", "stopped", "and", "put"], 3)).toEqual({ past: "putted" });
+    expect(zeroPastConvert(["they", "turned", "and", "cut"], 3)).toEqual({ past: "cutted" });
+    expect(zeroPastConvert(["he", "went", "then", "read"], 3)).toEqual({ past: "readed" });
+  });
+
+  it("bails on the infinitive and modal shapes", () => {
+    expect(zeroPastConvert(["he", "decided", "to", "put"], 3)).toBeNull();
+    expect(zeroPastConvert(["i", "will", "put"], 2)).toBeNull();
+  });
+
+  it("bails when the conjunct verb is not clearly past", () => {
+    expect(zeroPastConvert(["they", "stop", "and", "put"], 3)).toBeNull();
+    expect(zeroPastConvert(["i", "put", "it", "there"], 1)).toBeNull();
+  });
+
+  it("bails on an -ed ADJECTIVE conjunct — no subject pronoun opens the shape", () => {
+    // "he was tired and hurt": `tired` is a predicate adjective, not a past verb; `was` (not a
+    // subject pronoun) sits before it, so the shape does not fire.
+    expect(zeroPastConvert(["he", "was", "tired", "and", "hurt"], 4)).toBeNull();
+    // "the red and cut flowers": attributive adjectives, `the` before the conjunct → no fire.
+    expect(zeroPastConvert(["the", "red", "and", "cut", "flowers"], 3)).toBeNull();
   });
 });

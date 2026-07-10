@@ -36,7 +36,9 @@
     { "verb": "disagree", "prep": "with", "ruling": "drop", "rank": 2503 },
     { "verb": "resign", "prep": "from", "ruling": "drop", "rank": 2566 },
     { "verb": "gaze", "prep": "at", "ruling": "drop", "rank": 2772, "note": "gaze has no competing transitive sense, same pattern as look/listen" },
-    { "verb": "hint", "prep": "at", "ruling": "drop", "rank": 2689 }
+    { "verb": "hint", "prep": "at", "ruling": "drop", "rank": 2689 },
+    { "verb": "consist", "prep": "of", "ruling": "drop", "rank": 1547, "note": "consist is intransitive-only and always takes 'of' — no competing transitive sense, so the drop is unambiguous" },
+    { "verb": "stare", "prep": "at", "ruling": "drop", "rank": 2106, "note": "stare has no competing transitive sense, same pattern as gaze/look/listen" }
   ],
 
   "phrasalVerbs": [
@@ -92,7 +94,10 @@
     { "phrasal": "cancel out", "plain": "neutralize", "rank": 2390 },
     { "phrasal": "wipe out", "plain": "eliminate", "rank": 2770 },
     { "phrasal": "stir up", "plain": "provoke", "rank": 2740 },
-    { "phrasal": "filter out", "plain": "remove", "rank": 2719 }
+    { "phrasal": "filter out", "plain": "remove", "rank": 2719 },
+    { "phrasal": "call off", "plain": "cancel", "rank": 105, "note": "single clear sense (cancel an event); the literal 'call' senses don't take the 'off' particle" },
+    { "phrasal": "bring about", "plain": "cause", "alternates": ["produce"], "rank": 196, "note": "the causation sense (bring about change); unambiguous, no competing 'bring about' reading in this register" },
+    { "phrasal": "rule out", "plain": "exclude", "rank": 415, "note": "single clear sense (exclude a possibility); distinct from the govern/draw-a-line senses of plain 'rule'" }
   ],
 
   "sensePreferences": [
@@ -191,7 +196,10 @@
     { "standard": "curious about science", "woe": "curious about science", "ruling": "keep", "rank": 2543, "note": "adjective-selected preposition — G3 boundary, see 'good at math'" },
     { "standard": "anxious about the exam", "woe": "anxious about the exam", "ruling": "keep", "rank": 2666, "note": "adjective-selected preposition — G3 boundary, see 'good at math'" },
     { "standard": "distinct from the others", "woe": "distinct from the others", "ruling": "keep", "rank": 2572, "note": "adjective-selected preposition — G3 boundary, see 'good at math'" },
-    { "standard": "take a leap", "woe": "leap", "ruling": "replace", "rank": 2730 }
+    { "standard": "take a leap", "woe": "leap", "ruling": "replace", "rank": 2730 },
+    { "standard": "make a choice", "woe": "choose", "ruling": "replace", "rank": 565, "note": "light-verb construction (make+noun) simplified to the plain verb, same pattern as 'make a decision'" },
+    { "standard": "make a promise", "woe": "promise", "ruling": "replace", "rank": 829 },
+    { "standard": "make a suggestion", "woe": "suggest", "ruling": "replace", "rank": 1284 }
   ],
 
   "falseFriends": [
