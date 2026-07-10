@@ -85,4 +85,18 @@ describe("lexicon validation — authored IPA agrees with the engine", () => {
     // Every advisory divergence is reduction-only — no surprises.
     expect(reductions.length).toBe(divergences.length);
   });
+
+  it("compares by phonemic segment, not codepoint count (#103)", () => {
+    // A synthetic entry whose unstressed syllable's diphthong (2 codepoints, "oʊ") reduces to a
+    // single-codepoint schwa in the authored IPA — same segment count, so this is a reduction,
+    // not a length-mismatch false positive.
+    const synthetic = {
+      entries: new Map([
+        ["fauxword", [{ word: "fauxword", respelling: "FOK-soh", ipa: "ˈfɑksə" }]],
+      ]),
+    };
+    const result = validateLexicon(synthetic);
+    expect(result).toHaveLength(1);
+    expect(result[0]?.kind).toBe("reduction");
+  });
 });

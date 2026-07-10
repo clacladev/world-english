@@ -50,6 +50,13 @@ describe("planted-bug detection (the point-4 class of mistake)", () => {
     expect(classesFor("listen to music")).toContain("listen to:dropped-prep/G3");
   });
 
+  it("flags inflected phrasal/dropped-prep forms too, not just the base (#70)", () => {
+    expect(classesFor("she listened to the radio")).toContain("listened to:dropped-prep/G3");
+    expect(classesFor("he listens to music")).toContain("listens to:dropped-prep/G3");
+    expect(classesFor("she gave up yesterday")).toContain("gave up:phrasal-verb/S2");
+    expect(classesFor("he finds out the truth")).toContain("finds out:phrasal-verb/S2");
+  });
+
   it("flags the object `wait for` but NOT the kept duration `wait for` (G3 for-test)", () => {
     expect(classesFor("wait for the bus")).toContain("wait for:dropped-prep/G3");
     expect(classesFor("wait for three minutes")).not.toContain("wait for:dropped-prep/G3");
@@ -61,6 +68,24 @@ describe("planted-bug detection (the point-4 class of mistake)", () => {
     expect(f?.expected).toBe("seed");
     const p = scan("the children").find((x) => x.found === "children");
     expect(p?.expected).toBe("childs");
+  });
+});
+
+describe("possessive of an irregular plural (#71)", () => {
+  it("flags 'women's'/'children's' style possessives, suggesting the regularized-plural form", () => {
+    expect(classesFor("the women's shoes")).toContain("women's:irregular-plural-possessive/G10");
+    const f = scan("the children's toys").find((x) => x.found === "children's");
+    expect(f?.expected).toBe("childs'");
+  });
+});
+
+describe("sentence-boundary precision (#73)", () => {
+  it("does not match a phrase across a sentence-ending period", () => {
+    expect(classesFor("They give. Up the hill be the house.")).not.toContain("give up:phrasal-verb/S2");
+  });
+
+  it("still matches the phrase within a single sentence", () => {
+    expect(classesFor("They give up the house.")).toContain("give up:phrasal-verb/S2");
   });
 });
 
@@ -90,6 +115,24 @@ describe("confidence gating", () => {
   it("treats homograph verb pasts as low confidence (the noun 'ground')", () => {
     expect(classesFor("on the ground")).toEqual([]);
     expect(classesFor("on the ground", { strict: true })).toContain("ground:irregular-verb/M1");
+  });
+});
+
+describe("contractions are flagged (#69)", () => {
+  it("flags be-form, do-support, and modal contractions", () => {
+    expect(classesFor("she wasn't here")).toContain("wasn't:contraction/M2");
+    expect(classesFor("they didn't go")).toContain("didn't:contraction/G6");
+    expect(classesFor("he couldn't see")).toContain("couldn't:contraction/G7");
+    expect(classesFor("I don't know")).toContain("don't:contraction/G6");
+  });
+});
+
+describe("closed-class words with no valid WoE reading (#72)", () => {
+  it("flags did/does/goes/has by default — no context can make these valid WoE", () => {
+    expect(classesFor("she did it")).toContain("did:do-support/G6");
+    expect(classesFor("the plan does work")).toContain("does:third-person-s/M3");
+    expect(classesFor("she goes home")).toContain("goes:third-person-s/M3");
+    expect(classesFor("it has value")).toContain("has:third-person-s/M3");
   });
 });
 

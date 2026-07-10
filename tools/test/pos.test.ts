@@ -67,6 +67,22 @@ describe("articleDrop (G2)", () => {
     expect(articleDrop(["for", "a", "while"], 1)).toBe(false);
     expect(articleDrop(["hope", "for", "a", "year"], 2)).toBe(false);
   });
+
+  it("keeps a magnitude word ('a hundred/thousand') — that's not the indefinite article (#62)", () => {
+    expect(articleDrop(["a", "hundred", "dollars"], 0)).toBe(false);
+    expect(articleDrop(["a", "thousand", "years"], 0)).toBe(false);
+  });
+
+  it("keeps distributive 'a' in a frequency expression (#62)", () => {
+    expect(articleDrop(["once", "a", "week"], 1)).toBe(false);
+    expect(articleDrop(["twice", "a", "day"], 1)).toBe(false);
+  });
+
+  it("keeps a capitalized standalone letter label mid-sentence (#62)", () => {
+    expect(articleDrop(["vitamin", "a", "deficiency"], 1, { rawWord: "A", sentenceInitial: false })).toBe(false);
+    // sentence-initial capitalized article still drops as usual
+    expect(articleDrop(["a", "dog", "barked"], 0, { rawWord: "A", sentenceInitial: true })).toBe(true);
+  });
 });
 
 describe("droppedThat (G14)", () => {

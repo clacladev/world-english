@@ -88,13 +88,38 @@ const QUANTIFIER_IDIOMS = new Set([
   "lot", "few", "little", "bit", "couple", "half", "dozen", "number", "bunch",
 ]);
 
-export function articleDrop(tokens: string[], i: number): boolean {
+// "a hundred/thousand/million" = "one hundred" (a magnitude word, not the indefinite article).
+const MAGNITUDE_WORDS = new Set(["hundred", "thousand", "million", "billion"]);
+
+// Distributive "a" in a frequency expression ("once a week", "twice a day", "$5 a pound") reads a
+// time/rate unit as "per", not as the indefinite article — only when a frequency/rate cue
+// immediately precedes the article.
+const FREQUENCY_TRIGGERS = new Set(["once", "twice", "per"]);
+const FREQUENCY_UNITS = new Set([
+  "second", "minute", "hour", "day", "week", "month", "year", "night", "morning", "pound",
+  "dozen", "person", "head", "time",
+]);
+
+export interface ArticleDropOptions {
+  /** The token's original-case surface form (translate.ts owns casing; tokens here are lowercased). */
+  rawWord?: string;
+  /** Whether the article begins a sentence (a genuinely capitalized "A dog barked" is fine). */
+  sentenceInitial?: boolean;
+}
+
+export function articleDrop(tokens: string[], i: number, opts: ArticleDropOptions = {}): boolean {
   const word = tokens[i]!;
   if (word !== "a" && word !== "an") return false;
+  // A standalone capitalized letter label ("Vitamin A deficiency") is not the indefinite article
+  // — a genuine mid-sentence article is essentially never capitalized, so a capital "A" that
+  // isn't sentence-initial reads as a label, not a determiner.
+  if (opts.rawWord === "A" && !opts.sentenceInitial) return false;
   const next = tokens[i + 1];
   if (next === undefined) return false; // dangling article, nothing to head — leave it
   if (QUANTIFIER_IDIOMS.has(next)) return false; // "a lot", "a few", …
   if (next === "great" && tokens[i + 2] === "deal") return false; // "a great deal"
+  if (MAGNITUDE_WORDS.has(next)) return false; // "a hundred dollars" (= "one hundred")
+  if (FREQUENCY_TRIGGERS.has(tokens[i - 1] ?? "") && FREQUENCY_UNITS.has(next)) return false; // "once a week"
   // Leave the article intact anywhere a preceding `for` governs it: a kept duration span keeps its
   // article ("for a while", S5), and the object-`for` drop zone (G3) stays untouched — so the
   // delicate for-handling in the phrase pass is never disturbed.

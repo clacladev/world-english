@@ -26,6 +26,7 @@ import { buildPrepRestorations } from "./core-lexicon.ts";
 import abolishedForms from "../data/abolished-forms.json" with { type: "json" };
 import irregularVerbs from "../data/irregular-verbs.json" with { type: "json" };
 import irregularPlurals from "../data/irregular-plurals.json" with { type: "json" };
+import { WORD, matchCase, tokenizeLine } from "./text-utils.ts";
 
 export interface ReverseEntry {
   /** The standard-English form to restore. */
@@ -72,8 +73,6 @@ const CANONICAL_LOSSY: Record<string, { restore: string; class: string; rule: st
   yous: { restore: "your", class: "pronoun", rule: "G4", note: "your/yours collapsed to `yous`" },
   thems: { restore: "their", class: "pronoun", rule: "G4", note: "their/theirs collapsed to `thems`" },
 };
-
-const WORD = /[A-Za-z]+(?:['’][A-Za-z]+)?/g;
 
 function confidenceHigh(e: { confidence?: string; homograph?: boolean }): boolean {
   return (e.confidence ?? (e.homograph ? "low" : "high")) === "high";
@@ -140,28 +139,6 @@ export function buildReverseMap(): Map<string, ReverseEntry> {
 const reverseMap = buildReverseMap();
 const prepRestorations = buildPrepRestorations();
 
-/** Re-apply the source token's casing to its replacement (goed→went, Goed→Went, HIMS→HIS). */
-function matchCase(source: string, restore: string): string {
-  if (source === source.toLowerCase()) return restore;
-  if (source.length > 1 && source === source.toUpperCase()) return restore.toUpperCase();
-  if (source[0] === source[0]!.toUpperCase()) return restore[0]!.toUpperCase() + restore.slice(1);
-  return restore;
-}
-
-interface LineToken {
-  word: string;
-  start: number;
-  end: number;
-}
-
-function tokenizeLine(line: string): LineToken[] {
-  return [...line.matchAll(WORD)].map((m) => ({
-    word: m[0],
-    start: m.index,
-    end: m.index + m[0].length,
-  }));
-}
-
 /**
  * Words after which a restored G3 drop-verb should NOT get its preposition re-inserted: the next
  * token already reads as a preposition, conjunction/subordinator, or a common place/time/degree
@@ -183,6 +160,27 @@ const PREP_INSERTION_STOPLIST = new Set([
   "still", "always", "never", "often", "sometimes", "usually", "again", "ago", "away", "back",
   "forward", "forth", "outside", "inside", "everywhere", "somewhere", "anywhere", "nowhere",
   "abroad", "home", "very", "too", "quite", "rather", "almost", "enough",
+  // common predicate adjectives: "she looks tired" (copular reading) is not "look at" (#65) — a
+  // drop-ruling verb followed directly by one of these reads as a linking verb, not the
+  // preposition-dropping transitive sense.
+  "tired", "happy", "sad", "good", "bad", "fine", "well", "sick", "upset", "angry", "worried",
+  "nice", "great", "terrible", "awful", "better", "worse", "different", "similar", "familiar",
+  "strange", "young", "old", "cold", "hot", "warm", "ready", "sure", "certain", "afraid",
+  "proud", "ashamed", "glad", "pleased", "excited", "confused", "calm", "quiet", "busy",
+]);
+
+// A determiner immediately before the candidate token signals a NOUN reading ("the look was
+// cold"), not a finite drop-ruling verb — #65.
+const PRECEDING_NOUN_SIGNAL = new Set([
+  "the", "a", "an", "this", "that", "these", "those", "my", "his", "her", "its", "our", "your",
+  "their", "mes", "hims", "uss", "yous", "thems", "some", "any", "no", "every", "each",
+]);
+
+// A determiner-headed quantifier idiom ("a lot", "a few", "a bit") right after the verb is an
+// adverbial, not the verb's object — inserting a preposition before it misparses "talks a lot" as
+// "talks to a lot" (#65).
+const QUANTIFIER_IDIOM_NOUNS = new Set([
+  "lot", "few", "little", "bit", "couple", "half", "dozen", "number", "bunch", "whole",
 ]);
 
 function stopsInsertion(word: string): boolean {
@@ -237,11 +235,21 @@ function restorePreps(line: string, lineNo: number, file: string, flags: Reverse
 
     const restoration = prepRestorations.get(tok.word.toLowerCase());
     if (!restoration) continue;
+    // A determiner right before the token signals a noun reading ("the look was cold"), not a
+    // finite drop-ruling verb (#65) — bail before even considering the next token.
+    const prev = tokens[i - 1];
+    if (prev && PRECEDING_NOUN_SIGNAL.has(prev.word.toLowerCase())) continue;
     const next = tokens[i + 1];
     if (!next) continue; // no next token — e.g. end of sentence
     const gap = line.slice(tok.end, next.start);
     if (!/^\s*$/.test(gap)) continue; // punctuation intervenes — e.g. "Wait, the bus…"
     if (stopsInsertion(next.word)) continue;
+    // A quantifier idiom ("a lot", "a few") right after the verb is adverbial, not an object —
+    // "talks a lot" is not "talks to a lot" (#65).
+    if (["a", "an"].includes(next.word.toLowerCase())) {
+      const afterDet = tokens[i + 2];
+      if (afterDet && QUANTIFIER_IDIOM_NOUNS.has(afterDet.word.toLowerCase())) continue;
+    }
 
     out += ` ${restoration.prep}`;
     flags.push({

@@ -21,10 +21,16 @@
 // bus`), duration-`for` is kept (`wait for three minutes`).
 
 import { loadDataset, type Dataset } from "./dataset.ts";
-import { buildPhraseTransforms, isDurationFor, type PhraseTransform } from "./core-lexicon.ts";
+import {
+  buildPhraseTransforms,
+  isDurationFor,
+  type CoreLexicon,
+  type PhraseTransform,
+} from "./core-lexicon.ts";
 import { thirdPersonSDrop, articleDrop, droppedThat, zeroPastConvert } from "./pos.ts";
 import { scanSpan, type Finding } from "./scan.ts";
 import type { Span } from "./extract.ts";
+import { matchCase, tokenizeLine } from "./text-utils.ts";
 
 const defaultDataset = loadDataset();
 const defaultPhraseTransforms = buildPhraseTransforms();
@@ -37,6 +43,13 @@ export interface TranslateOptions {
   file?: string;
   /** Override the dataset (mainly for tests). */
   dataset?: Dataset;
+  /**
+   * Override the core lexicon that phrase transforms (dropped prepositions, phrasal verbs) are
+   * built from (mainly for tests). Without this, phrase transforms always come from the
+   * module-level default lexicon even when `dataset` is overridden (#63) — pass both together for
+   * full isolation.
+   */
+  lexicon?: CoreLexicon;
 }
 
 export interface TranslateResult {
@@ -45,8 +58,6 @@ export interface TranslateResult {
   /** Standard forms the translator declined to convert (needs POS/syntax/lexicon). */
   flags: Finding[];
 }
-
-const WORD = /[A-Za-z]+(?:['’][A-Za-z]+)?/g;
 
 // Unambiguous past-time signal words (#59): when one of these appears anywhere on the line, a
 // zero-past phrasal head (set/put/cut/shut/quit/split up, …) is read as past tense rather than
@@ -86,14 +97,6 @@ export function buildForwardMap(dataset: Dataset = defaultDataset): Map<string, 
   return map;
 }
 
-/** Re-apply the source token's casing to its replacement (my→mes, My→Mes, THROUGH→THRU). */
-function matchCase(source: string, woe: string): string {
-  if (source === source.toLowerCase()) return woe;
-  if (source.length > 1 && source === source.toUpperCase()) return woe.toUpperCase();
-  if (source[0] === source[0]!.toUpperCase()) return woe[0]!.toUpperCase() + woe.slice(1);
-  return woe;
-}
-
 /** Uppercase the first alphabetic character — used when a dropped sentence-initial article's noun
  * becomes the new leading word (G2). */
 function capitalizeFirst(s: string): string {
@@ -109,20 +112,6 @@ function isSentenceInitial(line: string, pos: number): boolean {
   while (j >= 0 && /\s/.test(line[j]!)) j--;
   if (j < 0) return true;
   return ".!?\"'“‘(".includes(line[j]!);
-}
-
-interface LineToken {
-  word: string;
-  start: number;
-  end: number;
-}
-
-function tokenizeLine(line: string): LineToken[] {
-  return [...line.matchAll(WORD)].map((m) => ({
-    word: m[0],
-    start: m.index,
-    end: m.index + m[0].length,
-  }));
 }
 
 /** Phrase transforms grouped by their first token (lowercased), longest-first within a group. */
@@ -165,8 +154,12 @@ function substituteLine(
     out += line.slice(last, tok.start);
 
     // Dropped-`that` restoration (G14): insert the complementizer before a reported-clause pronoun,
-    // then let the pronoun itself be processed normally below.
-    if (droppedThat(lowerWords, i)) out += "that ";
+    // then let the pronoun itself be processed normally below. Bail if punctuation (a comma, a
+    // quotation mark) intervenes between the reporting verb and the pronoun — a direct quotation
+    // ('He said "I am here."') or a comma-set-off aside ('As I said, he will come') is not the
+    // reported-clause shape this restorer targets (#57).
+    const gapBeforePronoun = i > 0 ? line.slice(tokens[i - 1]!.end, tok.start) : "";
+    if (/^\s*$/.test(gapBeforePronoun) && droppedThat(lowerWords, i)) out += "that ";
 
     const candidates = phraseByFirst.get(tok.word.toLowerCase()) ?? [];
     const match = candidates.find((t) => {
@@ -176,6 +169,12 @@ function substituteLine(
         if (tokens[i + j]!.word.toLowerCase() !== t.tokens[j]) return false;
         const gap = line.slice(tokens[i + j - 1]!.end, tokens[i + j]!.start);
         if (!/^\s*$/.test(gap)) return false; // punctuation breaks a phrase
+      }
+      // A blocked-next word (e.g. "run out **of** milk", #58) signals the other reading the
+      // machine replacement doesn't cover — leave it untranslated instead of firing.
+      if (t.blockedNext) {
+        const next = tokens[i + n];
+        if (next && t.blockedNext.includes(next.word.toLowerCase())) return false;
       }
       return true;
     });
@@ -206,7 +205,7 @@ function substituteLine(
     // Indefinite article drop (G2): drop `a`/`an` heading a whitespace-adjacent noun phrase; a
     // capitalized sentence-initial article recapitalizes the now-leading word. The dropped form is
     // added to handledPhrases so collectFlags no longer emits its low-confidence G2 flag.
-    if (articleDrop(lowerWords, i)) {
+    if (articleDrop(lowerWords, i, { rawWord: tok.word, sentenceInitial: isSentenceInitial(line, tok.start) })) {
       const nextTok = tokens[i + 1]!;
       if (/^\s*$/.test(line.slice(tok.end, nextTok.start))) {
         handledPhrases.add(lowerWords[i]!);
@@ -254,21 +253,27 @@ function substituteLine(
  * Everything the scanner finds in the *input* that we did NOT translate. The scanner already
  * matches standard forms (and, under strict, the low-confidence and multi-word classes), so the
  * flags are exactly its findings minus the handled single-word and phrase substitutions.
+ *
+ * `handledPhrases` is one Set *per line* (#61) — a form handled on one line must not suppress the
+ * flag for an unhandled occurrence of the same surface form on another line (e.g. a
+ * punctuation-blocked `give up` on line 2 must still be flagged even though line 1's `give up`
+ * was substituted).
  */
 function collectFlags(
   text: string,
   dataset: Dataset,
   forwardMap: Map<string, string>,
-  handledPhrases: Set<string>,
+  handledPhrases: Set<string>[],
   opts: TranslateOptions,
 ): Finding[] {
   const file = opts.file ?? "<stdin>";
   const flags: Finding[] = [];
   text.split("\n").forEach((line, i) => {
     const span: Span = { file, line: i + 1, text: line, source: "table" };
+    const lineHandled = handledPhrases[i] ?? new Set<string>();
     for (const f of scanSpan(span, dataset, { strict: opts.strict })) {
       if (forwardMap.has(f.found)) continue;
-      if (handledPhrases.has(f.found)) continue;
+      if (lineHandled.has(f.found)) continue;
       flags.push(f);
     }
   });
@@ -278,11 +283,18 @@ function collectFlags(
 export function translate(text: string, opts: TranslateOptions = {}): TranslateResult {
   const dataset = opts.dataset ?? defaultDataset;
   const forwardMap = buildForwardMap(dataset);
-  const handledPhrases = new Set<string>();
+  const phraseByFirst = opts.lexicon
+    ? groupByFirstToken(buildPhraseTransforms(opts.lexicon))
+    : defaultPhraseByFirst;
+  const handledPhrases: Set<string>[] = [];
 
   const translatedText = text
     .split("\n")
-    .map((line) => substituteLine(line, defaultPhraseByFirst, forwardMap, handledPhrases))
+    .map((line) => {
+      const lineHandled = new Set<string>();
+      handledPhrases.push(lineHandled);
+      return substituteLine(line, phraseByFirst, forwardMap, lineHandled);
+    })
     .join("\n");
 
   return {

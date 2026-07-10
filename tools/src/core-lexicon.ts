@@ -37,6 +37,14 @@ export interface PhrasalVerb {
   rank?: number;
   note?: string;
   confidence?: Confidence;
+  /**
+   * Standard-English words that, immediately following the phrasal, signal the OTHER (usually
+   * intransitive) reading the machine replacement doesn't cover — e.g. "run out" (exhaust) is
+   * transitive, but "run out **of** milk" is the dominant intransitive idiom (#58). When the next
+   * token is one of these, the transform does not fire, leaving the sentence untranslated rather
+   * than mistranslating it.
+   */
+  blockedNext?: string[];
 }
 
 export interface SensePreference {
@@ -130,28 +138,49 @@ export interface AbolishedLexiconEntry {
  * Merge droppedPreps (ruling: "drop") and phrasalVerbs into the abolished-forms shape
  * dataset.ts's loadDataset() consumes, replacing the rows that used to be directly authored in
  * abolished-forms.json.
+ *
+ * Emits every inflected surface form (base, 3sg, -ing, past, pp), not just the base — #70: without
+ * this, "she listened to the radio" produced no linter finding at all, even though the translator
+ * side (core-lexicon.ts's buildPhraseTransforms) has always handled inflected forms. The `woe`
+ * hint stays the base form for every inflection (a suggestion, not a precise inflected guess —
+ * consistent with morphology.ts's own "hint text only" contract).
  */
 export function toAbolishedEntries(lexicon: CoreLexicon = defaultLexicon): AbolishedLexiconEntry[] {
   const out: AbolishedLexiconEntry[] = [];
   for (const d of lexicon.droppedPreps) {
     if (d.ruling !== "drop") continue;
-    out.push({
-      abolished: `${d.verb} ${d.prep}`,
-      woe: d.verb,
-      class: "dropped-prep",
-      rule: "G3",
-      confidence: confidenceOf(d),
-    });
+    const confidence = confidenceOf(d);
+    for (const form of standardInflections(d.verb)) {
+      out.push({
+        abolished: `${form} ${d.prep}`,
+        woe: d.verb,
+        class: "dropped-prep",
+        rule: "G3",
+        confidence,
+      });
+    }
   }
   for (const p of lexicon.phrasalVerbs) {
     const woe = [p.plain, ...(p.alternates ?? [])].join(" / ");
-    out.push({
-      abolished: p.phrasal,
-      woe,
-      class: "phrasal-verb",
-      rule: "S2",
-      confidence: confidenceOf(p),
-    });
+    const confidence = confidenceOf(p);
+    const particleTokens = p.phrasal.split(/\s+/).slice(1);
+    const head = p.phrasal.split(/\s+/)[0]!;
+    const headForms = new Set([
+      head.toLowerCase(),
+      standardThirdPerson(head),
+      standardPresentParticiple(head),
+      standardPast(head),
+      standardPastParticiple(head),
+    ]);
+    for (const hf of headForms) {
+      out.push({
+        abolished: [hf, ...particleTokens].join(" "),
+        woe,
+        class: "phrasal-verb",
+        rule: "S2",
+        confidence,
+      });
+    }
   }
   return out;
 }
@@ -165,7 +194,9 @@ const TIME_UNITS = new Set([
 ]);
 const NUMBER_WORDS = new Set([
   "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
-  "eleven", "twelve", "twenty", "thirty", "forty", "fifty", "hundred",
+  "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen",
+  "nineteen", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety",
+  "hundred", "thousand", "million",
   "few", "several", "couple", "many",
 ]);
 // Single words that are a whole span on their own: "for now", "for ever". ("for good" is
@@ -223,6 +254,8 @@ export interface PhraseTransform {
   guard?: "not-duration" | "zero-past";
   /** Past-tense WoE replacement for a "zero-past" guarded transform. */
   pastReplacement?: string;
+  /** Do not fire when the very next token is one of these (see PhrasalVerb.blockedNext, #58). */
+  blockedNext?: string[];
 }
 
 /**
@@ -297,6 +330,7 @@ export function buildPhraseTransforms(lexicon: CoreLexicon = defaultLexicon): Ph
         rule: "S2",
         guard: zeroPastBase ? "zero-past" : undefined,
         pastReplacement: zeroPastBase ? regularizeVerbPast(p.plain) : undefined,
+        blockedNext: p.blockedNext,
       });
     }
   }
