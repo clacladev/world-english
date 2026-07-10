@@ -348,7 +348,7 @@ The respelling key and [orthography.md](orthography.md) move together. The `ough
 respelled in orthography O5 take the obvious key reading — *thru* → THROO, *tho* → **DHOH**,
 *altho* → **awl-DHOH** (the `th` in *though*/*although* is the **voiced** /ð/, so it is `dh`
 in the key, per [P3](#rule-p3--th-is-split-in-the-key)); every word *not* respelled there
-(*knight* → NYT, *through*-as-retained) is still fully covered by its entry here.
+(*knight* → NYT, *thought*-as-retained) is still fully covered by its entry here.
 
 **Homographs are the one residue.** A handful of words are spelled the same but said two
 ways — *lead* (the metal, LED) vs *lead* (guide, LEED); *read* (present, REED) vs *read*

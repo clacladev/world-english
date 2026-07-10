@@ -185,23 +185,12 @@ describe("G3 round-trip property (forward→reverse)", () => {
 
   it("every forward-applying drop verb round-trips through forward then reverse, flagged", () => {
     for (const d of dropVerbs) {
-      if ((d.forward ?? "apply") === "flag") continue;
       const originalSe = `${d.verb} ${d.prep} the thing`;
       const woe = translate(originalSe, { file: "x.md" }).text;
       expect(woe).toBe(`${d.verb} the thing`); // forward drops the prep
       const back = reverseTranslate(woe, { file: "x.md" });
       expect(back.text).toBe(originalSe); // reverse restores it
       expect(back.flags.some((f) => f.found === d.verb)).toBe(true); // and always flags the guess
-    }
-  });
-
-  it("forward:\"flag\" entries (wait) pass forward unchanged and stay flagged", () => {
-    for (const d of dropVerbs) {
-      if ((d.forward ?? "apply") !== "flag") continue;
-      const se = `${d.verb} ${d.prep} the thing`;
-      const result = translate(se, { file: "x.md" });
-      expect(result.text).toBe(se);
-      expect(result.flags.some((f) => f.found === `${d.verb} ${d.prep}`)).toBe(true);
     }
   });
 });

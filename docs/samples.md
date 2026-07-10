@@ -33,7 +33,7 @@ Rule keys: `O*` [orthography](orthography.md) · `P*` [pronunciation](pronunciat
 **Annotations**
 
 1. *…the city builded new hospital.* — `[M1]` build → **builded** · `[G1]` present perfect
-   → simple past (finished action; the hospital now exists, no time word needed) · `[G2]`
+   → simple past (finished action; `yesterday` already carries the past reference) · `[G2]`
    drop indefinite article (*a new hospital* → **new hospital**) · `[G14]` content clause:
    complementizer **that** kept after *announced*. *announced* is already regular (`[M1]`, no
    change).
@@ -207,7 +207,7 @@ reference.
 > to study. The library offer three things: fast internet, long hours, and many books. Students
 > use the library every day.
 >
-> The building beed expensive. But the university think it beed worth the cost. Donors gaved most
+> The building beed expensive. But the university think it beed worth the cost. Donors gived most
 > of the money, so tuition stayed low. Also, the library created many jobs. For example, the
 > library hired twenty students last term.
 
@@ -233,7 +233,7 @@ reference.
 6. *But the university think it beed worth the cost.* — `[W1]` the standard **semicolon** is
    abolished → new sentence · `[W5]` *however* → **but** (one connective per relation) · `[M2]`
    was → **beed** · third-person *thinks* → **think** ([M3](morphology.md)).
-7. *Donors gaved most of the money, so tuition stayed low.* — `[M1]` give → **gaved** · `[W5]`
+7. *Donors gived most of the money, so tuition stayed low.* — `[M1]` give → **gived** · `[W5]`
    result connective **so**, with the `[W1]` comma before a coordinator joining two independent
    clauses.
 8. *Also, the library created many jobs. For example, the library hired twenty students last
@@ -267,8 +267,8 @@ and the plain speech-act templates ([S9](style.md#rule-s9--plain-templates-for-t
 
 > Hello Sara,
 >
-> Thank you. I seed yous message about the meeting on Friday. Sorry, I can not come, because I
-> will be away. Please send me the notes. I will read them next week.
+> Thank you. I seed yous message about the meeting on Friday. No. Sorry, I can not come, because
+> I will be away. Please send me the notes. I will read them next week.
 >
 > Goodbye,
 > Tom
@@ -279,10 +279,11 @@ and the plain speech-act templates ([S9](style.md#rule-s9--plain-templates-for-t
 2. *Thank you.* — `[S9]` invariant **thanks**.
 3. *I seed yous message about the meeting on Friday.* — `[M1]` see → **seed** · `[G4]` your →
    **yous** · `[G3]` keep **about**/**on** (real relations) · `[G1]` finished action → past tense.
-4. *Sorry, I can not come, because I will be away.* — `[S8]`/`[S9]` **refusal** carried by the
-   **Sorry** softener (optional, permitted) plus a plain reason, not graded indirectness
-   (standard *I'm terribly sorry, but I'm afraid I won't be able to…* → direct) · `[G6]` modal
-   negation **can not** · `[W5]`/`[G15]` explicit **because** · `[G7]` future **will**.
+4. *No. Sorry, I can not come, because I will be away.* — `[S8]`/`[S9]` **refusal** template:
+   invariant **No.** + plain reason, with the **optional `Sorry` softener** (permitted, never
+   required) — not graded indirectness (standard *I'm terribly sorry, but I'm afraid I won't be
+   able to…* → direct) · `[G6]` modal negation **can not** · `[W5]`/`[G15]` explicit **because** ·
+   `[G7]` future **will**.
 5. *Please send me the notes.* — `[S8]`/`[S9]` **request** template: **please** + plain
    imperative (`[G6]`, no *do*), replacing the graded *Could you possibly…?* · `[G4]` **me**.
 6. *I will read them next week.* — `[G7]` **will** · `[G4]` **them** (object) · time adjunct
@@ -314,7 +315,7 @@ each rendered by G1's one deterministic test (*still true?* → tense) plus an
 
 > I live in this city since 2015, and I still work in the same office. I study English for
 > three years, and I be still learning it. By next June, I finish mes degree. When you called,
-> I already goed home, because I beed feeling tired. I not seed the new film yet, but mes
+> I already goed home, because I beed feeling tired. I not see the new film yet, but mes
 > sister just watched it.
 
 **Annotations**
@@ -335,10 +336,11 @@ each rendered by G1's one deterministic test (*still true?* → tense) plus an
    carries the earlier-past) · `[M1]` go → **goed** · `[S5]` **already** · `[G1]` **past
    continuous** *was + -ing* → **beed feeling** · `[M2]` was → **beed** · `[G15]` **when** /
    **because** subordinators, natural tense.
-5. *I not seed the new film yet, but mes sister just watched it.* — `[G1]` present perfect
-   *finished* → **past tense** (*have not seen* → **not seed**; *has just watched* →
-   **just watched**) · `[S5]` **`yet`** and **`just`** carry the relevance the perfect used to ·
-   `[G6]` negation **not** before the verb, no *do*-support · `[M1]` see → **seed** · `[G4]`
+5. *I not see the new film yet, but mes sister just watched it.* — `[G1]` present perfect
+   *still true* (negative) → **present tense** (*have not seen* → **not see**; the film remains
+   unseen) · `[S5]` **`yet`** carries the ongoing relevance · `[G6]` negation **not** before the
+   verb, no *do*-support · `[G1]` present perfect *finished* → **past tense** (*has just watched*
+   → **just watched**) · `[S5]` **`just`** carries the relevance the perfect used to · `[G4]`
    my → **mes** · **the new film** stays definite.
 
 This passage needed no construction the specs do not cover — every tense-aspect case resolved

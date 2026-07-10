@@ -1,5 +1,5 @@
 {
-  "_comment": "Source list for M1 (docs/morphology.md). Each entry gives a standard irregular verb's base / past / past-participle. The linter flags the `past` and `pp` spellings when they appear in a World-English column; the suggested WoE form is computed from `base` by regularizeVerbPast() in src/morphology.ts. `pp` is omitted when identical to `past`. `homograph: true` marks a past/pp whose spelling collides with a valid everyday word (a noun, adjective, or direction) — those are demoted to low confidence so the default sweep does not false-positive on the non-verb sense. Zero-past verbs (cost, put, hit, cut, set, let, read, shut, cast, spread, burst, hurt, bet, quit, split, bid) are deliberately OMITTED: their past is spelled exactly like the valid WoE base form, so they cannot be detected without part-of-speech context.",
+  "_comment": "Source list for M1 (docs/morphology.md). Each entry gives a standard irregular verb's base / past / past-participle. The linter flags the `past` and `pp` spellings when they appear in a World-English column; the suggested WoE form is computed from `base` by regularizeVerbPast() in src/morphology.ts. `pp` is omitted when identical to `past`. `homograph: true` marks a past/pp whose spelling collides with a valid everyday word (a noun, adjective, or direction) — those are demoted to low confidence so the default sweep does not false-positive on the non-verb sense. Zero-past verbs (cost, put, hit, cut, set, shut, cast, spread, burst, hurt, bet, quit, split, bid) are deliberately OMITTED: their past is spelled exactly like the valid WoE base form, so they cannot be detected without part-of-speech context. Three zero-past verbs — let, read, and beat — ARE included for reverse-translator coverage: the linter skips them (past == base = undetectable), but their regularized WoE forms (letted, readed, beated) are non-standard coinages that the reverse translator maps back to the standard past.",
   "verbs": [
     { "base": "go", "past": "went", "pp": "gone" },
     { "base": "take", "past": "took", "pp": "taken" },
@@ -13,7 +13,7 @@
     { "base": "find", "past": "found", "homograph": true },
     { "base": "tell", "past": "told" },
     { "base": "say", "past": "said" },
-    { "base": "become", "past": "became" },
+    { "base": "become", "past": "became", "pp": "become" },
     { "base": "leave", "past": "left", "homograph": true },
     { "base": "feel", "past": "felt", "homograph": true },
     { "base": "bring", "past": "brought" },
@@ -26,7 +26,7 @@
     { "base": "let", "past": "let" },
     { "base": "mean", "past": "meant" },
     { "base": "meet", "past": "met" },
-    { "base": "run", "past": "ran" },
+    { "base": "run", "past": "ran", "pp": "run" },
     { "base": "pay", "past": "paid" },
     { "base": "sit", "past": "sat" },
     { "base": "speak", "past": "spoke", "pp": "spoken" },
@@ -67,7 +67,6 @@
     { "base": "shake", "past": "shook", "pp": "shaken" },
     { "base": "steal", "past": "stole", "pp": "stolen" },
     { "base": "freeze", "past": "froze", "pp": "frozen" },
-    { "base": "speak", "past": "spoke", "pp": "spoken" },
     { "base": "hide", "past": "hid", "pp": "hidden" },
     { "base": "bite", "past": "bit", "pp": "bitten" },
     { "base": "blow", "past": "blew", "pp": "blown" },
@@ -97,7 +96,6 @@
     { "base": "bind", "past": "bound", "homograph": true },
     { "base": "grind", "past": "ground", "homograph": true },
     { "base": "light", "past": "lit" },
-    { "base": "sit", "past": "sat" },
     { "base": "spit", "past": "spat" },
     { "base": "kneel", "past": "knelt" },
     { "base": "lean", "past": "leant" },
@@ -110,6 +108,17 @@
     { "base": "bear", "past": "bore", "pp": "borne" },
     { "base": "weave", "past": "wove", "pp": "woven" },
     { "base": "arise", "past": "arose", "pp": "arisen" },
-    { "base": "awake", "past": "awoke", "pp": "awoken" }
+    { "base": "awake", "past": "awoke", "pp": "awoken" },
+    { "base": "have", "past": "had" },
+    { "base": "do", "past": "did", "pp": "done" },
+    { "base": "shrink", "past": "shrank", "pp": "shrunk" },
+    { "base": "spring", "past": "sprang", "pp": "sprung" },
+    { "base": "breed", "past": "bred" },
+    { "base": "slide", "past": "slid" },
+    { "base": "strive", "past": "strove", "pp": "striven" },
+    { "base": "stink", "past": "stank", "pp": "stunk" },
+    { "base": "string", "past": "strung" },
+    { "base": "speed", "past": "sped" },
+    { "base": "forsake", "past": "forsook", "pp": "forsaken" }
   ]
 }

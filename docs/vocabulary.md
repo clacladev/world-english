@@ -51,12 +51,15 @@ exists per verb** — the invariant that makes the drop reversible — enforced 
 
 **`droppedPreps.forward`** defaults to `"apply"` (the forward translator drops the preposition).
 `"flag"` withholds the forward transform for a verb whose canonical preposition has a
-high-frequency competing reading the tools can't disambiguate without syntax — concretely
-**`wait for`** (duration *"wait for three minutes"* vs. object *"wait for the bus"*, the
-unresolved [item 16](to-do.md#16-constructions-surfaced-by-dogfooding-samplesmd) test). The
-*reverse* translator restores `wait for` regardless of `forward` mode — a stoplist (prepositions,
-conjunctions, common adverbs, `-ly` words) is what keeps a duration phrase like *"wait for three
-minutes"* from getting a second `for` inserted; see [`tools/README.md`](../tools/README.md).
+high-frequency competing reading the tools can't disambiguate without syntax. No entry
+currently uses this field: the one candidate, **`wait for`** (duration *"wait for three
+minutes"* vs. object *"wait for the bus"*, the [item 16](to-do.md#16-constructions-surfaced-by-dogfooding-samplesmd)
+test), is handled instead by the **not-duration guard** in `core-lexicon.ts` — the forward
+translator drops *for* only when the following span is not a length of time, so `wait for the
+bus` auto-translates and `wait for three minutes` is kept. The *reverse* translator restores
+`wait for` regardless — a stoplist (prepositions, conjunctions, common adverbs, `-ly` words)
+is what keeps a duration phrase like *"wait for three minutes"* from getting a second `for`
+inserted; see [`tools/README.md`](../tools/README.md).
 
 **`phrasalVerbs.plain`** is the *one* single-word machine replacement; `alternates` are additional
 human-readable options folded into the linter's report text (`woe` = `[plain, ...alternates].join("
@@ -96,19 +99,20 @@ verb has exactly one.
 | Verb | Prep | Ruling | World English |
 | ---- | ---- | ------ | -------------- |
 | listen | to | drop | **listen** music |
-| wait | for | drop (forward: flag — see note) | **wait** the bus |
+| wait | for | drop | **wait** the bus |
 | depend | on | drop | **depend** the weather |
 | look | at | drop | **look** the picture |
 | believe | in | replace → *trust* | not dropped — routed to Table B |
 | pay | for | keep | not dropped — real relation (*pay the waiter*, *pay for the meal*) |
 
 *wait* is still a `drop` verb — its canonical World English is **wait the bus**, same as the
-others. `forward: flag` only means the mechanical *translator* declines to auto-drop *for* from
-standard-English *"wait for X"*, because *X* might be a duration (*wait for three minutes*, kept
-by [S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect)) rather than
-the object of *wait* — see [item 16](to-do.md#16-constructions-surfaced-by-dogfooding-samplesmd).
-The *reverse* translator restores *wait*'s *for* regardless, using a stoplist to skip duration
-phrases instead (see the schema section above).
+others. The `for`-vs-duration test ([item 16](to-do.md#16-constructions-surfaced-by-dogfooding-samplesmd),
+resolved) is handled by the **not-duration guard** in `core-lexicon.ts`: the forward translator
+drops *for* only when the following span is not a length of time, so *"wait for the bus"* →
+**wait the bus** and *"wait for three minutes"* is kept (the *for* marks a duration, per
+[S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect)). The *reverse*
+translator restores *wait*'s *for* regardless, using a stoplist to skip duration phrases
+instead (see the schema section above).
 
 ## Table B — S2 phrasal → plain (`phrasalVerbs`)
 
