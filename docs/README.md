@@ -6,13 +6,19 @@ and replaces it with a regular, predictable rule. For how earlier reforms and co
 subsets approached the same problems — and what the intelligibility research says about these
 choices — see [`../resources/PRIOR-ART.md`](../resources/PRIOR-ART.md).
 
-Every rule in these specs follows the same template, per the project
-[design principles](../README.md#design-principles):
+Every rule in `orthography.md`, `pronunciation.md`, `morphology.md`, and `grammar.md` follows
+the same four-part template, per the project [design principles](../README.md#design-principles):
 
 > **Rule** — what World English does.
 > **Problem it solves** — the irregularity it removes (linked to the catalogue).
 > **Examples** — standard English → World English.
 > **Divergence & trade-off** — how far this departs from standard English, and the cost.
+
+Two exceptions, noted here rather than left to surprise a reader: `style.md` and `writing.md`
+use the same three opening parts but shorten the fourth label to a bare **Trade-off.**; and
+[O4](orthography.md#rule-o4--what-is-deliberately-left-alone) does not follow the template at
+all — it is a list of what orthography deliberately leaves alone, not a single rule with its
+own divergence to record.
 
 ## The specifications
 
@@ -21,7 +27,7 @@ Every rule in these specs follows the same template, per the project
 | [orthography.md](orthography.md) | Spelling regularization (light, legibility-preserving) | §1 |
 | [pronunciation.md](pronunciation.md) | Sound↔spelling mapping, respelling key, stress rule | §1, §2 |
 | [morphology.md](morphology.md) | Regular verbs, plurals, comparatives, adverbs | §3, §4, §5 |
-| [grammar.md](grammar.md) | Tense/aspect, articles, prepositions, pronouns, countability, questions, negation, modals, conditionals, passive, possessive, relative clauses, reflexives, complementation | §4, §6, §7, §8 |
+| [grammar.md](grammar.md) | Tense/aspect, articles, prepositions, pronouns, countability, questions, negation, modals, conditionals, passive, possessive, relative clauses, reflexives, complementation, content clauses & reported speech, subordinating conjunctions | §4, §6, §7, §8 |
 | [style.md](style.md) | Plain, unambiguous phrasing; word order; adverb placement; avoiding idiom; politeness markers & speech-act templates | §7, §8 |
 | [writing.md](writing.md) | Document-level conventions — punctuation set, one register, thesis-first structure, paragraph shape, cohesion | [PP §6](../resources/PAIN-POINTS.md#6-writing) |
 | [vocabulary.md](vocabulary.md) | Core lexicon — the per-word list G3/S2/S3/S6 look up (canonical prepositions, phrasal→plain, preferred sense, collocations, false friends, register) | §4 |
@@ -49,7 +55,8 @@ decisions inside existing specs, and planned tooling — ranked by learner impac
   why its row cites PAIN-POINTS, not IRREGULARITIES.
 - **vocabulary.md is the data behind four rules.** G3, S2, S3, and S6 each resolve a word by
   lookup; `vocabulary.md` holds that per-word list, so those rules are only as complete as it
-  is. It is what the planned linter and reverse translator will read.
+  is. It is what the built, tested, CI-gating linter and reverse translator read (see
+  [`tools/README.md`](../tools/README.md)).
 
 ## The regression test
 

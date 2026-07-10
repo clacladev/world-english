@@ -63,7 +63,8 @@
    Source: [PAIN-POINTS §3](../resources/PAIN-POINTS.md#3-grammar),
    [IRREGULARITIES §7](../resources/IRREGULARITIES.md#7-grammar-systems-articles-prepositions-tense-phrasal-verbs).
    Status: drafted → [grammar.md G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs).
-   Core lexicon carries 35 per-verb canonical-preposition rulings. *for* duration-vs-object
+   Core lexicon carries 37 per-verb canonical-preposition rulings (31 drop / 4 keep / 2
+   replace). *for* duration-vs-object
    test resolved (item 16): not-duration guard auto-translates `wait for`.
 
 5. **Verb irregularity, incl. *be*.** ~200 irregular verbs; *be* has eight forms.
@@ -121,7 +122,7 @@
 13. **Pronunciation/speech tool.** Render WoE text to respelling, IPA, and audio.
     Source: [README "Tooling"](../README.md#tooling), [pronunciation.md](pronunciation.md).
     Status: **built** — [`tools/pronounce.ts`](../tools) (`bun run pronounce`). Seed lexicon
-    (~40 gold words); deterministic P2/P3 respelling→IPA engine; `--audio` speaks our
+    (66 entries, 64 distinct words); deterministic P2/P3 respelling→IPA engine; `--audio` speaks our
     phonemes via `espeak-ng` (external dependency). Unknown words/homographs flagged, never
     guessed. Growth opportunity: lexicon is a seed, not exhaustive.
 

@@ -223,7 +223,33 @@ export function buildPhraseTransforms(lexicon: CoreLexicon = defaultLexicon): Ph
     if (confidenceOf(d) !== "high") continue;
     if ((d.forward ?? "apply") === "flag") continue;
     const guard = d.prep === "for" ? ("not-duration" as const) : undefined;
+    // A drop-verb that is itself an irregular verb (M1) needs its past/participle inflection
+    // regularized, not passed through verbatim — otherwise the transform would silently emit an
+    // abolished SE irregular form unflagged (#55: "spoke to the staff" → "spoke the staff").
+    const verbEntry = (
+      irregularVerbs.verbs as { base: string; past: string; pp?: string; homograph?: boolean }[]
+    ).find((v) => v.base.toLowerCase() === d.verb.toLowerCase());
     for (const form of standardInflections(d.verb)) {
+      const isIrregularPast =
+        !!verbEntry &&
+        (form === verbEntry.past.toLowerCase() ||
+          (!!verbEntry.pp && form === verbEntry.pp.toLowerCase()));
+      if (isIrregularPast) {
+        // The verb's irregular past/participle collides with a valid everyday reading (e.g.
+        // `spoke` is also homograph-flagged in the dataset) — too risky to guess-translate in
+        // this shape, so leave the phrase unhandled rather than emit the abolished form.
+        if (verbEntry!.homograph) continue;
+        // Otherwise the WoE past is a deterministic M1 regularization — apply it, not the verbatim
+        // SE irregular spelling.
+        out.push({
+          tokens: [form, d.prep],
+          replacement: regularizeVerbPast(d.verb),
+          class: "dropped-prep",
+          rule: "G3",
+          guard,
+        });
+        continue;
+      }
       out.push({ tokens: [form, d.prep], replacement: form, class: "dropped-prep", rule: "G3", guard });
     }
   }
