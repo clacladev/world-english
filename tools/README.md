@@ -269,8 +269,15 @@ dataset is authored here. It is also the seed for the deferred **reverse transla
 
 - **`irregular-verbs.json`** — `{ base, past, pp }` triples (M1). The flagged forms are `past`
   and `pp`; the suggested World-English form is computed from `base` by
-  `regularizeVerbPast()`. Zero-past verbs (*cost*, *put*, *read*) are omitted — their past is
-  spelled like the valid base, so they can't be detected without part-of-speech context.
+  `regularizeVerbPast()`. Most zero-past verbs (*cost*, *put*, *hit*, *cut*, *set*, *shut*,
+  *quit*, *split*) are omitted — their past is spelled like the valid base, so they can't be
+  detected without part-of-speech context. The dataset does still carry `let`, `read`, and
+  `beat`, even though `past` equals `base` for each: they are listed anyway (`let`/`read`
+  document the pair for the reverse translator and other lookups; `beat` is included because
+  its participle `beaten` differs from the base and *is* detectable). Their presence does not
+  mean the linter can flag a bare `read`/`let`/`beat` in running text without POS context — it
+  can't, for the same reason the fully-omitted verbs can't — only that these three rows exist
+  in the data for other consumers to use.
 - **`irregular-plurals.json`** — `{ singular, plural }` pairs (M4); WoE form computed by
   `regularizePlural()`. Zero-plurals (*sheep*) omitted for the same reason.
 - **`abolished-forms.json`** — directly-authored `abolished → woe` pairs for every other
