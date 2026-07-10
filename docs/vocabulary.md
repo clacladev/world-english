@@ -53,8 +53,9 @@ exists per verb** — the invariant that makes the drop reversible — enforced 
 `"flag"` withholds the forward transform for a verb whose canonical preposition has a
 high-frequency competing reading the tools can't disambiguate without syntax. No entry
 currently uses this field: the one candidate, **`wait for`** (duration *"wait for three
-minutes"* vs. object *"wait for the bus"*, the [item 16](to-do.md#16-constructions-surfaced-by-dogfooding-samplesmd)
-test), is handled instead by the **not-duration guard** in `core-lexicon.ts` — the forward
+minutes"* vs. object *"wait for the bus"*, tested by [`to-do.md`](to-do.md) item 16,
+"Constructions surfaced by dogfooding"), is handled instead by the **not-duration guard** in
+`core-lexicon.ts` — the forward
 translator drops *for* only when the following span is not a length of time, so `wait for the
 bus` auto-translates and `wait for three minutes` is kept. The *reverse* translator restores
 `wait for` regardless — a stoplist (prepositions, conjunctions, common adverbs, `-ly` words)

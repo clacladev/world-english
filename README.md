@@ -139,6 +139,11 @@ The end goal is not just documentation but working tools — now built and docum
 ```
 world-english/
 ├── README.md                   # this file — goals, principles, plan
+├── AGENTS.md                   # instructions for AI coding agents working in this repo
+├── .gitignore                  # root ignore rules
+├── .github/
+│   └── workflows/
+│       └── ci.yml              # CI: lint, typecheck, test on push/PR
 ├── docs/
 │   ├── README.md               # specs index + how the specs fit together
 │   ├── orthography.md          # spelling regularization rules
@@ -162,7 +167,8 @@ world-english/
     ├── translate.ts            # SE↔WoE translators (--reverse for WoE→SE)
     ├── pronounce.ts            # World English → respelling / IPA
     ├── src/                    # extractor, dataset/lexicon loaders, scanner, morphology helpers
-    └── data/                   # abolished-forms dataset, the core lexicon, NGSL frequency spine
+    ├── data/                   # abolished-forms dataset, the core lexicon, NGSL frequency spine
+    └── test/                   # unit + acceptance tests (bun test)
 ```
 
 The linter, both translators, and the respelling/IPA/audio renderer are built (see

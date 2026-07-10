@@ -110,6 +110,14 @@ describe("flagged, not translated (needs POS / syntax / lexicon)", () => {
     expect(woe("she will put it back")).toBe("she will put it back"); // modal
   });
 
+  it("does not silently pass an irregular-verb drop-prep form through unflagged (#55)", () => {
+    // `speak` is a homograph-flagged irregular verb (spoke/spoken collide with other readings),
+    // so the dropped-prep transform must not guess-translate "spoke to" — it should leave the
+    // sentence untouched rather than emit the abolished SE past verbatim.
+    expect(woe("The manager spoke to the staff.")).toBe("The manager spoke to the staff.");
+    expect(flagKeys("The manager spoke to the staff.", true)).toContain("spoke:irregular-verb/M1");
+  });
+
   it("resolves phrasal verbs (S2) and dropped prepositions (G3), inflected forms too", () => {
     expect(woe("please give up now")).toBe("please quit now");
     expect(woe("she gave up yesterday")).toBe("she quitted yesterday");
