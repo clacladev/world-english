@@ -29,6 +29,14 @@ derives from the rule rather than contradicting it:
 
 There are **no irregular verbs** and **no separate participle form**.
 
+**The `-ing` form.** The `-ing` form is unaffected by M1 (it is not a past tense), but its
+spelling follows the same mechanics stated above, applied consistently: **silent final
+`-e` drops** before `-ing` (*give → giving*, not *giveing*), and
+[O3](orthography.md#rule-o3--one-consonant-doubling-rule)'s consonant-doubling rule (double
+a final consonant after a stressed single vowel + single consonant) applies before `-ing`
+exactly as it applies before `-ed` (*stop → stopping*, *refer → referring*; *travel →
+traveling*, unstressed, no doubling).
+
 **Problem it solves.** ~200 irregular verbs in everyday use (see
 [§3](../resources/IRREGULARITIES.md#3-verb-conjugation)) — the densest pure-memorization
 load in English. The three "principal parts" collapse to one.
@@ -110,6 +118,20 @@ creoles.
 the regular spelling rule). No irregular plurals, no zero plurals, no imported Latin/Greek
 plurals.
 
+**Spelling sub-rules.** Three endings need an explicit spelling call, stated here so no
+noun is left to guesswork:
+
+- **Consonant + `y`** → **`-ies`**, the same sub-rule used by [M1](#rule-m1--all-verbs-are-regular)'s
+  verb past tense and [M5](#rule-m5--one-comparative-rule)'s comparatives: *city → cities*,
+  *baby → babies*. (A vowel before `y` is unaffected: *day → days*.)
+- **`-o` nouns** take a plain **`-s`**, uniformly, with no exceptions for the handful of
+  standard words that insert `-es` (*potato/potatoes*, *hero/heroes*): *potato → **potatos***,
+  *hero → **heros***. This is a deliberate regularization, consistent with World English's
+  general philosophy of dropping irregular sub-cases rather than preserving them.
+- **`-f`/`-fe` nouns** take a plain **`-s`**, uniformly, with no voicing shift to *-ves*:
+  *knife → **knifes***, *wife → **wifes***, *leaf → **leafs***. Also a deliberate
+  regularization, for the same reason.
+
 **Problem it solves.** Dozens of irregular plurals plus an open-ended tail of borrowed
 forms (see [§4](../resources/IRREGULARITIES.md#4-noun-plurals--countability)).
 
@@ -135,10 +157,18 @@ unambiguous and instantly understood. One rule replaces a list plus a borrowed-p
 
 **Rule.** The regular comparative and superlative are **`-er`** and **`-est`** for **every**
 adjective and adverb — no irregular one-word suppletives (*good* → **gooder**, not *better*).
-Where the `-er`/`-est` form reads clumsy — **long adjectives, `-ly` adverbs, and the
-quantifiers *many*/*much* (and *little*/*few*)** — the periphrastic **`more`/`most`** (and
-**`less`/`least`**) is permitted as an **optional, natural-sounding alternative**. Short
-adjectives take `-er`/`-est` only (*bigger*, never *more big*).
+The clumsy cases where the periphrastic **`more`/`most`** (and **`less`/`least`**) is
+permitted as an **optional, natural-sounding alternative** are defined by an explicit,
+derivable trigger rather than a vague "reads clumsy": **adjectives and adverbs of three or
+more syllables** (long adjectives, most `-ly` adverbs, the quantifiers *many*/*much* and
+*little*/*few*) take the escape hatch; **adjectives of one or two syllables take
+`-er`/`-est` only** (*bigger*, never *more big*; *happier*, never *more happy*) — the same
+syllable-count line standard English already draws for comparatives, so nothing new is
+invented. **Participial adjectives are classified separately and unconditionally:** any
+adjective built from a verb's `-ing` or `-ed` form (*interesting*, *tired*, *bored*,
+*surprising*) always takes **`more`/`most`**, regardless of syllable count, because it is
+not a true adjective but a verb form used adjectivally — so *more interesting* and *more
+tired* are the only forms, never *interestinger* or *tireder*.
 
 **Problem it solves.** Suppletive comparatives (*good/better/best*) and the fuzzy
 `-er`/`more` boundary (see [§5](../resources/IRREGULARITIES.md#5-adjectives--adverbs)).
@@ -149,7 +179,7 @@ adjectives take `-er`/`-est` only (*bigger*, never *more big*).
 | -------- | ------------- |
 | good / better / best | good / **gooder** / **goodest** |
 | bad / worse / worst | bad / **badder** / **baddest** |
-| many / more / most | many / **manyer** *or* **more** / **manyest** *or* **most** |
+| many / more / most | many / **manier** *or* **more** / **maniest** *or* **most** |
 | beautiful / more beautiful / most beautiful | beautiful / **beautifuler** *or* **more beautiful** / **beautifulest** *or* **most beautiful** |
 
 **Divergence & trade-off.** *gooder*, *beautifuler* are non-standard but fully transparent,
@@ -164,8 +194,13 @@ irregular one-word suppletives (*better*, *worse*) stay abolished — the hatch 
 **Two cases the base rule leaves to state.**
 
 - **Comparatives of `-ly` adverbs.** An adverb ending in `-ly` is a consonant + `y`, so it
-  takes the same **`y → i`** spelling sub-rule as the verb/plural rules
-  ([M1](#rule-m1--all-verbs-are-regular)): `-lier` / `-liest`.
+  takes the same **`y → i`** spelling sub-rule already used elsewhere for consonant + `y`
+  stems — [M1](#rule-m1--all-verbs-are-regular)'s verb past tense (*try → tried*) and
+  [M4](#rule-m4--all-plurals-are-regular)'s noun plural (*city → cities*): `-lier` / `-liest`.
+  The same sub-rule applies uniformly to any consonant + `y` comparative, including the
+  quantifier *many* below (*many* is consonant + `y` exactly like *quickly*, so it takes
+  **manier**/**maniest**, not *manyer*/*manyest* — there is no principled exception for
+  *many*, so none is made).
 
   | Adverb | Comparative | Superlative |
   | ------ | ----------- | ----------- |
@@ -178,14 +213,15 @@ irregular one-word suppletives (*better*, *worse*) stay abolished — the hatch 
   carefully*, *most easily*) as the natural-sounding alternative. Both are valid; the regular
   `-lier`/`-liest` is always available.
 
-- **Quantifier *more* / *most*.** *many/much* regularize to **`manyer` / `manyest`** (row
-  above, and [G5](grammar.md#rule-g5--all-nouns-are-countable) makes every noun count), so
-  *manyer than 100 persons* and *manyest persons* are the regular forms. But because the bare
-  quantifiers are the clumsiest cases of all (*I want manyer*), the standard **`more`/`most`**
+- **Quantifier *more* / *most*.** *many/much* regularize to **`manier` / `maniest`** (row
+  above, via the same consonant + `y` sub-rule just stated, and
+  [G5](grammar.md#rule-g5--all-nouns-are-countable) makes every noun count), so
+  *manier than 100 persons* and *maniest persons* are the regular forms. But because the bare
+  quantifiers are the clumsiest cases of all (*I want manier*), the standard **`more`/`most`**
   are permitted here as the escape hatch (*I want more*, *more than 100 persons*, *most
-  people*); *little/few* likewise take **`less`/`least`** alongside *littler/littlest*. Both
+  persons*); *little/few* likewise take **`less`/`least`** alongside *littler/littlest*. Both
   are valid. The translators leave *more/most/less/least* untouched (they are valid World
-  English) and never force *manyer*.
+  English) and never force *manier*.
 
 ---
 
@@ -198,13 +234,19 @@ adverbs, no zero-derived adverbs.
 *hard → hard* (see [§5](../resources/IRREGULARITIES.md#5-adjectives--adverbs)).
 
 **Examples.** *quick → **quickly***, *easy → **easily***, *careful → **carefully***,
-*good → **goodly*** (= "well"), *fast → **fastly***, *hard → **hardly*** in
-the manner sense — note World English drops the standard *hardly* = "barely" meaning, which
-must be expressed plainly (*barely*, *almost not*), per [style.md](style.md).
+*good → **goodly*** (= "well"), *fast → **fastly***, *hard → **hard*** (unchanged; see
+below). **`hardly` is reassigned, directly, to mean "barely":** M6 would otherwise regularly
+derive *hardly* as the manner adverb of *hard* ("in a hard manner"), but that collides with
+*hardly*'s existing, everyday meaning of "barely." World English keeps that everyday
+meaning and drops the compositional one: **`hardly` means only "barely"** (*She hardly
+finished* = "she barely finished"). The manner sense of *hard* does not need *hardly* at
+all — *hard* is already a flat (zero-derived) adverb in standard English (*hit hard*, *work
+hard*), and World English keeps that flat form for the manner sense, so no form is lost:
+*hard* covers the manner, *hardly* covers "barely," and the two never compete.
 
-**Divergence & trade-off.** Regular and predictable; collides with a couple of existing
-words (*hardly*), resolved by reassigning those meanings to plain phrasing in
-[style.md](style.md).
+**Divergence & trade-off.** Regular and predictable; the one collision (*hardly*) is
+resolved directly above by keeping *hardly*'s familiar "barely" sense and routing the
+manner sense through the flat adverb *hard* instead of manufacturing a clash.
 
 ---
 
