@@ -46,7 +46,26 @@ export interface TranslateResult {
   flags: Finding[];
 }
 
-const WORD = /[A-Za-z]+(?:'[A-Za-z]+)?/g;
+const WORD = /[A-Za-z]+(?:['’][A-Za-z]+)?/g;
+
+// Unambiguous past-time signal words (#59): when one of these appears anywhere on the line, a
+// zero-past phrasal head (set/put/cut/shut/quit/split up, …) is read as past tense rather than
+// the default present-tense guess — a closed, deterministic set, not general tense inference.
+const PAST_SIGNAL_WORDS = new Set([
+  "yesterday", "ago", "already", "earlier", "previously",
+]);
+const PAST_SIGNAL_LAST_WORDS = new Set([
+  "night", "week", "month", "year", "morning", "evening", "spring", "summer", "fall", "winter",
+]);
+
+function lineHasPastSignal(lowerWords: string[]): boolean {
+  for (let i = 0; i < lowerWords.length; i++) {
+    const w = lowerWords[i]!;
+    if (PAST_SIGNAL_WORDS.has(w)) return true;
+    if (w === "last" && PAST_SIGNAL_LAST_WORDS.has(lowerWords[i + 1] ?? "")) return true;
+  }
+  return false;
+}
 
 /**
  * The handled single-word substitutions: every high-confidence entry whose replacement is a
@@ -169,8 +188,15 @@ function substituteLine(
       const keepDurationFor =
         match.guard === "not-duration" &&
         isDurationFor(tokens.slice(i + span).map((tk) => tk.word.toLowerCase()));
+      // Zero-past phrasal head (#59): default to the present-tense replacement, but defer to the
+      // past-tense one when the line carries an unambiguous past-time signal.
+      const usePastReplacement =
+        match.guard === "zero-past" &&
+        match.pastReplacement !== undefined &&
+        lineHasPastSignal(lowerWords);
+      const replacement = usePastReplacement ? match.pastReplacement! : match.replacement;
       out += applyCap(
-        keepDurationFor ? line.slice(tok.start, spanEnd) : matchCase(tok.word, match.replacement),
+        keepDurationFor ? line.slice(tok.start, spanEnd) : matchCase(tok.word, replacement),
       );
       last = spanEnd;
       i += span;

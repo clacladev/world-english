@@ -41,7 +41,7 @@ function isAllowed(file: string, form: string, allow: AllowEntry[]): boolean {
 
 /** Lowercased word tokens, keeping their position so we can match multi-word phrases. */
 function tokenize(text: string): string[] {
-  const matches = text.toLowerCase().match(/[a-z]+(?:'[a-z]+)?/g);
+  const matches = text.toLowerCase().match(/[a-z]+(?:['’][a-z]+)?/g);
   return matches ?? [];
 }
 

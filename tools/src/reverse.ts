@@ -73,7 +73,7 @@ const CANONICAL_LOSSY: Record<string, { restore: string; class: string; rule: st
   thems: { restore: "their", class: "pronoun", rule: "G4", note: "their/theirs collapsed to `thems`" },
 };
 
-const WORD = /[A-Za-z]+(?:'[A-Za-z]+)?/g;
+const WORD = /[A-Za-z]+(?:['’][A-Za-z]+)?/g;
 
 function confidenceHigh(e: { confidence?: string; homograph?: boolean }): boolean {
   return (e.confidence ?? (e.homograph ? "low" : "high")) === "high";

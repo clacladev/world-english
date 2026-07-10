@@ -207,8 +207,16 @@ export interface PhraseTransform {
    * Set on every dropped `for` (G3 "for" test, to-do.md item 16): drop the object-for
    * (*wait for the bus* → *wait the bus*) but keep the duration-for (*wait for three
    * minutes*). translate.ts's substituteLine evaluates the guard.
+   *
+   * "zero-past": the matched surface form is a zero-past phrasal head (set/put/cut/shut/quit/
+   * split up — SE past spelled like the base, #59), so `replacement` is the present-tense WoE
+   * form and `pastReplacement` is the past-tense WoE form. translate.ts picks `pastReplacement`
+   * when the line carries an unambiguous past-time signal (yesterday, ago, already, last
+   * night/week/…), otherwise defaults to the present-tense reading.
    */
-  guard?: "not-duration";
+  guard?: "not-duration" | "zero-past";
+  /** Past-tense WoE replacement for a "zero-past" guarded transform. */
+  pastReplacement?: string;
 }
 
 /**
@@ -258,6 +266,11 @@ export function buildPhraseTransforms(lexicon: CoreLexicon = defaultLexicon): Ph
     if (confidenceOf(p) !== "high") continue;
     const particleTokens = p.phrasal.split(/\s+/).slice(1);
     const head = p.phrasal.split(/\s+/)[0]!;
+    // A zero-past head (set/put/cut/shut/quit/split up, …) has an SE past spelled exactly like
+    // its base, so the base-form pair below is reached by BOTH present- and past-tense uses
+    // (#59). Detect that collision so the base pair can defer to a past-tense signal instead of
+    // always guessing present tense.
+    const isZeroPastHead = standardPast(head) === head.toLowerCase();
     const pairs: [string, string][] = [
       [head.toLowerCase(), p.plain],
       [standardThirdPerson(head), standardThirdPerson(p.plain)],
@@ -269,11 +282,14 @@ export function buildPhraseTransforms(lexicon: CoreLexicon = defaultLexicon): Ph
     for (const [headForm, plainForm] of pairs) {
       if (seen.has(headForm)) continue;
       seen.add(headForm);
+      const zeroPastBase = isZeroPastHead && headForm === head.toLowerCase();
       out.push({
         tokens: [headForm, ...particleTokens],
         replacement: plainForm,
         class: "phrasal-verb",
         rule: "S2",
+        guard: zeroPastBase ? "zero-past" : undefined,
+        pastReplacement: zeroPastBase ? regularizeVerbPast(p.plain) : undefined,
       });
     }
   }

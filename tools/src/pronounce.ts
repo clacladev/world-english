@@ -37,7 +37,7 @@ export interface PronounceResult {
   flags: PronFlag[];
 }
 
-export const WORD = /[A-Za-z]+(?:'[A-Za-z]+)?/g;
+export const WORD = /[A-Za-z]+(?:['’][A-Za-z]+)?/g;
 
 export function lineOf(text: string, index: number): number {
   let line = 1;

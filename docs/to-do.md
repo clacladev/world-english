@@ -126,6 +126,36 @@
     phonemes via `espeak-ng` (external dependency). Unknown words/homographs flagged, never
     guessed. Growth opportunity: lexicon is a seed, not exhaustive.
 
+19. **AI speaking-practice partner tool.** Item 14 descoped the listening/speaking pain point
+    (accent variety, fluency/automaticity) *to* a tooling concern rather than a spec, but no
+    backlog item ever carried that tooling forward — the pain point had no live owner. This
+    item is that owner: an interactive tool that lets a learner practice speaking and listening
+    against WoE's own respelling/IPA/audio pipeline ([`tools/pronounce.ts`](../tools)), giving
+    corrective feedback the way item 13's renderer already does for text.
+    Source: [PAIN-POINTS §5](../resources/PAIN-POINTS.md#5-listening--speaking).
+    Status: **backlog** (not started).
+
+20. **S4 idiom-to-literal lexicon support.** PR #8 declared S4 (idioms and culture-bound
+    expressions) out of scope alongside the full 2–3k lexicon build. The lexicon build was
+    later delivered (item 8), but S4's own lexicon half — a per-idiom mapping to a literal
+    plain-English replacement, the same kind of machine-actionable data G3/S2 already have —
+    never entered the backlog and was never built. S4 remains pure advice in `style.md` while
+    S2/S3/S6 all got lexicon backing. This item is that gap's owner.
+    Source: [style.md S4](style.md#rule-s4--avoid-idioms-and-culture-bound-expressions),
+    [PAIN-POINTS §4](../resources/PAIN-POINTS.md#4-vocabulary--lexis).
+    Status: **backlog** (not started).
+
+21. **Grow the false-friends lexicon.** `falseFriends` in
+    [`tools/data/lexicon.json`](../tools/data/lexicon.json) ships as a 2-row stub — the two
+    examples copied directly from PAIN-POINTS' own illustration — under a **built** status in
+    item 8, with no plan to grow it. False friends are flagged in PAIN-POINTS as a major
+    hazard ("confident errors"), so a 2-row stub undersells the item-8 "built" status for this
+    part of the lexicon. This item tracks growing false-friends coverage the same
+    frequency-first way the rest of the core lexicon grows.
+    Source: [PAIN-POINTS §4](../resources/PAIN-POINTS.md#4-vocabulary--lexis),
+    [vocabulary.md Table E](vocabulary.md#table-e--false-friends-falsefriends-doc-only).
+    Status: **backlog** (not started).
+
 ---
 
 ## Priority 4 — Descoped from language design
@@ -133,7 +163,8 @@
 14. **Listening & speaking.** Connected speech covered by P5/P6. Accent variety and
     fluency/automaticity are tooling concerns (AI speaking-practice partner), not specs.
     Source: [PAIN-POINTS §5](../resources/PAIN-POINTS.md#5-listening--speaking).
-    Status: **descoped**.
+    Status: **descoped** from language design — the tooling concern this item descoped *to*
+    now has an owner: see item 19.
 
 15. **Psychological & motivational factors.** Properties of the learner and teaching method,
     not the language.
@@ -162,5 +193,8 @@
 | 17 | Open decisions | **resolved** | P2 |
 | 18 | LFC contradictions | **resolved** | P2 |
 | 13 | Pronunciation/speech tool | **built** | P3 |
+| 19 | AI speaking-practice partner tool | backlog | P3 |
+| 20 | S4 idiom-to-literal lexicon support | backlog | P3 |
+| 21 | Grow the false-friends lexicon | backlog | P3 |
 | 14 | Listening & speaking | **descoped** | P4 |
 | 15 | Psychological/motivational | **descoped** | P4 |
