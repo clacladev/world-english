@@ -75,12 +75,12 @@ lexicon's per-entry `forward` mode:
   included — `listens to`→`listens`, `gave up`→`quitted`, `finds out`→`learns`.
 - **Flagged, not translated** — article drop (G2), third-person `-s` (M3), do-support (G6),
   modals (G7), relativizers (G11), open-decision comparatives, and homographs (`ground`, `mine`,
-  `well`) — all need part-of-speech or syntax the tool doesn't have. One lexicon entry is
-  deliberately withheld too: `wait for`, tagged `forward: "flag"` in `lexicon.json` because its
-  `for` competes with the duration `for` of S5 (the unresolved item-16 test) — auto-dropping it
-  risks mistranslating *"wait for three minutes."* High-confidence flags (dropped-prep, and any
-  low-confidence lexicon entry) show by default; the low-confidence classes are advisory and only
-  shown under `--strict`.
+  `well`) — all need part-of-speech or syntax the tool doesn't have. The one lexicon entry that
+  used to be withheld — `wait for` — is now handled by the **not-duration guard** in
+  `core-lexicon.ts`: the forward translator drops *for* only when the following span is not a
+  length of time, so `wait for the bus` auto-translates and `wait for three minutes` is kept.
+  High-confidence flags (dropped-prep, and any low-confidence lexicon entry) show by default;
+  the low-confidence classes are advisory and only shown under `--strict`.
 
 The four `../docs/samples.md` passages are the translator's gold regression corpus:
 `test/translate.test.ts` translates each Standard-English passage and asserts it produces every

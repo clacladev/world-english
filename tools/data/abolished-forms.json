@@ -12,12 +12,14 @@
     { "abolished": "best", "woe": "goodest", "class": "suppletive-comparative", "rule": "M5" },
     { "abolished": "worse", "woe": "badder", "class": "suppletive-comparative", "rule": "M5" },
     { "abolished": "worst", "woe": "baddest", "class": "suppletive-comparative", "rule": "M5" },
-    { "abolished": "further", "woe": "farer", "class": "suppletive-comparative", "rule": "M5", "homograph": true },
-    { "abolished": "farther", "woe": "farer", "class": "suppletive-comparative", "rule": "M5" },
-    { "abolished": "furthest", "woe": "farest", "class": "suppletive-comparative", "rule": "M5" },
-    { "abolished": "farthest", "woe": "farest", "class": "suppletive-comparative", "rule": "M5" },
+    { "abolished": "further", "woe": "farrer", "class": "suppletive-comparative", "rule": "M5", "homograph": true },
+    { "abolished": "farther", "woe": "farrer", "class": "suppletive-comparative", "rule": "M5" },
+    { "abolished": "furthest", "woe": "farrest", "class": "suppletive-comparative", "rule": "M5" },
+    { "abolished": "farthest", "woe": "farrest", "class": "suppletive-comparative", "rule": "M5" },
 
     { "abolished": "well", "woe": "goodly", "class": "suppletive-adverb", "rule": "M6", "homograph": true },
+    { "abolished": "hard", "woe": "hardly", "class": "suppletive-adverb", "rule": "M6", "homograph": true },
+    { "abolished": "fast", "woe": "fastly", "class": "suppletive-adverb", "rule": "M6", "homograph": true },
 
     { "abolished": "colour", "woe": "color", "class": "british-spelling", "rule": "O1" },
     { "abolished": "favour", "woe": "favor", "class": "british-spelling", "rule": "O1" },
