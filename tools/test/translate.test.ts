@@ -116,6 +116,32 @@ describe("flagged, not translated (needs POS / syntax / lexicon)", () => {
     expect(text).toBe("she beed gooder");
     expect(flags).toEqual([]);
   });
+
+  it("drops the third-person -s after a he/she/it subject (M3, item 11)", () => {
+    expect(woe("he works hard")).toBe("he work hard");
+    expect(woe("she goes home")).toBe("she go home");
+    expect(woe("it has value")).toBe("it have value");
+    expect(woe("she tries again")).toBe("she try again");
+  });
+
+  it("leaves a determiner-led noun untouched (no subject pronoun)", () => {
+    expect(woe("the works of art")).toBe("the works of art");
+    expect(flagKeys("the works of art", true)).toEqual([]);
+  });
+
+  it("keeps an untriggered 3sg verb flagged under --strict, absent from default output", () => {
+    // No preceding subject pronoun → not converted; `does` (M3) is low-confidence, so it is
+    // quiet by default and surfaces only under --strict.
+    expect(woe("the plan does work")).toBe("the plan does work");
+    expect(flagKeys("the plan does work")).toEqual([]);
+    expect(flagKeys("the plan does work", true)).toContain("does:third-person-s/M3");
+  });
+
+  it("never both translates and flags the converted 3sg verb", () => {
+    const { text, flags } = translate("he does work", { dataset: data, strict: true });
+    expect(text).toBe("he do work");
+    expect(flags.map((f) => f.found)).not.toContain("does");
+  });
 });
 
 describe("gold round-trip against docs/samples.md", () => {
@@ -157,8 +183,8 @@ describe("gold round-trip against docs/samples.md", () => {
   const pairs = samplePairs();
   const forwardValues = new Set(buildForwardMap(data).values());
 
-  it("finds the seven gold passages", () => {
-    expect(pairs.length).toBe(7);
+  it("finds the eight gold passages", () => {
+    expect(pairs.length).toBe(8);
   });
 
   it("produces every handled World-English form the gold passage contains", () => {

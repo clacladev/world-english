@@ -294,6 +294,59 @@ S8/S9 template.
 
 ---
 
+## Passage 8 — Tense-aspect spread (exercises the perfect's replacements)
+
+Passages 1–7 touch the dropped perfect only in passing (a stray *already* or *for years*).
+This passage packs the full [G1](grammar.md#rule-g1--a-leaner-tenseaspect-system) tense/aspect
+range into one paragraph: present-perfect-with-**since**, **continuous aspect** (present and
+past), **past perfect**, **future perfect**, and the relevance words **`just`** / **`yet`** —
+each rendered by G1's one deterministic test (*still true?* → tense) plus an
+[S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect) time word.
+
+**Standard English**
+
+> I have lived in this city since 2015, and I still work in the same office. I have studied
+> English for three years, and I am still learning it. By next June, I will have finished my
+> degree. When you called, I had already gone home, because I was feeling tired. I have not
+> seen the new film yet, but my sister has just watched it.
+
+**World English**
+
+> I live in this city since 2015, and I still work in the same office. I study English for
+> three years, and I be still learning it. By next June, I finish mes degree. When you called,
+> I already goed home, because I beed feeling tired. I not seed the new film yet, but mes
+> sister just watched it.
+
+**Annotations**
+
+1. *I live in this city since 2015, and I still work in the same office.* — `[G1]` present
+   perfect *still true* → **present tense** (*have lived* → **live**; the residence continues) ·
+   `[S5]` **since** kept for a **starting point** (*since 2015*) and **still** carries the
+   ongoing relevance · `[G3]` keep **in** twice (real spatial relation).
+2. *I study English for three years, and I be still learning it.* — `[G1]` present perfect
+   *still true* → **present** (*have studied* → **study**) · `[S5]` **for** kept for a
+   **duration** (*for three years*) · `[G1]` **continuous aspect** *am + -ing* → **be
+   learning** (present continuous) · `[M2]` am → **be** · `[S5]` **still**.
+3. *By next June, I finish mes degree.* — `[G1]` **future perfect** → **present tense** + a
+   time word (*will have finished* → **finish**; *By next June* carries the completion) ·
+   `[G4]` my → **mes**.
+4. *When you called, I already goed home, because I beed feeling tired.* — `[G1]` **past
+   perfect** → **simple past** + a time word (*had already gone* → **already goed**; *already*
+   carries the earlier-past) · `[M1]` go → **goed** · `[S5]` **already** · `[G1]` **past
+   continuous** *was + -ing* → **beed feeling** · `[M2]` was → **beed** · `[G15]` **when** /
+   **because** subordinators, natural tense.
+5. *I not seed the new film yet, but mes sister just watched it.* — `[G1]` present perfect
+   *finished* → **past tense** (*have not seen* → **not seed**; *has just watched* →
+   **just watched**) · `[S5]` **`yet`** and **`just`** carry the relevance the perfect used to ·
+   `[G6]` negation **not** before the verb, no *do*-support · `[M1]` see → **seed** · `[G4]`
+   my → **mes** · **the new film** stays definite.
+
+This passage needed no construction the specs do not cover — every tense-aspect case resolved
+by [G1](grammar.md#rule-g1--a-leaner-tenseaspect-system)'s *still-true?* test plus an
+[S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect) time word.
+
+---
+
 ## Gaps this file surfaced — now closed
 
 Dogfooding turned up four constructions the specs did not cover. Each was logged in

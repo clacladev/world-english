@@ -182,9 +182,13 @@ So the core lexicon and the linter lead Priority 1, ahead of the drafted-rule re
    [IRREGULARITIES §7](../resources/IRREGULARITIES.md#7-grammar-systems-articles-prepositions-tense-phrasal-verbs).
    Status: drafted → [grammar.md G1](grammar.md#rule-g1--a-leaner-tenseaspect-system),
    [style.md S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect).
-   **Largely resolved in point 4:** G1 now gives one deterministic rendering (still-true →
+   **Resolved:** G1 now gives one deterministic rendering (still-true →
    present tense; finished → past tense), S5 keeps the standard *for*/*since* split, and
-   [samples.md](samples.md) exercises both. Remaining: confirm coverage with more examples.
+   [samples.md](samples.md) exercises both. Coverage is now confirmed by
+   [samples.md](samples.md) **Passage 8**, which packs the full tense-aspect range into one
+   paragraph — present-perfect-with-*since*, continuous aspect (present and past), past
+   perfect, future perfect, and the *just*/*yet* relevance words — each rendered by G1's
+   *still-true?* test plus an S5 time word, and green through the linter and both translators.
 
 7. **Phrasal verbs.** Non-compositional meaning plus irregular grammar (separable vs.
    inseparable, pronoun placement); learners without an L1 equivalent often avoid them
@@ -221,10 +225,17 @@ kept here for the record.
    repeat-don't-vary lexical/reference cohesion. Wired into [`README.md`](README.md) (spec table +
    `W*` key) and dogfooded by a new **multi-paragraph** [`samples.md`](samples.md) Passage 6
    (Passages 1–5 are single-paragraph and could not exercise W3–W6); example columns pass the
-   linter sweep. **Scope decision:** paragraph-level this pass; a fixed multi-paragraph **essay
-   template** is logged as a follow-up rather than baked into the first draft (it prescribes
-   rhetoric, a larger and more opinionated commitment — see item 10's similar "needs scoping"
-   note).
+   linter sweep. **Scope decision — resolved (essay template descoped).** No fixed named essay
+   template will be added. W3 already mandates thesis-first ordering *at whole-text scope* ("A
+   paragraph — and, above it, a whole text — follows one fixed, linear shape: the claim or
+   conclusion leads, and reasons, details, and examples follow it"), and W4 already requires one
+   idea per paragraph with a leading topic sentence; together these already imply
+   intro→body-per-idea→conclusion at the document level, so a named template would add no
+   coverage. It would, however, be the first WoE rule to **prescribe rhetoric** rather than remove
+   an irregularity — outside WoE's "regularity, not rhetoric" mandate — and it has no prior-art
+   support (STE, Plain English, and VOA Special English constrain vocabulary and sentence-level
+   clarity, never document rhetorical shape). Descoped on the same logic as item 10's deep
+   target-culture norm mastery and items 14/15.
 
 10. **Sociolinguistic & Pragmatics.** Politeness/indirectness calibration, contextual
     appropriateness, speech acts (refusals, apologies) — pragmatic failure, not grammar
@@ -335,27 +346,34 @@ to Priority 1 (items 11–12) because the rules depend on them; this is what is 
 
 ---
 
-## Priority 4 — Lower-impact / needs a scope decision
+## Priority 4 — Lower-impact / scope decided (both descoped from language design)
 
 `PAIN-POINTS.md` documents these as real learner difficulties, but they describe listener/
-speaker skill-building and psychology, not features of the language itself. Listed here so
-they aren't silently dropped; whether they belong in this project is an open question for the
-user, not decided here.
+speaker skill-building and psychology, not features of the language itself. The scope
+question is now **decided**: both are **descoped from language design** and kept here only as
+recorded rationale. Any language-tractable slice is already discharged by existing specs (see
+item 14); anything remaining is a learner/pedagogy or tooling concern, not a spec.
 
 14. **Listening & speaking (accent variety, fluency/automaticity).** Understanding fast
     connected speech and diverse accents; building automaticity requires practice volume a
     spec can't provide.
     Source: [PAIN-POINTS §5](../resources/PAIN-POINTS.md#5-listening--speaking).
-    Status: partially covered by [pronunciation.md P5](pronunciation.md#rule-p5--connected-speech-is-optional-never-required)
-    (connected speech); accent variety and fluency practice have no home yet — likely a
-    tooling/pedagogy concern (e.g. an AI speaking-practice partner), not a spec.
+    Status: **descoped from language design (resolved).** The one language-tractable slice —
+    connected speech — is already discharged by [pronunciation.md P5](pronunciation.md#rule-p5--connected-speech-is-optional-never-required)
+    (connected speech permitted, never required) and [P6](pronunciation.md#rule-p6--sentence-rhythm-is-optional-syllable-timing-is-acceptable)
+    (syllable-timed speech always acceptable). Accent variety (a property of speaker
+    communities) and fluency/automaticity (practice volume a spec can't provide) are descoped
+    from language design; if ever pursued they belong as **tooling** (an AI speaking-practice
+    partner, adjacent to the item-13 pronunciation/audio tool), not a spec.
 
 15. **Psychological & motivational factors (anxiety, fossilization, plateau).** Real and
     well-evidenced, but these are properties of the *learner and the teaching method*, not the
     language.
     Source: [PAIN-POINTS §8](../resources/PAIN-POINTS.md#8-psychological--motivational-factors).
-    Status: not addressed in `docs/`. Recommend explicitly descoping from language design and,
-    if pursued at all, treating as a pedagogy/tooling note, not a spec.
+    Status: **descoped from language design (resolved).** These are properties of the
+    *learner and the teaching method*, not the language (per [§8](../resources/PAIN-POINTS.md#8-psychological--motivational-factors)) —
+    the same logic that descoped item 10's cultural-mastery slice. Recorded here as rationale;
+    no tooling commitment made.
 
 ---
 
@@ -371,13 +389,13 @@ user, not decided here.
 | 3 | Spelling opacity | drafted (resolved) | P1 |
 | 4 | Prepositions | drafted (refined; item 8 lookup table built) | P1 |
 | 5 | Verb irregularity / *be* | drafted (M2 resolved: full collapse `be`/`beed`) | P1 |
-| 6 | Present perfect / tense | drafted (largely resolved in point 4) | P1 |
+| 6 | Present perfect / tense | **resolved** — G1 deterministic renderings + S5 time words, full range dogfooded in [`samples.md`](samples.md) Passage 8 | P1 |
 | 7 | Phrasal verbs | drafted (map built via item 8, 53 rows) | P1 |
-| 9 | Writing conventions | **drafted** → [`writing.md`](writing.md) W1–W6 (semicolon abolished, colon for lists only; paragraph-level; essay template logged as follow-up) | P2 |
+| 9 | Writing conventions | **resolved** → [`writing.md`](writing.md) W1–W6 (semicolon abolished, colon for lists only); essay template **descoped** — W3/W4 already cover document scope; a fixed template would prescribe rhetoric | P2 |
 | 10 | Sociolinguistic & pragmatics | **drafted (minimal Option A)** → [`style.md`](style.md) S8–S9 (fixed politeness markers + plain speech-act templates); cultural mastery descoped | P2 |
 | 16 | Constructions surfaced by dogfooding | **resolved** — G3 for-test (tooling), G14, G15, G10 boundary | P2 |
 | 17 | Open decisions from point 5 (plural-you, `-ly` comparatives, `more/most`) | **resolved** — `you all`; `-lier`/`manyer` regular, with an optional `more/most` escape hatch | P2 |
 | 18 | Research contradictions (LFC vs P3/P4/P7) | **resolved** — P3/P4 kept as reading aids; P7 divergence accepted | P2 |
 | 13 | Pronunciation/speech tool | **built — respelling + IPA + audio** (`tools/pronounce.ts`); seed lexicon; `--audio` speaks our phonemes via espeak-ng | P3 |
-| 14 | Listening & speaking support | uncovered, needs scoping | P4 |
-| 15 | Psychological/motivational factors | uncovered, likely out of scope | P4 |
+| 14 | Listening & speaking support | **descoped from language design** — connected-speech slice already covered by P5+P6; accent variety + fluency/automaticity are tooling (AI speaking-practice partner), not a spec | P4 |
+| 15 | Psychological/motivational factors | **descoped from language design** — learner/pedagogy, not the language (§8), same logic as item 10's cultural-mastery descope | P4 |

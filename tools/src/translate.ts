@@ -19,6 +19,7 @@
 
 import { loadDataset, type Dataset } from "./dataset.ts";
 import { buildPhraseTransforms, isDurationFor, type PhraseTransform } from "./core-lexicon.ts";
+import { thirdPersonSDrop } from "./pos.ts";
 import { scanSpan, type Finding } from "./scan.ts";
 import type { Span } from "./extract.ts";
 
@@ -110,6 +111,7 @@ function substituteLine(
   handledPhrases: Set<string>,
 ): string {
   const tokens = tokenizeLine(line);
+  const lowerWords = tokens.map((t) => t.word.toLowerCase());
   let out = "";
   let last = 0;
   let i = 0;
@@ -141,6 +143,20 @@ function substituteLine(
       last = spanEnd;
       i += span;
       continue;
+    }
+
+    // Third-person -s drop (M3): only after a he/she/it subject, and never over a form the
+    // forwardMap already owns (be-forms etc. take priority). The converted surface form is added
+    // to handledPhrases so collectFlags does not also flag it (e.g. goes/does/has under --strict).
+    if (!forwardMap.has(lowerWords[i]!)) {
+      const sDrop = thirdPersonSDrop(lowerWords, i);
+      if (sDrop) {
+        handledPhrases.add(lowerWords[i]!);
+        out += matchCase(tok.word, sDrop.base);
+        last = tok.end;
+        i += 1;
+        continue;
+      }
     }
 
     const woe = forwardMap.get(tok.word.toLowerCase());
