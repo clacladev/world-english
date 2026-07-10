@@ -21,7 +21,7 @@ function tokens(text: string): string[] {
 describe("deterministic closed-class substitution", () => {
   it("converts `be` forms (M2)", () => {
     expect(woe("she was here")).toBe("she beed here");
-    expect(woe("they are ready and it is done")).toBe("they be ready and it be done");
+    expect(woe("they are ready and it is done")).toBe("they be ready and it be doed");
   });
 
   it("converts pronouns (G4/G12)", () => {
@@ -53,7 +53,7 @@ describe("deterministic closed-class substitution", () => {
 
   it("preserves surrounding punctuation and whitespace", () => {
     expect(woe("My keys, was they?")).toBe("Mes keys, beed they?");
-    expect(woe("go\n  was\ndone")).toBe("go\n  beed\ndone");
+    expect(woe("go\n  was\ndone")).toBe("go\n  beed\ndoed");
   });
 });
 

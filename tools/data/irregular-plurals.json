@@ -42,6 +42,9 @@
     { "singular": "shelf", "plural": "shelves" },
     { "singular": "wolf", "plural": "wolves" },
     { "singular": "thief", "plural": "thieves" },
-    { "singular": "loaf", "plural": "loaves" }
+    { "singular": "loaf", "plural": "loaves" },
+    { "singular": "die", "plural": "dice" },
+    { "singular": "calf", "plural": "calves" },
+    { "singular": "elf", "plural": "elves" }
   ]
 }

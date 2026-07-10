@@ -108,6 +108,17 @@
     { "base": "bear", "past": "bore", "pp": "borne" },
     { "base": "weave", "past": "wove", "pp": "woven" },
     { "base": "arise", "past": "arose", "pp": "arisen" },
-    { "base": "awake", "past": "awoke", "pp": "awoken" }
+    { "base": "awake", "past": "awoke", "pp": "awoken" },
+    { "base": "have", "past": "had" },
+    { "base": "do", "past": "did", "pp": "done" },
+    { "base": "shrink", "past": "shrank", "pp": "shrunk" },
+    { "base": "spring", "past": "sprang", "pp": "sprung" },
+    { "base": "breed", "past": "bred" },
+    { "base": "slide", "past": "slid" },
+    { "base": "strive", "past": "strove", "pp": "striven" },
+    { "base": "stink", "past": "stank", "pp": "stunk" },
+    { "base": "string", "past": "strung" },
+    { "base": "speed", "past": "sped" },
+    { "base": "forsake", "past": "forsook", "pp": "forsaken" }
   ]
 }
