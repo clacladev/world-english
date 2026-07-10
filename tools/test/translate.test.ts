@@ -130,10 +130,12 @@ describe("flagged, not translated (needs POS / syntax / lexicon)", () => {
   it("does not silently pass an irregular-verb drop-prep form through unflagged (#55)", () => {
     // `speak` is a homograph-flagged irregular verb (spoke/spoken collide with other readings),
     // so the dropped-prep transform must not guess-translate "spoke to" — it should leave the
-    // sentence untouched and flag it (the inflected dropped-prep phrase itself is high-confidence,
-    // #70, so it surfaces even without --strict).
+    // sentence untouched. The inflected phrase collides with the same homograph risk as the
+    // standalone verb, so it is demoted to low confidence (surfaces only under --strict) rather
+    // than high-confidence-flagging a likely-false-positive like "the bike's spoke to hub".
     expect(woe("The manager spoke to the staff.")).toBe("The manager spoke to the staff.");
-    expect(flagKeys("The manager spoke to the staff.")).toContain("spoke to:dropped-prep/G3");
+    expect(flagKeys("The manager spoke to the staff.")).not.toContain("spoke to:dropped-prep/G3");
+    expect(flagKeys("The manager spoke to the staff.", true)).toContain("spoke to:dropped-prep/G3");
   });
 
   it("resolves phrasal verbs (S2) and dropped prepositions (G3), inflected forms too", () => {

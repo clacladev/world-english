@@ -95,8 +95,20 @@ export function buildReverseMap(): Map<string, ReverseEntry> {
   };
 
   // Irregular verbs: canonical restore is the PAST; a distinct participle makes it ambiguous.
-  for (const v of irregularVerbs.verbs as { base: string; past: string; pp?: string; homograph?: boolean }[]) {
-    if (v.homograph) continue; // low-confidence homograph (e.g. `ground`) — mirror the linter
+  // `homograph` marks a verb whose SE past/pp reads as another word (a *forward*-direction
+  // concern — see M1's linter/translator confidence demotion) and does not by itself imply the
+  // WoE-regularized form is unsafe to restore: `speaked`/`bited`/`shooted`/`beared` are not real
+  // words, so restoring them is lossless. Only `reverseCollision` (a distinct, explicit flag)
+  // marks a WoE form that collides with a real word on THIS side (`seed`, `hanged`) — those stay
+  // fully unrestored, matching the project's decision that a valid-word collision must not be
+  // guessed at all (#66).
+  for (const v of irregularVerbs.verbs as {
+    base: string;
+    past: string;
+    pp?: string;
+    reverseCollision?: boolean;
+  }[]) {
+    if (v.reverseCollision) continue; // WoE form collides with a real word — never guess (#66)
     const woe = regularizeVerbPast(v.base);
     if (woe === v.base.toLowerCase()) continue; // zero-past: woe equals the base, undetectable
     const ambiguous = !!(v.pp && v.pp.toLowerCase() !== v.past.toLowerCase());
@@ -109,9 +121,13 @@ export function buildReverseMap(): Map<string, ReverseEntry> {
     });
   }
 
-  // Irregular plurals.
-  for (const p of irregularPlurals.plurals as { singular: string; plural: string; homograph?: boolean }[]) {
-    if (p.homograph) continue;
+  // Irregular plurals. Same reverseCollision handling as verbs above (`leafs`, `persons`).
+  for (const p of irregularPlurals.plurals as {
+    singular: string;
+    plural: string;
+    reverseCollision?: boolean;
+  }[]) {
+    if (p.reverseCollision) continue;
     const woe = regularizePlural(p.singular);
     if (woe === p.singular.toLowerCase()) continue;
     add(woe, { restore: p.plural.toLowerCase(), class: "irregular-plural", rule: "M4", ambiguous: false });
@@ -160,14 +176,17 @@ const PREP_INSERTION_STOPLIST = new Set([
   "still", "always", "never", "often", "sometimes", "usually", "again", "ago", "away", "back",
   "forward", "forth", "outside", "inside", "everywhere", "somewhere", "anywhere", "nowhere",
   "abroad", "home", "very", "too", "quite", "rather", "almost", "enough",
-  // common predicate adjectives: "she looks tired" (copular reading) is not "look at" (#65) — a
-  // drop-ruling verb followed directly by one of these reads as a linking verb, not the
-  // preposition-dropping transitive sense.
-  "tired", "happy", "sad", "good", "bad", "fine", "well", "sick", "upset", "angry", "worried",
-  "nice", "great", "terrible", "awful", "better", "worse", "different", "similar", "familiar",
-  "strange", "young", "old", "cold", "hot", "warm", "ready", "sure", "certain", "afraid",
-  "proud", "ashamed", "glad", "pleased", "excited", "confused", "calm", "quiet", "busy",
+  // common *underived* predicate adjectives — ones with no adjective-forming suffix to detect by
+  // shape (#65: "she looks tired" is a copular reading, not "look at"). Adjectives built from a
+  // recognizable suffix (tired, nervous, wonderful, comfortable, ...) are instead caught by the
+  // general suffix check in stopsInsertion() below, so this list only needs the irregular core.
+  "good", "bad", "fine", "well", "sick", "sure", "young", "old", "cold", "hot", "warm", "calm",
 ]);
+
+// Adjective-forming suffixes: a word ending in one of these, right after a drop-ruling verb, reads
+// as a predicate adjective (copular "look"/"be" complement) rather than the verb's object — a
+// general shape check instead of an ever-growing hand-enumerated list (#65).
+const ADJECTIVE_SUFFIXES = ["ed", "ous", "ful", "ive", "able", "ible", "ious", "less"];
 
 // A determiner immediately before the candidate token signals a NOUN reading ("the look was
 // cold"), not a finite drop-ruling verb — #65.
@@ -185,7 +204,8 @@ const QUANTIFIER_IDIOM_NOUNS = new Set([
 
 function stopsInsertion(word: string): boolean {
   const w = word.toLowerCase();
-  return PREP_INSERTION_STOPLIST.has(w) || w.endsWith("ly");
+  if (PREP_INSERTION_STOPLIST.has(w) || w.endsWith("ly")) return true;
+  return ADJECTIVE_SUFFIXES.some((suf) => w.length > suf.length + 2 && w.endsWith(suf));
 }
 
 /** Word-level restoration pass: irregular verbs/plurals, comparatives, pronouns, be, etc. */

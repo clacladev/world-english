@@ -5,8 +5,9 @@
 
 import ngsl from "../data/ngsl.json" with { type: "json" };
 import irregularVerbs from "../data/irregular-verbs.json" with { type: "json" };
-import { loadCoreLexicon } from "./core-lexicon.ts";
+import { loadCoreLexicon, NUMBER_WORDS } from "./core-lexicon.ts";
 import { standardThirdPerson, regularizeVerbPast } from "./morphology.ts";
+import { ZERO_PAST_VERBS } from "./zero-past-verbs.ts";
 
 /**
  * The base-word whitelist the inverted 3sg base must hit before we convert. Union of the irregular
@@ -91,6 +92,10 @@ const QUANTIFIER_IDIOMS = new Set([
 // "a hundred/thousand/million" = "one hundred" (a magnitude word, not the indefinite article).
 const MAGNITUDE_WORDS = new Set(["hundred", "thousand", "million", "billion"]);
 
+function isNumeral(w: string): boolean {
+  return /^\d+$/.test(w) || NUMBER_WORDS.has(w);
+}
+
 // Distributive "a" in a frequency expression ("once a week", "twice a day", "$5 a pound") reads a
 // time/rate unit as "per", not as the indefinite article — only when a frequency/rate cue
 // immediately precedes the article.
@@ -119,7 +124,12 @@ export function articleDrop(tokens: string[], i: number, opts: ArticleDropOption
   if (QUANTIFIER_IDIOMS.has(next)) return false; // "a lot", "a few", …
   if (next === "great" && tokens[i + 2] === "deal") return false; // "a great deal"
   if (MAGNITUDE_WORDS.has(next)) return false; // "a hundred dollars" (= "one hundred")
-  if (FREQUENCY_TRIGGERS.has(tokens[i - 1] ?? "") && FREQUENCY_UNITS.has(next)) return false; // "once a week"
+  // "once a week", "twice a day" — a fixed frequency-trigger word directly before the article; or
+  // "five dollars a pound" — a numeral two tokens back (the actual rate quantity), with a plain
+  // measure noun between it and the article. Reuses the same closed number-word set core-lexicon's
+  // duration guard uses, rather than a second hand-kept numeral list.
+  if (FREQUENCY_TRIGGERS.has(tokens[i - 1] ?? "") && FREQUENCY_UNITS.has(next)) return false;
+  if (isNumeral(tokens[i - 2] ?? "") && FREQUENCY_UNITS.has(next)) return false;
   // Leave the article intact anywhere a preceding `for` governs it: a kept duration span keeps its
   // article ("for a while", S5), and the object-`for` drop zone (G3) stays untouched — so the
   // delicate for-handling in the phrase pass is never disturbed.
@@ -201,10 +211,6 @@ export function droppedThat(
 // shape `[past verb] [and|then|but] [zero-past verb]`, where the conjunct verb is clearly past
 // (ends in -ed, or a common irregular past). Bails everywhere else; near-zero false positives.
 
-const ZERO_PAST = new Set([
-  "cost", "put", "hit", "cut", "set", "let", "read", "shut", "cast",
-  "spread", "burst", "hurt", "bet", "quit", "split", "bid",
-]);
 const PAST_COORDINATORS = new Set(["and", "then", "but"]);
 // A few common irregular pasts, so the conjunct verb needn't be a regular -ed past.
 const COMMON_IRREGULAR_PASTS = new Set([
@@ -215,7 +221,7 @@ const ZERO_PAST_SUBJECTS = new Set(["i", "you", "he", "she", "it", "we", "they"]
 
 export function zeroPastConvert(tokens: string[], i: number): { past: string } | null {
   if (i < 3) return null;
-  if (!ZERO_PAST.has(tokens[i]!)) return null;
+  if (!ZERO_PAST_VERBS.has(tokens[i]!)) return null;
   if (!PAST_COORDINATORS.has(tokens[i - 1]!)) return null; // only the coordinated shape
   const conjunct = tokens[i - 2]!;
   if (!conjunct.endsWith("ed") && !COMMON_IRREGULAR_PASTS.has(conjunct)) return null; // conjunct past?

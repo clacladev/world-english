@@ -21,6 +21,8 @@ export interface AbolishedEntry {
   /** Source spec rule, e.g. "M1", "O1", "G3". */
   rule: string;
   confidence: Confidence;
+  /** Do not fire when the very next token is one of these (mirrors PhrasalVerb.blockedNext, #58). */
+  blockedNext?: string[];
 }
 
 interface RawEntry {
@@ -99,6 +101,7 @@ export function loadDataset(): Dataset {
       class: raw.class,
       rule: raw.rule,
       confidence: confidenceOf(raw),
+      blockedNext: raw.blockedNext,
     });
   }
 

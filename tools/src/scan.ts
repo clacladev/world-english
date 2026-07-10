@@ -116,6 +116,13 @@ export function scanSpan(span: Span, data: Dataset, opts: ScanOptions = {}): Fin
       ) {
         continue;
       }
+      // A phrase blocked before a specific next word (e.g. "run out" before "of", #58) is a
+      // deliberately valid standard-English shape, not an abolished form — mirrors the
+      // translator's own blockedNext guard so the linter doesn't contradict it.
+      if (entry.blockedNext) {
+        const next = sameSentenceAfter(tokens, sentenceId, i + phrase.length)[0];
+        if (next && entry.blockedNext.includes(next)) continue;
+      }
       emit(span, entry, phrase.join(" "), opts, out);
       for (let j = 0; j < phrase.length; j++) consumed[i + j] = true;
     }

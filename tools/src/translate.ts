@@ -79,6 +79,36 @@ function lineHasPastSignal(lowerWords: string[]): boolean {
 }
 
 /**
+ * Each token's sentence index within the line, so a per-sentence guard (past-tense signal,
+ * duration-`for`) never reads across a `.`/`!`/`?` boundary — mirrors scan.ts's
+ * tokenizeWithSentences (#73): "I called you yesterday. Now I set up a meeting." must not read
+ * "yesterday" as a signal for the second sentence's "set up" just because they share a line.
+ */
+function sentenceIdsFor(tokens: { start: number; end: number }[], line: string): number[] {
+  const ids = new Array<number>(tokens.length).fill(0);
+  let sentence = 0;
+  for (let k = 1; k < tokens.length; k++) {
+    if (/[.!?]/.test(line.slice(tokens[k - 1]!.end, tokens[k]!.start))) sentence++;
+    ids[k] = sentence;
+  }
+  return ids;
+}
+
+/** The tokens from `from` onward that stay within the same sentence as `from`. */
+function sameSentenceFrom<T>(items: T[], sentenceIds: number[], from: number): T[] {
+  const sid = sentenceIds[from];
+  const out: T[] = [];
+  for (let k = from; k < items.length && sentenceIds[k] === sid; k++) out.push(items[k]!);
+  return out;
+}
+
+/** Every token that shares its sentence with position `at` (both before and after it). */
+function sameSentenceAll<T>(items: T[], sentenceIds: number[], at: number): T[] {
+  const sid = sentenceIds[at];
+  return items.filter((_, k) => sentenceIds[k] === sid);
+}
+
+/**
  * The handled single-word substitutions: every high-confidence entry whose replacement is a
  * clean single form. This spans spelling (O1/O2/O5), `be` (M2), pronouns (G4/G12), comparatives
  * (M5) and the *non-homograph* irregular verbs/plurals (M1/M4) — all unambiguous surface forms.
@@ -105,13 +135,14 @@ function capitalizeFirst(s: string): string {
   return s.slice(0, m.index) + s[m.index]!.toUpperCase() + s.slice(m.index + 1);
 }
 
-/** True when `pos` begins a sentence: only whitespace precedes it on the line, or the previous
- * non-space character is a sentence-ender or an opening quote. */
+/** True when `pos` begins a sentence (or an independent clause introduced by `:`/`;`/an em dash):
+ * only whitespace precedes it on the line, or the previous non-space character is a clause/
+ * sentence boundary or an opening quote. */
 function isSentenceInitial(line: string, pos: number): boolean {
   let j = pos - 1;
   while (j >= 0 && /\s/.test(line[j]!)) j--;
   if (j < 0) return true;
-  return ".!?\"'“‘(".includes(line[j]!);
+  return ".!?:;—\"'“‘(".includes(line[j]!);
 }
 
 /** Phrase transforms grouped by their first token (lowercased), longest-first within a group. */
@@ -140,6 +171,7 @@ function substituteLine(
 ): string {
   const tokens = tokenizeLine(line);
   const lowerWords = tokens.map((t) => t.word.toLowerCase());
+  const sentenceIds = sentenceIdsFor(tokens, line);
   let out = "";
   let last = 0;
   let i = 0;
@@ -183,16 +215,17 @@ function substituteLine(
       const span = match.tokens.length;
       const spanEnd = tokens[i + span - 1]!.end;
       handledPhrases.add(match.tokens.join(" ")); // deliberate decision → excluded from flags
-      // G3 "for" test: a dropped `for` is KEPT before a duration span (S5), dropped otherwise.
+      // G3 "for" test: a dropped `for` is KEPT before a duration span (S5), dropped otherwise —
+      // scoped to the current sentence so a duration phrase in a later sentence can't leak back.
       const keepDurationFor =
         match.guard === "not-duration" &&
-        isDurationFor(tokens.slice(i + span).map((tk) => tk.word.toLowerCase()));
+        isDurationFor(sameSentenceFrom(tokens, sentenceIds, i + span).map((tk) => tk.word.toLowerCase()));
       // Zero-past phrasal head (#59): default to the present-tense replacement, but defer to the
-      // past-tense one when the line carries an unambiguous past-time signal.
+      // past-tense one when the *same sentence* carries an unambiguous past-time signal.
       const usePastReplacement =
         match.guard === "zero-past" &&
         match.pastReplacement !== undefined &&
-        lineHasPastSignal(lowerWords);
+        lineHasPastSignal(sameSentenceAll(lowerWords, sentenceIds, i));
       const replacement = usePastReplacement ? match.pastReplacement! : match.replacement;
       out += applyCap(
         keepDurationFor ? line.slice(tok.start, spanEnd) : matchCase(tok.word, replacement),

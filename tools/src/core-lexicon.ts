@@ -13,6 +13,7 @@ import {
   standardPresentParticiple,
   standardThirdPerson,
 } from "./morphology.ts";
+import { ZERO_PAST_VERBS } from "./zero-past-verbs.ts";
 
 export type Confidence = "high" | "low";
 export type Ruling = "drop" | "keep" | "replace";
@@ -132,6 +133,7 @@ export interface AbolishedLexiconEntry {
   class: "dropped-prep" | "phrasal-verb";
   rule: "G3" | "S2";
   confidence: Confidence;
+  blockedNext?: string[];
 }
 
 /**
@@ -145,18 +147,31 @@ export interface AbolishedLexiconEntry {
  * hint stays the base form for every inflection (a suggestion, not a precise inflected guess —
  * consistent with morphology.ts's own "hint text only" contract).
  */
+function findVerbEntry(base: string): { base: string; past: string; pp?: string; homograph?: boolean } | undefined {
+  return (irregularVerbs.verbs as { base: string; past: string; pp?: string; homograph?: boolean }[]).find(
+    (v) => v.base.toLowerCase() === base.toLowerCase(),
+  );
+}
+
 export function toAbolishedEntries(lexicon: CoreLexicon = defaultLexicon): AbolishedLexiconEntry[] {
   const out: AbolishedLexiconEntry[] = [];
   for (const d of lexicon.droppedPreps) {
     if (d.ruling !== "drop") continue;
     const confidence = confidenceOf(d);
+    // A drop-verb whose irregular past/pp collides with a valid everyday reading (e.g. `spoke`)
+    // is too risky to high-confidence-flag in this shape — demote just that inflected form,
+    // mirroring buildPhraseTransforms' forward-direction homograph guard (#55).
+    const verbEntry = findVerbEntry(d.verb);
     for (const form of standardInflections(d.verb)) {
+      const isIrregularHomographForm =
+        !!verbEntry?.homograph &&
+        (form === verbEntry.past.toLowerCase() || (!!verbEntry.pp && form === verbEntry.pp.toLowerCase()));
       out.push({
         abolished: `${form} ${d.prep}`,
         woe: d.verb,
         class: "dropped-prep",
         rule: "G3",
-        confidence,
+        confidence: isIrregularHomographForm ? "low" : confidence,
       });
     }
   }
@@ -179,6 +194,7 @@ export function toAbolishedEntries(lexicon: CoreLexicon = defaultLexicon): Aboli
         class: "phrasal-verb",
         rule: "S2",
         confidence,
+        blockedNext: p.blockedNext,
       });
     }
   }
@@ -192,7 +208,7 @@ const TIME_UNITS = new Set([
   "month", "months", "year", "years", "decade", "decades", "century", "centuries",
   "moment", "moments", "while", "ages", "night", "nights",
 ]);
-const NUMBER_WORDS = new Set([
+export const NUMBER_WORDS = new Set([
   "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
   "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen",
   "nineteen", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety",
@@ -228,9 +244,7 @@ export function isDurationFor(after: string[]): boolean {
 
 // Zero-past verbs (SE past spelled like the base — see irregular-verbs.json's _comment) that
 // also head a high-confidence phrasal verb (set up, put off, cut down, shut down, split up).
-// Mirrors pos.ts's ZERO_PAST set; kept local to avoid a circular import between core-lexicon.ts
-// and pos.ts (pos.ts already imports loadCoreLexicon from here).
-const ZERO_PAST_PHRASAL_HEADS = new Set(["set", "put", "cut", "shut", "quit", "split"]);
+// Shares its source list with pos.ts's coordinated-shape auto-convert via zero-past-verbs.ts.
 
 export interface PhraseTransform {
   /** Whitespace-separated tokens of the standard-English surface form to match. */
@@ -273,9 +287,7 @@ export function buildPhraseTransforms(lexicon: CoreLexicon = defaultLexicon): Ph
     // A drop-verb that is itself an irregular verb (M1) needs its past/participle inflection
     // regularized, not passed through verbatim — otherwise the transform would silently emit an
     // abolished SE irregular form unflagged (#55: "spoke to the staff" → "spoke the staff").
-    const verbEntry = (
-      irregularVerbs.verbs as { base: string; past: string; pp?: string; homograph?: boolean }[]
-    ).find((v) => v.base.toLowerCase() === d.verb.toLowerCase());
+    const verbEntry = findVerbEntry(d.verb);
     for (const form of standardInflections(d.verb)) {
       const isIrregularPast =
         !!verbEntry &&
@@ -310,7 +322,7 @@ export function buildPhraseTransforms(lexicon: CoreLexicon = defaultLexicon): Ph
     // (#59). These verbs are deliberately absent from irregular-verbs.json (their past is
     // undetectable in isolation), so `standardPast` can't be used to detect them here — it would
     // fall through to `regularizeVerbPast` and compute a form ("setted") that never occurs in SE.
-    const isZeroPastHead = ZERO_PAST_PHRASAL_HEADS.has(head.toLowerCase());
+    const isZeroPastHead = ZERO_PAST_VERBS.has(head.toLowerCase());
     const pairs: [string, string][] = [
       [head.toLowerCase(), p.plain],
       [standardThirdPerson(head), standardThirdPerson(p.plain)],

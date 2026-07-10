@@ -1,9 +1,9 @@
 {
-  "_comment": "Source list for M1 (docs/morphology.md). Each entry gives a standard irregular verb's base / past / past-participle. The linter flags the `past` and `pp` spellings when they appear in a World-English column; the suggested WoE form is computed from `base` by regularizeVerbPast() in src/morphology.ts. `pp` is omitted when identical to `past`. `homograph: true` marks a past/pp whose spelling collides with a valid everyday word (a noun, adjective, or direction) — those are demoted to low confidence so the default sweep does not false-positive on the non-verb sense. Zero-past verbs (their SE past is spelled exactly like the valid WoE base form, so the linter cannot detect them without part-of-speech context — those entries are `past` == `base`) are ALL included below (cost, put, hit, cut, set, let, read, shut, cast, spread, burst, hurt, bet, quit, split, bid — plus beat, whose past is zero but whose participle 'beaten' is distinct) purely for reverse-translator coverage (#67): the forward pipeline's zero-past auto-convert (translate.ts's zeroPastConvert) and the zero-past phrasal-head guard (core-lexicon.ts) both regularize these to non-standard coinages (quitted, putted, setted, …), so the reverse translator needs an entry to map each coinage back to the standard past. The linter itself still skips them (past == base = undetectable).",
+  "_comment": "Source list for M1 (docs/morphology.md). Each entry gives a standard irregular verb's base / past / past-participle. The linter flags the `past` and `pp` spellings when they appear in a World-English column; the suggested WoE form is computed from `base` by regularizeVerbPast() in src/morphology.ts. `pp` is omitted when identical to `past`. `homograph: true` marks a *standard-English* past/pp whose spelling collides with a valid everyday word (a noun, adjective, or direction) — those are demoted to low confidence so the default sweep does not false-positive on the non-verb sense; this is a forward-direction (SE-scanning) concern only. `reverseCollision: true` is a separate, reverse-direction flag: it marks a verb whose *WoE-regularized* form (e.g. `seed`, `hanged`) itself collides with a valid everyday word, so the reverse translator must not guess a restoration at all (#66) — most homographs (`speaked`, `bited`, `shooted`, `beared`) don't have this problem since their WoE forms are not real words. Zero-past verbs (their SE past is spelled exactly like the valid WoE base form, so the linter cannot detect them without part-of-speech context — those entries are `past` == `base`) are ALL included below (cost, put, hit, cut, set, let, read, shut, cast, spread, burst, hurt, bet, quit, split, bid — plus beat, whose past is zero but whose participle 'beaten' is distinct) purely for reverse-translator coverage (#67): the forward pipeline's zero-past auto-convert (translate.ts's zeroPastConvert) and the zero-past phrasal-head guard (core-lexicon.ts) both regularize these to non-standard coinages (quitted, putted, setted, …), so the reverse translator needs an entry to map each coinage back to the standard past. The linter itself still skips them (past == base = undetectable).",
   "verbs": [
     { "base": "go", "past": "went", "pp": "gone" },
     { "base": "take", "past": "took", "pp": "taken" },
-    { "base": "see", "past": "saw", "pp": "seen", "homograph": true },
+    { "base": "see", "past": "saw", "pp": "seen", "homograph": true, "reverseCollision": true },
     { "base": "give", "past": "gave", "pp": "given" },
     { "base": "come", "past": "came", "pp": "come" },
     { "base": "make", "past": "made" },
@@ -99,7 +99,7 @@
     { "base": "feed", "past": "fed" },
     { "base": "bleed", "past": "bled" },
     { "base": "flee", "past": "fled" },
-    { "base": "hang", "past": "hung", "homograph": true },
+    { "base": "hang", "past": "hung", "homograph": true, "reverseCollision": true },
     { "base": "shoot", "past": "shot", "homograph": true },
     { "base": "spin", "past": "spun" },
     { "base": "stick", "past": "stuck" },
