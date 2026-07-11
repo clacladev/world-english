@@ -18,6 +18,7 @@ html {
   }
   * {
     animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
     transition-duration: 0.001ms !important;
   }
 }

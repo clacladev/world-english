@@ -107,7 +107,7 @@ verb has exactly one.
 | pay | for | keep | not dropped — real relation (*pay the waiter*, *pay for the meal*) |
 
 *wait* is still a `drop` verb — its canonical World English is **wait the bus**, same as the
-others. The `for`-vs-duration test ([item 16](to-do.md#16-constructions-surfaced-by-dogfooding-samplesmd),
+others. The `for`-vs-duration test ([item 16](to-do.md#priority-2--drafted-gaps-and-resolved-decisions),
 resolved) is handled by the **not-duration guard** in `core-lexicon.ts`: the forward translator
 drops *for* only when the following span is not a length of time, so *"wait for the bus"* →
 **wait the bus** and *"wait for three minutes"* is kept (the *for* marks a duration, per

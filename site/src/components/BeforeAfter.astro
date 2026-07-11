@@ -12,7 +12,7 @@ const { note } = Astro.props;
     <span class="ba__tag">Standard English</span>
     <p class="ba__text"><slot name="before" /></p>
   </div>
-  <div class="ba__arrow" aria-hidden="true">→</div>
+  <div class="ba__arrow" aria-hidden="true"><span class="ba__arrow-glyph">→</span></div>
   <div class="ba__col ba__col--after">
     <span class="ba__tag ba__tag--after">World English</span>
     <p class="ba__text"><slot name="after" /></p>
@@ -92,11 +92,16 @@ const { note } = Astro.props;
     .ba {
       grid-template-columns: 1fr;
     }
+    /* Rotate only the glyph — rotating the full-width divider box would paint
+       it as a tall strip over the neighbouring rows. */
     .ba__arrow {
-      transform: rotate(90deg);
       border-inline: none;
       border-block: var(--border-w) solid var(--border);
       padding-block: var(--space-1);
+    }
+    .ba__arrow-glyph {
+      display: inline-block;
+      transform: rotate(90deg);
     }
   }
 </style>

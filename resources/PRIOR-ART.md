@@ -267,7 +267,7 @@ are the **conservative subset** — which is precisely the line World English dr
      simultaneously. A dozen new pronoun forms are a one-time, front-loaded cost a learner pays
      once at the start, not a continuous tax on every word they already half-know how to spell.
   This is a considered bet, not a proven one — it has not been tested empirically the way the
-  LFC tests P3/P4/P7 (see [to-do.md item 18](../docs/to-do.md#18-lfc-research-contradictions--resolved)).
+  LFC tests P3/P4/P7 (see [to-do.md item 18](../docs/to-do.md#priority-2--drafted-gaps-and-resolved-decisions)).
   The honest position is: **the coined pronoun paradigms are the part of WoE structurally
   closest to Webster's failures**, kept deliberately because they are small, systematic, and
   front-loaded rather than because prior art endorses them.

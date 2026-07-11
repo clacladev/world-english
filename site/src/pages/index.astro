@@ -3,6 +3,15 @@ import Base from '../layouts/Base.astro';
 import BeforeAfter from '../components/BeforeAfter.astro';
 import RuleCard from '../components/RuleCard.astro';
 
+// The hook: concrete counts of what a learner no longer memorizes. Each figure
+// comes from the spec the card links to (M1, M2, G2, M4).
+const stats = [
+  { before: '≈200', after: '0', label: 'irregular verbs', href: '/rules/morphology/#rule-m1--all-verbs-are-regular', sr: 'Irregular verbs: from about 200 down to none' },
+  { before: '8', after: '3', label: 'forms of “be”', href: '/rules/morphology/#rule-m2--one-verb-of-be-regularized', sr: 'Forms of “be”: from 8 down to 3' },
+  { before: '3', after: '1', label: 'articles', href: '/rules/grammar/#rule-g2--one-article-rule', sr: 'Articles: from 3 down to 1' },
+  { before: 'dozens', after: '0', label: 'irregular plurals', href: '/rules/morphology/#rule-m4--all-plurals-are-regular', sr: 'Irregular plurals: from dozens down to none' },
+];
+
 const goals = [
   { title: 'Regular', body: 'Rules apply consistently, with as few exceptions as possible.' },
   { title: 'Predictable', body: 'Know the rule and you can produce and read new forms — nobody has to teach you each one.' },
@@ -33,6 +42,23 @@ const goals = [
         </div>
         <p class="say-card__caption">How a word is written should tell you how it is said.</p>
       </div>
+
+      <ul class="hero-stats">
+        {
+          stats.map((s) => (
+            <li class="hero-stat">
+              <a href={s.href} aria-label={s.sr}>
+                <span class="hero-stat__nums" aria-hidden="true">
+                  <s class="hero-stat__before">{s.before}</s>
+                  <span class="hero-stat__arrow" aria-hidden="true">→</span>
+                  <b class="hero-stat__after">{s.after}</b>
+                </span>
+                <span class="hero-stat__label">{s.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
 
       <div class="hero__cta">
         <a class="btn btn--primary" href="/rules/">Read the rules</a>
@@ -99,10 +125,10 @@ const goals = [
       </header>
       <p class="prio">
         Language exists for communication, so World English orders its priorities plainly:
-        <span class="prio__chain">
-          <b>ease</b> <span aria-hidden="true">›</span> <b>clarity</b>
-          <span aria-hidden="true">›</span> <b>entertainment</b>
-        </span>.
+        <span class="prio__chain"
+          ><b>ease</b> <span aria-hidden="true">›</span> <b>clarity</b>
+          <span aria-hidden="true">›</span> <b>entertainment</b></span
+        >.
         Where they conflict, the earlier one wins — which is why it trades away idiom and
         flourish. One constraint bounds all three: it must stay
         <strong>legible as English</strong>. An evolution, not a cipher.
@@ -237,6 +263,56 @@ const goals = [
     font-size: var(--text-sm);
     color: var(--text-muted);
   }
+  /* What disappears — the quantified hook under the pronunciation card */
+  .hero-stats {
+    list-style: none;
+    margin: var(--space-6) 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-2) var(--space-3);
+    font-family: var(--font-sans);
+  }
+  .hero-stat a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1rem;
+    padding: var(--space-2) var(--space-4);
+    border: var(--border-w) solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    text-decoration: none;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.15s ease, transform 0.1s ease;
+  }
+  .hero-stat a:hover {
+    border-color: var(--accent-line);
+    transform: translateY(-2px);
+  }
+  .hero-stat__nums {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    font-size: var(--text-lg);
+    line-height: 1.2;
+  }
+  .hero-stat__before {
+    color: var(--text-muted);
+  }
+  .hero-stat__arrow {
+    color: var(--accent);
+  }
+  .hero-stat__after {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .hero-stat__label {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+
   .hero__cta {
     display: flex;
     gap: var(--space-3);
@@ -244,6 +320,26 @@ const goals = [
     flex-wrap: wrap;
     margin-top: var(--space-6);
   }
+
+  /* Gentle entrance — global.css zeroes these durations under reduced motion */
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(0.6rem);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .hero__inner > * {
+    animation: hero-rise 0.5s ease-out backwards;
+  }
+  .hero__inner > :nth-child(2) { animation-delay: 0.06s; }
+  .hero__inner > :nth-child(3) { animation-delay: 0.12s; }
+  .hero__inner > :nth-child(4) { animation-delay: 0.18s; }
+  .hero__inner > :nth-child(5) { animation-delay: 0.24s; }
+  .hero__inner > :nth-child(6) { animation-delay: 0.3s; }
 
   /* Section heads — left-aligned to the section's content edge, with a readable
      measure. Headings and their intro text share the same left edge as the cards
