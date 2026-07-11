@@ -9,10 +9,10 @@ import rehypeWrapTables from './src/plugins/rehype-wrap-tables.mjs';
 // Repo root is one level up from this site/ directory.
 const repoRoot = new URL('../', import.meta.url);
 
-// Placeholder canonical URL — hosting is chosen later (see plan follow-ups).
-// Change `site` (and add `base` if deploying to a sub-path) when hosting is decided.
+// Canonical public URL — the site is served here via a reverse proxy in front of
+// Vercel. Drives canonical <link>, Open Graph/Twitter image URLs, and the sitemap.
 export default defineConfig({
-  site: 'https://world-english.example',
+  site: 'https://worldenglish.tugulab.org',
   trailingSlash: 'ignore',
   markdown: {
     remarkPlugins: [remarkGfm],

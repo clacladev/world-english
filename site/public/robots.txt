@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://world-english.example/sitemap-index.xml
+Sitemap: https://worldenglish.tugulab.org/sitemap-index.xml
