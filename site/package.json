@@ -1,0 +1,23 @@
+{
+  "name": "world-english-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "The World English (WoE) reference website — a static Astro site rendering the docs/ specs and resources/ research in place.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && pagefind --site dist",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "astro": "^5.2.5",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-slug": "^6.0.0",
+    "remark-gfm": "^4.0.0"
+  },
+  "devDependencies": {
+    "pagefind": "^1.3.0"
+  }
+}

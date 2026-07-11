@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="World English — a simpler, more regular English">
+  <rect width="1200" height="630" fill="#faf8f5"/>
+  <rect width="1200" height="12" fill="#8b2c2c"/>
+  <g font-family="Georgia, 'Times New Roman', serif" fill="#2b2b2b">
+    <text x="90" y="180" font-size="34" letter-spacing="3" fill="#8b2c2c" font-family="system-ui, sans-serif" font-weight="600">WORLD ENGLISH · WoE</text>
+    <text x="86" y="300" font-size="96" font-weight="700">A simpler, more</text>
+    <text x="86" y="404" font-size="96" font-weight="700">regular English.</text>
+    <text x="90" y="500" font-size="34" fill="#605a50">World English</text>
+    <text x="360" y="500" font-size="34" fill="#8b2c2c" font-family="ui-monospace, Menlo, monospace">→  WERLD ING-glish</text>
+  </g>
+  <text x="90" y="560" font-size="26" fill="#605a50" font-family="system-ui, sans-serif">A regular, predictable revision of English — easy to learn, still legible as English.</text>
+</svg>

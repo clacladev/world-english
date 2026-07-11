@@ -1,0 +1,100 @@
+---
+import Base from '../../layouts/Base.astro';
+import { RESEARCH_NAV } from '../../lib/nav';
+---
+
+<Base
+  title="Research"
+  description="The reasoning and evidence behind World English — what makes English hard to learn, what must be memorized, and what a century of earlier reforms tells us."
+>
+  <div class="shell page">
+    <header class="page__head measure">
+      <p class="eyebrow">Why it exists</p>
+      <h1>The research behind it</h1>
+      <p class="lede">
+        World English is a research-led design effort, not a manifesto. Every rule points back
+        to a documented learner difficulty, and every divergence from standard English is
+        weighed against what earlier reforms actually achieved. These are the source documents.
+      </p>
+    </header>
+
+    <ul class="cards">
+      {
+        RESEARCH_NAV.map((s) => (
+          <li>
+            <a class="card" href={`/research/${s.slug}/`}>
+              <h2 class="card__title">{s.title}</h2>
+              <p class="card__blurb">{s.blurb}</p>
+              <span class="card__go" aria-hidden="true">Read →</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="foot measure">
+      A standard-English grammar baseline (Brehe’s <em>Grammar Anatomy</em>) is kept in the
+      repository as a reference and is not reproduced here.
+    </p>
+  </div>
+</Base>
+
+<style>
+  .page {
+    padding-block: var(--space-8) var(--space-10);
+  }
+  .page__head {
+    margin-bottom: var(--space-8);
+  }
+  .page__head h1 {
+    font-size: var(--text-3xl);
+    margin: 0 0 var(--space-4);
+  }
+  .cards {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: var(--space-4);
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: var(--space-5);
+    background: var(--surface);
+    border: var(--border-w) solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: inherit;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.15s ease, transform 0.1s ease;
+  }
+  .card:hover {
+    border-color: var(--accent-line);
+    transform: translateY(-2px);
+  }
+  .card__title {
+    font-size: var(--text-lg);
+    margin: 0 0 var(--space-2);
+  }
+  .card__blurb {
+    margin: 0 0 var(--space-4);
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    flex: 1;
+  }
+  .card__go {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .foot {
+    margin-top: var(--space-8);
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+  }
+</style>
