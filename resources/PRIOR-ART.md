@@ -8,7 +8,10 @@
   **subsets that live inside a bounded domain survive; top-down reforms that ask everyone to
   respell or re-learn fail.** That is direct evidence for the project's own
   [design principles](../README.md#design-principles) — *subtract before you add*, *stay
-  legible*, *adopt an existing form, never coin a new one*.
+  legible* — and for
+  [O5](../docs/orthography.md#rule-o5--respell-ough-words-only-where-an-informal-form-already-exists)'s
+  own local stopping criterion, *adopt an existing informal spelling, never coin a new one*
+  (see the honest exceptions to that criterion in §B below).
 - The one place the evidence **contradicts** World English is pronunciation: Jennifer
   Jenkins' empirically-derived **Lingua Franca Core** finds the *th* sounds /θ/ and /ð/ are
   **not** needed for international intelligibility and are safely substitutable — yet
@@ -141,16 +144,30 @@ are the **conservative subset** — which is precisely the line World English dr
   American English: *color* (‹ colour), *center* (‹ centre), *-ize*, *defense/offense*,
   *traveled* (single *-l-*), *plow*, *check*. The **radical** ones **all failed**: *tho, thru,
   tung, wimmen, fether, iland* — Webster himself dropped several by 1828.
-- **Lesson for WoE.** The sharpest lesson in the whole file: **the same reformer's
+- **Lesson for WoE — corrected.** The sharpest lesson in the whole file: **the same reformer's
   conservative changes survived and radical ones died.** World English's
   [O1](../docs/orthography.md#rule-o1--one-dialect-one-spelling) adopts exactly Webster's
-  *winning* set (color/center/-ize) and its [O4](../docs/orthography.md#rule-o4--what-is-deliberately-left-alone)/[O5](../docs/orthography.md#rule-o5--respell-ough-words-only-where-an-informal-form-already-exists)
-  restraint refuses exactly his *losing* set — except *thru/tho*, which O5 permits **only
-  because they have since become common informal spellings** (the very condition Webster's
-  versions lacked in 1806).
+  *winning* set (color/center/-ize), and *thru*/*tho* are licensed by
+  [O5](../docs/orthography.md#rule-o5--respell-ough-words-only-where-an-informal-form-already-exists)
+  precisely because they have since become common informal spellings — the condition Webster's
+  1806 coinages lacked. **But it is not accurate to say WoE "refuses his losing set except
+  thru/tho."** WoE's orthography reform is broader than "avoid Webster's failures": O2 drops
+  silent etymological letters on its own criterion (worst offenders, kept to a short list), and
+  that criterion produces several respellings — *det, dout, receit, iland, suttle* — that are
+  original WoE coinages, not adopted informal spellings. *iland* in particular is a spelling
+  Webster tried and dropped; WoE's O2 revives it on different grounds (a purely silent letter),
+  not because it has informal currency today. That is a conscious trade-off, not a coincidence:
+  O2 accepts the risk Webster's radical set ran into (a coined form with no existing usage to
+  point to) for a small, curated list, betting that "short list, transparent rule, real silent
+  letter" is enough to avoid Webster's fate where "any letter that offends the eye" was not. The
+  Cut Spelling comparison below answers with a related but distinct criterion — "keep the list
+  small" — which is the same bet, not a different one, but neither O2 nor this file previously
+  said so plainly; see ["The coined-pronoun tension"](#the-coined-pronoun-tension-webster-again)
+  below for the same trade-off applied to WoE's pronoun paradigms.
 - **Bears on.** [O1](../docs/orthography.md#rule-o1--one-dialect-one-spelling) (the successful
-  subset), [O4](../docs/orthography.md#rule-o4--what-is-deliberately-left-alone)/[O5](../docs/orthography.md#rule-o5--respell-ough-words-only-where-an-informal-form-already-exists)
-  (the coinage line).
+  subset), [O2](../docs/orthography.md#rule-o2--drop-purely-silent-etymological-letters) (the
+  coinage exception, acknowledged), [O4](../docs/orthography.md#rule-o4--what-is-deliberately-left-alone)/[O5](../docs/orthography.md#rule-o5--respell-ough-words-only-where-an-informal-form-already-exists)
+  (the adopt-don't-coin line, which O2 knowingly crosses for a short list).
 
 ### Simplified Spelling Board (SSB)
 
@@ -218,6 +235,46 @@ are the **conservative subset** — which is precisely the line World English dr
   not remain, like Nuclear English, a proposal.
 - **Bears on.** The [README methodology](../README.md#methodology) and the tooling backlog
   (to-do items 11–13); the samples/regression discipline.
+
+### The coined-pronoun tension (Webster, again)
+
+- **The honest problem.** The strongest lesson in this whole section is that reforms asking the
+  public to *re-learn* something fail, and successes were *subsets* — "none asked anyone to
+  spell differently." World English's grammar breaks that pattern in one place: G4's pronoun
+  paradigm (*mes, hims, uss, yous, thems*) and G12's reflexives (*meself, hisself*) and G4's
+  plural-*you* possessive (*you all's*) are not adopted from anywhere — they are coined forms a
+  learner must memorize, in the exact structural position Webster's *tho/thru/tung/wimmen/
+  fether/iland* occupied before most of them died. The creole-convergence evidence above
+  defends WoE's *verb/tense* moves (no 3sg *-s*, preverbal negation, invariant tags, regularized
+  past) as natural endpoints of simplification, not designer inventions — but it says nothing
+  about the pronoun coinages, because no creole or interlanguage source is cited for *mes* or
+  *hisself* as a class. The "adopt an existing form, never coin" boundary
+  ([O5](../docs/orthography.md#rule-o5--respell-ough-words-only-where-an-informal-form-already-exists))
+  is also applied selectively: it was used to reject a coined question particle (kept intonation
+  instead, per P7 in §C), yet waived for the entire pronoun/reflexive system.
+- **Why WoE includes them anyway.** Three differences from Webster's failed coinages, stated
+  plainly rather than left silent:
+  1. **Small and closed.** Webster's radical set was an open-ended, word-by-word rewrite of
+     ordinary vocabulary (any word could get a new spelling); WoE's coinages are a closed
+     paradigm of a dozen or so pronoun/reflexive forms, learned once as a system rather than
+     memorized word by word.
+  2. **Systematic and derivable.** Every coined pronoun follows one visible pattern (object/
+     possessive form = subject form + *-s*; reflexive = possessive-looking form + *-self*), so
+     once a learner sees the rule they can produce the rest — unlike Webster's respellings, which
+     had to be learned one word at a time with no generative rule linking them.
+  3. **Learnable in isolation, not competing with existing habits at scale.** Webster's spellings
+     had to displace an already-automatic reading habit across the entire everyday vocabulary
+     simultaneously. A dozen new pronoun forms are a one-time, front-loaded cost a learner pays
+     once at the start, not a continuous tax on every word they already half-know how to spell.
+  This is a considered bet, not a proven one — it has not been tested empirically the way the
+  LFC tests P3/P4/P7 (see [to-do.md item 18](../docs/to-do.md#18-lfc-research-contradictions--resolved)).
+  The honest position is: **the coined pronoun paradigms are the part of WoE structurally
+  closest to Webster's failures**, kept deliberately because they are small, systematic, and
+  front-loaded rather than because prior art endorses them.
+- **Bears on.** [G4](../docs/grammar.md#rule-g4--regular-pronoun-case),
+  [G12](../docs/grammar.md#rule-g12--reflexive-pronouns),
+  [O5](../docs/orthography.md#rule-o5--respell-ough-words-only-where-an-informal-form-already-exists)
+  (the never-coin line, and its one deliberate exception).
 
 ---
 
@@ -320,6 +377,29 @@ actually helps or hurts understanding between non-native speakers. It is where p
 | Quirk's Nuclear English | **stalled** | A proposal that is never built changes nothing. Ship specs, dogfood, and tool. |
 | Jenkins' LFC | **contradicts (th, word-stress, question intonation)** | Keeping /θ/–/ð/, marking lexical stress, and load-bearing question intonation are not required for intelligibility — the tension is now **resolved** (item 18): P3/P4 kept as reading aids, P7's spoken divergence accepted. |
 | Creole / interlanguage convergence | **corroborates** | No 3rd-sg *-s*, preverbal negation, invariant tags, regularized past are what English becomes when simplified — natural, not arbitrary. |
+
+---
+
+## D. A design-principle trade-off this evidence surfaces
+
+STE's rule ("one word, one meaning," a controlled dictionary) is the closest precedent to
+[design principle 4](../README.md#design-principles), "no table of special cases to memorize" —
+but reading WoE's own [G3](../docs/grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs)
+against that precedent surfaces a gap worth recording rather than leaving implicit. G3's
+preposition-drop/keep rulings are backed by a per-verb list (31 drop / 4 keep / 2 replace rows in
+the core lexicon), and G3's prose says the moves "apply on sight." STE's dictionary is exactly
+this kind of list too — approved/non-approved words a writer looks up — and STE is a success
+story, not a counterexample; the lesson from STE is that an explicit, looked-up list is a
+legitimate tool, not a violation, *as long as it is stated and small*. Where WoE's practice
+diverges from the letter of principle 4 is narrower than "there's a hidden list": the list is
+public and versioned ([vocabulary.md](../docs/vocabulary.md) Table A), so the *acceptance
+criterion* ("no *hidden* word list") is met. But "apply on sight" overstates what a learner can
+actually do without consulting that list — *depend on* drops its preposition, *agree with* keeps
+it, and nothing about the verb's shape predicts which. That is a real, if narrow, gap between the
+principle's letter and the rule's practice, and it should be named as a trade-off rather than
+asserted away: WoE accepts an explicit, lookup-based exception list for prepositions (STE's
+method) while describing the result in language ("on sight") that promises more than a lookup
+system can deliver.
 
 ---
 

@@ -99,6 +99,14 @@ accept to hold "one sound, one spelling."
 YES, *computer* → kom-PYOO-ter). The two never compete — a glide cannot be a syllable's
 vowel — so position tells them apart, exactly as it does in English *my* vs *yes*.
 
+**Parsing a respelling.** A respelling is read by **longest match** against this grapheme
+inventory: scan left to right and, at each position, take the longest sequence that matches
+a defined consonant, digraph, vowel, or r-colored vowel spelling before falling back to a
+shorter one (so `th` is read as the single digraph /θ/, not `t` + `h`). **Hyphens** are
+inserted only where the longest-match reading would otherwise misparse a boundary — the
+same job they already do for syllable and digraph boundaries (see
+[P3](#rule-p3--th-is-split-in-the-key)'s *mishap* → MIS-hap example) — never as decoration.
+
 **Divergence & trade-off.** This alphabet governs the *respelling*, not the base
 orthography — so the page still reads as English while the key stays perfectly phonetic.
 
@@ -234,8 +242,10 @@ always understood.
 **Rule.** Pitch is load-bearing only where **no word already marks the meaning** — and there is
 exactly one such place: the **yes/no question**. It has no question word (World English dropped
 do-support and inversion), so `You like it` and its question are segmentally identical, and
-**rising intonation** in speech — plus a **leading `?`** in writing — is the *only* thing that
-tells them apart (see [grammar.md G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)).
+**rising intonation** in speech — plus a **leading `?`** in writing — is **one of the primary
+markers** that tells them apart, alongside the optional tag *right?*
+([grammar.md G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)) as a
+segmental alternative a speaker may add instead of, or in addition to, the pitch rise.
 A **wh-question is already marked by its wh-word** (*who, what, where…*), so pitch there is
 redundant: it is **permitted for naturalness but never required**, and English wh-questions
 naturally *fall* like statements anyway. Everywhere else — statements, negation, emphasis,
@@ -327,13 +337,16 @@ their stress openly — nothing to guess (kom-**PYOO**-ter, uh-**BOWT**).
 
 This is a valid World English sentence — regular past *gived* ([M1](morphology.md#rule-m1--all-verbs-are-regular),
 silent-*e* stem adds *-d*) and no indefinite article before *book*
-([G2](grammar.md#rule-g2--one-article-rule)):
+([G2](grammar.md#rule-g2--one-article-rule)). The clause order is chosen deliberately to
+keep *book* away from *child* — a dropped article can leave two adjacent bare nouns
+momentarily ambiguous as a single compound (*child book*), so the object is moved to a
+final *to*-phrase instead of sitting next to the other noun:
 
-> *The doctor gived the young child book about birds.*
+> *The doctor gived book about birds to the young child.*
 
-**Respelling:** dhuh **DOK**-ter **GIVD** dhuh **YUNG** **CHYLD** **BUUK** uh-**BOWT** **BERDZ**
+**Respelling:** dhuh **DOK**-ter **GIVD** **BUUK** uh-**BOWT** **BERDZ** too dhuh **YUNG** **CHYLD**
 
-**IPA:** /ðə ˈdɑktɚ ɡɪvd ðə jʌŋ tʃaɪld bʊk əˈbaʊt bɝdz/
+**IPA:** /ðə ˈdɑktɚ ɡɪvd bʊk əˈbaʊt bɝdz tu ðə jʌŋ tʃaɪld/
 
 The function word *the* sits unstressed and lowercase; the content words carry the
 CAPITAL-marked stress. Reading it exactly like this — each word at full value — is **always
@@ -351,13 +364,20 @@ in the key, per [P3](#rule-p3--th-is-split-in-the-key)); every word *not* respel
 (*knight* → NYT, *thought*-as-retained) is still fully covered by its entry here.
 
 **Homographs are the one residue.** A handful of words are spelled the same but said two
-ways — *lead* (the metal, LED) vs *lead* (guide, LEED); *read* (present, REED) vs *read*
-(past, RED). These keep **two key entries**, and context selects which applies — the reader
-knows *the pipe is lead* is LED, not LEED. So the guarantee is precise: every *word* has a
-predictable pronunciation, and the only place a reader must consult context is this small,
-closed set of retained homographs — recorded here as known residue (it is the pronunciation
+ways — *lead* (the metal, LED) vs *lead* (guide, LEED); *singed* (past of *sing*, SINGD) vs
+*singed* (past of *singe*, SINJD); *seed* (past of *see*, SEED) vs *seed* (the plant noun,
+SEED — spelled and said the same, so it is a true homograph *and* homophone pair
+disambiguated only by context, e.g. *the plant seed* vs *he seed the plant*). These keep
+**two key entries** each, and context selects which applies — the reader knows *the pipe is
+lead* is LED, not LEED. Note that standard English's *read* (present, REED) / *read* (past,
+RED) pair does **not** survive as a homograph here: [M1](morphology.md#rule-m1--all-verbs-are-regular)
+spells the past of *read* as *readed*, so only REED ever attaches to the spelling *read* in
+valid World English text — *readed* is its own, unambiguous word. So the guarantee is
+precise: every *word* has a predictable pronunciation, and the only place a reader must
+consult context is this small, closed set of retained homographs — *lead/lead*,
+*singed/singed*, *seed/seed* — recorded here as known residue (it is the pronunciation
 mirror of the homographs [orthography O4](orthography.md#rule-o4--what-is-deliberately-left-alone)
-keeps distinct in spelling).
+keeps distinct in spelling, plus the new pairs M1's regular verb morphology creates).
 
 ---
 

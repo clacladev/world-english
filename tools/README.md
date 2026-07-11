@@ -19,7 +19,11 @@ up*), and so on.
 This is the class of mistake the point-4 critique found by hand — a standard form sitting in
 a World-English column — and the reason the linter was pulled forward to Priority 1: per the
 [README methodology](../README.md#methodology), a rule is only "done" when *its example
-columns pass this sweep*. It is meant to run in CI so a spec edit that reintroduces an
+columns pass this sweep*. (Editorial note: this refers to point 4 of a critique document from
+PR #7, which addressed "points 2–6" of that critique. The critique document itself was never
+committed, and what point 1 was — fixed, rejected, or simply not written down — is lost to
+history; it cannot be reconstructed from the repository and this note does not attempt to
+invent content for it.) It is meant to run in CI so a spec edit that reintroduces an
 abolished form fails the build.
 
 ### Run
@@ -109,7 +113,7 @@ bun run translate --reverse --json
   its participle (`seed` → `saw`, flagged "past/participle collapsed").
 - **G3 dropped prepositions restore the same way** — a second per-line pass (after word-level
   restoration) checks whether a restored token is a core-lexicon drop verb (`listen`, `wait`,
-  `depend`, `look`, and the rest of the sweep's 35); if the next word isn't stoplisted, it
+  `depend`, `look`, and the rest of the sweep's 37); if the next word isn't stoplisted, it
   inserts the verb's canonical preposition and **always flags it**, since the drop is lossy and
   nothing proves the object reading was meant. The stoplist (prepositions, conjunctions, common
   place/time/degree adverbs, `-ly` words) is what keeps a duration phrase like *"wait for three
@@ -265,8 +269,15 @@ dataset is authored here. It is also the seed for the deferred **reverse transla
 
 - **`irregular-verbs.json`** — `{ base, past, pp }` triples (M1). The flagged forms are `past`
   and `pp`; the suggested World-English form is computed from `base` by
-  `regularizeVerbPast()`. Zero-past verbs (*cost*, *put*, *read*) are omitted — their past is
-  spelled like the valid base, so they can't be detected without part-of-speech context.
+  `regularizeVerbPast()`. Most zero-past verbs (*cost*, *put*, *hit*, *cut*, *set*, *shut*,
+  *quit*, *split*) have no row in the file at all: their past is spelled like the valid base, so
+  they can't be detected without part-of-speech context. Three verbs whose past also equals the
+  base — *let*, *read*, *beat* — **do** have a row, but `src/dataset.ts` still skips adding a
+  detectable form for the `past` value when it matches `base` (same undetectability reason), so
+  `let` and `read` contribute no flaggable form either; only `beat`'s distinct participle
+  (`beaten`) is actually detected. In short: the *dataset file* contains `let`/`read`/`beat`,
+  but functionally they are just as undetectable as the omitted verbs, with `beat` alone
+  contributing one flaggable form (`beaten`, not `beat`).
 - **`irregular-plurals.json`** — `{ singular, plural }` pairs (M4); WoE form computed by
   `regularizePlural()`. Zero-plurals (*sheep*) omitted for the same reason.
 - **`abolished-forms.json`** — directly-authored `abolished → woe` pairs for every other
@@ -307,8 +318,9 @@ word. Re-run `bun test`.
   adjectives out (`he was tired and hurt`, `the red and cut flowers` are left untouched); every
   other occurrence is left alone.
 - **Only World-English *columns* and sample blockquotes are scanned**, not arbitrary prose
-  (which legitimately names abolished forms when explaining them). `--strict` additionally
-  reads bolded forms in `**Examples.**` prose.
+  (which legitimately names abolished forms when explaining them). `--strict` does not change
+  *what* is scanned — extraction scope is the same in both modes — it only turns on the
+  low-confidence, POS-dependent classes described under [Confidence](#confidence) above.
 - **The forward translator applies only high-precision transforms.** It has no full POS tagger
   or parser; beyond the deterministic closed-class substitutions it adds a few **conservative,
   low-recall** syntactic detectors (`src/pos.ts`), each firing only on one unambiguous shape and
@@ -319,8 +331,9 @@ word. Re-run `bun test`.
   generic-`the` → bare plural (needs semantics), separated phrasals (`give it up`), and any
   non-coordinated zero-past. It also can only convert forms the dataset or lexicon actually
   carry: a phrasal/dropped-prep pair the sweep hasn't reached passes through untouched. `wait
-  for` is a deliberate exception even though it's in the lexicon — see
-  [above](#the-core-lexicon-item-8).
+  for` is **not** an exception — the forward translator does handle it, via the not-duration
+  guard described [above](#the-core-lexicon-item-8): `wait for the bus` auto-translates and
+  `wait for three minutes` is correctly left alone.
 - **The reverse translator restores what the dataset and lexicon carry, and only that.** A
   dropped preposition not in the lexicon's `droppedPreps`, or a form outside the dataset, is
   left untouched. Phrasal verbs are never restored (their plain replacements are
@@ -331,7 +344,7 @@ word. Re-run `bun test`.
   pairings that passed a real collision check earned a row (see
   [the sweep methodology](#the-core-lexicon-item-8)); many plausible candidates were deliberately
   left out because they were too risky to auto-transform, not because they don't exist.
-- **The pronunciation lexicon is a seed.** It carries only the ~40 gold words in
+- **The pronunciation lexicon is a seed.** It carries only the 66 entries (64 distinct words) in
   `pronunciation.md`; any other word is emitted verbatim and flagged, not guessed. It grows
   frequency-first, mirroring `vocabulary.md`'s seed convention.
 - **Audio needs an external synthesizer.** `--audio` drives `espeak-ng`, which is not bundled;

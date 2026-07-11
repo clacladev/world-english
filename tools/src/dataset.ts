@@ -21,6 +21,8 @@ export interface AbolishedEntry {
   /** Source spec rule, e.g. "M1", "O1", "G3". */
   rule: string;
   confidence: Confidence;
+  /** Do not fire when the very next token is one of these (mirrors PhrasalVerb.blockedNext, #58). */
+  blockedNext?: string[];
 }
 
 interface RawEntry {
@@ -66,8 +68,16 @@ export function loadDataset(): Dataset {
     const form = entry.abolished.toLowerCase();
     if (form.includes(" ")) {
       phrases.push({ tokens: form.split(/\s+/), entry: { ...entry, abolished: form } });
-    } else if (!words.has(form)) {
-      // First definition wins; keeps the dataset deterministic despite any duplicate source rows.
+      return;
+    }
+    const existing = words.get(form);
+    if (!existing) {
+      words.set(form, { ...entry, abolished: form });
+    } else if (existing.confidence === "low" && entry.confidence === "high") {
+      // A duplicate source row for the same surface form: never let a low-confidence definition
+      // silently shadow a high-confidence one (#72) — the higher-confidence row always wins,
+      // regardless of which was authored first. Two same-confidence duplicates keep the first,
+      // for a deterministic result.
       words.set(form, { ...entry, abolished: form });
     }
   };
@@ -91,6 +101,7 @@ export function loadDataset(): Dataset {
       class: raw.class,
       rule: raw.rule,
       confidence: confidenceOf(raw),
+      blockedNext: raw.blockedNext,
     });
   }
 

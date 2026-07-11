@@ -13,6 +13,7 @@ import {
   standardPresentParticiple,
   standardThirdPerson,
 } from "./morphology.ts";
+import { ZERO_PAST_VERBS } from "./zero-past-verbs.ts";
 
 export type Confidence = "high" | "low";
 export type Ruling = "drop" | "keep" | "replace";
@@ -37,6 +38,14 @@ export interface PhrasalVerb {
   rank?: number;
   note?: string;
   confidence?: Confidence;
+  /**
+   * Standard-English words that, immediately following the phrasal, signal the OTHER (usually
+   * intransitive) reading the machine replacement doesn't cover — e.g. "run out" (exhaust) is
+   * transitive, but "run out **of** milk" is the dominant intransitive idiom (#58). When the next
+   * token is one of these, the transform does not fire, leaving the sentence untranslated rather
+   * than mistranslating it.
+   */
+  blockedNext?: string[];
 }
 
 export interface SensePreference {
@@ -124,34 +133,70 @@ export interface AbolishedLexiconEntry {
   class: "dropped-prep" | "phrasal-verb";
   rule: "G3" | "S2";
   confidence: Confidence;
+  blockedNext?: string[];
 }
 
 /**
  * Merge droppedPreps (ruling: "drop") and phrasalVerbs into the abolished-forms shape
  * dataset.ts's loadDataset() consumes, replacing the rows that used to be directly authored in
  * abolished-forms.json.
+ *
+ * Emits every inflected surface form (base, 3sg, -ing, past, pp), not just the base — #70: without
+ * this, "she listened to the radio" produced no linter finding at all, even though the translator
+ * side (core-lexicon.ts's buildPhraseTransforms) has always handled inflected forms. The `woe`
+ * hint stays the base form for every inflection (a suggestion, not a precise inflected guess —
+ * consistent with morphology.ts's own "hint text only" contract).
  */
+function findVerbEntry(base: string): { base: string; past: string; pp?: string; homograph?: boolean } | undefined {
+  return (irregularVerbs.verbs as { base: string; past: string; pp?: string; homograph?: boolean }[]).find(
+    (v) => v.base.toLowerCase() === base.toLowerCase(),
+  );
+}
+
 export function toAbolishedEntries(lexicon: CoreLexicon = defaultLexicon): AbolishedLexiconEntry[] {
   const out: AbolishedLexiconEntry[] = [];
   for (const d of lexicon.droppedPreps) {
     if (d.ruling !== "drop") continue;
-    out.push({
-      abolished: `${d.verb} ${d.prep}`,
-      woe: d.verb,
-      class: "dropped-prep",
-      rule: "G3",
-      confidence: confidenceOf(d),
-    });
+    const confidence = confidenceOf(d);
+    // A drop-verb whose irregular past/pp collides with a valid everyday reading (e.g. `spoke`)
+    // is too risky to high-confidence-flag in this shape — demote just that inflected form,
+    // mirroring buildPhraseTransforms' forward-direction homograph guard (#55).
+    const verbEntry = findVerbEntry(d.verb);
+    for (const form of standardInflections(d.verb)) {
+      const isIrregularHomographForm =
+        !!verbEntry?.homograph &&
+        (form === verbEntry.past.toLowerCase() || (!!verbEntry.pp && form === verbEntry.pp.toLowerCase()));
+      out.push({
+        abolished: `${form} ${d.prep}`,
+        woe: d.verb,
+        class: "dropped-prep",
+        rule: "G3",
+        confidence: isIrregularHomographForm ? "low" : confidence,
+      });
+    }
   }
   for (const p of lexicon.phrasalVerbs) {
     const woe = [p.plain, ...(p.alternates ?? [])].join(" / ");
-    out.push({
-      abolished: p.phrasal,
-      woe,
-      class: "phrasal-verb",
-      rule: "S2",
-      confidence: confidenceOf(p),
-    });
+    const confidence = confidenceOf(p);
+    const particleTokens = p.phrasal.split(/\s+/).slice(1);
+    const head = p.phrasal.split(/\s+/)[0]!;
+    const headForms = new Set([
+      head.toLowerCase(),
+      standardThirdPerson(head),
+      standardPresentParticiple(head),
+      standardPast(head),
+      standardPastParticiple(head),
+    ]);
+    for (const hf of headForms) {
+      out.push({
+        abolished: [hf, ...particleTokens].join(" "),
+        woe,
+        class: "phrasal-verb",
+        rule: "S2",
+        confidence,
+        blockedNext: p.blockedNext,
+      });
+    }
   }
   return out;
 }
@@ -163,9 +208,11 @@ const TIME_UNITS = new Set([
   "month", "months", "year", "years", "decade", "decades", "century", "centuries",
   "moment", "moments", "while", "ages", "night", "nights",
 ]);
-const NUMBER_WORDS = new Set([
+export const NUMBER_WORDS = new Set([
   "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
-  "eleven", "twelve", "twenty", "thirty", "forty", "fifty", "hundred",
+  "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen",
+  "nineteen", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety",
+  "hundred", "thousand", "million",
   "few", "several", "couple", "many",
 ]);
 // Single words that are a whole span on their own: "for now", "for ever". ("for good" is
@@ -195,6 +242,10 @@ export function isDurationFor(after: string[]): boolean {
   return false;
 }
 
+// Zero-past verbs (SE past spelled like the base — see irregular-verbs.json's _comment) that
+// also head a high-confidence phrasal verb (set up, put off, cut down, shut down, split up).
+// Shares its source list with pos.ts's coordinated-shape auto-convert via zero-past-verbs.ts.
+
 export interface PhraseTransform {
   /** Whitespace-separated tokens of the standard-English surface form to match. */
   tokens: string[];
@@ -207,8 +258,18 @@ export interface PhraseTransform {
    * Set on every dropped `for` (G3 "for" test, to-do.md item 16): drop the object-for
    * (*wait for the bus* → *wait the bus*) but keep the duration-for (*wait for three
    * minutes*). translate.ts's substituteLine evaluates the guard.
+   *
+   * "zero-past": the matched surface form is a zero-past phrasal head (set/put/cut/shut/quit/
+   * split up — SE past spelled like the base, #59), so `replacement` is the present-tense WoE
+   * form and `pastReplacement` is the past-tense WoE form. translate.ts picks `pastReplacement`
+   * when the line carries an unambiguous past-time signal (yesterday, ago, already, last
+   * night/week/…), otherwise defaults to the present-tense reading.
    */
-  guard?: "not-duration";
+  guard?: "not-duration" | "zero-past";
+  /** Past-tense WoE replacement for a "zero-past" guarded transform. */
+  pastReplacement?: string;
+  /** Do not fire when the very next token is one of these (see PhrasalVerb.blockedNext, #58). */
+  blockedNext?: string[];
 }
 
 /**
@@ -223,7 +284,31 @@ export function buildPhraseTransforms(lexicon: CoreLexicon = defaultLexicon): Ph
     if (confidenceOf(d) !== "high") continue;
     if ((d.forward ?? "apply") === "flag") continue;
     const guard = d.prep === "for" ? ("not-duration" as const) : undefined;
+    // A drop-verb that is itself an irregular verb (M1) needs its past/participle inflection
+    // regularized, not passed through verbatim — otherwise the transform would silently emit an
+    // abolished SE irregular form unflagged (#55: "spoke to the staff" → "spoke the staff").
+    const verbEntry = findVerbEntry(d.verb);
     for (const form of standardInflections(d.verb)) {
+      const isIrregularPast =
+        !!verbEntry &&
+        (form === verbEntry.past.toLowerCase() ||
+          (!!verbEntry.pp && form === verbEntry.pp.toLowerCase()));
+      if (isIrregularPast) {
+        // The verb's irregular past/participle collides with a valid everyday reading (e.g.
+        // `spoke` is also homograph-flagged in the dataset) — too risky to guess-translate in
+        // this shape, so leave the phrase unhandled rather than emit the abolished form.
+        if (verbEntry!.homograph) continue;
+        // Otherwise the WoE past is a deterministic M1 regularization — apply it, not the verbatim
+        // SE irregular spelling.
+        out.push({
+          tokens: [form, d.prep],
+          replacement: regularizeVerbPast(d.verb),
+          class: "dropped-prep",
+          rule: "G3",
+          guard,
+        });
+        continue;
+      }
       out.push({ tokens: [form, d.prep], replacement: form, class: "dropped-prep", rule: "G3", guard });
     }
   }
@@ -232,6 +317,12 @@ export function buildPhraseTransforms(lexicon: CoreLexicon = defaultLexicon): Ph
     if (confidenceOf(p) !== "high") continue;
     const particleTokens = p.phrasal.split(/\s+/).slice(1);
     const head = p.phrasal.split(/\s+/)[0]!;
+    // A zero-past head (set/put/cut/shut/quit/split up, …) has an SE past spelled exactly like
+    // its base, so the base-form pair below is reached by BOTH present- and past-tense uses
+    // (#59). These verbs are deliberately absent from irregular-verbs.json (their past is
+    // undetectable in isolation), so `standardPast` can't be used to detect them here — it would
+    // fall through to `regularizeVerbPast` and compute a form ("setted") that never occurs in SE.
+    const isZeroPastHead = ZERO_PAST_VERBS.has(head.toLowerCase());
     const pairs: [string, string][] = [
       [head.toLowerCase(), p.plain],
       [standardThirdPerson(head), standardThirdPerson(p.plain)],
@@ -243,11 +334,15 @@ export function buildPhraseTransforms(lexicon: CoreLexicon = defaultLexicon): Ph
     for (const [headForm, plainForm] of pairs) {
       if (seen.has(headForm)) continue;
       seen.add(headForm);
+      const zeroPastBase = isZeroPastHead && headForm === head.toLowerCase();
       out.push({
         tokens: [headForm, ...particleTokens],
         replacement: plainForm,
         class: "phrasal-verb",
         rule: "S2",
+        guard: zeroPastBase ? "zero-past" : undefined,
+        pastReplacement: zeroPastBase ? regularizeVerbPast(p.plain) : undefined,
+        blockedNext: p.blockedNext,
       });
     }
   }

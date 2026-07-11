@@ -27,29 +27,39 @@ Rule keys: `O*` [orthography](orthography.md) · `P*` [pronunciation](pronunciat
 **World English**
 
 > The mayor announced yesterday that the city builded new hospital. It beed designed by
-> famous architect and costed fifty million dollars. Officials say it will open on September.
-> Many residents wait gooder health care for years.
+> famous architect and costed fifty million dollars. Officials say that it will open on
+> September. Many residents wait gooder health care for years.
 
 **Annotations**
 
 1. *…the city builded new hospital.* — `[M1]` build → **builded** · `[G1]` present perfect
-   → simple past (finished action; `yesterday` already carries the past reference) · `[G2]`
-   drop indefinite article (*a new hospital* → **new hospital**) · `[G14]` content clause:
-   complementizer **that** kept after *announced*. *announced* is already regular (`[M1]`, no
-   change).
+   *finished action* → simple past (the hospital is already complete; the tense is licensed by
+   the content clause's own finished-ness, not by *yesterday*, which is the **matrix** clause's
+   time word for *announced*) · `[G2]` drop indefinite article (*a new hospital* →
+   **new hospital**) · `[G14]` content clause: complementizer **that** kept after *announced*.
+   *announced* is already regular (`[M1]`, no change).
 2. *It beed designed by famous architect and costed fifty million dollars.* — `[G9]` passive
    *be + -ed* (**beed designed**) · `[M2]` was → **beed** · `[G2]` drop *a* · `[M1]` cost →
    **costed** (no more zero-past).
-3. *Officials say it will open on September.* — `[M4]` official → **officials** · `[G7]`
-   future **will** kept · `[G3]` time preposition defaults to **on** (*in September* →
+3. *Officials say that it will open on September.* — `[M4]` official → **officials** ·
+   `[G14]` content clause: complementizer **that** kept after *say* — always kept, never
+   dropped, so *Officials say **that** it will open* (not *officials say it will open*) ·
+   `[G7]` future **will** kept · `[G3]` time preposition defaults to **on** (*in September* →
    **on September**).
-4. *Many residents wait gooder health care for years.* — `[G5]` **many** (all nouns count) ·
-   `[M4]` **residents** · `[G1]` present perfect *still ongoing* → **present tense** (they
-   are still waiting) · `[G3]` drop verb-selected *for* (*wait for X* → **wait X**) · `[M5]`
-   better → **gooder** · `[S5]` duration keeps **for** (*for years*).
+4. *Many residents wait gooder health care for years.* — `[M4]` **residents** (already standard
+   English here — *many residents* needed no `[G5]` transformation; `[G5]` fires only where an
+   uncountable noun is forced to count, which does not happen in this sentence) · `[G1]`
+   present perfect *still ongoing* → **present tense** (they are still waiting) · `[G3]` drop
+   verb-selected *for* (*wait for X* → **wait X**) · `[M5]` better → **gooder** · `[S5]`
+   duration keeps **for** (*for years*).
    ✅ **Resolved** ([G3 *for* test](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs)):
    *wait X* (dropped object-*for*) and *for years* (kept duration-*for*) both follow the rule —
    keep *for* only before a length of time, drop it otherwise.
+   **Legibility note.** This sentence stacks three reforms at once — transitive *wait*
+   (dropped object-*for*), the present-for-still-true mapping, and the kept duration *for* —
+   and the result is the corpus's hardest sentence to parse: an English reader's first pass
+   reads *wait* as intransitive and stumbles on the bare NP *gooder health care* before
+   recovering. Recorded here as a real legibility cost of combining reforms, not smoothed over.
 
 ---
 
@@ -144,7 +154,7 @@ Rule keys: `O*` [orthography](orthography.md) · `P*` [pronunciation](pronunciat
 3. *The food beed gooder than I expected, and the persons beed very kind.* — `[M2]`
    was/were → **beed** · `[M5]` better → **gooder** · `[M4]` people → **persons** · `[M1]`
    expect → **expected**.
-4. *Mes son sayed it beed the goodest trip of hims life.* — `[G4]` my → **mes**, his →
+4. *Mes son sayed that it beed the goodest trip of hims life.* — `[G4]` my → **mes**, his →
    **hims** · `[M1]` say → **sayed** · `[M2]` was → **beed** · `[M5]` best → **goodest** ·
    `[G14]` reported speech: complementizer **that** kept, natural tense (no backshift) ·
    `[G10]` keep **of** — a fixed superlative frame (*trip of hims life*), not a possession, so
@@ -173,14 +183,22 @@ Rule keys: `O*` [orthography](orthography.md) · `P*` [pronunciation](pronunciat
 **Annotations**
 
 1. *You all worked more quickly this year, so more of you all passed the test.* — `[G4]`
-   plural *you* → **you all** (subject and object alike) · `[M1]` **worked** / **passed**
+   plural *you* → **you all**, subject and object alike; the subject *you all* is already the
+   SE original's form (no transformation there), so the actual `[G4]` transformation in this
+   sentence is the **object** *of you* → **of you all** · `[M1]` **worked** / **passed**
    (already regular) · `[M5]` `-ly` adverb comparative via the **optional *more/most* escape
    hatch** (*more quickly* kept, over the regular *quicklier*) · `[M5]` quantifier **more of**
-   (escape hatch, over the regular *manyer of*) · `[G15]` *so* (result) subordinator.
+   (escape hatch, over the regular *manyer of*) · `[G15]` *so* (result) subordinator · `[S7]`
+   the comparative phrase **more quickly** stays in its natural **post-verb** position (*worked
+   more quickly*), the stated exception to S7's single-word pre-verb slot for multi-word
+   comparative adverb phrases — fronting it (*more quickly worked*) would read worse than the
+   order it replaces.
 2. *Next time, plan more carefully.* — `[M5]` `-ly` adverb comparative, again the **escape
-   hatch** *more carefully* (over *carefullier*). This passage exercises item-17: `you all`
-   plus the optional `more/most` hatch — *more/most* is valid World English, so the linter
-   does not flag it.
+   hatch** *more carefully* (over *carefullier*) · `[S7]` **more carefully** likewise stays
+   post-verb under the same comparative-adverb-phrase exception · `[S7]` the time adjunct
+   **Next time** is **fronted** for topicalization, a licensed option (clause-final is only the
+   unmarked position). This passage exercises item-17: `you all` plus the optional `more/most`
+   hatch — *more/most* is valid World English, so the linter does not flag it.
 
 ---
 
@@ -207,9 +225,9 @@ reference.
 > to study. The library offer three things: fast internet, long hours, and many books. Students
 > use the library every day.
 >
-> The building beed expensive. But the university think it beed worth the cost. Donors gived most
-> of the money, so tuition stayed low. Also, the library created many jobs. For example, the
-> library hired twenty students last term.
+> The university think that the building beed worth the cost. But the building beed expensive.
+> Donors gived most of the money, so tuition stayed low. Also, the library created many jobs.
+> For example, the library hired twenty students last term.
 
 **Annotations**
 
@@ -221,22 +239,31 @@ reference.
    **builded** · `[G2]` drop *a* (**quiet place**) · `[W5]`/`[G15]` explicit **because** carries
    the reason · `[G13]` *to study* plain infinitive.
 3. *The library offer three things: fast internet, long hours, and many books.* — `[W1]` the
-   **colon** is kept — a **list** follows — with the always-present serial comma · `[G5]`
-   **many** (all nouns count) · `[M4]` **hours**/**books** · third-person *offers* → **offer**
+   **colon** is kept — a **list** follows — with the always-present serial comma · `[M4]`
+   **hours**/**books** (*many books* was already standard English here — no `[G5]`
+   transformation fires; `[G5]` matters only where an uncountable noun is forced to count,
+   which isn't the case for *books*) · third-person *offers* → **offer**
    ([M3](morphology.md), no agreement).
 4. *Students use the library every day.* — `[W6]` **repeat the noun** *the library* instead of
    the elegant variation *the facility*.
 
-*Paragraph 2 — one idea (it was worth the cost).*
+*Paragraph 2 — one idea (the building was worth the cost), point first.*
 
-5. *The building beed expensive.* — `[M2]` was → **beed** · `[W3]`/`[W4]` topic sentence leads.
-6. *But the university think it beed worth the cost.* — `[W1]` the standard **semicolon** is
-   abolished → new sentence · `[W5]` *however* → **but** (one connective per relation) · `[M2]`
-   was → **beed** · third-person *thinks* → **think** ([M3](morphology.md)).
-7. *Donors gived most of the money, so tuition stayed low.* — `[M1]` give → **gived** · `[W5]`
+5. *The university think that the building beed worth the cost. But the building beed
+   expensive.* — `[W3]`/`[W4]` topic sentence leads with the paragraph's one idea — **worth the
+   cost** — instead of the SE original's concession-first order (*The building was expensive;
+   however…*); the concession now follows as the paragraph's second, supporting sentence, as
+   point-first requires · `[G14]` content clause: complementizer **that** kept after *think* ·
+   `[W1]` the standard **semicolon** is abolished → two sentences · `[W5]` *however* → **but**
+   (one connective per relation) · `[M2]` was → **beed** (twice) · third-person *thinks* →
+   **think** ([M3](morphology.md)) · `[W6]` **the building** is repeated instead of a pronoun
+   *it* in the first sentence — the semicolon's collapse into two clauses puts *the university*
+   nearer to any pronoun than *the building*, so W6's nearest-antecedent rule requires the noun,
+   not *it*, here.
+6. *Donors gived most of the money, so tuition stayed low.* — `[M1]` give → **gived** · `[W5]`
    result connective **so**, with the `[W1]` comma before a coordinator joining two independent
    clauses.
-8. *Also, the library created many jobs. For example, the library hired twenty students last
+7. *Also, the library created many jobs. For example, the library hired twenty students last
    term.* — `[W5]` addition **also** and illustration **for example** · `[W6]` *it* → **the
    library** repeated for an unmistakable reference · `[M1]` **created**/**hired** (already
    regular).
@@ -346,6 +373,48 @@ each rendered by G1's one deterministic test (*still true?* → tense) plus an
 This passage needed no construction the specs do not cover — every tense-aspect case resolved
 by [G1](grammar.md#rule-g1--a-leaner-tenseaspect-system)'s *still-true?* test plus an
 [S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect) time word.
+
+---
+
+## Passage 9 — Short exchange (closes dogfooding blind spots)
+
+Review 2's Theme 6 audit found that Passages 1–8 never exercise several rules at all — most
+notably **G11 relative clauses** (the largest single blind spot), G10's `'s` possessive, a
+wh-question, a `will`/`would` result clause, and a real *much → many* substitution. This short
+passage targets exactly those gaps; it is not a narrative, just a compact set of sentences
+built to fire the rules the rest of the corpus never touches.
+
+**Standard English**
+
+> Where do you live now? Sara's neighbor is the man we met last year. If you have much
+> homework, you will stay home. Many visitors listen to music while they wait for the bus.
+
+**World English**
+
+> ?Where you live now? Sara's neighbor be the man that we meeted last year. If you have many
+> homeworks, you will stay home. Many visitors listen music while they wait the bus.
+
+**Annotations**
+
+1. *?Where you live now?* — `[G6]` **wh-question**: the question word **where** moves to the
+   front, no dummy *do*, and the rest keeps normal SVO order (*you live now*, not *do you live*).
+2. *Sara's neighbor be the man that we meeted last year.* — `[G10]` the noun possessive **'s**
+   is kept unchanged (**Sara's**) — the one construction that still takes an apostrophe, unlike
+   the apostrophe-less pronoun possessive elsewhere in this file (`[G4]`: *mes*, *hims*) ·
+   `[G11]` **relative clause**: invariant **that** introduces the clause and is kept even though
+   standard English drops it here (the SE original's zero relative *the man we met* has no
+   relativizer at all) · `[M1]` meet → **meeted** · `[M2]` is → **be**.
+3. *If you have many homeworks, you will stay home.* — `[G5]` determiner **much → many**
+   (*much homework* → **many homeworks**; *homework* pluralizes like every other noun now that
+   the uncountable category is removed) · `[G8]` **predictive conditional**: the *if*-clause
+   stays present tense and the result clause marks a real/expected outcome with **will**.
+4. *Many visitors listen music while they wait the bus.* — `[G3]` drop the verb-selected
+   preposition twice: *listen to* → **listen**, *wait for* → **wait** (the bus is the thing
+   awaited, not a duration, so the not-duration guard drops *for* — see the item-16/G3 *for*
+   test) · `[G15]` **while** (time — during), trailing clause, no comma.
+
+This passage needed no construction the specs do not cover; it exists to close the blind spots
+[review.md](review.md) issue #46 identified, not to showcase a new one.
 
 ---
 

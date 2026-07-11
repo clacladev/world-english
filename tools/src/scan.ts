@@ -39,10 +39,25 @@ function isAllowed(file: string, form: string, allow: AllowEntry[]): boolean {
   );
 }
 
-/** Lowercased word tokens, keeping their position so we can match multi-word phrases. */
-function tokenize(text: string): string[] {
-  const matches = text.toLowerCase().match(/[a-z]+(?:'[a-z]+)?/g);
-  return matches ?? [];
+/**
+ * Lowercased word tokens, keeping their position so we can match multi-word phrases, plus each
+ * token's sentence index (#73): a phrase match must never cross a sentence-ending `.`/`!`/`?` —
+ * "They give. Up the hill be the house." must not read as the phrasal "give up" just because the
+ * two words are adjacent in the token stream.
+ */
+function tokenizeWithSentences(text: string): { words: string[]; sentenceId: number[] } {
+  const words: string[] = [];
+  const sentenceId: number[] = [];
+  let sentence = 0;
+  for (const m of text.toLowerCase().matchAll(/[a-z]+(?:['’][a-z]+)?|[.!?]+/g)) {
+    if (/[.!?]/.test(m[0]!)) {
+      sentence++;
+      continue;
+    }
+    words.push(m[0]!);
+    sentenceId.push(sentence);
+  }
+  return { words, sentenceId };
 }
 
 function emit(
@@ -65,8 +80,16 @@ function emit(
   });
 }
 
+/** The tokens from `from` onward that stay within the same sentence as `from` (#73). */
+function sameSentenceAfter(tokens: string[], sentenceId: number[], from: number): string[] {
+  const sid = sentenceId[from - 1];
+  const out: string[] = [];
+  for (let k = from; k < tokens.length && sentenceId[k] === sid; k++) out.push(tokens[k]!);
+  return out;
+}
+
 export function scanSpan(span: Span, data: Dataset, opts: ScanOptions = {}): Finding[] {
-  const tokens = tokenize(span.text);
+  const { words: tokens, sentenceId } = tokenizeWithSentences(span.text);
   const out: Finding[] = [];
   const consumed = new Array<boolean>(tokens.length).fill(false);
 
@@ -74,6 +97,8 @@ export function scanSpan(span: Span, data: Dataset, opts: ScanOptions = {}): Fin
   // before single-word matching runs.
   for (const { tokens: phrase, entry } of data.phrases) {
     for (let i = 0; i + phrase.length <= tokens.length; i++) {
+      // A phrase can't cross a sentence boundary (#73).
+      if (sentenceId[i] !== sentenceId[i + phrase.length - 1]) continue;
       let hit = true;
       for (let j = 0; j < phrase.length; j++) {
         if (tokens[i + j] !== phrase[j] || consumed[i + j]) {
@@ -87,9 +112,16 @@ export function scanSpan(span: Span, data: Dataset, opts: ScanOptions = {}): Fin
       if (
         entry.class === "dropped-prep" &&
         phrase[phrase.length - 1] === "for" &&
-        isDurationFor(tokens.slice(i + phrase.length))
+        isDurationFor(sameSentenceAfter(tokens, sentenceId, i + phrase.length))
       ) {
         continue;
+      }
+      // A phrase blocked before a specific next word (e.g. "run out" before "of", #58) is a
+      // deliberately valid standard-English shape, not an abolished form — mirrors the
+      // translator's own blockedNext guard so the linter doesn't contradict it.
+      if (entry.blockedNext) {
+        const next = sameSentenceAfter(tokens, sentenceId, i + phrase.length)[0];
+        if (next && entry.blockedNext.includes(next)) continue;
       }
       emit(span, entry, phrase.join(" "), opts, out);
       for (let j = 0; j < phrase.length; j++) consumed[i + j] = true;
@@ -101,6 +133,29 @@ export function scanSpan(span: Span, data: Dataset, opts: ScanOptions = {}): Fin
     if (consumed[i]) continue;
     const entry = data.words.get(tokens[i]!);
     if (entry) emit(span, entry, tokens[i]!, opts, out);
+  }
+
+  // Possessive of an irregular plural (#71): "women's" tokenizes as one word (the WORD-matching
+  // regex keeps a trailing 's attached), so it never matches the bare irregular-plural key
+  // ("women") above — invisible without this pass, though G10 mandates a regularized-plural
+  // possessive ("womans'").
+  for (let i = 0; i < tokens.length; i++) {
+    if (consumed[i]) continue;
+    const m = /^([a-z]+)['’]s$/.exec(tokens[i]!);
+    if (!m) continue;
+    const base = data.words.get(m[1]!);
+    if (!base || base.class !== "irregular-plural") continue;
+    if (base.confidence === "low" && !opts.strict) continue;
+    if (isAllowed(span.file, tokens[i]!, opts.allow ?? defaultAllow)) continue;
+    out.push({
+      file: span.file,
+      line: span.line,
+      found: tokens[i]!,
+      class: "irregular-plural-possessive",
+      rule: "G10",
+      expected: `${base.woe}'`,
+      confidence: base.confidence,
+    });
   }
 
   return out;

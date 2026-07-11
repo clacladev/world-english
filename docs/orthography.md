@@ -48,6 +48,13 @@ Latin/Greek root, **provided the word stays recognizable**.
 payoff — *debt* is not even from a Latin *-b-* word natively; the letter was added by
 Renaissance scholars (see [§1](../resources/IRREGULARITIES.md#1-spelling--orthography)).
 
+**Scope — a closed, enumerated list.** O2 is deliberately narrow: it respells exactly the
+five words below, and no others. It is not a productive rule a writer applies to new words;
+it is a fixed list, closed here. Every other silent-letter word from
+[§1](../resources/IRREGULARITIES.md#1-spelling--orthography)'s list (*knight, gnome, write,
+comb, honest, Wednesday, colonel*) is kept as-is under [O4](#rule-o4--what-is-deliberately-left-alone),
+which now names them explicitly — so there is no word left in an undefined middle ground.
+
 **Examples.**
 
 | Standard | World English | Silent letter removed |
@@ -94,6 +101,17 @@ To stay legible, World English does **not**:
   exists (*through → thru*): that narrow case is [O5](#rule-o5--respell-ough-words-only-where-an-informal-form-already-exists)'s
   job, and O4 defers to it — the boundary is "adopt an existing informal form, never coin a
   new one," so O4 and O5 never disagree about a given word.
+- **Kept silent-letter words (outside O2's closed list).** *gnome*, *write*, and *comb* keep
+  their silent letters for the same reason as *knight* above — each anchors a very common
+  spelling pattern (*gn-*, *wr-*, *-mb*) shared by many other kept words, so touching one
+  would only make it an inconsistent outlier among the rest. **`honest`, `Wednesday`, and
+  `colonel`** are also explicitly kept: each is low enough frequency, and its silent/altered
+  letters distinctive enough as a whole-word shape, that respelling would cost recognizability
+  for little predictability gain — exactly O2's own "provided the word stays recognizable"
+  test, applied here to say *no*. Together with O2's five-word list, this closes every word
+  named in [§1](../resources/IRREGULARITIES.md#1-spelling--orthography)'s silent-letter
+  example set: each is either respelled by O2 or explicitly kept here — none is left
+  undecided.
 - **Merge homophones.** *flour/flower*, *their/there/they're*, *hear/here* keep distinct
   spellings — collapsing them would *lose* information, not simplify.
 - **Touch proper nouns, brand names, or loanwords** still felt as foreign.
@@ -117,9 +135,9 @@ common use**:
 
 | Standard | World English | Sound |
 | -------- | ------------- | ----- |
-| through | **thru** | /θruː/ |
+| through | **thru** | /θru/ |
 | though | **tho** | /ðoʊ/ |
-| although | **altho** | /ɔːlˈðoʊ/ |
+| although | **altho** | /ɔlˈðoʊ/ |
 
 **The stopping criterion.** The list stops where it does for a *principled* reason, not an
 arbitrary one: *thru*, *tho*, and *altho* are already everyday informal spellings, so
@@ -141,3 +159,9 @@ by the respelling key in [pronunciation.md](pronunciation.md), consistent with O
 Every spelling kept by O4 must still be *pronounceable from the key* in
 [pronunciation.md](pronunciation.md). The two specs are maintained together: if a future
 revision respells a word here, its entry in the pronunciation key changes in lockstep.
+
+**IPA convention.** This spec's IPA follows [pronunciation.md](pronunciation.md#rule-p2--the-respelling-alphabet-one-symbol-per-sound)'s
+rhotic General American convention throughout, including its choice **not** to mark vowel
+length (`ː`): GA does not phonemically contrast vowel length the way length marks imply, so
+transcriptions here write */θru/*, not */θruː/*. Any IPA appearing in this document should
+be read against that same convention.

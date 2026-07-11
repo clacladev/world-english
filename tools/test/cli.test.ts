@@ -18,7 +18,7 @@ describe("cli", () => {
   it("lints an explicit file path and exits 1 on findings", async () => {
     const { stdout, exitCode } = await runLint([fixture]);
     expect(exitCode).toBe(1);
-    expect(stdout).toContain('"saw" → "seed"');
+    expect(stdout).toContain('"gave" → "gived"');
     expect(stdout).toContain('"was" → "beed"');
     expect(stdout).toContain('"colour" → "color"');
   });

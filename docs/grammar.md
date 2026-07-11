@@ -18,7 +18,12 @@ aspect** (continuous, with `-ing`). It **removes the perfect** as a separate for
 perfect used to encode splits by a single deterministic test: if the situation **still holds**,
 use the **present tense** + a time phrase (*I live here for ten years*); if it is **finished**,
 use the **past tense** + a time word (*I finished already*). No wavering between forms — the
-"still true?" question has one answer, and it picks the tense.
+"still true?" question has one answer, and it picks the tense. The same test extends to a
+**future reference point**: the future perfect ("I will have lived here by then") asks whether
+the situation still holds *at that future point*, not now — since it does, the same "still
+holds" branch applies and the tense collapses to **present tense** + a time phrase marking the
+future point (*I **live** here **by then***), exactly as the present-tense branch does for a
+present reference point.
 
 | Meaning | Standard English | World English |
 | ------- | ---------------- | ------------- |
@@ -53,8 +58,8 @@ number/quantifier when count matters. The *a/an* distinction is removed.
 | She is a doctor. | She **be doctor**. |
 | an hour, a university | (no article) **hour**, **university** |
 | The dogs barked. (definite plural) | **The dogs** barked. (`the` + [M4](morphology.md) plural — no new rule) |
-| Some information I gave you was wrong. | **The information** I **gived** you **beed** wrong. (definite, singular) |
-| I need informations for the report. | I need **informations**. (indefinite, plural, per [G5](#rule-g5--all-nouns-are-countable)) |
+| Some information I gave you was wrong. | **The information that** I **gived** you **beed** wrong. (definite, singular; relativizer *that* kept per [G11](#rule-g11--relative-clauses)) |
+| I need information for the report. | I need **informations** for the report. (indefinite, plural, per [G5](#rule-g5--all-nouns-are-countable)) |
 
 **Generics.** A generic statement names a whole kind, not one already-known thing, so it
 takes the **zero article** — the same "indefinite → no article" case, applied to a class
@@ -202,7 +207,7 @@ verb's preposition, or reach for a plain verb.
 change. *On Monday*, *on July*, and *listen music* read slightly off to a native ear but are
 never ambiguous. The drop is lossy on the surface yet **reversible**: each verb has one
 canonical preposition, so a reverse translator restores it by lookup (*listen* → *listen
-to*) — the per-verb list lives in [vocabulary.md Table A](vocabulary.md#table-a--g3-canonical-prepositions-drop-and-reverse-map) — consistent with the map-back-losslessly goal of
+to*) — the per-verb list lives in [vocabulary.md Table A](vocabulary.md#table-a--g3-canonical-prepositions-droppedpreps) — consistent with the map-back-losslessly goal of
 [morphology M1](morphology.md#rule-m1--all-verbs-are-regular). The one real risk — two
 senses collapsing onto one verb — is handled by routing meaning-changing particles to S2
 rather than dropping them.
@@ -211,8 +216,9 @@ rather than dropping them.
 
 ## Rule G4 — Regular pronoun case
 
-**Rule.** Pronouns keep a **subject form** and a single **object/possessive-determiner
-form** built regularly. The *who/whom* distinction is removed (always **who**).
+**Rule.** Pronouns keep **three forms**: a **subject form**, an **object form**, and a
+**possessive-determiner form** built regularly from the object form. The *who/whom* distinction
+is removed (always **who**).
 
 | Standard (subj / obj / poss / poss-pron) | World English (subj / obj / poss) |
 | ---------------------------------------- | --------------------------------- |
@@ -232,7 +238,10 @@ Possessive is the object form + `-s` (regular, like the plural rule in
 (dialects fill it with *y'all*, *yous*, *you guys*). World English cannot use *yous* for the
 plural, because [the table above](#rule-g4--regular-pronoun-case) already assigns *yous* to
 the singular **possessive** (*yous book*). The plural is the transparent **`you all`**
-(subject and object alike; possessive *you all's*), which no other form claims.
+(subject and object alike; possessive **`you alls`** — the same object-form-+-`s` pattern as
+every other pronoun, so it takes **no apostrophe**, matching [G10](#rule-g10--noun-possessive)'s
+rule that the pronoun possessive-determiner is never written with one), which no other form
+claims.
 
 **Problem it solves.** Irregular case grids and the dying *who/whom* distinction (see
 [§6](../resources/IRREGULARITIES.md#6-pronouns)).
@@ -256,11 +265,19 @@ furniture*) that blocks *informations*, *an advice* (see
 *much information → **many informations***; *how much furniture → **how many furnitures***.
 
 **Quantifier consequence.** Once every noun counts, the count/non-count quantifier split has
-nothing left to split, so its members collapse to the count form everywhere: **`much` → `many`**
-and **`less` → `fewer`** in all cases (*many informations*, *fewer furnitures*). The learner
-never again decides whether a noun is "mass" before choosing a quantifier. (This is only the
-*determiner* *much*; the degree adverb *much* in *much better* is untouched — it quantifies an
-adjective, not a noun.)
+nothing left to split for the *much*/*many* pair, so the determiner **`much` → `many`**
+everywhere a noun is involved (*many informations*, not *much informations*). **`little`/`few`**
+are the mirror case and are **not** abolished the same way: per
+[morphology M5](morphology.md#rule-m5--regular-comparatives-and-superlatives), *little/few*
+keep **`less`/`least`** (alongside the regular *littler/littlest*) as a valid, optional World
+English form — so *fewer furnitures* and *less furnitures* are both grammatical; this rule does
+not force *fewer* "in all cases." The learner never again decides whether a noun is "mass"
+before choosing *much* vs *many*; whether to say *less* or *littler* for *little/few* is a
+separate, already-resolved morphology choice. (This is only the *determiner* `much`, the
+quantifier meaning "a lot of." The **degree adverb** `much` — the intensifier in *much
+**gooder***, meaning "by a large margin" — is a different word: it modifies a comparative
+adjective, not a noun, so this much→many swap never touches it and *much* survives unchanged
+before any comparative.)
 
 **Divergence & trade-off.** *informations* is non-standard English but grammatical in many
 languages and instantly clear. Removes a noun-by-noun memorization list and its knock-on
@@ -270,21 +287,34 @@ effects (*much* vs *many*, article choice).
 
 ## Rule G6 — Regular questions and negation (no do-support)
 
-**Rule.** Form a **question** with **normal word order** — **no dummy `do`**, no
-subject–auxiliary inversion. In **writing**, open the question with a **leading `?`** (and
+**Rule.** Form a **question** with **no dummy `do`** and **no subject–auxiliary inversion**.
+For a *wh-* question, the question word **moves to the front of the clause**; everything after
+it keeps **normal SVO order** — there is no inversion of subject and verb the way standard
+English inverts after the fronted word (*who did you call* → subject/verb stay in place behind
+the fronted *who*). For a yes/no question, nothing moves or is inserted at all; only the
+punctuation/intonation marks it. In **writing**, open the question with a **leading `?`** (and
 capitalize the next word, as the `?` opens the sentence) and close it with the usual `?`:
 *?You like it?*. In **speech**, a **yes/no** question is carried by **rising intonation**
 ([P7](pronunciation.md#rule-p7--intonation-carries-only-the-question)); a **wh-** question is
-carried by its **wh-word** (*who, what, where…*). Form a **negative** by placing **`not`**
-before the verb.
+carried by its fronted **wh-word** (*who, what, where…*). Form a **negative** by placing
+**`not`** immediately before the main verb — **in every clause type**, including *be*-clauses,
+the continuous, the passive, and existential *there be* clauses: *I **not be** living*, *It
+**not be** red*, *There **not be** problem*. When a pre-verb adverb is also present, `not`
+takes precedence and comes first, immediately before the verb, with the adverb before *it*:
+*She **not often call***, never *she often not call* (see
+[style S7](style.md#rule-s7--one-default-adverb-position) for the shared adverb/negation slot).
 
 | Standard English | World English |
 | ---------------- | ------------- |
 | Do you like it? | **?You like it?** (rising intonation in speech) |
 | Does she know? | **?She know?** |
-| Who did you call? | **?Who you called?** (wh-word marks it; normal word order) |
+| Who did you call? | **?Who you called?** (wh-word fronted; rest keeps SVO order) |
 | I do not like it. | I **not like** it. |
 | She did not go. | She **not goed**. |
+| I am not living here. | I **not be** living here. |
+| It is not red. | It **not be** red. |
+| There is not a problem. | **There not be** problem. |
+| She does not often call. | She **not often call**. |
 | It is good, isn't it? | **It be good, right?** (invariant tag) |
 
 **Problem it solves.** Do-support inserts a meaningless auxiliary into *every* question and
@@ -327,6 +357,12 @@ from the same two moves (marker for questions, `not` before the verb):
   since [M2](morphology.md#rule-m2--one-verb-of-be-regularized) already removes *is/are* and
   [M3](morphology.md#rule-m3--no-third-person--s) removes number agreement: *There be many
   persons*, *There beed a problem*.
+- **Embedded/indirect questions** keep the question word — the *wh*-word or **`whether`** for a
+  yes/no embedded question — but use **normal declarative word order with no fronting**, since
+  there is no inversion to undo in the first place: *He asked **where he goed***, *I not know
+  **whether it will rain***. **`if` is never used for an embedded question** — [G15](#rule-g15--subordinating-conjunctions)
+  reserves *if* for conditionals, so an embedded yes/no question always takes **`whether`**,
+  never *if* (*He asked **whether** it rained*, not *he asked if it rained*).
 
 ---
 
@@ -370,10 +406,22 @@ the hypothetical marker in [G8](#rule-g8--one-conditional-shape).
 ## Rule G8 — One conditional shape
 
 **Rule.** Every conditional is **`if` + clause, + result clause**, each in its **natural
-tense** — no tense-backshift. The result clause marks how real it is with one word:
+tense** — no tense-backshift. There are two patterns, by how real the result is:
 
-- **`will`** — a real or expected result (standard zero + first conditional).
-- **`would`** — a hypothetical or unreal result (standard second + third conditional).
+- **Generic/zero conditional** — a general truth or habitual result, true whenever the
+  condition holds. **Both clauses are present tense; no `will`/`would` appears at all**
+  (standard zero conditional): *If it **rain**, the ground **get** wet.*
+- **Predictive/hypothetical conditional** — a specific real-or-expected future result, or a
+  hypothetical/unreal one. The result clause marks how real it is with one word:
+  - **`will`** — a real or expected result (standard first conditional): *If it **rain**, I
+    **will go**.*
+  - **`would`** — a hypothetical or unreal result (standard second + third conditional): *If I
+    **have** money, **I would buy** it.*
+
+The `if`-clause is always present tense in both patterns (never backshifted to a past-tense
+hypothetical the way standard English does for the second conditional); only the result clause
+changes, and only between the predictive and hypothetical patterns — the generic pattern takes
+no marker word in either clause.
 
 Past-unreal ("if it had happened") is carried by a **time word** ([style.md S5](style.md)),
 since World English has no perfect ([G1](#rule-g1--a-leaner-tenseaspect-system)).
@@ -459,13 +507,24 @@ English is no worse; context resolves it, and the apostrophe fully disambiguates
 form. (This is the **noun** possessive; the **pronoun** possessive is the separate `-s` form
 in [G4](#rule-g4--regular-pronoun-case) — *mes*, *hims* — which takes no apostrophe.)
 
+**Standalone possessive pronouns.** World English has no separate standalone possessive form
+(standard *mine, yours, his, hers, ours, theirs*): the same possessive-determiner form in
+[G4](#rule-g4--regular-pronoun-case) doubles as the standalone possessive pronoun, since the
+determiner/pronoun split collapses along with everything else in the pronoun table. *This book
+be **mes*** (= *this book is mine*) is grammatical; likewise *That car be **hims***.
+
 ---
 
 ## Rule G11 — Relative clauses
 
 **Rule.** One invariant relativizer, **`that`**, introduces every relative clause — for
-people or things, subject or object. The *who / whom / which / whose*-relative set is dropped,
-and so is the **restrictive/non-restrictive comma rule** (*that* vs *which* + comma).
+people or things, subject or object. **`that` is never dropped**, including in object relative
+clauses where standard English allows a "zero relative" (*the man I saw* → **the man that I
+seed**, not *the man I seed*) — the same "always kept, never dropped" rule
+[G14](#rule-g14--content-clauses-and-reported-speech) states for content-clause *that*, so a
+learner meets one invariant rule for the word in both jobs. The *who / whom / which / whose*-relative
+set is dropped, and so is the **restrictive/non-restrictive comma rule** (*that* vs *which* +
+comma).
 
 | Standard English | World English |
 | ---------------- | ------------- |
@@ -473,7 +532,7 @@ and so is the **restrictive/non-restrictive comma rule** (*that* vs *which* + co
 | the woman **who** called | **the woman that called** |
 | the book **which** is on the table | **the book that be on the table** |
 | the man **whose** car broke | **the man that hims car breaked** (resumptive *hims*) |
-| My car, **which** is red, is fast. | **Mes car, that be red, be fast.** (no comma contrast) |
+| My car, **which** is red, is fast. | **Mes car that be red be fast.** (no comma contrast — no comma at all) |
 
 **Problem it solves.** Standard English splits relativizers by animacy (*who* vs *which*),
 by case (*who* vs *whom*), and adds a possessive relative (*whose*) plus a punctuation-borne
@@ -502,7 +561,7 @@ sentences ([S1](style.md#rule-s1--fixed-subjectverbobject-order)).
 | 3sg f | herself | **herself** |
 | 3sg n | itself | **itself** |
 | 1pl | ourselves | **usselfs** (*us* + self, plural `-selfs`) |
-| 2pl | yourselves | **youselfs** |
+| 2pl | yourselves | **you all self** |
 | 3pl | themselves | **themselfs** |
 
 **Problem it solves.** Standard English builds reflexives **two** inconsistent ways in one
@@ -510,17 +569,39 @@ paradigm — *my*self, *your*self (possessive + self) but *him*self, *them*selve
 self), see [§6](../resources/IRREGULARITIES.md#6-pronouns). World English uses the **object**
 form throughout, so the rule is one line.
 
+**Plural *you* reflexive — `you all self`.** [G4](#rule-g4--regular-pronoun-case) gives plural
+*you* one form, **`you all`**, used for subject and object alike — there is no separate 2pl
+object pronoun to add `-self` to. So the 2pl reflexive is not built by the same single-word
+"object + `-self`" step as the others; it treats **`you all`** as the one object form it is and
+adds `self` to the whole phrase: **`you all self`** (*You all should introduce you all self.*).
+This keeps the "object form + self" rule exceptionless once *you all* is recognized as a single
+pronoun rather than a sequence needing its own reflexive stem.
+
 **Divergence & trade-off.** *meself* and *usselfs* are non-standard (*meself* is attested in
 dialect), but they fall straight out of "object pronoun + self," and the plural is the plain
-`-selfs` rather than the irregular `-selves` — one pattern, no exceptions.
+`-selfs` rather than the irregular `-selves` — one pattern, no exceptions. *You all self* is the
+one case that reflexivizes a two-word pronoun rather than a single word, recorded here as the
+deliberate exception the *you all* system requires.
 
 ---
 
 ## Rule G13 — Verb complementation
 
-**Rule.** When a verb takes another verb as its complement, the complement is always
+**Rule.** When an ordinary verb takes another verb as its complement, the complement is always
 **`to` + base verb**. The gerund-vs-infinitive choice (*enjoy doing* vs *want to do*) is
-removed — it is always the *to*-infinitive.
+removed — it is always the *to*-infinitive. This rule has **two closed exceptions**, both
+already ruled on elsewhere and not reopened here:
+
+- **Modals** ([G7](#rule-g7--a-reduced-modal-set-shades-by-adverb): *can, must, should, will*)
+  take the **bare infinitive**, never *to*: *You **must go*** (not *must to go*), *She **can
+  swim***. Modals are not "verbs taking a complement" in the sense this rule covers — they are
+  the fixed functional set G7 already closes.
+- **Causative/perception verbs** — a separate closed class (*let, make, help, see, hear* +
+  object + verb) — also take the **bare infinitive** after their object: *Let him **go***, *She
+  made me **wait***, *I saw him **fall***, *I heard her **sing***. This is a fixed lexical
+  pattern (object + bare verb), not an instance of the *to*-infinitive default.
+
+Outside these two closed classes, every other complement-taking verb uses *to* + base verb:
 
 | Standard English | World English |
 | ---------------- | ------------- |
@@ -528,6 +609,9 @@ removed — it is always the *to*-infinitive.
 | I want **to go**. | I want **to go**. |
 | She finished **eating**. | She finished **to eat**. |
 | They avoid **speaking**. | They avoid **to speak**. |
+| You must go. (modal) | You **must go**. (bare infinitive after a modal) |
+| Let him go. (causative) | **Let him go.** (bare infinitive after object) |
+| I saw him fall. (perception) | **I saw him fall.** (bare infinitive after object) |
 
 **Problem it solves.** Which complement a verb takes is lexically fixed and unpredictable —
 *enjoy* demands the gerund, *want* the infinitive, *begin* allows either, and a few verbs
@@ -542,6 +626,16 @@ resolves it with plain phrasing when it matters — *cease* for the "quit" sense
 to smoke*), *pause* for the "interrupt" sense (*She pause to smoke*) — the same
 plain-verb move as [S2](style.md#rule-s2--prefer-plain-verbs-over-phrasal-verbs). Recorded as
 a known trade-off.
+
+**No subjunctive mood.** World English has **no subjunctive** — this is a stated design
+decision, not an accidental silence. Standard English's mandative subjunctive (*I insist that
+he **go***, using the bare base form regardless of subject) and its formulaic subjunctive
+(*if I **were** you*) are both dropped: the **indicative** is used everywhere, including inside
+a content clause after a verb like *insist/demand/suggest*. [G14](#rule-g14--content-clauses-and-reported-speech)'s
+ordinary *that*-clause rule already covers the mandative case with no special form: *I insist
+that he **go*** → **I insist that he **goes**** (present indicative, [M3](morphology.md#rule-m3--no-third-person--s)'s
+no-agreement present); *if I were you* → **if I **be** you** ([G8](#rule-g8--one-conditional-shape)'s
+ordinary conditional, natural tense, no special "were"). One mood, no exceptions.
 
 ---
 
@@ -597,7 +691,7 @@ takes a comma, a trailing one takes none.**
 
 *If it rain, I will go. I not drink it while it be too hot. We leaved because it beed late.*
 
-Causal *since* is dropped in favour of *because*, which leaves *since* with only its
+Causal *since* is dropped in favor of *because*, which leaves *since* with only its
 [S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect)
 starting-point sense (*since 2015*) — removing the one real overlap.
 

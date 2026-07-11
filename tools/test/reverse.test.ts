@@ -1,8 +1,8 @@
 import { describe, expect, it } from "bun:test";
-import { join } from "node:path";
 import { buildReverseMap, reverseTranslate } from "../src/reverse.ts";
 import { translate } from "../src/translate.ts";
 import { loadCoreLexicon } from "../src/core-lexicon.ts";
+import { samplePairs } from "./helpers/samples.ts";
 
 function se(text: string) {
   return reverseTranslate(text, { file: "x.md" }).text;
@@ -63,11 +63,19 @@ describe("lossy reverse: canonical default + flag", () => {
   });
 
   it("restores an irregular past canonically but flags the past/participle collapse", () => {
-    // `seed` collapsed `saw` (past) and `seen` (participle); canonical restore is the past.
-    expect(se("I seed it")).toBe("I saw it");
-    const f = flags("I seed it").find((x) => x.found === "seed");
-    expect(f?.restored).toBe("saw");
-    expect(f?.note).toContain("saw/seen");
+    // `singed` (past of `sing`) collapses `sang` (past) and `sung` (participle); canonical
+    // restore is the past.
+    expect(se("I singed it")).toBe("I sang it");
+    const f = flags("I singed it").find((x) => x.found === "singed");
+    expect(f?.restored).toBe("sang");
+    expect(f?.note).toContain("sang/sung");
+  });
+
+  it("does not reverse `seed` — `see`'s past is a homograph with the valid WoE noun `seed`", () => {
+    // `seed` collides with a common, legitimate World-English noun (the plant part), so the
+    // reverse map leaves it untouched rather than guessing it always means `saw` (past of see).
+    expect(se("the seed grows in spring")).toBe("the seed grows in spring");
+    expect(flags("I seed it")).toEqual([]);
   });
 });
 
@@ -111,48 +119,32 @@ describe("G3 preposition restoration (core lexicon, item 8 wiring)", () => {
     expect(se("Please wait.")).toBe("Please wait.");
   });
 
+  it("does not restore a preposition into a copular/adjectival reading (#65)", () => {
+    expect(se("The look beed cold.")).toBe("The look was cold.");
+    expect(se("She looks tired.")).toBe("She looks tired.");
+    expect(se("she talks a lot")).toBe("she talks a lot");
+  });
+
   it("does not reverse phrasal verbs — the plain WoE verb is itself valid standard English", () => {
-    expect(se("she quitted yesterday")).toBe("she quitted yesterday");
     expect(se("he seeks it")).toBe("he seeks it");
+  });
+
+  it("round-trips zero-past coinages produced by the forward pipeline (#67)", () => {
+    // `quitted`/`putted` never occur in standard English, but the forward translator's zero-past
+    // auto-convert and zero-past-phrasal-head guard both produce them — the reverse translator
+    // must map them back to the standard zero-past form.
+    expect(se("she quitted yesterday")).toBe("she quit yesterday");
+    expect(se("he putted it down")).toBe("he put it down");
+    expect(se("they setted up a fund")).toBe("they set up a fund");
   });
 });
 
 describe("lossless-mapping proof against docs/samples.md", () => {
-  function samplePairs(): { se: string; woe: string }[] {
-    const md = require("node:fs").readFileSync(
-      join(import.meta.dir, "..", "..", "docs", "samples.md"),
-      "utf8",
-    ) as string;
-    const lines = md.split("\n");
-    const blocks: { kind: "se" | "woe"; text: string }[] = [];
-    for (let i = 0; i < lines.length; i++) {
-      const m = /^\s*\*\*(Standard|World) English\*\*\s*$/.exec(lines[i]!);
-      if (!m) continue;
-      const kind = m[1] === "Standard" ? "se" : "woe";
-      const quote: string[] = [];
-      let started = false;
-      for (let r = i + 1; r < lines.length; r++) {
-        const isQuote = lines[r]!.trimStart().startsWith(">");
-        if (lines[r]!.trim() === "") {
-          if (started) break;
-          continue;
-        }
-        if (!isQuote) break;
-        started = true;
-        quote.push(lines[r]!.replace(/^\s*>\s?/, ""));
-      }
-      blocks.push({ kind, text: quote.join(" ") });
-    }
-    const pairs: { se: string; woe: string }[] = [];
-    for (let i = 0; i + 1 < blocks.length; i += 2) pairs.push({ se: blocks[i]!.text, woe: blocks[i + 1]!.text });
-    return pairs;
-  }
-
   const pairs = samplePairs();
   const reverseMap = buildReverseMap();
 
-  it("finds the eight gold passages", () => {
-    expect(pairs.length).toBe(8);
+  it("finds the nine gold passages", () => {
+    expect(pairs.length).toBe(9);
   });
 
   it("restores every losslessly-reversible WoE form back to its standard original", () => {

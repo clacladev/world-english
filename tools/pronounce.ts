@@ -115,6 +115,14 @@ function reportValidation(): boolean {
 async function main(): Promise<void> {
   const args = parseArgs(Bun.argv.slice(2));
 
+  // --ipa/--json render text-mode output; --audio takes over the whole run and writes a WAV
+  // instead, so combining them silently did nothing useful (#102) — warn instead, regardless of
+  // whether espeak-ng ends up being available.
+  if (args.audio && (args.ipa || args.json)) {
+    const ignored = [args.ipa && "--ipa", args.json && "--json"].filter(Boolean).join(" and ");
+    console.error(`pronounce: --audio ignores ${ignored} (writing audio only, not text output).`);
+  }
+
   // Fail fast before blocking on stdin: --audio is useless without the synthesizer.
   if (args.audio && !(await espeakAvailable())) {
     console.error(

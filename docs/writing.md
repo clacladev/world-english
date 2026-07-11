@@ -17,16 +17,54 @@ Sentence-internal phrasing stays in [style.md](style.md); word *forms* stay in
 ## Rule W1 — One regular punctuation set
 
 **Rule.** World English uses a small, fixed set of punctuation marks, and **each mark has one
-job**:
+job** (or, for the comma, one closed list of jobs). This rule is the single source of truth for
+punctuation: every other rule that touches a mark ([G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)'s
+`!` and tag questions, [G10](grammar.md#rule-g10--noun-possessive)'s apostrophe, [G15](grammar.md#rule-g15--subordinating-conjunctions)'s
+comma-before-a-subordinate-clause) is a use *of* this inventory, never an exception to it.
 
 - **period `.`** — end a statement or a command.
-- **comma `,`** — mark exactly three boundaries: (a) after a leading subordinate clause
-  (*If it rain, we stay* — same comma [G15](grammar.md#rule-g15--subordinating-conjunctions)
-  fixes), (b) before a coordinator (*and, but, so*) joining two independent clauses, and (c)
-  between every item of a list, **including the last** — the serial comma is always present.
-- **question mark** — [G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)
-  brackets a question with a `?` at **both ends**: a **leading `?`** opens it (and the next word
-  is capitalized) and the usual `?` closes it — *?You like it?*
+- **comma `,`** — mark one of a **closed set of boundaries**, never anything else:
+  1. **leading clause or adjunct** — after a fronted subordinate clause, a fronted time/place
+     adjunct, or a sentence-initial connective: *If it rain, we stay* (same comma
+     [G15](grammar.md#rule-g15--subordinating-conjunctions) fixes); *Next time, plan better*;
+     *Also, check the file.* / *For example, this happens.*
+  2. **coordinator joining independent clauses** — before *and, but, so* joining two
+     independent clauses, including two coordinated **imperative** clauses (an imperative is an
+     independent clause for this purpose): *Wash it, and dry it.*
+  3. **list items** — between every item of a list, **including the last** (the serial comma is
+     always present). This job covers a list of **clauses** exactly as it covers a list of
+     words: three or more independent clauses in a series take a comma between each, with the
+     usual coordinator before the last — *The roads beed icy, many drivers haved no experience,
+     and visibility beed poor.* (Two bare clauses with no coordinator are never joined by a
+     comma alone — that is job 2's territory, and job 2 always requires the coordinator.)
+  4. **vocative, politeness marker, or greeting** — setting off a directly-addressed name, a
+     politeness word ([S8](style.md#rule-s8--fixed-politeness-markers-not-graded-indirectness)'s
+     *please/sorry*), or a greeting's name: *Close the door, please.*; *Sorry, I can not come.*;
+     *Hello Sara,* …
+  5. **trailing tag question** — before the invariant tag: *It be good, right?* (See the
+     question-mark entry below: the tag is exempt from the leading/trailing `?` bracket.)
+  6. **trailing duration afterthought** — before a restated time-span tacked onto a finished
+     clause: *She still live here, for ten years.*
+  7. **`, then`** — before *then* marking a sequence between two clauses: *Wash it, then dry
+     it.*
+
+  No other comma use exists — in particular, there is **no restrictive/non-restrictive comma
+  distinction** ([G11](grammar.md#rule-g11--relative-clauses) drops it entirely; a relative
+  clause never takes a comma under any of the seven jobs above).
+- **apostrophe `'`** — one job only: mark a possessive (noun possessive `'s`/`s'` per
+  [G10](grammar.md#rule-g10--noun-possessive); the pronoun possessive-determiner in
+  [G4](grammar.md#rule-g4--regular-pronoun-case) takes none). World English has no contractions,
+  so the apostrophe never marks an omitted letter.
+- **question mark `?`** — [G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)
+  brackets a **wh-** or **yes/no** question with a `?` at **both ends**: a **leading `?`** opens
+  it (and the next word is capitalized) and the usual `?` closes it — *?You like it?* The
+  invariant **tag question** is the one exemption: *right?* is not itself bracketed — it takes
+  only the ordinary **trailing `?`** on the host clause (*It be good, right?*), because the tag
+  is a fixed two-word add-on, not a separate question needing its own opening mark.
+- **exclamation mark `!`** — end an imperative given with force, per
+  [G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)'s negative imperative
+  (*Not go!*) and imperatives generally (*Go!*). A plain, unforced command still just takes a
+  period (*Close the door.*).
 - **quotation marks** — mark speech.
 - **colon `:`** — **one job only: introduce a list.**
 
@@ -41,7 +79,7 @@ is unwritten, and the semicolon and colon draw boundaries against the period and
 even native writers dispute (PAIN-POINTS §6 names punctuation conventions explicitly). The
 semicolon's rule (*an independent clause on both sides*) and the colon's four overlapping uses
 (list, explanation, reveal, clause-join) are exactly the by-feel choices this project removes
-elsewhere. One mark, one job removes the choice.
+elsewhere. One mark, one closed list of jobs removes the choice.
 
 **Examples.**
 
@@ -49,9 +87,9 @@ elsewhere. One mark, one job removes the choice.
 | ---------------- | ------------- |
 | The train was late; we missed the meeting. | The train **beed** late. We missed the meeting. |
 | She studied for years; however, she struggled. | She studied for years**,** but she struggled. |
-| He was late: the train broke down. | He **beed** late **because** the train **breaked** down. |
+| He was late: the train failed. | He **beed** late **because** the train **failed**. |
 | Bring three things: a pen, an ID, and water. | Bring three things**:** pen, ID, and water. |
-| We left at 10:30. | We **leaved** at 10:30. |
+| We left at 10:30. | We **leaved** on 10:30. |
 
 The first row drops a semicolon to a period; the second turns the hard `;however,` into a plain
 `, but` ([W5](#rule-w5--make-every-connection-explicit)); the third turns an explanatory colon
@@ -86,7 +124,7 @@ pragmatics concern handled by [style.md S8–S9](style.md#rule-s8--fixed-politen
 | I regret to inform you that we cannot proceed. | I **be** sorry. We **can not** continue. |
 | The aforementioned issue must be addressed. | We must fix this problem. |
 
-**Trade-off.** Loses tonal shading and the signalling of formality; gains one register that no
+**Trade-off.** Loses tonal shading and the signaling of formality; gains one register that no
 one has to calibrate and no reader has to decode.
 
 ---
@@ -170,7 +208,7 @@ routes collocations to a regular pairing.
 
 And an **implicit** link made explicit — the same case as W1's abolished explanatory colon:
 
-> *He was late. The train broke down.* → He **beed** late **because** the train **breaked** down.
+> *He was late. The train broke down.* → He **beed** late **because** the train **failed**.
 
 **Boundary with G15.** [G15](grammar.md#rule-g15--subordinating-conjunctions) fixes the
 *subordinators* that open a dependent clause (*if, because, when, while…*); W5 governs the

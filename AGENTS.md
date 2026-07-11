@@ -12,7 +12,8 @@ All tooling lives in `tools/` (Bun/TypeScript). Run commands from that directory
 bun install          # once
 bun run lint         # sweep docs/ for abolished forms in World-English columns
 bun run typecheck    # tsc --noEmit
-bun test             # unit + acceptance tests (185 tests)
+bun test             # unit + acceptance tests (all pass except one environment-conditional skip
+                     #  — the espeak-ng audio test, skipped when espeak-ng isn't on PATH)
 ```
 
 The pronunciation tool's `--audio` flag requires `espeak-ng` on PATH (external dependency).

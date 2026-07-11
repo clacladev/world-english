@@ -62,6 +62,11 @@ describe("pronounce cli", () => {
     expect(stderr).toContain("espeak-ng");
   });
 
+  it("warns that --audio ignores --ipa/--json, regardless of espeak-ng availability (#102)", async () => {
+    const { stderr } = await runPronounce(["--audio", "--ipa", "--json"], SENTENCE);
+    expect(stderr).toContain("--audio ignores --ipa and --json");
+  });
+
   it("--strict validates the lexicon and stays green when only reductions diverge", async () => {
     const { exitCode } = await runPronounce(["--strict"], SENTENCE);
     expect(exitCode).toBe(0);

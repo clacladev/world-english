@@ -1,7 +1,8 @@
 import { describe, expect, it } from "bun:test";
-import { join } from "node:path";
 import { loadDataset } from "../src/dataset.ts";
 import { buildForwardMap, translate } from "../src/translate.ts";
+import { loadCoreLexicon, type CoreLexicon } from "../src/core-lexicon.ts";
+import { samplePairs } from "./helpers/samples.ts";
 
 const data = loadDataset();
 
@@ -60,11 +61,14 @@ describe("deterministic closed-class substitution", () => {
 describe("flagged, not translated (needs POS / syntax / lexicon)", () => {
   it("leaves genuine homographs untouched, flagging them only under --strict", () => {
     // `ground` (past of grind) is marked homograph → low confidence, so it is neither
-    // translated nor flagged by default. `saw`, by contrast, is high-confidence in the dataset
-    // (the linter flags it too) and *is* translated → seed.
+    // translated nor flagged by default. `saw` (past of see, also "the tool") is marked
+    // homograph the same way — it is risky to guess-translate, so it stays untouched too.
     expect(woe("on the ground")).toBe("on the ground");
     expect(flagKeys("on the ground")).toEqual([]); // low-confidence: quiet by default
     expect(flagKeys("on the ground", true)).toContain("ground:irregular-verb/M1");
+    expect(woe("he used the saw to cut wood")).toBe("he used the saw to cut wood");
+    expect(flagKeys("he used the saw to cut wood")).toEqual([]);
+    expect(flagKeys("he used the saw to cut wood", true)).toContain("saw:irregular-verb/M1");
   });
 
   it("drops the indefinite article a/an and no longer flags it (G2)", () => {
@@ -86,6 +90,17 @@ describe("flagged, not translated (needs POS / syntax / lexicon)", () => {
     expect(woe("wait for a while")).toBe("wait for a while");
   });
 
+  it("does not drop a/an where it isn't the indefinite article (#62)", () => {
+    // A capitalized standalone letter label, mid-sentence, is not the article.
+    expect(woe("Vitamin A deficiency is common.")).toBe("Vitamin A deficiency be common.");
+    // A genuine sentence-initial capitalized article still drops as usual.
+    expect(woe("A dog barked.")).toBe("Dog barked.");
+    // Distributive "a" in a frequency expression.
+    expect(woe("I go there once a week.")).toBe("I go there once a week.");
+    // "a hundred/thousand/million" = "one hundred", not the indefinite article.
+    expect(woe("It costs a hundred dollars.")).toBe("It cost a hundred dollars.");
+  });
+
   it("restores a dropped complementizer `that` in reported speech (G14)", () => {
     expect(woe("I think he is right")).toBe("I think that he be right");
     expect(woe("They know we go there")).toBe("They know that we go there");
@@ -94,6 +109,11 @@ describe("flagged, not translated (needs POS / syntax / lexicon)", () => {
   it("does not insert `that` outside the reported-clause shape (G14)", () => {
     expect(woe("I know it")).toBe("I know it"); // object-capable pronoun → bail
     expect(woe("I know that he goes")).toBe("I know that he go"); // already present → no dup (3sg still fires)
+  });
+
+  it("does not insert `that` into a direct quotation or across a comma (#57)", () => {
+    expect(woe('He said "I am here."')).toBe('He sayed "I be here."');
+    expect(woe("As I said, he will come")).toBe("As I sayed, he will come");
   });
 
   it("auto-converts a zero-past verb in the coordinated-past shape (M1)", () => {
@@ -105,6 +125,17 @@ describe("flagged, not translated (needs POS / syntax / lexicon)", () => {
     expect(woe("I put it there")).toBe("I put it there"); // plain present
     expect(woe("they decided to put it back")).toBe("they decided to put it back"); // infinitive
     expect(woe("she will put it back")).toBe("she will put it back"); // modal
+  });
+
+  it("does not silently pass an irregular-verb drop-prep form through unflagged (#55)", () => {
+    // `speak` is a homograph-flagged irregular verb (spoke/spoken collide with other readings),
+    // so the dropped-prep transform must not guess-translate "spoke to" — it should leave the
+    // sentence untouched. The inflected phrase collides with the same homograph risk as the
+    // standalone verb, so it is demoted to low confidence (surfaces only under --strict) rather
+    // than high-confidence-flagging a likely-false-positive like "the bike's spoke to hub".
+    expect(woe("The manager spoke to the staff.")).toBe("The manager spoke to the staff.");
+    expect(flagKeys("The manager spoke to the staff.")).not.toContain("spoke to:dropped-prep/G3");
+    expect(flagKeys("The manager spoke to the staff.", true)).toContain("spoke to:dropped-prep/G3");
   });
 
   it("resolves phrasal verbs (S2) and dropped prepositions (G3), inflected forms too", () => {
@@ -124,6 +155,10 @@ describe("flagged, not translated (needs POS / syntax / lexicon)", () => {
     expect(woe("wait for a while")).toBe("wait for a while");
     expect(woe("wait for a long time")).toBe("wait for a long time");
     expect(woe("wait for now")).toBe("wait for now");
+    // teens, tens 60-90, and hundred/thousand/million are duration spans too (#60)
+    expect(woe("wait for fifteen minutes")).toBe("wait for fifteen minutes");
+    expect(woe("wait for sixty minutes")).toBe("wait for sixty minutes");
+    expect(woe("wait for a thousand years")).toBe("wait for a thousand years");
     // …but a time-unit noun buried behind an adjective is an object, not a span → dropped
     // (better → gooder is the unrelated M5 comparative)
     expect(woe("hope for a better year")).toBe("hope a gooder year");
@@ -136,8 +171,37 @@ describe("flagged, not translated (needs POS / syntax / lexicon)", () => {
     expect(flagKeys("wait for three minutes")).not.toContain("wait for:dropped-prep/G3");
   });
 
+  it("recognizes a zero-past phrasal head's SE past tense given a past-time signal (#59)", () => {
+    expect(woe("they set up a fund yesterday")).toBe("they established fund yesterday");
+    expect(woe("they set up a fund every year")).toBe("they establish fund every year");
+    expect(woe("she put off the meeting last week")).toBe("she delayed the meeting last week");
+    expect(woe("they cut down the tree already")).toBe("they reduced the tree already");
+  });
+
+  it("does not auto-replace the dangerously polysemous 'came across'/'worked out' (#94)", () => {
+    expect(woe("he came across the room")).toBe("he comed across the room");
+    expect(woe("she worked out at the gym")).toBe("she worked out at the gym");
+    expect(flagKeys("he came across the room", true)).toContain("came across:phrasal-verb/S2");
+  });
+
+  it("does not mistranslate the intransitive 'run out of' as the transitive phrasal (#58)", () => {
+    expect(woe("we ran out of milk")).toBe("we runned out of milk");
+    expect(woe("they ran out the supplies")).toBe("they exhausted the supplies");
+  });
+
   it("does not cross punctuation to form a phrase", () => {
     expect(woe("Wait, for the record, I disagree.")).toBe("Wait, for the record, I disagree.");
+  });
+
+  it("flags an unhandled occurrence even when the same phrase was handled elsewhere (#61)", () => {
+    // Line 1's "give up" is substituted (handled). Line 2's "give-up" is punctuation-blocked from
+    // substitution (translate's phrase pass requires a whitespace gap) but the scanner still
+    // matches it as a token sequence, so it must still surface its own flag rather than being
+    // silently suppressed because the same surface string was handled on line 1.
+    const text = "please give up now\nThey give-up the hill.";
+    const { text: out, flags } = translate(text, { dataset: data, strict: true, file: "x.md" });
+    expect(out).toBe("please quit now\nThey give-up the hill.");
+    expect(flags.some((f) => f.found === "give up" && f.line === 2)).toBe(true);
   });
 
   it("leaves zero-past verbs alone (undetectable without POS — documented limit)", () => {
@@ -164,12 +228,13 @@ describe("flagged, not translated (needs POS / syntax / lexicon)", () => {
     expect(flagKeys("the works of art", true)).toEqual([]);
   });
 
-  it("keeps an untriggered 3sg verb flagged under --strict, absent from default output", () => {
-    // No preceding subject pronoun → not converted; `does` (M3) is low-confidence, so it is
-    // quiet by default and surfaces only under --strict.
-    expect(woe("the plan does work")).toBe("the plan does work");
+  it("translates an untriggered 'does' unconditionally — it has no valid WoE reading (#72)", () => {
+    // `does` (M3) is now high-confidence: unlike the general POS-dependent 3sg-s class it has NO
+    // valid WoE reading in any position, so it is translated (and never flagged) even without a
+    // preceding subject pronoun.
+    expect(woe("the plan does work")).toBe("the plan do work");
     expect(flagKeys("the plan does work")).toEqual([]);
-    expect(flagKeys("the plan does work", true)).toContain("does:third-person-s/M3");
+    expect(flagKeys("the plan does work", true)).toEqual([]);
   });
 
   it("never both translates and flags the converted 3sg verb", () => {
@@ -179,47 +244,27 @@ describe("flagged, not translated (needs POS / syntax / lexicon)", () => {
   });
 });
 
-describe("gold round-trip against docs/samples.md", () => {
-  // Parse the alternating **Standard English** / **World English** blockquotes out of samples.md.
-  function samplePairs(): { se: string; woe: string }[] {
-    const md = require("node:fs").readFileSync(
-      join(import.meta.dir, "..", "..", "docs", "samples.md"),
-      "utf8",
-    ) as string;
-    const lines = md.split("\n");
-    const blocks: { kind: "se" | "woe"; text: string }[] = [];
-    for (let i = 0; i < lines.length; i++) {
-      const m = /^\s*\*\*(Standard|World) English\*\*\s*$/.exec(lines[i]!);
-      if (!m) continue;
-      const kind = m[1] === "Standard" ? "se" : "woe";
-      const quote: string[] = [];
-      let started = false;
-      for (let r = i + 1; r < lines.length; r++) {
-        const isQuote = lines[r]!.trimStart().startsWith(">");
-        if (lines[r]!.trim() === "") {
-          if (started) break;
-          continue;
-        }
-        if (!isQuote) break;
-        started = true;
-        quote.push(lines[r]!.replace(/^\s*>\s?/, ""));
-      }
-      blocks.push({ kind, text: quote.join(" ") });
-    }
-    const pairs: { se: string; woe: string }[] = [];
-    for (let i = 0; i + 1 < blocks.length; i += 2) {
-      expect(blocks[i]!.kind).toBe("se");
-      expect(blocks[i + 1]!.kind).toBe("woe");
-      pairs.push({ se: blocks[i]!.text, woe: blocks[i + 1]!.text });
-    }
-    return pairs;
-  }
+describe("opts.lexicon overrides phrase transforms consistently with opts.dataset (#63)", () => {
+  it("uses an injected lexicon instead of the module-level default", () => {
+    const custom: CoreLexicon = {
+      ...loadCoreLexicon(),
+      phrasalVerbs: [{ phrasal: "give up", plain: "surrender", rank: 1 }],
+    };
+    const { text } = translate("please give up now", { lexicon: custom, file: "x.md" });
+    expect(text).toBe("please surrender now");
+  });
 
+  it("without an injected lexicon, phrase transforms still come from the production default", () => {
+    expect(translate("please give up now", { file: "x.md" }).text).toBe("please quit now");
+  });
+});
+
+describe("gold round-trip against docs/samples.md", () => {
   const pairs = samplePairs();
   const forwardValues = new Set(buildForwardMap(data).values());
 
-  it("finds the eight gold passages", () => {
-    expect(pairs.length).toBe(8);
+  it("finds the nine gold passages", () => {
+    expect(pairs.length).toBe(9);
   });
 
   it("produces every handled World-English form the gold passage contains", () => {

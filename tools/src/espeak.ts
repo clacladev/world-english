@@ -15,7 +15,7 @@
 // flag": they pass through as plain text for espeak to read itself, and reuse the same not-found
 // flag, so the sentence still flows but nothing is silently invented.
 
-import { splitSyllables, findStress, tokenizeSyllable, GRAPHEME_TO_IPA } from "./respell.ts";
+import { splitSyllables, findStress, tokenizeSyllable, GRAPHEME_TO_IPA, VOWEL_GRAPHEMES } from "./respell.ts";
 import { defaultLexicon, type Lexicon } from "./lexicon.ts";
 import { WORD, lineOf, type PronFlag } from "./pronounce.ts";
 
@@ -41,12 +41,6 @@ export const GRAPHEME_TO_ESPEAK: ReadonlyMap<string, string> = new Map([
   ["oy", "OI"], ["uh", "@"],
   // R-colored vowels (P2), from espeak's readback of the START/NORTH/NEAR/SQUARE/CURE words.
   ["ar", "A@"], ["or", "O@"], ["eer", "i@3"], ["air", "e@"], ["oor", "U@"],
-]);
-
-/** Vowel graphemes — decide the `y` glide/vowel split (P2). Mirrors respell.ts's VOWEL_GRAPHEMES. */
-const VOWEL_GRAPHEMES = new Set([
-  "a", "e", "i", "o", "u", "uu", "ee", "ay", "oh", "oo", "aw", "ow", "oy", "uh",
-  "er", "ar", "or", "eer", "air", "oor",
 ]);
 
 /** Map one grapheme to its espeak phoneme, resolving `er` (NURSE `3`) and `y` (glide vs. PRICE). */

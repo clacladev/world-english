@@ -26,6 +26,7 @@ import { buildPrepRestorations } from "./core-lexicon.ts";
 import abolishedForms from "../data/abolished-forms.json" with { type: "json" };
 import irregularVerbs from "../data/irregular-verbs.json" with { type: "json" };
 import irregularPlurals from "../data/irregular-plurals.json" with { type: "json" };
+import { WORD, matchCase, tokenizeLine } from "./text-utils.ts";
 
 export interface ReverseEntry {
   /** The standard-English form to restore. */
@@ -73,8 +74,6 @@ const CANONICAL_LOSSY: Record<string, { restore: string; class: string; rule: st
   thems: { restore: "their", class: "pronoun", rule: "G4", note: "their/theirs collapsed to `thems`" },
 };
 
-const WORD = /[A-Za-z]+(?:'[A-Za-z]+)?/g;
-
 function confidenceHigh(e: { confidence?: string; homograph?: boolean }): boolean {
   return (e.confidence ?? (e.homograph ? "low" : "high")) === "high";
 }
@@ -96,8 +95,20 @@ export function buildReverseMap(): Map<string, ReverseEntry> {
   };
 
   // Irregular verbs: canonical restore is the PAST; a distinct participle makes it ambiguous.
-  for (const v of irregularVerbs.verbs as { base: string; past: string; pp?: string; homograph?: boolean }[]) {
-    if (v.homograph) continue; // low-confidence homograph (e.g. `ground`) — mirror the linter
+  // `homograph` marks a verb whose SE past/pp reads as another word (a *forward*-direction
+  // concern — see M1's linter/translator confidence demotion) and does not by itself imply the
+  // WoE-regularized form is unsafe to restore: `speaked`/`bited`/`shooted`/`beared` are not real
+  // words, so restoring them is lossless. Only `reverseCollision` (a distinct, explicit flag)
+  // marks a WoE form that collides with a real word on THIS side (`seed`, `hanged`) — those stay
+  // fully unrestored, matching the project's decision that a valid-word collision must not be
+  // guessed at all (#66).
+  for (const v of irregularVerbs.verbs as {
+    base: string;
+    past: string;
+    pp?: string;
+    reverseCollision?: boolean;
+  }[]) {
+    if (v.reverseCollision) continue; // WoE form collides with a real word — never guess (#66)
     const woe = regularizeVerbPast(v.base);
     if (woe === v.base.toLowerCase()) continue; // zero-past: woe equals the base, undetectable
     const ambiguous = !!(v.pp && v.pp.toLowerCase() !== v.past.toLowerCase());
@@ -110,9 +121,13 @@ export function buildReverseMap(): Map<string, ReverseEntry> {
     });
   }
 
-  // Irregular plurals.
-  for (const p of irregularPlurals.plurals as { singular: string; plural: string; homograph?: boolean }[]) {
-    if (p.homograph) continue;
+  // Irregular plurals. Same reverseCollision handling as verbs above (`leafs`, `persons`).
+  for (const p of irregularPlurals.plurals as {
+    singular: string;
+    plural: string;
+    reverseCollision?: boolean;
+  }[]) {
+    if (p.reverseCollision) continue;
     const woe = regularizePlural(p.singular);
     if (woe === p.singular.toLowerCase()) continue;
     add(woe, { restore: p.plural.toLowerCase(), class: "irregular-plural", rule: "M4", ambiguous: false });
@@ -140,28 +155,6 @@ export function buildReverseMap(): Map<string, ReverseEntry> {
 const reverseMap = buildReverseMap();
 const prepRestorations = buildPrepRestorations();
 
-/** Re-apply the source token's casing to its replacement (goed→went, Goed→Went, HIMS→HIS). */
-function matchCase(source: string, restore: string): string {
-  if (source === source.toLowerCase()) return restore;
-  if (source.length > 1 && source === source.toUpperCase()) return restore.toUpperCase();
-  if (source[0] === source[0]!.toUpperCase()) return restore[0]!.toUpperCase() + restore.slice(1);
-  return restore;
-}
-
-interface LineToken {
-  word: string;
-  start: number;
-  end: number;
-}
-
-function tokenizeLine(line: string): LineToken[] {
-  return [...line.matchAll(WORD)].map((m) => ({
-    word: m[0],
-    start: m.index,
-    end: m.index + m[0].length,
-  }));
-}
-
 /**
  * Words after which a restored G3 drop-verb should NOT get its preposition re-inserted: the next
  * token already reads as a preposition, conjunction/subordinator, or a common place/time/degree
@@ -183,11 +176,36 @@ const PREP_INSERTION_STOPLIST = new Set([
   "still", "always", "never", "often", "sometimes", "usually", "again", "ago", "away", "back",
   "forward", "forth", "outside", "inside", "everywhere", "somewhere", "anywhere", "nowhere",
   "abroad", "home", "very", "too", "quite", "rather", "almost", "enough",
+  // common *underived* predicate adjectives — ones with no adjective-forming suffix to detect by
+  // shape (#65: "she looks tired" is a copular reading, not "look at"). Adjectives built from a
+  // recognizable suffix (tired, nervous, wonderful, comfortable, ...) are instead caught by the
+  // general suffix check in stopsInsertion() below, so this list only needs the irregular core.
+  "good", "bad", "fine", "well", "sick", "sure", "young", "old", "cold", "hot", "warm", "calm",
+]);
+
+// Adjective-forming suffixes: a word ending in one of these, right after a drop-ruling verb, reads
+// as a predicate adjective (copular "look"/"be" complement) rather than the verb's object — a
+// general shape check instead of an ever-growing hand-enumerated list (#65).
+const ADJECTIVE_SUFFIXES = ["ed", "ous", "ful", "ive", "able", "ible", "ious", "less"];
+
+// A determiner immediately before the candidate token signals a NOUN reading ("the look was
+// cold"), not a finite drop-ruling verb — #65.
+const PRECEDING_NOUN_SIGNAL = new Set([
+  "the", "a", "an", "this", "that", "these", "those", "my", "his", "her", "its", "our", "your",
+  "their", "mes", "hims", "uss", "yous", "thems", "some", "any", "no", "every", "each",
+]);
+
+// A determiner-headed quantifier idiom ("a lot", "a few", "a bit") right after the verb is an
+// adverbial, not the verb's object — inserting a preposition before it misparses "talks a lot" as
+// "talks to a lot" (#65).
+const QUANTIFIER_IDIOM_NOUNS = new Set([
+  "lot", "few", "little", "bit", "couple", "half", "dozen", "number", "bunch", "whole",
 ]);
 
 function stopsInsertion(word: string): boolean {
   const w = word.toLowerCase();
-  return PREP_INSERTION_STOPLIST.has(w) || w.endsWith("ly");
+  if (PREP_INSERTION_STOPLIST.has(w) || w.endsWith("ly")) return true;
+  return ADJECTIVE_SUFFIXES.some((suf) => w.length > suf.length + 2 && w.endsWith(suf));
 }
 
 /** Word-level restoration pass: irregular verbs/plurals, comparatives, pronouns, be, etc. */
@@ -237,11 +255,21 @@ function restorePreps(line: string, lineNo: number, file: string, flags: Reverse
 
     const restoration = prepRestorations.get(tok.word.toLowerCase());
     if (!restoration) continue;
+    // A determiner right before the token signals a noun reading ("the look was cold"), not a
+    // finite drop-ruling verb (#65) — bail before even considering the next token.
+    const prev = tokens[i - 1];
+    if (prev && PRECEDING_NOUN_SIGNAL.has(prev.word.toLowerCase())) continue;
     const next = tokens[i + 1];
     if (!next) continue; // no next token — e.g. end of sentence
     const gap = line.slice(tok.end, next.start);
     if (!/^\s*$/.test(gap)) continue; // punctuation intervenes — e.g. "Wait, the bus…"
     if (stopsInsertion(next.word)) continue;
+    // A quantifier idiom ("a lot", "a few") right after the verb is adverbial, not an object —
+    // "talks a lot" is not "talks to a lot" (#65).
+    if (["a", "an"].includes(next.word.toLowerCase())) {
+      const afterDet = tokens[i + 2];
+      if (afterDet && QUANTIFIER_IDIOM_NOUNS.has(afterDet.word.toLowerCase())) continue;
+    }
 
     out += ` ${restoration.prep}`;
     flags.push({

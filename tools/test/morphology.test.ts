@@ -1,5 +1,9 @@
 import { describe, expect, it } from "bun:test";
-import { regularizePlural, regularizeVerbPast } from "../src/morphology.ts";
+import {
+  regularizePlural,
+  regularizeVerbPast,
+  standardPresentParticiple,
+} from "../src/morphology.ts";
 
 describe("regularizeVerbPast (M1)", () => {
   it.each([
@@ -16,6 +20,32 @@ describe("regularizeVerbPast (M1)", () => {
     ["build", "builded"],
   ])("%s → %s", (base, expected) => {
     expect(regularizeVerbPast(base)).toBe(expected);
+  });
+
+  it.each([
+    ["begin", "beginned"],
+    ["refer", "referred"],
+    ["occur", "occurred"],
+    ["prefer", "preferred"],
+    ["admit", "admitted"],
+    ["control", "controlled"],
+  ])("stress-final polysyllable %s → %s (O3 doubling)", (base, expected) => {
+    expect(regularizeVerbPast(base)).toBe(expected);
+  });
+
+  it("does not double a non-stress-final polysyllable", () => {
+    expect(regularizeVerbPast("open")).toBe("opened");
+    expect(regularizeVerbPast("travel")).toBe("traveled");
+  });
+});
+
+describe("standardPresentParticiple (stress-final doubling)", () => {
+  it.each([
+    ["begin", "beginning"],
+    ["refer", "referring"],
+    ["occur", "occurring"],
+  ])("%s → %s", (base, expected) => {
+    expect(standardPresentParticiple(base)).toBe(expected);
   });
 });
 

@@ -53,8 +53,9 @@ exists per verb** — the invariant that makes the drop reversible — enforced 
 `"flag"` withholds the forward transform for a verb whose canonical preposition has a
 high-frequency competing reading the tools can't disambiguate without syntax. No entry
 currently uses this field: the one candidate, **`wait for`** (duration *"wait for three
-minutes"* vs. object *"wait for the bus"*, the [item 16](to-do.md#16-constructions-surfaced-by-dogfooding-samplesmd)
-test), is handled instead by the **not-duration guard** in `core-lexicon.ts` — the forward
+minutes"* vs. object *"wait for the bus"*, tested by [`to-do.md`](to-do.md) item 16,
+"Constructions surfaced by dogfooding"), is handled instead by the **not-duration guard** in
+`core-lexicon.ts` — the forward
 translator drops *for* only when the following span is not a length of time, so `wait for the
 bus` auto-translates and `wait for three minutes` is kept. The *reverse* translator restores
 `wait for` regardless — a stoplist (prepositions, conjunctions, common adverbs, `-ly` words)
@@ -204,7 +205,7 @@ An entry is "done" only when:
    entry, `phrasalVerbs.plain` is a single word and isn't itself a dropped form, and G3-drop /
    S2-phrasal bigrams don't collide.
 3. It stays **consistent with [`samples.md`](samples.md)** — e.g. *listen music* / *wait the bus*
-   agree with Passage 1.
+   agree with [Passage 9](samples.md#passage-9--short-exchange-closes-dogfooding-blind-spots).
 4. The forward/reverse **round-trip property** holds: every `drop` + `forward: "apply"` verb
    translates SE→WoE by dropping its preposition, and WoE→SE restores it, flagged
    (`tools/test/reverse.test.ts`).

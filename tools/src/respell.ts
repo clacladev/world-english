@@ -27,7 +27,7 @@ export const GRAPHEME_TO_IPA: ReadonlyMap<string, string> = new Map([
 ]);
 
 /** Vowel graphemes — used to decide the `y` glide/vowel split (P2's `y` note). `y` excluded. */
-const VOWEL_GRAPHEMES = new Set([
+export const VOWEL_GRAPHEMES = new Set([
   "a", "e", "i", "o", "u", "uu", "ee", "ay", "oh", "oo", "aw", "ow", "oy", "uh",
   "er", "ar", "or", "eer", "air", "oor",
 ]);
