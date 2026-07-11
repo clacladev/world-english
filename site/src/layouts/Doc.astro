@@ -1,0 +1,202 @@
+---
+import Base from './Base.astro';
+import Toc from '../components/Toc.astro';
+import type { MarkdownHeading } from 'astro';
+import type { NavItem } from '../lib/nav';
+
+interface Props {
+  title: string;
+  description?: string;
+  sectionLabel: string;
+  sectionHref: string;
+  basePath: string; // e.g. "/rules"
+  items: NavItem[];
+  current: string; // current slug
+  headings: MarkdownHeading[];
+}
+
+const { title, description, sectionLabel, sectionHref, basePath, items, current, headings } =
+  Astro.props;
+
+const idx = items.findIndex((i) => i.slug === current);
+const prev = idx > 0 ? items[idx - 1] : null;
+const next = idx >= 0 && idx < items.length - 1 ? items[idx + 1] : null;
+---
+
+<Base title={title} description={description}>
+  <div class="doc shell">
+    <aside class="doc__side">
+      <details class="doc__nav-wrap" open>
+        <summary class="doc__nav-summary">
+          <a href={sectionHref}>{sectionLabel}</a>
+        </summary>
+        <nav aria-label={sectionLabel}>
+          <ul class="doc__nav">
+            {items.map((i) => (
+              <li>
+                <a
+                  href={`${basePath}/${i.slug}/`}
+                  class:list={['doc__nav-link', { 'is-active': i.slug === current }]}
+                  aria-current={i.slug === current ? 'page' : undefined}
+                >
+                  {i.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </details>
+    </aside>
+
+    <article class="doc__main prose" data-pagefind-body>
+      <p class="doc__crumb">
+        <a href={sectionHref}>{sectionLabel}</a>
+      </p>
+      <slot />
+
+      <nav class="doc__pager" aria-label="More in this section">
+        {prev ? (
+          <a class="pager pager--prev" href={`${basePath}/${prev.slug}/`}>
+            <span class="pager__dir">← Previous</span>
+            <span class="pager__title">{prev.title}</span>
+          </a>
+        ) : <span />}
+        {next ? (
+          <a class="pager pager--next" href={`${basePath}/${next.slug}/`}>
+            <span class="pager__dir">Next →</span>
+            <span class="pager__title">{next.title}</span>
+          </a>
+        ) : <span />}
+      </nav>
+    </article>
+
+    <aside class="doc__toc">
+      <div class="doc__toc-sticky">
+        <Toc headings={headings} />
+      </div>
+    </aside>
+  </div>
+</Base>
+
+<style>
+  .doc {
+    display: grid;
+    grid-template-columns: 15rem minmax(0, 1fr) 14rem;
+    gap: var(--space-8);
+    padding-block: var(--space-8);
+    align-items: start;
+  }
+  .doc__side,
+  .doc__toc {
+    position: sticky;
+    top: 5rem;
+  }
+  .doc__nav-summary {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-3);
+    cursor: pointer;
+    list-style: none;
+  }
+  .doc__nav-summary a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .doc__nav-summary a:hover {
+    color: var(--accent);
+  }
+  .doc__nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    border-left: var(--border-w) solid var(--border);
+  }
+  .doc__nav-link {
+    display: block;
+    padding: 0.3rem 0 0.3rem var(--space-4);
+    margin-left: -1px;
+    border-left: 2px solid transparent;
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+  .doc__nav-link:hover {
+    color: var(--accent);
+  }
+  .doc__nav-link.is-active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    font-weight: 700;
+  }
+
+  .doc__main {
+    min-width: 0;
+  }
+  .doc__crumb {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    margin: 0 0 var(--space-4);
+  }
+
+  .doc__pager {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-top: var(--space-10);
+    padding-top: var(--space-5);
+    border-top: var(--border-w) solid var(--border);
+  }
+  .pager {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    font-family: var(--font-sans);
+    text-decoration: none;
+    padding: var(--space-3) var(--space-4);
+    border: var(--border-w) solid var(--border);
+    border-radius: var(--radius-sm);
+    max-width: 48%;
+  }
+  .pager:hover {
+    border-color: var(--accent-line);
+  }
+  .pager--next {
+    text-align: right;
+    margin-left: auto;
+  }
+  .pager__dir {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+  .pager__title {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .doc__toc-sticky {
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+  }
+
+  @media (max-width: 60rem) {
+    .doc {
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+    }
+    .doc__side,
+    .doc__toc {
+      position: static;
+    }
+    .doc__toc {
+      display: none;
+    }
+    .doc__nav-wrap:not([open]) .doc__nav {
+      display: none;
+    }
+  }
+</style>

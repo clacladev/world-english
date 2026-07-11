@@ -1,0 +1,62 @@
+---
+import type { MarkdownHeading } from 'astro';
+interface Props {
+  headings: MarkdownHeading[];
+}
+const { headings } = Astro.props;
+// On-page contents: show h2 and h3 only.
+const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+{
+  items.length > 0 && (
+    <nav class="toc" aria-label="On this page">
+      <p class="toc__title">On this page</p>
+      <ul class="toc__list">
+        {items.map((h) => (
+          <li class:list={['toc__item', { 'toc__item--sub': h.depth === 3 }]}>
+            <a href={`#${h.slug}`}>{h.text}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+<style>
+  .toc {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+  }
+  .toc__title {
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin: 0 0 var(--space-3);
+  }
+  .toc__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-left: var(--border-w) solid var(--border);
+  }
+  .toc__item a {
+    display: block;
+    padding: 0.25rem 0 0.25rem var(--space-4);
+    margin-left: -1px;
+    border-left: 2px solid transparent;
+    color: var(--text-muted);
+    text-decoration: none;
+    line-height: 1.35;
+  }
+  .toc__item a:hover {
+    color: var(--accent);
+    border-left-color: var(--accent-line);
+  }
+  .toc__item--sub a {
+    padding-left: var(--space-6);
+    font-size: 0.82rem;
+  }
+</style>

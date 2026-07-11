@@ -1,0 +1,99 @@
+---
+const year = 2026;
+const repo = 'https://github.com/clacladev/world-english';
+---
+
+<footer class="site-footer">
+  <div class="shell grid">
+    <div class="brand">
+      <span class="name">World English</span>
+      <span class="say">WERLD ING-glish · <span lang="en-fonipa">/wɝld ˈɪŋɡlɪʃ/</span></span>
+      <p class="status">An open design &amp; research project — everything here is provisional.</p>
+    </div>
+    <nav class="cols" aria-label="Footer">
+      <div>
+        <h2>Reference</h2>
+        <a href="/rules/">The rules</a>
+        <a href="/research/">Research</a>
+        <a href="/about/">About the project</a>
+      </div>
+      <div>
+        <h2>Source</h2>
+        <a href={repo}>Repository</a>
+        <a href={repo + '/tree/dev/docs'}>Specs (docs/)</a>
+        <a href={repo + '/tree/dev/tools'}>Tooling (tools/)</a>
+      </div>
+    </nav>
+  </div>
+  <div class="shell base">
+    <span>© {year} World English contributors</span>
+    <a href={repo}>Edit on GitHub</a>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: var(--space-12);
+    border-top: var(--border-w) solid var(--border);
+    background: var(--bg-tint);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+  }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-8);
+    padding-block: var(--space-8) var(--space-6);
+  }
+  .brand {
+    max-width: 22rem;
+  }
+  .name {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: var(--text-lg);
+    display: block;
+  }
+  .say {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+  }
+  .status {
+    color: var(--text-muted);
+    margin-top: var(--space-3);
+    line-height: 1.5;
+  }
+  .cols {
+    display: flex;
+    gap: var(--space-8);
+    margin-left: auto;
+  }
+  .cols h2 {
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin: 0 0 var(--space-3);
+  }
+  .cols a {
+    display: block;
+    color: var(--text);
+    text-decoration: none;
+    padding-block: var(--space-1);
+  }
+  .cols a:hover {
+    color: var(--accent);
+  }
+  .base {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-block: var(--space-4);
+    border-top: var(--border-w) solid var(--border);
+    color: var(--text-muted);
+  }
+  .base a {
+    color: var(--text-muted);
+  }
+</style>

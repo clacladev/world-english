@@ -1,0 +1,61 @@
+---
+// Compact "main rule at a glance" card used on the landing page.
+interface Props {
+  id: string; // e.g. "M1"
+  title: string;
+  href?: string; // deep link into the relevant spec
+}
+const { id, title, href } = Astro.props;
+const Tag = href ? 'a' : 'div';
+---
+
+<Tag class:list={['rule-card', { 'is-link': href }]} href={href}>
+  <span class="rule-card__id">{id}</span>
+  <h3 class="rule-card__title">{title}</h3>
+  <p class="rule-card__body"><slot /></p>
+</Tag>
+
+<style>
+  .rule-card {
+    display: block;
+    background: var(--surface);
+    border: var(--border-w) solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--space-5);
+    text-decoration: none;
+    color: inherit;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.15s ease, transform 0.1s ease;
+    height: 100%;
+  }
+  .rule-card.is-link:hover {
+    border-color: var(--accent-line);
+    transform: translateY(-2px);
+  }
+  .rule-card__id {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 999px;
+    padding: 0.1em 0.6em;
+    margin-bottom: var(--space-3);
+  }
+  .rule-card__title {
+    font-size: var(--text-lg);
+    margin: 0 0 var(--space-2);
+  }
+  .rule-card__body {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.55;
+  }
+  :global(.rule-card__body b),
+  :global(.rule-card__body strong) {
+    color: var(--accent);
+    font-weight: 700;
+  }
+</style>
