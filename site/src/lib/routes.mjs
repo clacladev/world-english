@@ -2,8 +2,6 @@
 // files map to site URLs. Imported by both the rehype link-rewriter (build time)
 // and the .astro pages, so loader ids, route params, and rewritten links agree.
 
-export const GITHUB_BLOB = 'https://github.com/clacladev/world-english/blob/dev';
-
 // docs/*.md basenames (lowercased, no extension) published under /rules/<slug>/
 export const SPEC_SLUGS = [
   'orthography',
