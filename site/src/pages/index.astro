@@ -23,7 +23,8 @@ const goals = [
 <Base>
   <!-- Hero -->
   <section class="hero">
-    <div class="shell hero__inner">
+    <div class="shell">
+      <div class="hero__inner col">
       <p class="eyebrow">World English · WoE</p>
       <h1 class="hero__title">A simpler, more regular English.</h1>
       <p class="hero__lede">
@@ -64,12 +65,14 @@ const goals = [
         <a class="btn btn--primary" href="/rules/">Read the rules</a>
         <a class="btn btn--ghost" href="/research/">Why it exists</a>
       </div>
+      </div>
     </div>
   </section>
 
   <!-- The idea in 10 seconds -->
   <section class="section">
     <div class="shell">
+      <div class="col">
       <header class="sec-head">
         <h2>The idea in ten seconds</h2>
         <p class="lede">
@@ -94,17 +97,18 @@ const goals = [
           <Fragment slot="after"><mark>?You seed</mark> <mark>mes</mark> keys?</Fragment>
         </BeforeAfter>
       </div>
+      </div>
     </div>
   </section>
 
   <!-- Goals -->
   <section class="section section--tint">
     <div class="shell">
-      <header class="sec-head">
+      <header class="sec-head col">
         <h2>What it aims to be</h2>
         <p class="lede">Four goals, in the project’s own words.</p>
       </header>
-      <ul class="goals">
+      <ul class="goals col-wide">
         {
           goals.map((g) => (
             <li class="goal">
@@ -120,6 +124,7 @@ const goals = [
   <!-- Priorities -->
   <section class="section">
     <div class="shell">
+      <div class="col">
       <header class="sec-head">
         <h2>What comes first</h2>
       </header>
@@ -133,19 +138,20 @@ const goals = [
         flourish. One constraint bounds all three: it must stay
         <strong>legible as English</strong>. An evolution, not a cipher.
       </p>
+      </div>
     </div>
   </section>
 
   <!-- Main rules at a glance -->
   <section class="section section--tint">
     <div class="shell">
-      <header class="sec-head">
+      <header class="sec-head col">
         <h2>The main rules at a glance</h2>
         <p class="lede">
           A few of the load-bearing changes. Each links into the full specification.
         </p>
       </header>
-      <div class="rule-grid">
+      <div class="rule-grid col-wide">
         <RuleCard id="M1" title="All verbs are regular" href="/rules/morphology/#rule-m1--all-verbs-are-regular">
           <b>go → goed</b>, <b>take → taked</b>. About 200 irregular verbs disappear; one <code>-ed</code> rule replaces the list.
         </RuleCard>
@@ -171,7 +177,7 @@ const goals = [
           A simple respelling key — <b>ING-glish</b> — so you can say any word from how it is written.
         </RuleCard>
       </div>
-      <p class="rule-grid__more">
+      <p class="rule-grid__more col">
         <a class="btn btn--ghost" href="/rules/">See all the rules →</a>
       </p>
     </div>
@@ -179,7 +185,8 @@ const goals = [
 
   <!-- Research teaser -->
   <section class="section">
-    <div class="shell teaser">
+    <div class="shell">
+      <div class="teaser col">
       <header class="sec-head">
         <p class="eyebrow">Grounded in evidence</p>
         <h2>The reasoning behind it</h2>
@@ -196,6 +203,7 @@ const goals = [
         <a class="btn btn--ghost" href="/research/">Read the research →</a>
         <a class="btn btn--ghost" href="/about/">About the project →</a>
       </p>
+      </div>
     </div>
   </section>
 </Base>
@@ -207,10 +215,19 @@ const goals = [
     background:
       radial-gradient(60rem 30rem at 50% -10%, var(--accent-soft), transparent 70%);
   }
-  .hero__inner {
+  /* One shared, centered content column. Everything is left-aligned inside it —
+     body text reads best ragged-right with a constant left edge — so the hero,
+     the section heads, and the prose all share one axis and one left edge. */
+  .col {
     max-width: 52rem;
-    text-align: center;
+    margin-inline: auto;
   }
+  /* Card grids sit on the same central axis as a slightly wider, symmetric band. */
+  .col-wide {
+    max-width: 66rem;
+    margin-inline: auto;
+  }
+
   .hero__title {
     font-size: var(--text-3xl);
     margin: var(--space-2) 0 var(--space-4);
@@ -218,11 +235,10 @@ const goals = [
   .hero__lede {
     font-size: var(--text-lg);
     color: var(--text-muted);
-    max-width: 42rem;
-    margin-inline: auto;
+    max-width: 44rem;
   }
   .say-card {
-    margin: var(--space-8) auto 0;
+    margin: var(--space-8) 0 0;
     max-width: 34rem;
     background: var(--surface);
     border: var(--border-w) solid var(--border);
@@ -234,7 +250,6 @@ const goals = [
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    justify-content: center;
     gap: var(--space-2) var(--space-3);
   }
   .say-card__name {
@@ -270,7 +285,6 @@ const goals = [
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: var(--space-2) var(--space-3);
     font-family: var(--font-sans);
   }
@@ -316,7 +330,6 @@ const goals = [
   .hero__cta {
     display: flex;
     gap: var(--space-3);
-    justify-content: center;
     flex-wrap: wrap;
     margin-top: var(--space-6);
   }
@@ -341,12 +354,12 @@ const goals = [
   .hero__inner > :nth-child(5) { animation-delay: 0.24s; }
   .hero__inner > :nth-child(6) { animation-delay: 0.3s; }
 
-  /* Section heads — left-aligned to the section's content edge, with a readable
-     measure. Headings and their intro text share the same left edge as the cards
-     below them. */
+  /* Section heads — same left edge as the column; intro text at a readable measure. */
   .sec-head {
-    max-width: 48rem;
     margin-bottom: var(--space-6);
+  }
+  .sec-head .lede {
+    max-width: 48rem;
   }
   .sec-head h2 {
     font-size: var(--text-2xl);
@@ -356,7 +369,6 @@ const goals = [
   .ba-stack {
     display: grid;
     gap: var(--space-4);
-    max-width: 52rem;
   }
 
   /* Goals */

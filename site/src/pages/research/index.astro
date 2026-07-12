@@ -8,7 +8,7 @@ import { RESEARCH_NAV } from '../../lib/nav';
   description="The reasoning and evidence behind World English — what makes English hard to learn, what must be memorized, and what a century of earlier reforms tells us."
 >
   <div class="shell page">
-    <header class="page__head measure">
+    <header class="page__head col">
       <p class="eyebrow">Why it exists</p>
       <h1>The research behind it</h1>
       <p class="lede">
@@ -18,7 +18,7 @@ import { RESEARCH_NAV } from '../../lib/nav';
       </p>
     </header>
 
-    <ul class="cards">
+    <ul class="cards col-wide">
       {
         RESEARCH_NAV.map((s) => (
           <li>
@@ -32,7 +32,7 @@ import { RESEARCH_NAV } from '../../lib/nav';
       }
     </ul>
 
-    <p class="foot measure">
+    <p class="foot col">
       A standard-English grammar baseline (Brehe’s <em>Grammar Anatomy</em>) is kept in the
       repository as a reference and is not reproduced here.
     </p>
@@ -42,6 +42,16 @@ import { RESEARCH_NAV } from '../../lib/nav';
 <style>
   .page {
     padding-block: var(--space-8) var(--space-10);
+  }
+  /* Shared centered column — heads and prose left-aligned on one axis, the card
+     grid a slightly wider symmetric band on the same axis (as on the landing page). */
+  .col {
+    max-width: 52rem;
+    margin-inline: auto;
+  }
+  .col-wide {
+    max-width: 66rem;
+    margin-inline: auto;
   }
   .page__head {
     margin-bottom: var(--space-8);
