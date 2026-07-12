@@ -19,7 +19,7 @@ import { SPEC_NAV } from '../../lib/nav';
       </p>
     </header>
 
-    <ul class="cards col-wide">
+    <ul class="cards col">
       {
         SPEC_NAV.map((s) => (
           <li>
@@ -46,14 +46,10 @@ import { SPEC_NAV } from '../../lib/nav';
   .page {
     padding-block: var(--space-8) var(--space-10);
   }
-  /* Shared centered column — heads and prose left-aligned on one axis, the card
-     grid a slightly wider symmetric band on the same axis (as on the landing page). */
+  /* Shared centered column — heads, prose, and the card grid all span the same
+     width on one axis, left-aligned (as on the landing page). */
   .col {
     max-width: 52rem;
-    margin-inline: auto;
-  }
-  .col-wide {
-    max-width: 66rem;
     margin-inline: auto;
   }
   .page__head {
@@ -65,7 +61,7 @@ import { SPEC_NAV } from '../../lib/nav';
   }
   .cards {
     list-style: none;
-    margin: 0;
+    margin-block: 0; /* block only — .col owns the inline (auto-centering) margins */
     padding: 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));

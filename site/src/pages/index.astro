@@ -108,7 +108,7 @@ const goals = [
         <h2>What it aims to be</h2>
         <p class="lede">Four goals, in the project’s own words.</p>
       </header>
-      <ul class="goals col-wide">
+      <ul class="goals col">
         {
           goals.map((g) => (
             <li class="goal">
@@ -151,7 +151,7 @@ const goals = [
           A few of the load-bearing changes. Each links into the full specification.
         </p>
       </header>
-      <div class="rule-grid col-wide">
+      <div class="rule-grid col">
         <RuleCard id="M1" title="All verbs are regular" href="/rules/morphology/#rule-m1--all-verbs-are-regular">
           <b>go → goed</b>, <b>take → taked</b>. About 200 irregular verbs disappear; one <code>-ed</code> rule replaces the list.
         </RuleCard>
@@ -215,16 +215,11 @@ const goals = [
     background:
       radial-gradient(60rem 30rem at 50% -10%, var(--accent-soft), transparent 70%);
   }
-  /* One shared, centered content column. Everything is left-aligned inside it —
-     body text reads best ragged-right with a constant left edge — so the hero,
-     the section heads, and the prose all share one axis and one left edge. */
+  /* One shared, centered content column. Everything — hero, section heads,
+     prose, and card grids — spans exactly this width, left-aligned inside it,
+     so the whole page has a single axis and a single pair of edges. */
   .col {
     max-width: 52rem;
-    margin-inline: auto;
-  }
-  /* Card grids sit on the same central axis as a slightly wider, symmetric band. */
-  .col-wide {
-    max-width: 66rem;
     margin-inline: auto;
   }
 
@@ -235,7 +230,6 @@ const goals = [
   .hero__lede {
     font-size: var(--text-lg);
     color: var(--text-muted);
-    max-width: 44rem;
   }
   .say-card {
     margin: var(--space-8) 0 0;
@@ -354,12 +348,9 @@ const goals = [
   .hero__inner > :nth-child(5) { animation-delay: 0.24s; }
   .hero__inner > :nth-child(6) { animation-delay: 0.3s; }
 
-  /* Section heads — same left edge as the column; intro text at a readable measure. */
+  /* Section heads — same edges as everything else in the column. */
   .sec-head {
     margin-bottom: var(--space-6);
-  }
-  .sec-head .lede {
-    max-width: 48rem;
   }
   .sec-head h2 {
     font-size: var(--text-2xl);
@@ -374,10 +365,11 @@ const goals = [
   /* Goals */
   .goals {
     list-style: none;
-    margin: 0;
+    margin-block: 0; /* block only — .col owns the inline (auto-centering) margins */
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    /* Two even columns at column width; single column on narrow screens. */
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
     gap: var(--space-4);
   }
   .goal {
@@ -400,7 +392,6 @@ const goals = [
 
   /* Priorities */
   .prio {
-    max-width: 48rem;
     font-size: var(--text-lg);
     line-height: 1.6;
   }
@@ -418,7 +409,8 @@ const goals = [
   /* Rule grid */
   .rule-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    /* Two even columns at column width; single column on narrow screens. */
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
     gap: var(--space-4);
   }
   .rule-grid :global(code) {
@@ -430,10 +422,6 @@ const goals = [
     margin-top: var(--space-6);
   }
 
-  /* Research teaser — keep the prose at a readable measure, left-aligned */
-  .teaser > p {
-    max-width: 48rem;
-  }
   .research-cta {
     display: flex;
     gap: var(--space-3);
