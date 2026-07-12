@@ -1,22 +1,29 @@
-/* Design tokens — the warm cream + maroon serif brand, light and dark.
+/* Design tokens — tugulab.org colour scheme (warm cream + rust/teal accents)
+   with Fraunces (serif) and Inter (sans). Light and dark variants.
    Every text/background pairing is checked to meet WCAG AA (>=4.5:1 body). */
 
 :root {
   /* Type families */
-  --font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: "Fraunces", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
-  /* Fluid type scale (18px base), 1.25 ratio */
-  --text-sm: 0.9rem;
-  --text-base: 1.0625rem;
-  --text-lg: 1.2rem;
-  --text-xl: clamp(1.35rem, 1.1rem + 1.1vw, 1.6rem);
-  --text-2xl: clamp(1.7rem, 1.3rem + 1.9vw, 2.15rem);
-  --text-3xl: clamp(2.1rem, 1.5rem + 3vw, 3.1rem);
+  /* Fluid type scale — tuned for a content-heavy docs site. Body sits at
+     ~15.5–17px (a comfortable reading size); the hero tops out around 53px.
+     Lower bounds assume the smallest viewport; vw shares scale headings up
+     proportionally as width grows. */
+  --text-xs: clamp(0.72rem, 0.71rem + 0.025vw, 0.75rem);       /* 11.5 → 12 */
+  --text-sm: clamp(0.84rem, 0.83rem + 0.05vw, 0.89rem);        /* 13.5 → 14.2 */
+  --text-base: clamp(0.97rem, 0.9375rem + 0.16vw, 1.08rem);   /* 15.5 → 17.25 */
+  --text-md: clamp(1.15rem, 1.09rem + 0.29vw, 1.33rem);       /* 18.4 → 21.3 */
+  --text-lg: clamp(1.41rem, 1.32rem + 0.47vw, 1.68rem);       /* 22.5 → 26.9 */
+  --text-xl: clamp(1.72rem, 1.59rem + 0.68vw, 2.12rem);       /* 27.5 → 33.9 */
+  --text-2xl: clamp(2.15rem, 1.97rem + 0.91vw, 2.65rem);      /* 34.4 → 42.4 */
+  --text-3xl: clamp(2.6rem, 2.34rem + 1.3vw, 3.32rem);        /* 41.6 → 53.2 */
 
   --leading: 1.7;
-  --leading-tight: 1.25;
+  --leading-tight: 1.1;
+  --tracking-tight: -0.01em;
 
   /* Spacing scale */
   --space-1: 0.25rem;
@@ -35,32 +42,32 @@
   --radius-sm: 6px;
   --border-w: 1px;
 
-  --shadow-sm: 0 1px 2px rgba(43, 43, 43, 0.05);
-  --shadow: 0 4px 20px rgba(43, 43, 43, 0.08);
+  --shadow-sm: 0 1px 2px rgba(53, 53, 52, 0.05);
+  --shadow: 0 4px 20px rgba(53, 53, 52, 0.08);
 
   color-scheme: light;
 }
 
-/* ---- Light (default) ---- */
+/* ---- Light (default) — tugulab.org palette ---- */
 :root,
 :root[data-theme="light"] {
-  --bg: #faf8f5;
-  --bg-tint: #f4efe8;      /* alternating section band */
+  --bg: #f6f5f1;            /* warm cream background */
+  --bg-tint: #eeece6;       /* tinted section band / code background */
   --surface: #ffffff;
-  --surface-2: #f3efe9;
-  --text: #2b2b2b;
-  --text-muted: #605a50;
-  --accent: #8b2c2c;
-  --accent-hover: #6f2020;
-  --accent-soft: #f2e4e1;  /* maroon tint for change highlights */
-  --accent-line: #d9b7b2;
-  --border: #e5ded4;
-  --border-strong: #d8cfc1;
-  --focus: #8b2c2c;
+  --surface-2: #eeece6;     /* zebra rows, callout background */
+  --text: #353534;          /* ink — main text */
+  --text-muted: #73706d;    /* muted text */
+  --accent: #c2410c;        /* rust orange — links, active states */
+  --accent-hover: #0e7c7b;  /* teal — hover state (tugulab accent-soft) */
+  --accent-soft: #fdf0e8;   /* light orange tint for highlight backgrounds */
+  --accent-line: #e2a887;  /* medium orange for decoration lines */
+  --border: #d3d3d1;       /* rule colour */
+  --border-strong: #c4c4c2;
+  --focus: #0e7c7b;        /* teal focus ring */
   color-scheme: light;
 }
 
-/* ---- Dark ---- */
+/* ---- Dark — complementary warm-dark with the same accent hues ---- */
 :root[data-theme="dark"] {
   --bg: #1b1916;
   --bg-tint: #221f1b;
@@ -68,13 +75,13 @@
   --surface-2: #2c2823;
   --text: #ece7df;
   --text-muted: #b3aa9d;
-  --accent: #e79393;
-  --accent-hover: #f2acac;
-  --accent-soft: #3a2726;
-  --accent-line: #6a3b3b;
+  --accent: #e8772e;       /* lighter rust orange for dark bg */
+  --accent-hover: #2dd4cf;  /* lighter teal for dark bg */
+  --accent-soft: #3a2418;  /* dark orange tint for highlight backgrounds */
+  --accent-line: #6a4a30;  /* medium orange-brown for decoration lines */
   --border: #38332d;
   --border-strong: #48423a;
-  --focus: #e79393;
+  --focus: #2dd4cf;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
   color-scheme: dark;
@@ -89,13 +96,13 @@
     --surface-2: #2c2823;
     --text: #ece7df;
     --text-muted: #b3aa9d;
-    --accent: #e79393;
-    --accent-hover: #f2acac;
-    --accent-soft: #3a2726;
-    --accent-line: #6a3b3b;
+    --accent: #e8772e;
+    --accent-hover: #2dd4cf;
+    --accent-soft: #3a2418;
+    --accent-line: #6a4a30;
     --border: #38332d;
     --border-strong: #48423a;
-    --focus: #e79393;
+    --focus: #2dd4cf;
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
     --shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
     color-scheme: dark;
