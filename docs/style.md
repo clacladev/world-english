@@ -169,7 +169,7 @@ only fixes where the adjunct sits when it is *not* fronted.
 
 **Comparative adverb phrases.** The one fixed pre-verb slot is sized for a **single-word**
 adverb. A **multi-word comparative phrase** built with the *more/most* escape hatch
-([morphology M5](morphology.md#rule-m5--regular-comparatives-and-superlatives): *more quickly*,
+([morphology M5](morphology.md#rule-m5--one-comparative-rule): *more quickly*,
 *more carefully*) is exempt and stays in its natural **post-verb** position instead: *She
 worked **more quickly**.*, *Plan **more carefully**.* — not *she more quickly worked*, which
 fronts a two-word phrase in front of the verb and reads worse than the order it would replace.

@@ -268,7 +268,7 @@ furniture*) that blocks *informations*, *an advice* (see
 nothing left to split for the *much*/*many* pair, so the determiner **`much` → `many`**
 everywhere a noun is involved (*many informations*, not *much informations*). **`little`/`few`**
 are the mirror case and are **not** abolished the same way: per
-[morphology M5](morphology.md#rule-m5--regular-comparatives-and-superlatives), *little/few*
+[morphology M5](morphology.md#rule-m5--one-comparative-rule), *little/few*
 keep **`less`/`least`** (alongside the regular *littler/littlest*) as a valid, optional World
 English form — so *fewer furnitures* and *less furnitures* are both grammatical; this rule does
 not force *fewer* "in all cases." The learner never again decides whether a noun is "mass"

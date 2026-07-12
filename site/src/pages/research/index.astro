@@ -8,7 +8,7 @@ import { RESEARCH_NAV } from '../../lib/nav';
   description="The reasoning and evidence behind World English — what makes English hard to learn, what must be memorized, and what a century of earlier reforms tells us."
 >
   <div class="shell page">
-    <header class="page__head measure">
+    <header class="page__head col">
       <p class="eyebrow">Why it exists</p>
       <h1>The research behind it</h1>
       <p class="lede">
@@ -18,7 +18,7 @@ import { RESEARCH_NAV } from '../../lib/nav';
       </p>
     </header>
 
-    <ul class="cards">
+    <ul class="cards col">
       {
         RESEARCH_NAV.map((s) => (
           <li>
@@ -32,7 +32,7 @@ import { RESEARCH_NAV } from '../../lib/nav';
       }
     </ul>
 
-    <p class="foot measure">
+    <p class="foot col">
       A standard-English grammar baseline (Brehe’s <em>Grammar Anatomy</em>) is kept in the
       repository as a reference and is not reproduced here.
     </p>
@@ -43,6 +43,12 @@ import { RESEARCH_NAV } from '../../lib/nav';
   .page {
     padding-block: var(--space-8) var(--space-10);
   }
+  /* Shared centered column — heads, prose, and the card grid all span the same
+     width on one axis, left-aligned (as on the landing page). */
+  .col {
+    max-width: 52rem;
+    margin-inline: auto;
+  }
   .page__head {
     margin-bottom: var(--space-8);
   }
@@ -52,7 +58,7 @@ import { RESEARCH_NAV } from '../../lib/nav';
   }
   .cards {
     list-style: none;
-    margin: 0;
+    margin-block: 0; /* block only — .col owns the inline (auto-centering) margins */
     padding: 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));

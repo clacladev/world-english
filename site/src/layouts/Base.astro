@@ -18,7 +18,9 @@ const {
 const siteName = 'World English';
 const fullTitle = title ? `${title} · ${siteName}` : `${siteName} — a simpler, more regular English`;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
-const ogImage = new URL('/og.svg', Astro.site).href;
+// PNG, not SVG — X/Facebook/Slack/LinkedIn don't render SVG social cards.
+const ogImage = new URL('/og.png', Astro.site).href;
+const ogImageAlt = 'World English — a simpler, more regular English';
 ---
 
 <!doctype html>
@@ -30,7 +32,8 @@ const ogImage = new URL('/og.svg', Astro.site).href;
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#8b2c2c" />
+    <meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1b1916" media="(prefers-color-scheme: dark)" />
 
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={siteName} />
@@ -38,10 +41,14 @@ const ogImage = new URL('/og.svg', Astro.site).href;
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
 
     <!-- Set theme before paint to avoid a flash of the wrong colour scheme -->
     <script is:inline>

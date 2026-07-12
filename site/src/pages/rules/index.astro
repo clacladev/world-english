@@ -8,7 +8,7 @@ import { SPEC_NAV } from '../../lib/nav';
   description="The full World English specifications — orthography, pronunciation, morphology, grammar, style, writing, and vocabulary."
 >
   <div class="shell page">
-    <header class="page__head measure">
+    <header class="page__head col">
       <p class="eyebrow">Reference</p>
       <h1>The full rules</h1>
       <p class="lede">
@@ -19,7 +19,7 @@ import { SPEC_NAV } from '../../lib/nav';
       </p>
     </header>
 
-    <ul class="cards">
+    <ul class="cards col">
       {
         SPEC_NAV.map((s) => (
           <li>
@@ -33,7 +33,7 @@ import { SPEC_NAV } from '../../lib/nav';
       }
     </ul>
 
-    <p id="status" class="status measure">
+    <p id="status" class="status col">
       <strong>Status.</strong> These specifications are provisional — a first design pass.
       Every divergence from standard English is recorded with its rationale, and the rules keep
       changing as they are worked out. <a href="/rules/samples/">Samples</a> is the regression
@@ -46,6 +46,12 @@ import { SPEC_NAV } from '../../lib/nav';
   .page {
     padding-block: var(--space-8) var(--space-10);
   }
+  /* Shared centered column — heads, prose, and the card grid all span the same
+     width on one axis, left-aligned (as on the landing page). */
+  .col {
+    max-width: 52rem;
+    margin-inline: auto;
+  }
   .page__head {
     margin-bottom: var(--space-8);
   }
@@ -55,7 +61,7 @@ import { SPEC_NAV } from '../../lib/nav';
   }
   .cards {
     list-style: none;
-    margin: 0;
+    margin-block: 0; /* block only — .col owns the inline (auto-centering) margins */
     padding: 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
