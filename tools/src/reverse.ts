@@ -1,4 +1,4 @@
-// WoE→SE reverse translator (docs/to-do.md item 12) — the lossless-mapping proof.
+// WoE→SE reverse translator — the lossless-mapping proof.
 //
 // Reads the *same* abolished-forms data the linter loads, but inverted: it maps each coined
 // World-English form back to its standard-English original. Most classes reverse losslessly

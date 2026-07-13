@@ -7,7 +7,7 @@ So far it holds the **linter** (`lint.ts`) and both **translators** (`translate.
 `--reverse` for the WoE→SE direction). All three share the abolished-forms dataset in
 [`data/`](data).
 
-## The linter (`to-do.md` item 11)
+## The linter
 
 `lint.ts` sweeps the **World-English example columns** of the specs in [`../docs`](../docs) —
 plus the `**World English**` blockquote passages in [`samples.md`](../docs/samples.md) — and
@@ -39,7 +39,7 @@ bun test             # unit + acceptance tests
 bun run typecheck    # tsc --noEmit
 ```
 
-## The forward translator (`to-do.md` item 11, second half)
+## The forward translator
 
 `translate.ts` turns standard English into World English. Per the project's staged plan it
 does only the transforms it can apply **deterministically** — a closed set of unambiguous
@@ -90,7 +90,7 @@ The eight `../docs/samples.md` passages are the translator's gold regression cor
 `test/translate.test.ts` translates each Standard-English passage and asserts it produces every
 handled World-English form the human gold contains.
 
-## The reverse translator (`to-do.md` item 12) — the lossless-mapping proof
+## The reverse translator — the lossless-mapping proof
 
 `translate.ts --reverse` (logic in `src/reverse.ts`) goes the other way: World English back to
 standard English, by inverting the same dataset. It exists to *prove* the mapping is
@@ -189,7 +189,7 @@ This is a first full pass over the spine, not a final one: only the clear cases 
 Coverage grows opportunistically from here — a new collision found in review, a gap surfaced by
 dogfooding, or simply revisiting a skipped verb with more care.
 
-## The pronunciation tool (`to-do.md` item 13)
+## The pronunciation tool
 
 `pronounce.ts` renders World English text to its learner **respelling** (default) or **IPA**
 (`--ipa`), following rules P1–P7 in [`pronunciation.md`](../docs/pronunciation.md).
@@ -297,7 +297,7 @@ dataset is authored here. It is also the seed for the deferred **reverse transla
 
 Every entry is `high` or `low`. **Low** covers forms that are POS-dependent (`third-person-s`,
 `do-support`, `modal`, `relativizer`, `article`), ride on an open design decision
-(`more`/`most`/`less`/`least`, per [`to-do.md` item 17](../docs/to-do.md)), or are homographs
+(`more`/`most`/`less`/`least`), or are homographs
 of a valid everyday word (the noun *ground*, the adverb *well*). Low entries are **off by
 default** and only reported under `--strict`, so the default gate stays high-precision.
 

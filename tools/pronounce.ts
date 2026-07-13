@@ -1,5 +1,5 @@
 #!/usr/bin/env bun
-// The World English pronunciation tool (docs/to-do.md item 13; rules P1–P7 in
+// The World English pronunciation tool (rules P1–P7 in
 // docs/pronunciation.md).
 //
 // Renders World English text to its learner respelling (default) or IPA (--ipa) by looking each

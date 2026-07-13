@@ -4,7 +4,7 @@
 > reached `drafted`/`built`/`resolved`. This is an **issue collection**, not a fix plan: every
 > problem, contradiction, forgotten promise, and critique found by re-auditing the initial
 > goals ([README](../README.md)), the research base ([`resources/`](../resources)), the
-> priorities ([`to-do.md`](to-do.md)), the specs ([`docs/`](.)), and the tooling
+> priorities (`to-do.md`), the specs ([`docs/`](.)), and the tooling
 > ([`tools/`](../tools)). A follow-up plan will select, order, and resolve these.
 
 **Method.** Five independent audit passes, each verified against the actual files before

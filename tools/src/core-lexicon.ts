@@ -1,4 +1,4 @@
-// Loader + builders for the core lexicon (docs/to-do.md item 8; data/lexicon.json).
+// Loader + builders for the core lexicon (data/lexicon.json).
 //
 // data/lexicon.json's schema is documented in its own `_comment` and in docs/vocabulary.md.
 // This module turns it into the shapes the rest of the tooling consumes: the abolished-forms
@@ -201,7 +201,7 @@ export function toAbolishedEntries(lexicon: CoreLexicon = defaultLexicon): Aboli
   return out;
 }
 
-// The G3 "for" test (docs/grammar.md G3, to-do.md item 16): a dropped `for` is KEPT when it
+// The G3 "for" test (docs/grammar.md G3): a dropped `for` is KEPT when it
 // introduces a duration span (S5), DROPPED when it marks the verb's object. Closed word set.
 const TIME_UNITS = new Set([
   "second", "seconds", "minute", "minutes", "hour", "hours", "day", "days", "week", "weeks",
@@ -255,7 +255,7 @@ export interface PhraseTransform {
   rule: "G3" | "S2";
   /**
    * "not-duration": only fire when the tokens after the phrase are NOT a duration span.
-   * Set on every dropped `for` (G3 "for" test, to-do.md item 16): drop the object-for
+   * Set on every dropped `for` (G3 "for" test): drop the object-for
    * (*wait for the bus* → *wait the bus*) but keep the duration-for (*wait for three
    * minutes*). translate.ts's substituteLine evaluates the guard.
    *

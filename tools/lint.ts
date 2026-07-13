@@ -1,5 +1,5 @@
 #!/usr/bin/env bun
-// World English spec linter (docs/to-do.md item 11).
+// World English spec linter.
 //
 // Sweeps the World-English example columns of the specs (and the samples.md regression
 // passages) and flags any abolished standard-English form that leaked into World-English

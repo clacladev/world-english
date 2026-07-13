@@ -1,4 +1,4 @@
-// SE→WoE forward translator (docs/to-do.md item 11, second half).
+// SE→WoE forward translator.
 //
 // Turns standard English into World English by applying only the transforms it can do
 // *deterministically* — a closed set of unambiguous surface-form substitutions — and FLAGGING

@@ -33,12 +33,6 @@ own divergence to record.
 | [vocabulary.md](vocabulary.md) | Core lexicon — the per-word list G3/S2/S3/S6 look up (canonical prepositions, phrasal→plain, preferred sense, collocations, false friends, register) | §4 |
 | [samples.md](samples.md) | Dogfooded translations, annotated rule-by-rule — the regression test | all |
 
-## Backlog
-
-[`to-do.md`](to-do.md) is the prioritized list of what to work on next — spec gaps, open
-decisions inside existing specs, and planned tooling — ranked by learner impact per
-[`../resources/PAIN-POINTS.md`](../resources/PAIN-POINTS.md).
-
 ## How the specs fit together
 
 - **orthography.md and pronunciation.md are a pair.** A spelling change implies a sound,
@@ -64,7 +58,7 @@ decisions inside existing specs, and planned tooling — ranked by learner impac
 rule-by-rule. It is the project's **regression test**: **every future spec change must re-run
 those passages and keep them consistent.** If a rule changes, the affected sentences and
 their annotations change with it; if a passage needs a construction no rule covers, it is
-flagged in `samples.md` and logged in [`to-do.md`](to-do.md) — never silently improvised.
+flagged in `samples.md` — never silently improvised.
 This is how the specs are kept from drifting back into the contradictions they were written
 to remove.
 

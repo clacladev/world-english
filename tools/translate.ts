@@ -1,5 +1,5 @@
 #!/usr/bin/env bun
-// The World English translators (docs/to-do.md items 11–12).
+// The World English translators.
 //
 // Default is the SE→WoE forward translator: reads standard English and writes World English,
 // applying only the deterministic closed-class transforms. Anything that needs part-of-speech,
