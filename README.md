@@ -197,5 +197,21 @@ silently: divergences from English are always written down with their rationale.
 
 ---
 
+## License
+
+World English is dual-licensed:
+
+- **Code** — everything in [`tools/`](tools/) and [`site/`](site/) — is licensed
+  under the [MIT License](LICENSE-MIT).
+- **Documentation and research** — [`docs/`](docs/), [`resources/`](resources/),
+  this `README.md`, and `AGENTS.md` — is licensed under
+  [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/)
+  (CC BY 4.0). See [`LICENSE-CC-BY`](LICENSE-CC-BY).
+
+The [`LICENSE`](LICENSE) file states the split in full. Copyright © World English
+contributors.
+
+---
+
 *World English is an open design exploration. Everything here is provisional and
 open to revision as the rules are worked out.*
