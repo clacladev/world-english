@@ -97,3 +97,11 @@ unchanged and Vercel serves that domain natively — no Host rewrite, and nothin
 to `*.vercel.app`.
 
 Replace `<project>.vercel.app` with the real deployment origin in either pattern.
+
+## License
+
+This `site/` package is part of the World English project's **code** and is licensed
+under the [MIT License](../LICENSE-MIT). The documentation it renders (in
+[`../docs`](../docs) and [`../resources`](../resources)) is separately licensed under
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See [`../LICENSE`](../LICENSE)
+for the project-wide split.

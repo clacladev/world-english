@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "description": "The World English (WoE) reference website — a static Astro site rendering the docs/ specs and resources/ research in place.",
+  "license": "MIT",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && pagefind --site dist",

@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "description": "Tooling for World English — the spec linter, the SE→WoE / WoE→SE translators, and the pronunciation renderer.",
+  "license": "MIT",
   "scripts": {
     "lint": "bun lint.ts",
     "translate": "bun translate.ts",

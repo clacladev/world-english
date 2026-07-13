@@ -1,0 +1,12 @@
+World English is distributed under a dual license:
+
+  - Code — everything in `tools/` and `site/` — is licensed under the MIT License.
+    See `LICENSE-MIT` for the full text.
+
+  - Documentation and research — `docs/`, `resources/`, `README.md`, `AGENTS.md`,
+    and `site/README.md` — is licensed under the Creative Commons Attribution 4.0
+    International License (CC BY 4.0).
+    See `LICENSE-CC-BY` for a summary and the full text at
+    https://creativecommons.org/licenses/by/4.0/legalcode
+
+Copyright © World English contributors.
