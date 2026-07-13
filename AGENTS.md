@@ -21,7 +21,7 @@ The pronunciation tool's `--audio` flag requires `espeak-ng` on PATH (external d
 ## Architecture
 
 - `docs/` — the language specifications (orthography, pronunciation, morphology, grammar,
-  style, writing, vocabulary) + `samples.md` (the regression test) + `to-do.md` (backlog).
+  style, writing, vocabulary) + `samples.md` (the regression test).
 - `resources/` — research baseline: `PAIN-POINTS.md`, `IRREGULARITIES.md`, `PRIOR-ART.md`,
   and Brehe's Grammar Anatomy (standard-English reference).
 - `tools/` — Bun/TypeScript tooling: the spec linter, SE↔WoE translators, and pronunciation

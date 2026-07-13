@@ -273,8 +273,8 @@ differently-intoned L1s must produce and hear a rising question — the difficul
 mitigated in **writing** by the always-present leading `?` and bounded in **speech** to one
 contrast. This diverges from Jenkins' Lingua Franca Core, which rates grammatical
 intonation non-essential for intelligibility (see
-[PRIOR-ART §C](../resources/PRIOR-ART.md#c-the-empirical-base-on-international-intelligibility)
-and [to-do.md](../docs/to-do.md) item 18) — and the divergence is **settled: accepted, not
+[PRIOR-ART §C](../resources/PRIOR-ART.md#c-the-empirical-base-on-international-intelligibility))
+— and the divergence is **settled: accepted, not
 open.** The yes/no question is frequent and important enough to load-bear one pitch
 contrast; the alternative (a coined particle) is a word the language would rather not add,
 so questions stay purely subtractive; and the cost is bounded — one contrast in speech,

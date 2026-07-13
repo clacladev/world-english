@@ -17,7 +17,6 @@ export const SPEC_NAV: NavItem[] = [
   { slug: 'writing', title: 'Writing', blurb: 'Document-level conventions and cohesion.' },
   { slug: 'vocabulary', title: 'Vocabulary', blurb: 'The core lexicon four rules look words up in.' },
   { slug: 'samples', title: 'Samples', blurb: 'Real passages translated and annotated rule-by-rule.' },
-  { slug: 'to-do', title: 'Roadmap', blurb: 'The prioritized backlog of open work.' },
 ];
 
 export const RESEARCH_NAV: NavItem[] = [

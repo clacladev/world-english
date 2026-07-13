@@ -53,7 +53,7 @@ tamed grammar), deployed in a **bounded context** (news, aircraft manuals, busin
   language — Basic English under-specified grammar and over-trusted paraphrase. World English
   should pair its core word-list with the full rule specs, not lean on vocabulary limits
   alone.
-- **Bears on.** The core-lexicon backlog item ([to-do.md](../docs/to-do.md) item 8);
+- **Bears on.** The core lexicon;
   [S3](../docs/style.md#rule-s3--one-word-one-meaning-avoid-heavy-polysemy),
   [S4](../docs/style.md#rule-s4--avoid-idioms-and-culture-bound-expressions).
 
@@ -108,7 +108,7 @@ tamed grammar), deployed in a **bounded context** (news, aircraft manuals, busin
   founding insight matches World English's philosophy that ease and clarity outrank
   fluency-flavored polish.
 - **Bears on.** The whole subset philosophy ([README](../README.md#what-is-world-english));
-  the ~1.5–3k core-lexicon target (to-do item 8).
+  the ~1.5–3k core-lexicon target.
 
 ### Plain English / Plain Language movement
 
@@ -233,8 +233,8 @@ are the **conservative subset** — which is precisely the line World English dr
   never built, so it changed nothing. World English's answer is **methodology** — write the
   specs, dogfood them ([samples.md](../docs/samples.md)), and build the tooling — so it does
   not remain, like Nuclear English, a proposal.
-- **Bears on.** The [README methodology](../README.md#methodology) and the tooling backlog
-  (to-do items 11–13); the samples/regression discipline.
+- **Bears on.** The [README methodology](../README.md#methodology) and the tooling backlog;
+  the samples/regression discipline.
 
 ### The coined-pronoun tension (Webster, again)
 
@@ -267,7 +267,7 @@ are the **conservative subset** — which is precisely the line World English dr
      simultaneously. A dozen new pronoun forms are a one-time, front-loaded cost a learner pays
      once at the start, not a continuous tax on every word they already half-know how to spell.
   This is a considered bet, not a proven one — it has not been tested empirically the way the
-  LFC tests P3/P4/P7 (see [to-do.md item 18](../docs/to-do.md#priority-2--drafted-gaps-and-resolved-decisions)).
+  LFC tests P3/P4/P7.
   The honest position is: **the coined pronoun paradigms are the part of WoE structurally
   closest to Webster's failures**, kept deliberately because they are small, systematic, and
   front-loaded rather than because prior art endorses them.
@@ -295,7 +295,7 @@ actually helps or hurts understanding between non-native speakers. It is where p
   /ð/**, fine **vowel quality**, **lexical word-stress** placement, weak forms/schwa,
   stress-timed rhythm, and attitudinal intonation.
 - **Where it contradicts WoE.** Three places, recorded honestly — and now **resolved
-  deliberately** (see [to-do.md](../docs/to-do.md) item 18): P3 and P4 are kept on
+  deliberately**: P3 and P4 are kept on
   reading-aid grounds, P7's spoken divergence is accepted.
   1. **The *th* split.** Jenkins found /θ/ and /ð/ are **non-core and safely substitutable**
      (with /t d/, /s z/, /f v/) without harming international intelligibility. Yet
@@ -439,5 +439,5 @@ system can deliver.
 > SSB funding, STE's "2025 standard" status) and one theoretical claim (Bickerton's bioprogram)
 > are flagged as source-dependent or contested. Where prior art contradicts a World English rule
 > — most importantly the LFC on /θ/–/ð/ — the contradiction was recorded honestly and is now
-> resolved deliberately (§C; [to-do.md](../docs/to-do.md) item 18): the diverging rules are
+> resolved deliberately (§C): the diverging rules are
 > kept, on reading-aid grounds for P3/P4 and as an accepted spoken trade-off for P7.

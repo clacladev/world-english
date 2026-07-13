@@ -153,8 +153,7 @@ world-english/
 │   ├── style.md                # plain-phrasing guidance
 │   ├── writing.md              # document-level conventions — punctuation, paragraph shape
 │   ├── vocabulary.md           # core lexicon — the word list G3/S2/S3/S6 look up
-│   ├── samples.md              # dogfooded translations + regression test
-│   └── to-do.md                # prioritized problem backlog
+│   └── samples.md              # dogfooded translations + regression test
 ├── resources/
 │   ├── IRREGULARITIES.md       # catalogue of what English forces you to memorize
 │   ├── PAIN-POINTS.md          # research-backed survey of learner difficulty

@@ -8,7 +8,7 @@
 Each passage is given three ways: the **standard English** original, the **World English**
 translation, and a **per-sentence annotation** naming every rule applied (`[M1]`, `[G2]`, …).
 Where a sentence needs a construction the specs do **not** yet cover, it is **flagged inline**
-and logged in [`to-do.md`](to-do.md) — never silently improvised.
+— never silently improvised.
 
 Rule keys: `O*` [orthography](orthography.md) · `P*` [pronunciation](pronunciation.md) ·
 `M*` [morphology](morphology.md) · `G*` [grammar](grammar.md) · `S*` [style](style.md) ·
@@ -420,8 +420,8 @@ This passage needed no construction the specs do not cover; it exists to close t
 
 ## Gaps this file surfaced — now closed
 
-Dogfooding turned up four constructions the specs did not cover. Each was logged in
-[`to-do.md`](to-do.md) (item 16) and has since been **fixed by rule**:
+Dogfooding turned up four constructions the specs did not cover. Each has since been
+**fixed by rule**:
 
 1. ✅ **The *for* test — duration vs. thing-awaited.**
    [G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs) now states it: keep
@@ -445,5 +445,4 @@ Dogfooding turned up four constructions the specs did not cover. Each was logged
 `samples.md` is a **regression test**, not decoration. Per
 [docs/README.md](README.md#status), **every future spec change must re-run these passages**
 and keep them consistent: if a rule changes, the affected sentences and annotations here
-change with it, and any newly-uncovered construction is flagged and sent to
-[`to-do.md`](to-do.md) rather than quietly translated.
+change with it, and any newly-uncovered construction is flagged rather than quietly translated.

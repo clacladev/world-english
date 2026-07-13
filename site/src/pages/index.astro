@@ -101,6 +101,30 @@ const goals = [
     </div>
   </section>
 
+  <!-- Showcase -->
+  <section class="section">
+    <div class="shell col">
+      <div class="showcase">
+        <p class="showcase__eyebrow">See it carry real weight</p>
+        <blockquote class="showcase__quote">
+          “…that these dead shall not die in vain — that this nation, under God, shall have
+          <mark>new</mark> birth of freedom — and that government of the people, by the people,
+          for the people, shall not perish from the earth.”
+        </blockquote>
+        <p class="showcase__cite">The Gettysburg Address, in World English</p>
+        <p class="showcase__body">
+          The best test of the reform is a text you already know by heart. We rendered the
+          Universal Declaration of Human Rights and Lincoln's Gettysburg Address in World
+          English by the book — every line applying the published rules, with not one abolished
+          form left in. See what changes, and how much doesn't.
+        </p>
+        <p class="showcase__cta">
+          <a class="btn btn--primary" href="/showcase/">Read them in World English →</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- Goals -->
   <section class="section section--tint">
     <div class="shell">
@@ -427,5 +451,53 @@ font-size: var(--text-md);
     gap: var(--space-3);
     flex-wrap: wrap;
     margin-top: var(--space-5);
+  }
+
+  /* Showcase teaser — a famous text in WoE, boldly quoted */
+  .showcase {
+    border: var(--border-w) solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-6) var(--space-6) var(--space-5);
+  }
+  .showcase__eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 var(--space-3);
+  }
+  .showcase__quote {
+    font-family: var(--font-serif, Fraunces, serif);
+    font-size: var(--text-lg);
+    line-height: 1.6;
+    margin: 0;
+    border: 0;
+    padding: 0;
+  }
+  .showcase__quote mark {
+    background: transparent;
+    color: var(--accent);
+    font-weight: 700;
+    box-shadow: inset 0 -0.35em 0 color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+  .showcase__cite {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    margin: var(--space-3) 0 var(--space-5);
+  }
+  .showcase__body {
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0;
+  }
+  .showcase__cta {
+    margin: var(--space-5) 0 0;
   }
 </style>

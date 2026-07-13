@@ -9,6 +9,10 @@ import rehypeWrapTables from './src/plugins/rehype-wrap-tables.mjs';
 // Repo root is one level up from this site/ directory.
 const repoRoot = new URL('../', import.meta.url);
 
+// The public source repo. Cross-links to files that have no page on the site
+// (tools/, review.md, the Brehe textbook) point here.
+const repo = { url: 'https://github.com/clacladev/world-english', branch: 'dev' };
+
 // Canonical public URL — the site is served here via a reverse proxy in front of
 // Vercel. Drives canonical <link>, Open Graph/Twitter image URLs, and the sitemap.
 export default defineConfig({
@@ -27,7 +31,7 @@ export default defineConfig({
           properties: { className: ['heading-anchor'] },
         },
       ],
-      [rehypeRewriteLinks, { repoRoot, base: '/' }],
+      [rehypeRewriteLinks, { repoRoot, base: '/', repo }],
       rehypeWrapTables,
     ],
   },

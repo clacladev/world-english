@@ -1,4 +1,4 @@
-// Spoken audio for the pronunciation tool (docs/to-do.md item 13; rules P1–P7 in
+// Spoken audio for the pronunciation tool (rules P1–P7 in
 // docs/pronunciation.md), driving the external `espeak-ng` synthesizer.
 //
 // The whole project's philosophy is that the respelling/IPA *is* the pronunciation — nothing is

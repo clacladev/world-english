@@ -12,7 +12,6 @@ export const SPEC_SLUGS = [
   'writing',
   'vocabulary',
   'samples',
-  'to-do',
 ];
 
 // resources/*.md basenames published under /research/<slug>/

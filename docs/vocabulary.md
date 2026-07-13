@@ -5,8 +5,7 @@
 > (phrasal → plain), [S3](style.md#rule-s3--one-word-one-meaning-avoid-heavy-polysemy)
 > (preferred sense), and [S6](style.md#rule-s6--prefer-regular-replacements-for-collocations)
 > (regular collocations) each quote a per-word list to do their job. Without it those rules are
-> promissory notes — statable in prose, but not verifiable or reversible. See
-> [`to-do.md` item 8](to-do.md).
+> promissory notes — statable in prose, but not verifiable or reversible.
 
 ## Source of truth
 
@@ -53,8 +52,7 @@ exists per verb** — the invariant that makes the drop reversible — enforced 
 `"flag"` withholds the forward transform for a verb whose canonical preposition has a
 high-frequency competing reading the tools can't disambiguate without syntax. No entry
 currently uses this field: the one candidate, **`wait for`** (duration *"wait for three
-minutes"* vs. object *"wait for the bus"*, tested by [`to-do.md`](to-do.md) item 16,
-"Constructions surfaced by dogfooding"), is handled instead by the **not-duration guard** in
+minutes"* vs. object *"wait for the bus"*), is handled instead by the **not-duration guard** in
 `core-lexicon.ts` — the forward
 translator drops *for* only when the following span is not a length of time, so `wait for the
 bus` auto-translates and `wait for three minutes` is kept. The *reverse* translator restores
@@ -107,8 +105,7 @@ verb has exactly one.
 | pay | for | keep | not dropped — real relation (*pay the waiter*, *pay for the meal*) |
 
 *wait* is still a `drop` verb — its canonical World English is **wait the bus**, same as the
-others. The `for`-vs-duration test ([item 16](to-do.md#priority-2--drafted-gaps-and-resolved-decisions),
-resolved) is handled by the **not-duration guard** in `core-lexicon.ts`: the forward translator
+others. The `for`-vs-duration test is handled by the **not-duration guard** in `core-lexicon.ts`: the forward translator
 drops *for* only when the following span is not a length of time, so *"wait for the bus"* →
 **wait the bus** and *"wait for three minutes"* is kept (the *for* marks a duration, per
 [S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect)). The *reverse*
