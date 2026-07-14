@@ -19,48 +19,51 @@ Sentence-internal phrasing stays in [style.md](style.md); word *forms* stay in
 **Rule.** World English uses a small, fixed set of punctuation marks, and **each mark has one
 job** (or, for the comma, one closed list of jobs). This rule is the single source of truth for
 punctuation: every other rule that touches a mark ([G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)'s
-`!` and tag questions, [G10](grammar.md#rule-g10--noun-possessive)'s apostrophe, [G15](grammar.md#rule-g15--subordinating-conjunctions)'s
+`!` and tag questions, [G10](grammar.md#rule-g10--noun-possessive)'s apostrophe, [G13](grammar.md#rule-g13--subordinating-conjunctions)'s
 comma-before-a-subordinate-clause) is a use *of* this inventory, never an exception to it.
 
 - **period `.`** — end a statement or a command.
-- **comma `,`** — mark one of a **closed set of boundaries**, never anything else:
-  1. **leading clause or adjunct** — after a fronted subordinate clause, a fronted time/place
-     adjunct, or a sentence-initial connective: *If it rain, we stay* (same comma
-     [G15](grammar.md#rule-g15--subordinating-conjunctions) fixes); *Next time, plan better*;
-     *Also, check the file.* / *For example, this happens.*
-  2. **coordinator joining independent clauses** — before *and, but, so* joining two
-     independent clauses, including two coordinated **imperative** clauses (an imperative is an
-     independent clause for this purpose): *Wash it, and dry it.*
-  3. **list items** — between every item of a list, **including the last** (the serial comma is
-     always present). This job covers a list of **clauses** exactly as it covers a list of
-     words: three or more independent clauses in a series take a comma between each, with the
-     usual coordinator before the last — *The roads beed icy, many drivers haved no experience,
-     and visibility beed poor.* (Two bare clauses with no coordinator are never joined by a
-     comma alone — that is job 2's territory, and job 2 always requires the coordinator.)
-  4. **vocative, politeness marker, or greeting** — setting off a directly-addressed name, a
-     politeness word ([S8](style.md#rule-s8--fixed-politeness-markers-not-graded-indirectness)'s
-     *please/sorry*), or a greeting's name: *Close the door, please.*; *Sorry, I can not come.*;
-     *Hello Sara,* …
-  5. **trailing tag question** — before the invariant tag: *It be good, right?* (See the
-     question-mark entry below: the tag is exempt from the leading/trailing `?` bracket.)
-  6. **trailing duration afterthought** — before a restated time-span tacked onto a finished
-     clause: *She still live here, for ten years.*
-  7. **`, then`** — before *then* marking a sequence between two clauses: *Wash it, then dry
-     it.*
+- **comma `,`** — mark one of a **closed set of boundaries**, never anything else. The jobs group
+  into three categories:
+
+  **(1) Boundary** — separate a leading or joining clause/adjunct from what follows:
+  - after a fronted subordinate clause, a fronted time/place adjunct, or a sentence-initial
+    connective: *If it rain, we stay* (same comma
+    [G13](grammar.md#rule-g13--subordinating-conjunctions) fixes); *Next time, plan better*;
+    *Also, check the file.* / *For example, this happens.*
+  - before *and, but, so* joining two independent clauses, including two coordinated
+    **imperative** clauses (an imperative is an independent clause for this purpose): *Wash it,
+    and dry it.*
+  - before *then* marking a sequence between two clauses: *Wash it, then dry it.*
+
+  **(2) List** — between every item of a list, **including the last** (the serial comma is always
+  present). This covers a list of **clauses** exactly as it covers a list of words: three or more
+  independent clauses in a series take a comma between each, with the usual coordinator before the
+  last — *The roads beed icy, many drivers haved no experience, and visibility beed poor.* (Two
+  bare clauses with no coordinator are never joined by a comma alone — that is the **boundary**
+  category's coordinator job, which always requires the coordinator.)
+
+  **(3) Set-off** — set off an added element from the clause it attaches to:
+  - a directly-addressed name, a politeness word
+    ([S5](style.md#rule-s5--politeness-markers-and-speech-act-templates)'s *please/sorry*), or a
+    greeting's name: *Close the door, please.*; *Sorry, I can not come.*; *Hello Sara,* …
+  - the invariant **trailing tag question**, before the tag: *It be good, right?*
+  - a **trailing duration afterthought** — a restated time-span tacked onto a finished clause:
+    *She still live here, for ten years.*
 
   No other comma use exists — in particular, there is **no restrictive/non-restrictive comma
-  distinction** ([G11](grammar.md#rule-g11--relative-clauses) drops it entirely; a relative
-  clause never takes a comma under any of the seven jobs above).
+  distinction** ([G11](grammar.md#rule-g11--subordinate-clauses-introduced-by-that) drops it
+  entirely; a relative clause never takes a comma under any of the three categories above).
 - **apostrophe `'`** — one job only: mark a possessive (noun possessive `'s`/`s'` per
   [G10](grammar.md#rule-g10--noun-possessive); the pronoun possessive-determiner in
   [G4](grammar.md#rule-g4--regular-pronoun-case) takes none). World English has no contractions,
   so the apostrophe never marks an omitted letter.
 - **question mark `?`** — [G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)
-  brackets a **wh-** or **yes/no** question with a `?` at **both ends**: a **leading `?`** opens
-  it (and the next word is capitalized) and the usual `?` closes it — *?You like it?* The
-  invariant **tag question** is the one exemption: *right?* is not itself bracketed — it takes
-  only the ordinary **trailing `?`** on the host clause (*It be good, right?*), because the tag
-  is a fixed two-word add-on, not a separate question needing its own opening mark.
+  marks a **wh-** or **yes/no** question with a single **trailing `?`**, exactly as standard
+  English does: *You like it?* There is no opening mark — the question is otherwise identical to
+  the statement (no do-support, no inversion), so the trailing `?`, and in speech a rising pitch,
+  are what set it apart. The invariant **tag question** takes the same ordinary trailing `?` on
+  its host clause (*It be good, right?*).
 - **exclamation mark `!`** — end an imperative given with force, per
   [G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)'s negative imperative
   (*Not go!*) and imperatives generally (*Go!*). A plain, unforced command still just takes a
@@ -113,14 +116,14 @@ to a friend.
 *I'm sorry to say* vs *bad news* — a native-intuition skill and a documented ESL difficulty
 (PAIN-POINTS §6, "register and tone"). Removing the axis removes the calibration. The related
 question of **politeness and indirectness** — *how* to soften a request or refusal — is a
-pragmatics concern handled by [style.md S8–S9](style.md#rule-s8--fixed-politeness-markers-not-graded-indirectness)
+pragmatics concern handled by [style.md S5](style.md#rule-s5--politeness-markers-and-speech-act-templates)
 (fixed markers and plain speech-act templates), not here.
 
 **Examples.**
 
 | Standard English (register-marked) | World English (plain) |
 | ---------------------------------- | --------------------- |
-| We would be delighted to receive your feedback. | Please send **yous** feedback. |
+| We would be delighted to receive your feedback. | Please send **your** feedback. |
 | I regret to inform you that we cannot proceed. | I **be** sorry. We **can not** continue. |
 | The aforementioned issue must be addressed. | We must fix this problem. |
 
@@ -186,7 +189,7 @@ the logical link implicit, and never carry it with punctuation. One connective p
 | addition | **and** / **also** |
 | contrast | **but** |
 | result | **so** |
-| reason | **because** (subordinator — [G15](grammar.md#rule-g15--subordinating-conjunctions)) |
+| reason | **because** (subordinator — [G13](grammar.md#rule-g13--subordinating-conjunctions)) |
 | illustration | **for example** |
 | sequence | **then** |
 
@@ -194,7 +197,7 @@ the logical link implicit, and never carry it with punctuation. One connective p
 weakest aspect of ESL academic writing (PAIN-POINTS §6). English also offers stacks of
 near-synonyms whose differences are register nuance, not meaning (*however / nevertheless / yet*;
 *therefore / thus / hence / consequently*). World English keeps **one per relation** and routes
-the variants to it, the same way [S6](style.md#rule-s6--prefer-regular-replacements-for-collocations)
+the variants to it, the same way [S2](style.md#rule-s2--plain-single-sense-words)
 routes collocations to a regular pairing.
 
 **Examples.**
@@ -210,7 +213,7 @@ And an **implicit** link made explicit — the same case as W1's abolished expla
 
 > *He was late. The train broke down.* → He **beed** late **because** the train **failed**.
 
-**Boundary with G15.** [G15](grammar.md#rule-g15--subordinating-conjunctions) fixes the
+**Boundary with G13.** [G13](grammar.md#rule-g13--subordinating-conjunctions) fixes the
 *subordinators* that open a dependent clause (*if, because, when, while…*); W5 governs the
 *connectives that link whole sentences* and collects the register-variant synonyms. Together they
 give one word per logical relation.

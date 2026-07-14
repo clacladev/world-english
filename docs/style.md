@@ -30,72 +30,57 @@ fixed-order *and* free-order L1s alike.
 
 ---
 
-## Rule S2 — Prefer plain verbs over phrasal verbs
+## Rule S2 — Plain, single-sense words
 
-**Rule.** Where a single regular verb exists, use it instead of a non-compositional phrasal
-verb.
+**Rule.** Choose the **plainest, single-sense word** for the meaning. Four habits, one
+principle — prefer the word that reads only one way:
 
-**Problem it solves.** Phrasal verbs are non-compositional and grammatically irregular
-(separable/inseparable, pronoun placement) — see
-[§7](../resources/IRREGULARITIES.md#7-grammar-systems-articles-prepositions-tense-phrasal-verbs).
+1. **Plain verb over opaque phrasal.** Where a single regular verb exists, use it instead of a
+   non-compositional phrasal verb (*give up → **quit** / **stop***, *look after → **mind***).
+   Transparent phrasals (*sit down*, *stand up*) are fine; only the opaque ones are replaced.
+2. **Clearest sense over heavy polysemy.** Prefer the word whose meaning is clearest in context;
+   avoid the rare senses of highly polysemous words (*run a business → **manage***,
+   *get a letter → **receive***, *take a photo → **make***). Reserve *run*, *get*, *take* for
+   their most concrete sense.
+3. **Literal over idiom.** Say the literal thing; avoid idioms and culture-bound expressions
+   (*bite the bullet → **accept the hard thing***, *break the ice → **start the conversation***).
+4. **Regular pairing over arbitrary collocation.** Where standard English forces a fixed,
+   arbitrary word-partnership, a regular literal pairing is fine (*heavy rain → **strong rain***,
+   *make a decision → **decide***).
+
+**Problem it solves.** Phrasal verbs are non-compositional and grammatically irregular; common
+words carry huge sense counts a learner can misread; idioms are non-literal and culturally
+loaded; collocations are unpredictable partnerships (see
+[§7](../resources/IRREGULARITIES.md#7-grammar-systems-articles-prepositions-tense-phrasal-verbs)
+and [`PAIN-POINTS.md` §4](../resources/PAIN-POINTS.md)). All four are the same trap — a word that
+does not mean what it plainly says — so one rule covers them: prefer the plain, single-sense
+word.
 
 **Examples.**
 
-| Phrasal verb | Plain World English |
-| ------------ | ------------------- |
-| give up | **quit** / **stop** |
-| put off | **delay** |
-| look after | **mind** / **tend** |
-| come up with | **invent** / **devise** |
-| find out | **learn** / **discover** |
+| Category | Standard English | World English |
+| -------- | ---------------- | ------------- |
+| phrasal → plain | give up / look after / find out | **quit** / **mind** / **learn** |
+| clearest sense | run a business / get tired | **manage** a business / **become** tired |
+| literal over idiom | bite the bullet / piece of cake | **accept the hard thing** / **very easy** |
+| regular collocation | heavy rain / make a decision | **strong rain** / **decide** |
 
-**Trade-off.** Slightly less idiomatic, more learnable. Phrasal verbs are not *banned* —
-the transparent ones (*sit down*, *stand up*) are fine — only the opaque ones are replaced.
-The phrasal→plain map lives in [vocabulary.md Table B](vocabulary.md#table-b--s2-phrasal--plain-phrasalverbs).
+The per-word lists live in [vocabulary.md](vocabulary.md) — phrasal→plain
+([Table B](vocabulary.md#table-b--s2-phrasal--plain-phrasalverbs)), preferred sense
+([Table C](vocabulary.md#table-c--s2-preferred-sense-sensepreferences-doc-only)), and
+collocation→regular ([Table D](vocabulary.md#table-d--s2-collocation--regular-pairing-collocations-doc-only)).
 
-**Boundary with G3.** This rule handles particles that *change* a verb's meaning (*look
-after* ≠ *look*). Meaning-neutral prepositions that a verb merely selects (*listen to*,
-*wait for*) are not replaced here — [grammar G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs)
-simply drops them.
+**Boundary with G3.** [G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs)
+keeps a verb's meaning-neutral preposition as vocabulary (*listen to*, *wait for*); this rule
+handles only particles that *change* a verb's meaning (*look after* ≠ *look*, *look for* ≠
+*look*), swapping in a plain verb (*mind*, *seek*).
 
----
-
-## Rule S3 — One word, one meaning (avoid heavy polysemy)
-
-**Rule.** In World English writing, prefer the word whose meaning is clearest in context;
-avoid relying on rare senses of highly polysemous words.
-
-**Problem it solves.** Common verbs carry enormous sense counts (*run* has hundreds of
-senses); learners may know a word yet misread it (see
-[`PAIN-POINTS.md` §4](../resources/PAIN-POINTS.md)).
-
-**Examples.** Instead of *run a business* → **manage a business**; *run a program* →
-**start a program**. Reserve *run* for physical running. Likewise *get a letter* →
-**receive a letter**, *get tired* → **become tired**; *take a photo* → **make a photo**,
-*take a bus* → **use a bus**.
-
-**Trade-off.** A little verbosity for a lot of clarity.
-
-The preferred-sense list lives in [vocabulary.md Table C](vocabulary.md#table-c--s3-preferred-sense-sensepreferences-doc-only).
+**Trade-off.** Slightly less idiomatic and less colorful; far more learnable and far harder to
+misread. The plain word means exactly one thing.
 
 ---
 
-## Rule S4 — Avoid idioms and culture-bound expressions
-
-**Rule.** Say the literal thing. Avoid idioms (*bite the bullet*), culture-specific
-references, and humor that depends on shared background.
-
-**Problem it solves.** Idioms are non-literal and culturally loaded — a core
-late-stage difficulty (see [`PAIN-POINTS.md` §4](../resources/PAIN-POINTS.md)).
-
-**Examples.** *bite the bullet* → **accept the hard thing**; *break the ice* → **start the
-conversation**; *piece of cake* → **very easy**.
-
-**Trade-off.** Less color, far less ambiguity for a global reader.
-
----
-
-## Rule S5 — State relevance explicitly (cover for the dropped perfect)
+## Rule S3 — State relevance explicitly (cover for the dropped perfect)
 
 **Rule.** Because World English drops the present perfect ([grammar.md G1](grammar.md)), use
 explicit time words to carry "past with present relevance": *already, since, still, just, yet,
@@ -120,25 +105,7 @@ opaque tense.
 
 ---
 
-## Rule S6 — Prefer regular replacements for collocations
-
-**Rule.** Where standard English demands a fixed, arbitrary collocation, a regular,
-literal pairing is acceptable in World English.
-
-**Problem it solves.** Collocations (*heavy rain* not *strong rain*; *make the bed*) are
-unpredictable word-partnerships (see [`PAIN-POINTS.md` §4](../resources/PAIN-POINTS.md)).
-
-**Examples.** *heavy rain* → **strong rain** is fine (a regular, literal adjective+noun
-pairing instead of the arbitrary collocation); *make a decision* → **decide**;
-*do homework* → **do homework** *or* **study**.
-
-**Trade-off.** Sounds less native; removes a large memorization layer.
-
-The collocation→regular map lives in [vocabulary.md Table D](vocabulary.md#table-d--s6-collocation--regular-pairing-collocations-doc-only).
-
----
-
-## Rule S7 — One default adverb position
+## Rule S4 — One default adverb position
 
 **Rule.** Put manner, frequency, and degree adverbs in **one fixed slot: immediately before
 the main verb** (and after any modal or `be`). A whole-sentence adverb (*maybe, probably,
@@ -168,7 +135,7 @@ adjunct to open the sentence is common, natural English and this rule does not f
 only fixes where the adjunct sits when it is *not* fronted.
 
 **Comparative adverb phrases.** The one fixed pre-verb slot is sized for a **single-word**
-adverb. A **multi-word comparative phrase** built with the *more/most* escape hatch
+adverb. A **multi-word comparative phrase** built with the periphrastic *more/most*
 ([morphology M5](morphology.md#rule-m5--one-comparative-rule): *more quickly*,
 *more carefully*) is exempt and stays in its natural **post-verb** position instead: *She
 worked **more quickly**.*, *Plan **more carefully**.* — not *she more quickly worked*, which
@@ -190,39 +157,14 @@ it is one predictable position instead of several.
 
 ---
 
-## Rule S8 — Fixed politeness markers, not graded indirectness
+## Rule S5 — Politeness markers and speech-act templates
 
 **Rule.** Mark courtesy with a small **closed set of explicit words** — **please** (a request),
-**sorry** (an apology), **thank you** (thanks) — never by grading indirectness. World English
-does **not** soften through longer, less direct phrasings (*Could you possibly…*, *I was
-wondering if you might…*); it says the direct thing and adds the marker. **Directness is the
-neutral default and is not rude** — the marker, not the indirectness, carries the courtesy.
-
-**Problem it solves.** Politeness and indirectness calibration — *how much* to soften a request,
-refusal, or apology — is the least explicitly taught and most L1-transferred part of
-[§7 pragmatics](../resources/PAIN-POINTS.md#7-sociolinguistic--pragmatic-issues), and pragmatic
-failure (not grammar error) is the most-cited source of cross-cultural miscommunication. One
-fixed marker per function removes the grading entirely.
-
-**Examples.**
-
-| Standard English (graded / indirect) | World English (marker + direct) |
-| ------------------------------------ | ------------------------------- |
-| Could you possibly send me the file? | **Please send the file.** |
-| I'm terribly sorry to bother you, but… | **Sorry.** … |
-| I was wondering if you might help. | **Please help.** |
-
-**Trade-off.** Loses deference shading and the signaling indirectness carries; gains a politeness
-rule a learner applies without reading the social context. Register itself is fixed separately by
-[writing.md W2](writing.md#rule-w2--one-plain-register); cultural references and humor stay out by
-[S4](#rule-s4--avoid-idioms-and-culture-bound-expressions).
-
----
-
-## Rule S9 — Plain templates for the hard speech acts
-
-**Rule.** Use **one fixed, low-context frame** per speech act, so the "how do I phrase this"
-question never arises:
+**sorry** (an apology), **thank you** (thanks) — never by graded indirectness, and phrase each
+hard speech act with **one fixed, low-context template**. World English does **not** soften
+through longer, less direct phrasings (*Could you possibly…*, *I was wondering if you might…*);
+it says the direct thing and adds the marker. **Directness is the neutral default and is not
+rude** — the marker, not the indirectness, carries the courtesy.
 
 | Speech act | Template | Example |
 | ---------- | -------- | ------- |
@@ -232,22 +174,26 @@ question never arises:
 | thanks | invariant | **Thank you.** |
 | email open / close | fixed greeting + closing | **Hello Sara,** … **Goodbye,** |
 
-**Problem it solves.** Speech acts — refusals and apologies especially — are the hardest part of
-[§7](../resources/PAIN-POINTS.md#7-sociolinguistic--pragmatic-issues): they demand target-culture
-norms, and omitting an email greeting or closing is itself read as impolite. A fixed template per
-act removes the norm-mastery requirement.
+**Problem it solves.** Politeness and indirectness calibration — *how much* to soften a request,
+refusal, or apology — is the least explicitly taught and most L1-transferred part of
+[§7 pragmatics](../resources/PAIN-POINTS.md#7-sociolinguistic--pragmatic-issues), and pragmatic
+failure (not grammar error) is the most-cited source of cross-cultural miscommunication; omitting
+an email greeting or closing is itself read as impolite. One fixed marker per function and one
+template per act remove the grading and the norm-mastery entirely.
 
 **Examples.** A refusal keeps
 [G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)'s invariant **No.** and adds
 a plain reason with a [W5](writing.md#rule-w5--make-every-connection-explicit) connective:
 *No. Sorry, I can not come because I be busy.* (Trailing *because*-clause, so no comma before it,
-per [G15](grammar.md#rule-g15--subordinating-conjunctions) /
-[W1](writing.md#rule-w1--one-regular-punctuation-set).) A request is just that same imperative
-with **please**: *Please close the door.*
+per [G13](grammar.md#rule-g13--subordinating-conjunctions) /
+[W1](writing.md#rule-w1--one-regular-punctuation-set).) A request is that same imperative with
+**please**: *Please close the door.* The **optional `Sorry` softener** on a refusal is the one
+permitted concession to warmth — allowed, never required.
 
 **Trade-off.** Blunter than native usage and less personal; every speech act is unambiguous and
-needs no cultural calibration. The **optional `Sorry` softener** on a refusal is the one permitted
-concession to warmth — allowed, never required.
+needs no cultural calibration. Register itself is fixed separately by
+[writing.md W2](writing.md#rule-w2--one-plain-register); cultural references and humor stay out by
+[S2](#rule-s2--plain-single-sense-words).
 
 ---
 
@@ -256,11 +202,7 @@ concession to warmth — allowed, never required.
 | Guideline | Keep it... |
 | --------- | ---------- |
 | S1 word order | Subject–Verb–Object, no inversion |
-| S2 phrasal verbs | plain verb when one exists |
-| S3 polysemy | clearest sense, avoid rare senses |
-| S4 idioms | literal phrasing |
-| S5 relevance | explicit time words (no perfect) |
-| S6 collocations | regular literal pairings allowed |
-| S7 adverb position | one slot: before the main verb |
-| S8 politeness | fixed marker (please / sorry / thank you), not graded indirectness |
-| S9 speech acts | one plain template each (request / refusal / apology / thanks / email) |
+| S2 plain words | plain, single-sense word — plain verb, clearest sense, literal, regular pairing |
+| S3 relevance | explicit time words (no perfect) |
+| S4 adverb position | one slot: before the main verb |
+| S5 pragmatics | fixed politeness markers + one plain template per speech act |

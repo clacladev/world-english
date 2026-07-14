@@ -2,7 +2,6 @@
 
 import type { AbolishedEntry, Dataset } from "./dataset.ts";
 import type { Span } from "./extract.ts";
-import { isDurationFor } from "./core-lexicon.ts";
 import allowlistData from "../data/allowlist.json" with { type: "json" };
 
 export interface Finding {
@@ -107,15 +106,6 @@ export function scanSpan(span: Span, data: Dataset, opts: ScanOptions = {}): Fin
         }
       }
       if (!hit) continue;
-      // G3 "for" test: a dropped `for` is legitimately KEPT before a duration span (S5), so a
-      // World-English column reading "wait for three minutes" is not an abolished form.
-      if (
-        entry.class === "dropped-prep" &&
-        phrase[phrase.length - 1] === "for" &&
-        isDurationFor(sameSentenceAfter(tokens, sentenceId, i + phrase.length))
-      ) {
-        continue;
-      }
       // A phrase blocked before a specific next word (e.g. "run out" before "of", #58) is a
       // deliberately valid standard-English shape, not an abolished form — mirrors the
       // translator's own blockedNext guard so the linter doesn't contradict it.

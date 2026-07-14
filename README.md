@@ -152,7 +152,7 @@ world-english/
 │   ├── grammar.md              # tense/aspect, articles, prepositions
 │   ├── style.md                # plain-phrasing guidance
 │   ├── writing.md              # document-level conventions — punctuation, paragraph shape
-│   ├── vocabulary.md           # core lexicon — the word list G3/S2/S3/S6 look up
+│   ├── vocabulary.md           # core lexicon — the word list S2's vocabulary layers look up
 │   └── samples.md              # dogfooded translations + regression test
 ├── resources/
 │   ├── IRREGULARITIES.md       # catalogue of what English forces you to memorize

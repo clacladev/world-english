@@ -240,28 +240,29 @@ always understood.
 ## Rule P7 — Intonation carries only the question
 
 **Rule.** Pitch is load-bearing only where **no word already marks the meaning** — and there is
-exactly one such place: the **yes/no question**. It has no question word (World English dropped
-do-support and inversion), so `You like it` and its question are segmentally identical, and
-**rising intonation** in speech — plus a **leading `?`** in writing — is **one of the primary
-markers** that tells them apart, alongside the optional tag *right?*
+exactly one such place: the **yes/no question** in **speech**. It has no question word (World
+English dropped do-support and inversion), so *You like it* and its spoken question are
+segmentally identical, and **rising intonation** is **one of the primary markers** that tells
+them apart, alongside the optional tag *right?*
 ([grammar.md G6](grammar.md#rule-g6--regular-questions-and-negation-no-do-support)) as a
-segmental alternative a speaker may add instead of, or in addition to, the pitch rise.
-A **wh-question is already marked by its wh-word** (*who, what, where…*), so pitch there is
-redundant: it is **permitted for naturalness but never required**, and English wh-questions
-naturally *fall* like statements anyway. Everywhere else — statements, negation, emphasis,
-attitude — meaning rides on **words and word order**, so pitch changes nothing.
+segmental alternative a speaker may add instead of, or in addition to, the pitch rise. In
+**writing** the question is not carried by pitch at all — the ordinary **trailing `?`** marks it,
+exactly as in standard English. A **wh-question is already marked by its wh-word** (*who, what,
+where…*), so pitch there is redundant: it is **permitted for naturalness but never required**,
+and English wh-questions naturally *fall* like statements anyway. Everywhere else — statements,
+negation, emphasis, attitude — meaning rides on **words and word order**, so pitch changes
+nothing.
 
-**Example.** *You like it.* (statement) vs *?You like it?* (question). In speech the question
-**rises** at the end; in writing the leading `?` says so. The leading `?` *is* the written
-instruction to raise the pitch, so the two channels agree — a reader and a listener reach the
-same reading, one by the mark and one by the tune.
+**Example.** *You like it.* (statement) vs *You like it?* (question). In writing the trailing `?`
+tells the two apart; in speech the question **rises** at the end. The two channels agree — a
+reader knows by the mark, a listener by the tune.
 
 **Problem it solves.** English uses pitch for many jobs at once — questions, contrast,
 sarcasm, politeness — and learners from differently-intoned languages both mis-signal and
 mis-hear them (see [PAIN-POINTS §1](../resources/PAIN-POINTS.md#1-pronunciation--phonology),
-intonation). World English load-bears pitch for **only** the yes/no question, so a learner has
-a single intonation contrast to master, not an open set — and in writing does not need even
-that, because the leading `?` carries it.
+intonation). World English load-bears pitch for **only** the spoken yes/no question, so a learner
+has a single intonation contrast to master, not an open set — and in writing does not need even
+that, because the ordinary trailing `?` carries it.
 
 **Divergence & trade-off.** This is a deliberate reversal of a stricter earlier stance:
 World English *does* let the yes/no question ride on intonation, because questions are frequent
@@ -270,7 +271,7 @@ adds a word the language would rather not have (so removing it keeps questions *
 subtractive**: they drop do-support and add nothing). The cost is real: speakers of flat- or
 differently-intoned L1s must produce and hear a rising question — the difficulty
 [PAIN-POINTS §1](../resources/PAIN-POINTS.md#1-pronunciation--phonology) documents. It is
-mitigated in **writing** by the always-present leading `?` and bounded in **speech** to one
+mitigated in **writing** by the ordinary trailing `?` and bounded in **speech** to one
 contrast. This diverges from Jenkins' Lingua Franca Core, which rates grammatical
 intonation non-essential for intelligibility (see
 [PRIOR-ART §C](../resources/PRIOR-ART.md#c-the-empirical-base-on-international-intelligibility))
@@ -278,7 +279,7 @@ intonation non-essential for intelligibility (see
 open.** The yes/no question is frequent and important enough to load-bear one pitch
 contrast; the alternative (a coined particle) is a word the language would rather not add,
 so questions stay purely subtractive; and the cost is bounded — one contrast in speech,
-carried by the leading `?` in writing. Attitudinal intonation stays non-load-bearing,
+carried by the ordinary trailing `?` in writing. Attitudinal intonation stays non-load-bearing,
 aligned with the LFC.
 
 ---
@@ -391,4 +392,4 @@ keeps distinct in spelling, plus the new pairs M1's regular verb morphology crea
 | P4 | Native stress is kept and *always* marked; only noun/verb pairs collapse |
 | P5 | Connected speech is permitted, never required |
 | P6 | Syllable-timed rhythm is always acceptable |
-| P7 | Intonation is load-bearing for one thing only — the yes/no question (rising pitch / leading `?`) |
+| P7 | Intonation is load-bearing for one thing only — the spoken yes/no question (rising pitch; trailing `?` in writing) |

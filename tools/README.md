@@ -43,7 +43,7 @@ bun run typecheck    # tsc --noEmit
 
 `translate.ts` turns standard English into World English. Per the project's staged plan it
 does only the transforms it can apply **deterministically** — a closed set of unambiguous
-surface-form substitutions, now including the core lexicon's (item 8) drop verbs and phrasal
+surface-form substitutions, now including the core lexicon's drop verbs and phrasal
 verbs — and **flags** (never guesses) everything that still needs part-of-speech or syntax.
 
 The linter's dataset is the single-word forward map: `loadDataset().words` is keyed by the
@@ -128,7 +128,7 @@ The proof lives in `test/reverse.test.ts`: it reverse-translates the `samples.md
 passages and asserts every losslessly-reversible form comes back to its standard original —
 Passage 4 round-trips to its exact Standard-English source.
 
-## The core lexicon (item 8)
+## The core lexicon
 
 G3 (dropped prepositions), S2 (phrasal verbs), S3 (preferred sense), and S6 (regular
 collocations) each quote a per-word list to do their job. That list is
@@ -283,8 +283,8 @@ dataset is authored here. It is also the seed for the deferred **reverse transla
 - **`abolished-forms.json`** — directly-authored `abolished → woe` pairs for every other
   directly-authored class (`be`, comparatives, British spellings, silent letters, `ough`,
   pronouns, articles, and the POS-dependent classes). Phrasal verbs and dropped prepositions live
-  in `lexicon.json` instead (see [above](#the-core-lexicon-item-8)).
-- **`lexicon.json`** — the core lexicon (item 8): dropped prepositions (G3), phrasal verbs (S2),
+  in `lexicon.json` instead (see [above](#the-core-lexicon)).
+- **`lexicon.json`** — the core lexicon: dropped prepositions (G3), phrasal verbs (S2),
   and the doc-only sense/collocation/false-friend/register arrays (S3/S6 and the advanced
   hazards). Source of truth for `../docs/vocabulary.md`.
 - **`ngsl.json`** — the NGSL 1.2 frequency spine `lexicon.json`'s sweep walks; rank + headword
@@ -332,7 +332,7 @@ word. Re-run `bun test`.
   non-coordinated zero-past. It also can only convert forms the dataset or lexicon actually
   carry: a phrasal/dropped-prep pair the sweep hasn't reached passes through untouched. `wait
   for` is **not** an exception — the forward translator does handle it, via the not-duration
-  guard described [above](#the-core-lexicon-item-8): `wait for the bus` auto-translates and
+  guard described [above](#the-core-lexicon): `wait for the bus` auto-translates and
   `wait for three minutes` is correctly left alone.
 - **The reverse translator restores what the dataset and lexicon carry, and only that.** A
   dropped preposition not in the lexicon's `droppedPreps`, or a form outside the dataset, is
@@ -342,7 +342,7 @@ word. Re-run `bun test`.
   flagged, never silently guessed.
 - **The core lexicon is a first sweep, not exhaustive.** Only verb+preposition and phrasal
   pairings that passed a real collision check earned a row (see
-  [the sweep methodology](#the-core-lexicon-item-8)); many plausible candidates were deliberately
+  [the sweep methodology](#the-core-lexicon)); many plausible candidates were deliberately
   left out because they were too risky to auto-transform, not because they don't exist.
 - **The pronunciation lexicon is a seed.** It carries only the 66 entries (64 distinct words) in
   `pronunciation.md`; any other word is emitted verbatim and flagged, not guessed. It grows

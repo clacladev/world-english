@@ -54,8 +54,7 @@ tamed grammar), deployed in a **bounded context** (news, aircraft manuals, busin
   should pair its core word-list with the full rule specs, not lean on vocabulary limits
   alone.
 - **Bears on.** The core lexicon;
-  [S3](../docs/style.md#rule-s3--one-word-one-meaning-avoid-heavy-polysemy),
-  [S4](../docs/style.md#rule-s4--avoid-idioms-and-culture-bound-expressions).
+  [S2](../docs/style.md#rule-s2--plain-single-sense-words) (plain, single-sense words).
 
 ### VOA Special English (now "Learning English")
 
@@ -89,9 +88,8 @@ tamed grammar), deployed in a **bounded context** (news, aircraft manuals, busin
   set plus a controlled lexicon, proven to work **where safety and intelligibility matter
   most**. "One word, one meaning" and "prefer active voice" are STE rules World English
   reaches independently.
-- **Bears on.** [S3](../docs/style.md#rule-s3--one-word-one-meaning-avoid-heavy-polysemy)
-  (one meaning), [S2](../docs/style.md#rule-s2--prefer-plain-verbs-over-phrasal-verbs) (plain
-  verbs), [G9](../docs/grammar.md#rule-g9--passive-voice)+[S1](../docs/style.md#rule-s1--fixed-subjectverbobject-order)
+- **Bears on.** [S2](../docs/style.md#rule-s2--plain-single-sense-words)
+  (plain, single-sense words), [G9](../docs/grammar.md#rule-g9--passive-voice)+[S1](../docs/style.md#rule-s1--fixed-subjectverbobject-order)
   (prefer active), and the whole controlled-grammar approach.
 
 ### Globish
@@ -272,7 +270,6 @@ are the **conservative subset** — which is precisely the line World English dr
   closest to Webster's failures**, kept deliberately because they are small, systematic, and
   front-loaded rather than because prior art endorses them.
 - **Bears on.** [G4](../docs/grammar.md#rule-g4--regular-pronoun-case),
-  [G12](../docs/grammar.md#rule-g12--reflexive-pronouns),
   [O5](../docs/orthography.md#rule-o5--respell-ough-words-only-where-an-informal-form-already-exists)
   (the never-coin line, and its one deliberate exception).
 
@@ -375,7 +372,7 @@ actually helps or hurts understanding between non-native speakers. It is where p
 | Basic English, VOA, STE, Globish, Plain English | **survived** | Subsets in a bounded domain, backed by institutions, work. Don't reform spelling; constrain vocabulary and grammar and stay legible. |
 | Webster (radical set), SSB, Cut Spelling, ITA | **failed** | Public respelling fails; only the conservative subset ever sticks. Adopt existing forms, never coin; keep the phonetic layer separate from the orthography. |
 | Quirk's Nuclear English | **stalled** | A proposal that is never built changes nothing. Ship specs, dogfood, and tool. |
-| Jenkins' LFC | **contradicts (th, word-stress, question intonation)** | Keeping /θ/–/ð/, marking lexical stress, and load-bearing question intonation are not required for intelligibility — the tension is now **resolved** (item 18): P3/P4 kept as reading aids, P7's spoken divergence accepted. |
+| Jenkins' LFC | **contradicts (th, word-stress, question intonation)** | Keeping /θ/–/ð/, marking lexical stress, and load-bearing question intonation are not required for intelligibility — the tension is now **resolved**: P3/P4 kept as reading aids, P7's spoken divergence accepted. |
 | Creole / interlanguage convergence | **corroborates** | No 3rd-sg *-s*, preverbal negation, invariant tags, regularized past are what English becomes when simplified — natural, not arbitrary. |
 
 ---

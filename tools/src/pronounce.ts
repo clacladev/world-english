@@ -1,7 +1,7 @@
 // Renders World English text to its learner respelling (default) or IPA (--ipa), by looking each
 // word up in the authored lexicon (src/lexicon.ts). Mirrors translate.ts's substitute() structure —
-// tokenize on word matches, copy the gaps between them verbatim — so punctuation, whitespace and
-// P7's leading `?` pass through untouched. Unlike translate.ts it does NOT re-case the output:
+// tokenize on word matches, copy the gaps between them verbatim — so punctuation and whitespace
+// (including a question's trailing `?`) pass through untouched. Unlike translate.ts it does NOT re-case the output:
 // respelling casing is *semantic* (CAPITALS = stress, P1/P4), so the lexicon's stored casing is
 // emitted as-is (The → dhuh). Nothing is guessed: an unknown word is emitted verbatim and flagged;
 // a homograph emits its first entry and flags the alternatives (the reverse-translator's

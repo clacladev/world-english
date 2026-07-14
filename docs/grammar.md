@@ -58,7 +58,7 @@ number/quantifier when count matters. The *a/an* distinction is removed.
 | She is a doctor. | She **be doctor**. |
 | an hour, a university | (no article) **hour**, **university** |
 | The dogs barked. (definite plural) | **The dogs** barked. (`the` + [M4](morphology.md) plural — no new rule) |
-| Some information I gave you was wrong. | **The information that** I **gived** you **beed** wrong. (definite, singular; relativizer *that* kept per [G11](#rule-g11--relative-clauses)) |
+| Some information I gave you was wrong. | **The information that** I **gived** you **beed** wrong. (definite, singular; relativizer *that* kept per [G11](#rule-g11--subordinate-clauses-introduced-by-that)) |
 | I need information for the report. | I need **informations** for the report. (indefinite, plural, per [G5](#rule-g5--all-nouns-are-countable)) |
 
 **Generics.** A generic statement names a whole kind, not one already-known thing, so it
@@ -108,11 +108,12 @@ pattern. Diverges from standard English but removes the largest single grammar b
 
 ## Rule G3 — Regular prepositions for time, place, and verbs
 
-**Rule.** Prepositions are split into two jobs. Where the choice is **arbitrary** — fixed by
-idiom, carrying no meaning a learner could derive — World English removes the guesswork:
-the *time/place* choices collapse to **one default each**, and the *verb-selected*
-prepositions are **dropped** so the verb takes a direct object. Where a preposition marks a
-**real relation** (surface, direction, topic), it keeps its meaning.
+**Rule.** Where a preposition's choice is **arbitrary** — fixed by idiom, carrying no meaning a
+learner could derive — World English removes the guesswork: the *time/place* choices collapse to
+**one default each**. Where a preposition marks a **real relation** (surface, direction, topic),
+it keeps its meaning. A verb keeps its own standard preposition (*listen **to***, *wait **for***,
+*depend **on***): the verb+preposition pairing is learned together as **vocabulary**, not derived
+from a rule.
 
 **Time and place — one default each.**
 
@@ -131,123 +132,54 @@ contact), *under the bridge*, *behind the door*, *between the trees*. You say *i
 (being located there) but *on the table* (resting on its surface): the first was arbitrary,
 the second is real.
 
-**Dependent prepositions — dropped.** Many verbs demand a preposition for no reason (*listen
-**to**, wait **for**, depend **on***); one L1 preposition maps to several English ones and
-vice-versa, with no rule to fall back on. When the preposition merely marks the verb's own
-object and adds no meaning, World English **drops it** and the verb becomes directly
-transitive:
+**Verb-selected prepositions stay.** A verb that demands a fixed preposition (*listen **to***,
+*wait **for***, *depend **on***, *look **at***) keeps it, standard and unchanged. One L1
+preposition maps to several English ones with no derivable rule, so the pairing is memorized —
+but it is memorized the same way the verb itself is, as **vocabulary**, one lexical item. World
+English does not coin a transitive form (*listen music*); it leaves the verb+preposition as
+standard English. Particles that *change* a verb's meaning (*look after*, *give up*, *look for*)
+are a separate case, handled by [S2](style.md#rule-s2--plain-single-sense-words), which swaps in
+a plain verb (*look after → mind*, *look for → seek*).
 
-| Standard | World English |
-| -------- | ------------- |
-| listen **to** music | **listen music** |
-| wait **for** the bus | **wait the bus** |
-| depend **on** the weather | **depend the weather** |
-| look **at** the picture | **look the picture** |
-
-**The *for* test — duration survives, the object drops.** *for* is the one dropped
-preposition that competes with a *for* World English **keeps**: the **duration** *for* of
-[S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect) (*for three
-minutes*). The test: **keep *for* only when it introduces a length of time** (answers *how
-long?* — *for ten years*, *for a while*); in every other case it merely marks the verb's
-object (answers *wait for what?*) and is **dropped**. One clause can hold both — drop the
-object, keep the duration:
-
-| Standard English | World English |
-| ---------------- | ------------- |
-| wait **for** the bus | **wait the bus** |
-| wait **for** ten minutes | **wait for ten minutes** (duration — kept) |
-| wait **for** the bus **for** ten minutes | **wait the bus for ten minutes** |
-
-The duration set is closed and mechanical: *for* + a number (or *a* / *a few* / *several*)
-immediately followed by a time unit (*second, minute, hour, day, week, month, year*…), a bare
-time-unit plural (*for hours*), or a fixed span (*for a while*, *for a long time*, *for now*).
-This is the one dropped-*for* case the translator decides on sight; every other *for* after a
-drop-verb drops.
-
-**Keep / drop / replace — the boundary.** Every verb+preposition pairing falls into exactly
-one bucket:
-
-| Bucket | Preposition | Action | Example |
-| ------ | ----------- | ------ | ------- |
-| marks a real spatial/time/direction/topic relation | *on the table*, *to the shop*, *talk about the plan* | **keep** (time/place defaults above) | *put it **on** the table* |
-| verb-selected, meaning-neutral | *listen to*, *wait for*, *depend on* | **drop** — verb goes transitive | *listen music* |
-| particle that *changes* the verb's meaning (phrasal) | *look after*, *give up*, *look for* | **replace** with a plain verb, per [S2](style.md#rule-s2--prefer-plain-verbs-over-phrasal-verbs) | *look after → mind* |
-
-**The test** that separates *drop* from *replace*: drop the preposition only when the verb's
-meaning is unchanged without it. If removing it would merge two distinct senses — *look
-**for*** (search) vs *look* (sight) — the particle carries meaning, so it is a phrasal
-verb and S2 swaps in a plain verb (*seek*) instead. So *look at* (view) drops — the verb
-means the same thing without *at* — but *look for* replaces. This keeps G3 and S2 from
-claiming the same forms.
-
-**Two the test explicitly excludes from the drop list.** *believe **in*** and *pay **for***
-fail it, so they are **not** dropped: *believe* (accept as true) and *believe in* (have faith
-in) are distinct senses — dropping *in* would merge them — so *believe in* is a
-meaning-changing particle routed to **replace** ([S2](style.md#rule-s2--prefer-plain-verbs-over-phrasal-verbs):
-*trust*). And *pay* already takes a direct object for the recipient (*pay the waiter*), so
-*pay **for*** (the thing bought) marks a **real relation** and is **kept** — dropping it
-would collide *pay the meal* with *pay the person*. They are listed here as the worked cases
-that show the boundary is a test, not a blanket rule.
-
-**Scope of the drop.** Transitive-capable **verbs** only. Adjective- and noun-selected
-prepositions (*good **at** math*, *afraid **of** dogs*, *reason **for** it*) are **not**
-dropped — a predicate adjective cannot take a direct object, so *good math* is ungrammatical.
-These are left as collocation residue for
-[S6](style.md#rule-s6--prefer-regular-replacements-for-collocations).
-
-**Problem it solves.** ~60–70 prepositions used idiomatically with no logic (see
-[§7](../resources/IRREGULARITIES.md#7-grammar-systems-articles-prepositions-tense-phrasal-verbs))
-— the top source of fossilized error, because the arbitrary pairings are "open-ended,
-idiom-by-idiom learning with no rule to fall back on." World English replaces that memorized
-list with three moves a learner can apply on sight: default the time/place slot, drop the
-verb's preposition, or reach for a plain verb.
+**Problem it solves.** The *time/place* slot forces an arbitrary at/in/on choice with no rule
+behind it (see
+[§7](../resources/IRREGULARITIES.md#7-grammar-systems-articles-prepositions-tense-phrasal-verbs)).
+World English fixes **one default per slot**, so the learner never again guesses which of at/in/on
+a time or place takes.
 
 **Divergence & trade-off.** Meaningful spatial and relational prepositions (*on* = surface,
-*under*, *between*, *with*, directional *to*) keep their jobs; only the *arbitrary* choices
-change. *On Monday*, *on July*, and *listen music* read slightly off to a native ear but are
-never ambiguous. The drop is lossy on the surface yet **reversible**: each verb has one
-canonical preposition, so a reverse translator restores it by lookup (*listen* → *listen
-to*) — the per-verb list lives in [vocabulary.md Table A](vocabulary.md#table-a--g3-canonical-prepositions-droppedpreps) — consistent with the map-back-losslessly goal of
-[morphology M1](morphology.md#rule-m1--all-verbs-are-regular). The one real risk — two
-senses collapsing onto one verb — is handled by routing meaning-changing particles to S2
-rather than dropping them.
+*under*, *between*, *with*, directional *to*) keep their jobs; only the *arbitrary* time/place
+choices change. *On Monday* and *on July* read slightly off to a native ear but are never
+ambiguous. Verb-selected prepositions are left standard, so nothing about them needs a reverse
+mapping — *listen to* is *listen to* in both directions.
 
 ---
 
 ## Rule G4 — Regular pronoun case
 
-**Rule.** Pronouns keep **three forms**: a **subject form**, an **object form**, and a
-**possessive-determiner form** built regularly from the object form. The *who/whom* distinction
-is removed (always **who**).
+**Rule.** Pronouns keep their **standard** forms — a **subject** form, an **object** form, a
+**possessive determiner** (*my, your, his…*), and a **standalone possessive** (*mine, yours,
+his…*). World English makes **one** change: the *who/whom* distinction is removed — the object
+form is always **who** (*the man who I seed*). *whose* is kept.
 
-| Standard (subj / obj / poss / poss-pron) | World English (subj / obj / poss) |
-| ---------------------------------------- | --------------------------------- |
-| I / me / my / mine | I / **me** / **mes** |
-| you / you / your / yours | you / **you** / **yous** |
-| he / him / his | he / **him** / **hims** |
-| she / her / her / hers | she / **her** / **hers** |
-| it / it / its | it / **it** / **its** |
-| we / us / our / ours | we / **us** / **uss** |
-| they / them / their / theirs | they / **them** / **thems** |
-| who / whom / whose | who / **who** / **whos** |
+| Person | Subject | Object | Possessive determiner | Standalone possessive |
+| ------ | ------- | ------ | --------------------- | --------------------- |
+| 1sg | I | me | my | mine |
+| 2 | you | you | your | yours |
+| 3sg m | he | him | his | his |
+| 3sg f | she | her | her | hers |
+| 3sg n | it | it | its | — |
+| 1pl | we | us | our | ours |
+| 3pl | they | them | their | theirs |
+| interrogative | who | **who** *(was whom)* | whose | whose |
 
-Possessive is the object form + `-s` (regular, like the plural rule in
-[morphology M4](morphology.md)): *mes book*, *hims car*, *whos turn*.
+**Problem it solves.** The dying *who/whom* distinction — the one pronoun choice learners, and
+many natives, get wrong (see [§6](../resources/IRREGULARITIES.md#6-pronouns)). Everything else in
+the pronoun grid is a small, already-learned closed set, so World English keeps it standard rather
+than coining new forms.
 
-**Plural *you* — `you all`.** English has no distinct plural *you*, a real gap
-(dialects fill it with *y'all*, *yous*, *you guys*). World English cannot use *yous* for the
-plural, because [the table above](#rule-g4--regular-pronoun-case) already assigns *yous* to
-the singular **possessive** (*yous book*). The plural is the transparent **`you all`**
-(subject and object alike; possessive **`you alls`** — the same object-form-+-`s` pattern as
-every other pronoun, so it takes **no apostrophe**, matching [G10](#rule-g10--noun-possessive)'s
-rule that the pronoun possessive-determiner is never written with one), which no other form
-claims.
-
-**Problem it solves.** Irregular case grids and the dying *who/whom* distinction (see
-[§6](../resources/IRREGULARITIES.md#6-pronouns)).
-
-**Divergence & trade-off.** Keeps the useful subject/object contrast (it marks "who does
-what"), regularizes the rest. *mes*, *hims* are non-standard but transparent.
+**Divergence & trade-off.** Only *whom* changes (→ *who*), a collapse everyday spoken English
+mostly made already. Every other pronoun is standard English, so a page reads normally.
 
 ---
 
@@ -292,9 +224,8 @@ For a *wh-* question, the question word **moves to the front of the clause**; ev
 it keeps **normal SVO order** — there is no inversion of subject and verb the way standard
 English inverts after the fronted word (*who did you call* → subject/verb stay in place behind
 the fronted *who*). For a yes/no question, nothing moves or is inserted at all; only the
-punctuation/intonation marks it. In **writing**, open the question with a **leading `?`** (and
-capitalize the next word, as the `?` opens the sentence) and close it with the usual `?`:
-*?You like it?*. In **speech**, a **yes/no** question is carried by **rising intonation**
+punctuation/intonation marks it. In **writing**, a question takes a **trailing `?` only**:
+*You like it?*. In **speech**, a **yes/no** question is carried by **rising intonation**
 ([P7](pronunciation.md#rule-p7--intonation-carries-only-the-question)); a **wh-** question is
 carried by its fronted **wh-word** (*who, what, where…*). Form a **negative** by placing
 **`not`** immediately before the main verb — **in every clause type**, including *be*-clauses,
@@ -302,13 +233,13 @@ the continuous, the passive, and existential *there be* clauses: *I **not be** l
 **not be** red*, *There **not be** problem*. When a pre-verb adverb is also present, `not`
 takes precedence and comes first, immediately before the verb, with the adverb before *it*:
 *She **not often call***, never *she often not call* (see
-[style S7](style.md#rule-s7--one-default-adverb-position) for the shared adverb/negation slot).
+[style S4](style.md#rule-s4--one-default-adverb-position) for the shared adverb/negation slot).
 
 | Standard English | World English |
 | ---------------- | ------------- |
-| Do you like it? | **?You like it?** (rising intonation in speech) |
-| Does she know? | **?She know?** |
-| Who did you call? | **?Who you called?** (wh-word fronted; rest keeps SVO order) |
+| Do you like it? | **You like it?** (rising intonation in speech) |
+| Does she know? | **She know?** |
+| Who did you call? | **Who you called?** (wh-word fronted; rest keeps SVO order) |
 | I do not like it. | I **not like** it. |
 | She did not go. | She **not goed**. |
 | I am not living here. | I **not be** living here. |
@@ -324,13 +255,14 @@ naturally (*You like it?*).
 
 **Divergence & trade-off.** Removes do-support and inversion outright and adds **no**
 replacement word — so questions are **purely subtractive** (they drop the meaningless *do* and
-put nothing back). A yes/no question is marked by **rising intonation** in speech and a
-**leading `?`** in writing; a *wh-* question by its question word (*?Who you seed?*). Tag
+put nothing back). A yes/no question is marked by **rising intonation** in speech and the
+ordinary **trailing `?`** in writing; a *wh-* question by its question word (*Who you seed?*). Tag
 questions (*…isn't it?*) collapse to a single invariant tag — **`right?`** — eliminating the
 mirror-the-auxiliary computation. The one cost is that the yes/no question becomes the single
 construction that rides on pitch (see [P7](pronunciation.md#rule-p7--intonation-carries-only-the-question)):
 a deliberate choice to keep questions natural and the language free of coined particles,
-accepting the flat-intonation-L1 difficulty, mitigated in writing by the leading `?`.
+accepting the flat-intonation-L1 difficulty. In writing the question is unambiguous — the
+trailing `?` marks it exactly as in standard English.
 
 **Extension — the rest of the negation/question system.** Four related constructions follow
 from the same two moves (marker for questions, `not` before the verb):
@@ -360,7 +292,7 @@ from the same two moves (marker for questions, `not` before the verb):
 - **Embedded/indirect questions** keep the question word — the *wh*-word or **`whether`** for a
   yes/no embedded question — but use **normal declarative word order with no fronting**, since
   there is no inversion to undo in the first place: *He asked **where he goed***, *I not know
-  **whether it will rain***. **`if` is never used for an embedded question** — [G15](#rule-g15--subordinating-conjunctions)
+  **whether it will rain***. **`if` is never used for an embedded question** — [G13](#rule-g13--subordinating-conjunctions)
   reserves *if* for conditionals, so an embedded yes/no question always takes **`whether`**,
   never *if* (*He asked **whether** it rained*, not *he asked if it rained*).
 
@@ -398,7 +330,7 @@ and carries suppletive pasts (*can*→*could*) and defective morphology (see
 
 **Divergence & trade-off.** Loses the modal system's fine gradient of certainty and
 politeness, recovered with plain adverbs — the same plain-phrasing trade as
-[style.md S3–S4](style.md). *would* is **not** kept as a modal here; its one surviving job is
+[style.md S2](style.md#rule-s2--plain-single-sense-words). *would* is **not** kept as a modal here; its one surviving job is
 the hypothetical marker in [G8](#rule-g8--one-conditional-shape).
 
 ---
@@ -486,12 +418,13 @@ This is one of the few places World English keeps a standard-English form verbat
 | the children's toys | **the childs' toys** (regular plural *childs* + `'`) |
 
 **`'s` vs the *of*-genitive.** Use **`'s`** (this rule) or the pronoun possessive
-([G4](#rule-g4--regular-pronoun-case): *mes*, *hims*) for genuine **possession** — a
-possessor that *has* or *owns* the thing (*the dog's bone*, *Mary's car*, *hims car*). Keep
+([G4](#rule-g4--regular-pronoun-case): *my*, *his*) for genuine **possession** — a
+possessor that *has* or *owns* the thing (*the dog's bone*, *Mary's car*, *his car*). Keep
 **`of`** for the non-possessive genitives it already carries: part-whole and relational (*the
 captain of the team*, *the top of the hill*) and fixed superlative frames (*the goodest trip
-of hims life*). The two are **not interchangeable**, so neither is mandated over the other —
-the same "keep the real distinction, drop only the arbitrary choice" line as S5's *for* /
+of his life*). The two are **not interchangeable**, so neither is mandated over the other —
+the same "keep the real distinction, drop only the arbitrary choice" line as
+[S3](style.md#rule-s3--state-relevance-explicitly-cover-for-the-dropped-perfect)'s *for* /
 *since*. (Partitive/measure *of* is separately removed by
 [G5](#rule-g5--all-nouns-are-countable): *a piece of advice* → *one advice*.)
 
@@ -504,88 +437,68 @@ page.
 **Divergence & trade-off.** None from standard punctuation — deliberately. In **speech** all
 three are /dɒgz/, but that ambiguity is exactly what standard English already has, so World
 English is no worse; context resolves it, and the apostrophe fully disambiguates the written
-form. (This is the **noun** possessive; the **pronoun** possessive is the separate `-s` form
-in [G4](#rule-g4--regular-pronoun-case) — *mes*, *hims* — which takes no apostrophe.)
-
-**Standalone possessive pronouns.** World English has no separate standalone possessive form
-(standard *mine, yours, his, hers, ours, theirs*): the same possessive-determiner form in
-[G4](#rule-g4--regular-pronoun-case) doubles as the standalone possessive pronoun, since the
-determiner/pronoun split collapses along with everything else in the pronoun table. *This book
-be **mes*** (= *this book is mine*) is grammatical; likewise *That car be **hims***.
+form. (This is the **noun** possessive; the **pronoun** possessive is the standard
+determiner/standalone set in [G4](#rule-g4--regular-pronoun-case) — *my*/*mine*, *his* — which
+takes no apostrophe either.)
 
 ---
 
-## Rule G11 — Relative clauses
+## Rule G11 — Subordinate clauses introduced by *that*
 
-**Rule.** One invariant relativizer, **`that`**, introduces every relative clause — for
-people or things, subject or object. **`that` is never dropped**, including in object relative
-clauses where standard English allows a "zero relative" (*the man I saw* → **the man that I
-seed**, not *the man I seed*) — the same "always kept, never dropped" rule
-[G14](#rule-g14--content-clauses-and-reported-speech) states for content-clause *that*, so a
-learner meets one invariant rule for the word in both jobs. The *who / whom / which / whose*-relative
-set is dropped, and so is the **restrictive/non-restrictive comma rule** (*that* vs *which* +
-comma).
+**Rule.** One invariant word, **`that`**, introduces **every** subordinate clause of two kinds —
+**relative clauses** (modifying a noun) and **content clauses** (the object of a reporting or
+mental verb: *say, think, know, hope*). **`that` is never dropped** in either job, including
+where standard English allows a "zero relative" (*the man I saw* → **the man that I seed**) or a
+dropped complementizer (*he said it was cold* → **he sayed that it beed cold**). A learner meets
+**one** rule for the word — "a clause follows" — in both places.
+
+**Relative clauses.** *that* introduces every relative clause — for people or things, subject or
+object. The *who / whom / which / whose*-relative set is dropped, and so is the
+**restrictive/non-restrictive comma rule** (*that* vs *which* + comma).
 
 | Standard English | World English |
 | ---------------- | ------------- |
 | the man **whom** I saw | **the man that I seed** |
 | the woman **who** called | **the woman that called** |
 | the book **which** is on the table | **the book that be on the table** |
-| the man **whose** car broke | **the man that hims car breaked** (resumptive *hims*) |
-| My car, **which** is red, is fast. | **Mes car that be red be fast.** (no comma contrast — no comma at all) |
+| the man **whose** car broke | **the man that his car breaked** (resumptive *his*) |
+| My car, **which** is red, is fast. | **My car that be red be fast.** (no comma contrast — no comma at all) |
 
-**Problem it solves.** Standard English splits relativizers by animacy (*who* vs *which*),
-by case (*who* vs *whom*), and adds a possessive relative (*whose*) plus a punctuation-borne
+**Content clauses and reported speech.** A clause serving as the object of a reporting or mental
+verb is introduced by the **same `that`** — always kept — and stands in its **natural tense**:
+**no backshift**. [G1](#rule-g1--a-leaner-tenseaspect-system)'s one test picks the reported
+clause's tense exactly as it does anywhere else — **still true → present, finished → past** —
+regardless of the reporting verb's own tense.
+
+| Standard English | World English |
+| ---------------- | ------------- |
+| He said (that) it **was** cold. (now over) | He sayed **that** it **beed** cold. |
+| She thinks (that) he **is** right. | She think **that** he **be** right. |
+| He said (that) he **lived** there. (and still does) | He sayed **that** he **live** there. |
+| I know (that) you **will** come. | I know **that** you **will** come. |
+
+**Problem it solves.** Standard English splits relativizers by animacy (*who* vs *which*), by
+case (*who* vs *whom*), and adds a possessive relative (*whose*) plus a punctuation-borne
 restrictive/non-restrictive distinction (*that*/*which* + comma) that
-[§8](../resources/IRREGULARITIES.md#8-sentence-structure) notes "many natives ignore and few
-can state." All of it collapses to one word.
+[§8](../resources/IRREGULARITIES.md#8-sentence-structure) notes "many natives ignore and few can
+state." Separately, English **backshift** (the sequence-of-tenses rule — *say → said* drags
+*is → was*) is grammatical agreement carrying no meaning, and the content-clause *that* is
+optionally droppable by a feel few learners share. World English collapses all of it: one word
+introduces every clause, and the tense states the real time (per
+[G1](#rule-g1--a-leaner-tenseaspect-system)).
 
-**Divergence & trade-off.** *that* for people (*the man that I seed*) is already everyday
-spoken English. Possessive relatives use a **resumptive pronoun** (*the man that hims car
-breaked*) instead of *whose* — slightly longer but fully regular. The lost
-restrictive/non-restrictive nuance is recovered, when it matters, by rephrasing into two
-sentences ([S1](style.md#rule-s1--fixed-subjectverbobject-order)).
-
----
-
-## Rule G12 — Reflexive pronouns
-
-**Rule.** A reflexive is the **object pronoun + `-self`**, pluralized regularly as **`-selfs`**
-([M4](morphology.md#rule-m4--all-plurals-are-regular)). One formation, no split.
-
-| Person | Standard | World English |
-| ------ | -------- | ------------- |
-| 1sg | myself | **meself** (*me* + self) |
-| 2sg | yourself | **youself** |
-| 3sg m | himself | **himself** |
-| 3sg f | herself | **herself** |
-| 3sg n | itself | **itself** |
-| 1pl | ourselves | **usselfs** (*us* + self, plural `-selfs`) |
-| 2pl | yourselves | **you all self** |
-| 3pl | themselves | **themselfs** |
-
-**Problem it solves.** Standard English builds reflexives **two** inconsistent ways in one
-paradigm — *my*self, *your*self (possessive + self) but *him*self, *them*selves (object +
-self), see [§6](../resources/IRREGULARITIES.md#6-pronouns). World English uses the **object**
-form throughout, so the rule is one line.
-
-**Plural *you* reflexive — `you all self`.** [G4](#rule-g4--regular-pronoun-case) gives plural
-*you* one form, **`you all`**, used for subject and object alike — there is no separate 2pl
-object pronoun to add `-self` to. So the 2pl reflexive is not built by the same single-word
-"object + `-self`" step as the others; it treats **`you all`** as the one object form it is and
-adds `self` to the whole phrase: **`you all self`** (*You all should introduce you all self.*).
-This keeps the "object form + self" rule exceptionless once *you all* is recognized as a single
-pronoun rather than a sequence needing its own reflexive stem.
-
-**Divergence & trade-off.** *meself* and *usselfs* are non-standard (*meself* is attested in
-dialect), but they fall straight out of "object pronoun + self," and the plural is the plain
-`-selfs` rather than the irregular `-selves` — one pattern, no exceptions. *You all self* is the
-one case that reflexivizes a two-word pronoun rather than a single word, recorded here as the
-deliberate exception the *you all* system requires.
+**Divergence & trade-off.** *that* for people (*the man that I seed*) is already everyday spoken
+English. Possessive relatives use a **resumptive pronoun** (*the man that his car breaked*)
+instead of *whose* — slightly longer but fully regular. Keeping *that* everywhere is a word
+longer than the common spoken drop, but it unifies the subordinate-clause marker: the **same
+`that`** introduces relative and content clauses. The lost restrictive/non-restrictive nuance is
+recovered, when it matters, by rephrasing into two sentences
+([S1](style.md#rule-s1--fixed-subjectverbobject-order)). Dropping backshift means *He sayed that
+it be true* reads present because the fact still holds.
 
 ---
 
-## Rule G13 — Verb complementation
+## Rule G12 — Verb complementation
 
 **Rule.** When an ordinary verb takes another verb as its complement, the complement is always
 **`to` + base verb**. The gerund-vs-infinitive choice (*enjoy doing* vs *want to do*) is
@@ -624,14 +537,14 @@ memorizes it verb by verb. One default form erases the list.
 to X* makes *She stop to smoke* ambiguous. World English accepts the ambiguity as rare and
 resolves it with plain phrasing when it matters — *cease* for the "quit" sense (*She cease
 to smoke*), *pause* for the "interrupt" sense (*She pause to smoke*) — the same
-plain-verb move as [S2](style.md#rule-s2--prefer-plain-verbs-over-phrasal-verbs). Recorded as
+plain-verb move as [S2](style.md#rule-s2--plain-single-sense-words). Recorded as
 a known trade-off.
 
 **No subjunctive mood.** World English has **no subjunctive** — this is a stated design
 decision, not an accidental silence. Standard English's mandative subjunctive (*I insist that
 he **go***, using the bare base form regardless of subject) and its formulaic subjunctive
 (*if I **were** you*) are both dropped: the **indicative** is used everywhere, including inside
-a content clause after a verb like *insist/demand/suggest*. [G14](#rule-g14--content-clauses-and-reported-speech)'s
+a content clause after a verb like *insist/demand/suggest*. [G11](#rule-g11--subordinate-clauses-introduced-by-that)'s
 ordinary *that*-clause rule already covers the mandative case with no special form: *I insist
 that he **go*** → **I insist that he **goes**** (present indicative, [M3](morphology.md#rule-m3--no-third-person--s)'s
 no-agreement present); *if I were you* → **if I **be** you** ([G8](#rule-g8--one-conditional-shape)'s
@@ -639,37 +552,7 @@ ordinary conditional, natural tense, no special "were"). One mood, no exceptions
 
 ---
 
-## Rule G14 — Content clauses and reported speech
-
-**Rule.** A clause serving as the object of a reporting or mental verb (*say, think, know,
-hope*) is introduced by **`that`** — always kept, never dropped — and stands in its
-**natural tense**: no backshift. [G1](#rule-g1--a-leaner-tenseaspect-system)'s one test picks
-the reported clause's tense exactly as it does anywhere else — **still true → present,
-finished → past** — regardless of the reporting verb's own tense.
-
-| Standard English | World English |
-| ---------------- | ------------- |
-| He said (that) it **was** cold. (now over) | He sayed **that** it **beed** cold. |
-| She thinks (that) he **is** right. | She think **that** he **be** right. |
-| He said (that) he **lived** there. (and still does) | He sayed **that** he **live** there. |
-| I know (that) you **will** come. | I know **that** you **will** come. |
-
-**Problem it solves.** English **backshift** (the sequence-of-tenses rule — *say → said*
-drags *is → was*) is grammatical agreement carrying no meaning of its own, and the
-complementizer *that* is optionally droppable by a feel few learners share. World English
-removes both choices: the tense states the real time (per
-[G1](#rule-g1--a-leaner-tenseaspect-system)), and *that* is always present.
-
-**Divergence & trade-off.** Keeping *that* everywhere is a word longer than the common spoken
-drop, but it unifies the subordinate-clause marker: the **same `that`** introduces relative
-clauses ([G11](#rule-g11--relative-clauses)) and content clauses, so a learner meets one word
-— "a clause follows" — in both. Dropping backshift means *He sayed that it be true* reads
-present because the fact still holds; the reporting verb's pastness no longer drags the inner
-tense.
-
----
-
-## Rule G15 — Subordinating conjunctions
+## Rule G13 — Subordinating conjunctions
 
 **Rule.** Adverbial clauses are joined with a **closed, one-per-meaning set** of
 subordinators, each used on the standard-English model: one word, **natural tense** (no
@@ -686,21 +569,20 @@ takes a comma, a trailing one takes none.**
 | time — point | **when** | — |
 | time — during | **while** | *whilst*, temporal *as* |
 | time — sequence | **before**, **after**, **until** | *till* |
-| purpose | **so that** | *in order that* (same-subject purpose → *to* + verb, [G13](#rule-g13--verb-complementation)) |
+| purpose | **so that** | *in order that* (same-subject purpose → *to* + verb, [G12](#rule-g12--verb-complementation)) |
 | result | **so** | *and so*, *therefore* |
 
 *If it rain, I will go. I not drink it while it be too hot. We leaved because it beed late.*
 
 Causal *since* is dropped in favor of *because*, which leaves *since* with only its
-[S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect)
+[S3](style.md#rule-s3--state-relevance-explicitly-cover-for-the-dropped-perfect)
 starting-point sense (*since 2015*) — removing the one real overlap.
 
 **Problem it solves.** English offers several subordinators per meaning (*because / since /
 as / for*; *although / though / even though*; *while / whilst*), split by register and subtle
 nuance a learner cannot derive. Fixing **one default per meaning** erases the choice without
 losing any meaning-bearing distinction — the register-variant synonyms route to
-[S4](style.md#rule-s4--avoid-idioms-and-culture-bound-expressions) /
-[S6](style.md#rule-s6--prefer-regular-replacements-for-collocations).
+[S2](style.md#rule-s2--plain-single-sense-words).
 
 **Divergence & trade-off.** The kept words are all everyday standard English used on the
 standard model — this rule *subtracts* the synonyms rather than reforming anything, so a page
@@ -715,16 +597,14 @@ accepted under the ease-over-entertainment priority.
 | ------ | ---------------- | ------------------ |
 | Tense/aspect | past/present/future × simple/cont./perfect | 3 tenses + optional `-ing`, no perfect (G1) |
 | Articles | a / an / the / zero | `the` or nothing (G2) |
-| Prepositions (time/place) | arbitrary at/in/on | fixed defaults (G3) |
-| Pronoun case | irregular grid, who/whom | subj + obj + obj`-s` (G4) |
+| Prepositions (time/place) | arbitrary at/in/on | fixed defaults; verbs keep their preposition (G3) |
+| Pronoun case | irregular grid, who/whom | standard forms, who/whom → who (G4) |
 | Countability | countable vs uncountable | all countable (G5) |
-| Questions/negation | do-support + inversion | leading `?` + rising intonation / wh-word + `not` (G6) |
+| Questions/negation | do-support + inversion | trailing `?` + rising intonation / wh-word + `not` (G6) |
 | Modals | overlapping cluster + suppletive pasts | can / must / should / will + adverbs (G7) |
 | Conditionals | 5 shapes via backshift + would | `if` + natural tense, will/would (G8) |
 | Passive | be + irregular participle | `be` + `-ed`, optional *by* (G9) |
 | Noun possessive | `'s` / `s'` | `'s` / `s'`, kept (G10) |
-| Relative clauses | who/whom/which/that/whose + comma | invariant `that` (G11) |
-| Reflexives | possessive-self + object-self mix | object + `-self`/`-selfs` (G12) |
-| Verb complementation | lexically-fixed gerund vs infinitive | always `to` + base (G13) |
-| Content clauses | backshift + optional *that* | natural tense, `that` kept (G14) |
-| Subordinators | several per meaning, by register | one default per meaning (G15) |
+| Subordinate clauses (relative + content) | who/whom/which/that/whose + comma; backshift + optional *that* | invariant `that`, kept, natural tense (G11) |
+| Verb complementation | lexically-fixed gerund vs infinitive | always `to` + base (G12) |
+| Subordinators | several per meaning, by register | one default per meaning (G13) |

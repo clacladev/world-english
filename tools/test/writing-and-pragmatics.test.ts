@@ -1,5 +1,5 @@
 // Dedicated regression tests for the document-level writing spec (writing.md, item 9) and the
-// pragmatics guidance (style.md S8–S9, item 10). The data-driven gold-passage tests in
+// pragmatics guidance (style.md S5, item 10). The data-driven gold-passage tests in
 // translate/reverse.test.ts already exercise the *forms* in samples.md Passage 6/7; these tests
 // pin the *rules and examples themselves* so a future edit can't silently regress them.
 
@@ -62,12 +62,12 @@ describe("writing.md (item 9)", () => {
     }
   });
 
-  // Regression guard for the bug caught in review: a question is bracketed by a `?` at BOTH
-  // ends, not a leading `?` only. Keep writing.md consistent with grammar.md G6.
-  it("W1 states questions take a ? at both ends, never leading-only", () => {
-    expect(writing).toMatch(/both ends/i);
-    expect(writing).not.toMatch(/not the end/i);
-    expect(writing).toContain("?You like it?");
+  // Regression guard: a written question takes a single TRAILING `?`, never a leading one.
+  // Keep writing.md consistent with grammar.md G6.
+  it("W1 states a question takes a single trailing `?`, never a leading one", () => {
+    expect(writing).toMatch(/trailing/i);
+    expect(writing).not.toContain("?You");
+    expect(writing).toContain("You like it?");
   });
 
   it("W1 abolishes the semicolon and keeps the colon only for a list", () => {
@@ -75,31 +75,29 @@ describe("writing.md (item 9)", () => {
     expect(writing).toMatch(/semicolon.*abolished|abolished.*semicolon/i);
   });
 
-  it("W2 routes politeness/indirectness to the S8/S9 pragmatics rules, not 'out of scope'", () => {
-    expect(writing).toContain("style.md#rule-s8");
+  it("W2 routes politeness/indirectness to the S5 pragmatics rule, not 'out of scope'", () => {
+    expect(writing).toContain("style.md#rule-s5");
     expect(writing).not.toMatch(/out of scope here/i);
   });
 });
 
-describe("style.md pragmatics (item 10, S8–S9)", () => {
+describe("style.md pragmatics (item 10, S5)", () => {
   const style = read("style.md");
 
-  it("defines S8 and S9, including the summary rows", () => {
-    expect(style).toContain("## Rule S8 —");
-    expect(style).toContain("## Rule S9 —");
-    expect(style).toMatch(/\|\s*S8 /);
-    expect(style).toMatch(/\|\s*S9 /);
+  it("defines S5, including the summary row", () => {
+    expect(style).toContain("## Rule S5 —");
+    expect(style).toMatch(/\|\s*S5 /);
   });
 
-  it("S8 fixes exactly the three politeness markers", () => {
+  it("S5 fixes exactly the three politeness markers", () => {
     for (const marker of ["please", "sorry", "thank you"]) {
       expect(style.toLowerCase()).toContain(marker);
     }
-    // The whole point of Option A: courtesy is a fixed marker, not graded indirectness.
-    expect(style).toMatch(/not.*graded indirectness|graded indirectness/i);
+    // The whole point: courtesy is a fixed marker, not graded indirectness.
+    expect(style).toMatch(/graded indirectness/i);
   });
 
-  it("S9 gives a template for each hard speech act", () => {
+  it("S5 gives a template for each hard speech act", () => {
     for (const act of ["request", "refusal", "apology", "thanks", "email"]) {
       expect(style.toLowerCase()).toContain(act);
     }
@@ -111,14 +109,14 @@ describe("style.md pragmatics (item 10, S8–S9)", () => {
 describe("samples.md Passage 7 dogfoods the pragmatics rules", () => {
   const woe = passageWoe(read("samples.md"), "## Passage 7");
 
-  it("contains every S8/S9 marker inside a running email", () => {
+  it("contains every S5 marker inside a running email", () => {
     for (const marker of ["Hello", "Thank you", "Sorry", "Please", "Goodbye"]) {
       expect(woe).toContain(marker);
     }
   });
 
-  it("also exercises the deterministic morphology (see→seed, your→yous)", () => {
+  it("also exercises the deterministic morphology (see→seed) with standard possessives", () => {
     expect(woe).toContain("seed");
-    expect(woe).toContain("yous");
+    expect(woe).toContain("your message");
   });
 });

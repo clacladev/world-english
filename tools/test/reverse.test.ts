@@ -1,7 +1,5 @@
 import { describe, expect, it } from "bun:test";
 import { buildReverseMap, reverseTranslate } from "../src/reverse.ts";
-import { translate } from "../src/translate.ts";
-import { loadCoreLexicon } from "../src/core-lexicon.ts";
 import { samplePairs } from "./helpers/samples.ts";
 
 function se(text: string) {
@@ -29,22 +27,16 @@ describe("lossless reverse restoration (the classes M1/M4/M5/O2/O5 promise to re
     expect(se("straight thru, tho")).toBe("straight through, though");
   });
 
-  it("restores uniquely-reversible pronouns and reflexives (G4/G12)", () => {
-    expect(se("hims car")).toBe("his car");
-    expect(se("whos keys")).toBe("whose keys");
-    expect(se("they hurt themselfs")).toBe("they hurt themselves");
-  });
-
   it("preserves casing", () => {
     expect(se("Goed home")).toBe("Went home");
-    expect(se("HIMS car")).toBe("HIS car");
+    expect(se("The CHILDS ran")).toBe("The CHILDREN ran");
   });
 
   it("does the truly-lossless classes without a flag", () => {
-    // Plurals, comparatives, ough, silent letters, and unique pronouns have exactly one standard
-    // form, so no guess is involved. (Irregular *verbs* are flagged separately — their `-ed`
-    // past collapses the standard past and its participle; see the lossy suite.)
-    expect(flags("the childs is gooder thru here, no det, hims car")).toEqual([]);
+    // Plurals, comparatives, ough, silent letters have exactly one standard form, so no guess is
+    // involved. (Irregular *verbs* are flagged separately — their `-ed` past collapses the
+    // standard past and its participle; see the lossy suite.)
+    expect(flags("the childs is gooder thru here, no det")).toEqual([]);
   });
 });
 
@@ -53,13 +45,6 @@ describe("lossy reverse: canonical default + flag", () => {
     expect(se("they be here and it beed late")).toBe("they is here and it was late");
     expect(flagKeys("they be here")).toContain("be→is");
     expect(flagKeys("it beed late")).toContain("beed→was");
-  });
-
-  it("restores collapsed possessives to the determiner form, flagged (G4)", () => {
-    expect(se("mes son and uss tickets")).toBe("my son and our tickets");
-    expect(se("yous coat, thems keys")).toBe("your coat, their keys");
-    expect(flagKeys("mes son")).toContain("mes→my");
-    expect(flagKeys("yous coat")).toContain("yous→your");
   });
 
   it("restores an irregular past canonically but flags the past/participle collapse", () => {
@@ -90,39 +75,13 @@ describe("leaves valid standard English untouched (per project decision)", () =>
     // `ground` (past of grind) is a homograph → excluded, so it stays put.
     expect(se("on the ground")).toBe("on the ground");
   });
-});
 
-describe("G3 preposition restoration (core lexicon, item 8 wiring)", () => {
-  it("restores a drop verb's canonical preposition and always flags it", () => {
-    expect(se("listen music")).toBe("listen to music");
-    expect(se("wait the bus")).toBe("wait for the bus");
-    expect(se("depend the weather")).toBe("depend on the weather");
-    expect(se("look the picture")).toBe("look at the picture");
-    expect(flagKeys("listen music")).toContain("listen→listen to");
-  });
-
-  it("restores inflected forms too (3sg, -ing, past)", () => {
-    expect(se("he listens music")).toBe("he listens to music");
-    expect(se("they listened the radio")).toBe("they listened to the radio");
-  });
-
-  it("skips insertion before a stoplisted next word (preposition, adverb, -ly)", () => {
-    expect(se("wait for three minutes")).toBe("wait for three minutes");
-    expect(se("looked under the sofa")).toBe("looked under the sofa");
-    expect(se("looked there")).toBe("looked there");
-    expect(se("looked quickly")).toBe("looked quickly");
-    expect(flags("wait for three minutes")).toEqual([]);
-  });
-
-  it("skips insertion when punctuation intervenes or there is no next token", () => {
-    expect(se("Wait, the bus is coming.")).toBe("Wait, the bus is coming.");
-    expect(se("Please wait.")).toBe("Please wait.");
-  });
-
-  it("does not restore a preposition into a copular/adjectival reading (#65)", () => {
-    expect(se("The look beed cold.")).toBe("The look was cold.");
-    expect(se("She looks tired.")).toBe("She looks tired.");
-    expect(se("she talks a lot")).toBe("she talks a lot");
+  it("does not reverse verb prepositions — verbs keep their standard preposition (G3, no drop)", () => {
+    // WoE keeps *listen to* / *wait for* verbatim, so a WoE sentence reads the same as standard
+    // English here and nothing is inserted or flagged.
+    expect(se("listen to music")).toBe("listen to music");
+    expect(se("wait for the bus")).toBe("wait for the bus");
+    expect(flags("listen to music and wait for the bus")).toEqual([]);
   });
 
   it("does not reverse phrasal verbs — the plain WoE verb is itself valid standard English", () => {
@@ -163,26 +122,9 @@ describe("lossless-mapping proof against docs/samples.md", () => {
     }
   });
 
-  it("flags the lossy classes the passages exercise (be/beed, collapsed possessives)", () => {
+  it("flags the lossy classes the passages exercise (be/beed)", () => {
     const allWoe = pairs.map((p) => p.woe).join("\n");
     const keys = flagKeys(allWoe);
     expect(keys).toContain("beed→was");
-    expect(keys).toContain("mes→my");
-  });
-});
-
-describe("G3 round-trip property (forward→reverse)", () => {
-  const lexicon = loadCoreLexicon();
-  const dropVerbs = lexicon.droppedPreps.filter((d) => d.ruling === "drop");
-
-  it("every forward-applying drop verb round-trips through forward then reverse, flagged", () => {
-    for (const d of dropVerbs) {
-      const originalSe = `${d.verb} ${d.prep} the thing`;
-      const woe = translate(originalSe, { file: "x.md" }).text;
-      expect(woe).toBe(`${d.verb} the thing`); // forward drops the prep
-      const back = reverseTranslate(woe, { file: "x.md" });
-      expect(back.text).toBe(originalSe); // reverse restores it
-      expect(back.flags.some((f) => f.found === d.verb)).toBe(true); // and always flags the guess
-    }
   });
 });

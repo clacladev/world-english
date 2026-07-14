@@ -2,28 +2,26 @@
 //
 // Turns standard English into World English by applying only the transforms it can do
 // *deterministically* — a closed set of unambiguous surface-form substitutions — and FLAGGING
-// (never guessing) everything that needs part-of-speech, syntax, or the core lexicon (item 8).
+// (never guessing) everything that needs part-of-speech, syntax, or the core lexicon.
 //
 // The dataset the linter already loads is exactly the single-word forward map: loadDataset().words
 // is keyed by the standard (`abolished`) surface form, and each entry's `.woe` is its World-English
-// replacement. Multi-word transforms (dropped prepositions, phrasal verbs — the core lexicon,
-// item 8) are built separately by core-lexicon.ts's buildPhraseTransforms(), since they need
+// replacement. Multi-word transforms (dropped prepositions, phrasal verbs — the core lexicon)
+// are built separately by core-lexicon.ts's buildPhraseTransforms(), since they need
 // per-inflection generation buildForwardMap() doesn't do, and `test/translate.test.ts`'s gold
 // harness derives its expectations from buildForwardMap()'s values, so it must stay single-word.
 //
 // Now handled conservatively by the pos.ts detectors: G2 indefinite-article drop (a/an → ∅, with
-// sentence-initial recapitalization), G14 dropped-`that` restoration in reported speech, and the
+// sentence-initial recapitalization), G11 dropped-`that` restoration in reported speech, and the
 // coordinated-shape zero-past auto-convert (M1). Still flag-only / untouched (documented, not a
 // bug): generic-`the` → bare plural (needs semantics), separated phrasals (*give it up* — needs a
-// parser), non-coordinated zero-past, S3/S6/false-friends/register (doc-only, not even flagged).
-// The duration-`for` vs. object-`for` test (item 16) is resolved: dropped `for` auto-translates
-// via the not-duration guard (isDurationFor) — object-`for` drops (`wait for the bus` → `wait the
-// bus`), duration-`for` is kept (`wait for three minutes`).
+// parser), non-coordinated zero-past, sense/collocation/false-friends/register (doc-only, not even
+// flagged). Verb prepositions are no longer dropped by G3 — a verb keeps its standard preposition
+// as vocabulary — so there is no preposition transform in either direction.
 
 import { loadDataset, type Dataset } from "./dataset.ts";
 import {
   buildPhraseTransforms,
-  isDurationFor,
   type CoreLexicon,
   type PhraseTransform,
 } from "./core-lexicon.ts";
@@ -92,14 +90,6 @@ function sentenceIdsFor(tokens: { start: number; end: number }[], line: string):
     ids[k] = sentence;
   }
   return ids;
-}
-
-/** The tokens from `from` onward that stay within the same sentence as `from`. */
-function sameSentenceFrom<T>(items: T[], sentenceIds: number[], from: number): T[] {
-  const sid = sentenceIds[from];
-  const out: T[] = [];
-  for (let k = from; k < items.length && sentenceIds[k] === sid; k++) out.push(items[k]!);
-  return out;
 }
 
 /** Every token that shares its sentence with position `at` (both before and after it). */
@@ -215,11 +205,6 @@ function substituteLine(
       const span = match.tokens.length;
       const spanEnd = tokens[i + span - 1]!.end;
       handledPhrases.add(match.tokens.join(" ")); // deliberate decision → excluded from flags
-      // G3 "for" test: a dropped `for` is KEPT before a duration span (S5), dropped otherwise —
-      // scoped to the current sentence so a duration phrase in a later sentence can't leak back.
-      const keepDurationFor =
-        match.guard === "not-duration" &&
-        isDurationFor(sameSentenceFrom(tokens, sentenceIds, i + span).map((tk) => tk.word.toLowerCase()));
       // Zero-past phrasal head (#59): default to the present-tense replacement, but defer to the
       // past-tense one when the *same sentence* carries an unambiguous past-time signal.
       const usePastReplacement =
@@ -227,9 +212,7 @@ function substituteLine(
         match.pastReplacement !== undefined &&
         lineHasPastSignal(sameSentenceAll(lowerWords, sentenceIds, i));
       const replacement = usePastReplacement ? match.pastReplacement! : match.replacement;
-      out += applyCap(
-        keepDurationFor ? line.slice(tok.start, spanEnd) : matchCase(tok.word, replacement),
-      );
+      out += applyCap(matchCase(tok.word, replacement));
       last = spanEnd;
       i += span;
       continue;

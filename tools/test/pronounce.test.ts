@@ -26,9 +26,9 @@ describe("pronounce — respelling (default)", () => {
     expect(pronounce("THE").text).toBe("dhuh");
   });
 
-  it("preserves punctuation and P7's leading `?`", () => {
-    // You/like/it are not in the seed lexicon → emitted verbatim, but both `?` survive.
-    expect(pronounce("?You like it?").text).toBe("?You like it?");
+  it("preserves punctuation and a question's trailing `?`", () => {
+    // You/like/it are not in the seed lexicon → emitted verbatim, and the trailing `?` survives.
+    expect(pronounce("You like it?").text).toBe("You like it?");
   });
 });
 
