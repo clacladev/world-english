@@ -40,6 +40,9 @@ body {
 
 main {
   flex: 1 0 auto;
+  /* Soft accent glow just below the header, consistent on every page */
+  background: radial-gradient(60rem 30rem at 50% -2rem, var(--accent-soft), transparent 70%);
+  background-repeat: no-repeat;
 }
 
 h1,
