@@ -137,7 +137,7 @@ export function articleDrop(tokens: string[], i: number, opts: ArticleDropOption
   return true;
 }
 
-// ── Dropped-`that` restoration (docs/grammar.md G14) ──────────────────────────────────────────
+// ── Dropped-`that` restoration (docs/grammar.md G11) ──────────────────────────────────────────
 // Content / reported clauses ALWAYS keep the complementizer `that`; standard English optionally
 // drops it. Restore it in the one unambiguous shape: a reporting/mental verb, an immediately
 // following NOMINATIVE-only subject pronoun, then a clause verb. `it`/`you` are excluded on

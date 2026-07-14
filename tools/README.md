@@ -111,13 +111,6 @@ bun run translate --reverse --json
   reports the guess: `be`→`is`, `beed`→`was`, `mes`→`my`, `uss`→`our`, `yous`→`your`,
   `thems`→`their`, and every irregular verb whose `-ed` past covers both the standard past and
   its participle (`seed` → `saw`, flagged "past/participle collapsed").
-- **G3 dropped prepositions restore the same way** — a second per-line pass (after word-level
-  restoration) checks whether a restored token is a core-lexicon drop verb (`listen`, `wait`,
-  `depend`, `look`, and the rest of the sweep's 37); if the next word isn't stoplisted, it
-  inserts the verb's canonical preposition and **always flags it**, since the drop is lossy and
-  nothing proves the object reading was meant. The stoplist (prepositions, conjunctions, common
-  place/time/degree adverbs, `-ly` words) is what keeps a duration phrase like *"wait for three
-  minutes"* or *"looked under the sofa"* from getting a second preposition inserted.
 - **Valid standard English is left untouched** — WoE mandates American spelling, so `color` /
   `center` are standard as-is (not reversed to British), and `who` (which forward-maps from
   `whom`) is a valid word. **Phrasal verbs are not restored** — `quit`, `delay`, `seek`, and the
@@ -149,9 +142,8 @@ against the data).
   abolished-forms shape `dataset.ts` consumes, so the linter and both translators see them the
   same way as every other abolished form.
 - `buildPhraseTransforms()` — the forward translator's multi-word transforms: every inflected
-  surface form (base, 3sg, `-ing`, past, participle) of a `drop`-ruling verb or phrasal verb,
-  sorted longest-first for greedy matching.
-- `buildPrepRestorations()` — the reverse translator's verb→canonical-preposition map.
+  surface form (base, 3sg, `-ing`, past, participle) of a phrasal verb, sorted longest-first
+  for greedy matching.
 
 ### Sweep methodology
 
