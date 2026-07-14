@@ -8,7 +8,7 @@
 // partial translation never renders blank. See site/README.md → "Translations".
 
 export const defaultLocale = 'en' as const;
-export const locales = ['en', 'es'] as const;
+export const locales = ['en', 'es', 'zh'] as const;
 export type Locale = (typeof locales)[number];
 
 // Each language's own name — what its speakers recognize (no flags: a flag is a
@@ -16,6 +16,7 @@ export type Locale = (typeof locales)[number];
 export const localeNames: Record<Locale, string> = {
   en: 'English',
   es: 'Español',
+  zh: '中文',
 };
 
 // Shared UI strings, keyed by a stable dotted id. `en` is the source of truth;
@@ -70,6 +71,30 @@ const ui = {
     'englishOnly.page': 'Esta página solo está disponible en inglés.',
     'englishOnly.spec': 'Esta especificación solo está disponible en inglés.',
   },
+  zh: {
+    'nav.rules': '规则',
+    'nav.translate': '翻译',
+    'nav.showcase': '阅读',
+    'nav.research': '研究',
+    'nav.skills': 'Skills',
+    'nav.about': '关于',
+    'nav.primary': '主导航',
+    'search.label': '搜索',
+    'search.close': 'Esc',
+    'search.title': '搜索',
+    'search.note': '搜索索引在构建时生成。运行 <code>bun run build &amp;&amp; bun run preview</code> 即可在本地体验。',
+    'lang.label': '语言',
+    'skip': '跳到内容',
+    'footer.status': '一个开放的设计与研究项目——这里的一切都还是暂定的。',
+    'footer.reference': '参考',
+    'footer.aboutProject': '关于本项目',
+    'footer.project': '项目',
+    'footer.repo': 'GitHub 仓库',
+    'footer.feedback': '反馈意见',
+    'footer.rights': 'World English 贡献者 · 代码：MIT · 文档：',
+    'englishOnly.page': '本页面仅提供英文版本。',
+    'englishOnly.spec': '本规范仅提供英文版本。',
+  },
 } as const;
 
 export type UIKey = keyof (typeof ui)['en'];
@@ -98,4 +123,12 @@ export function localePath(path: string, locale: Locale): string {
   if (locale === defaultLocale) return path;
   const clean = path.startsWith('/') ? path : `/${path}`;
   return clean === '/' ? `/${locale}` : `/${locale}${clean}`;
+}
+
+// Inverse of localePath: strip a leading non-default locale segment, returning
+// the bare (default-locale) path. /es/about → /about, /zh → /, /about → /about.
+const nonDefaultLocales = locales.filter((l) => l !== defaultLocale);
+const localePrefix = new RegExp(`^/(${nonDefaultLocales.join('|')})(?=/|$)`);
+export function stripLocale(pathname: string): string {
+  return pathname.replace(localePrefix, '') || '/';
 }

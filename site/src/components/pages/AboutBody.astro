@@ -5,8 +5,8 @@ const locale = getLocale(Astro.currentLocale);
 const lp = (path: string) => localePath(path, locale);
 
 // Heading ids stay in English so in-page anchors remain stable across locales;
-// only the visible text is translated.
-const COPY = {
+// only the visible text is translated. A missing locale falls back to English.
+const DICT = {
   en: {
     eyebrow: 'About the project',
     h1: 'What World English is',
@@ -83,7 +83,46 @@ const COPY = {
     ctaRules: 'Lee las reglas',
     ctaResearch: 'Ver la investigación',
   },
-}[locale === defaultLocale ? 'en' : (locale as 'es')];
+  zh: {
+    eyebrow: '关于本项目',
+    h1: 'World English 是什么',
+    lede:
+      'World English（WoE）是对英语的一次审慎修订：保留行之有效的部分，修正不合理的部分——目标是一种规则、可预测、更易学、又依然让任何懂英语的人都读得懂的变体。',
+    intro:
+      '英语是互联网、科学、航空、商业和旅行的默认语言。然而，由于历史的偶然而非有意的设计，它也是最难学好的语言之一：拼写很少能预示读音，动词和复数充斥着需要死记的例外，许多所谓的“规则”根本不是规则，而是清单。在许多方面，World English 是英式与美式英语的一个<strong>子集</strong>——取其共同的核心，舍去不规则的边角。在另一些方面，它是一次真正的<strong>改革</strong>，用更简单的东西替换那些已无可救药的规则。',
+    whyH: '为什么存在',
+    why:
+      '今天的学习者必须吸收成千上万的不规则拼写、数百个不规则动词、一套过于庞大的时态系统，以及一层连母语者自己都解释不清的近乎任意的选择。要清晰地交流，这些复杂性一样都不需要——它们只是历史的沉积物。World English 严谨地发问：<em>英语在仍然是英语的前提下，能简单到什么程度？</em>它是一项研究与设计的工作，而不是一场劝人改用它的运动。',
+    principlesH: '设计原则',
+    principles: [
+      ['先做减法，再做加法', '首要的工具是去除不规则，而不是发明新的语法。大多数收益都来自把已有的东西规整化。'],
+      ['只有在减法失效时才改革', '当一条规则任意到无可救药时，用一条可预测的规则取而代之——哪怕那种形式并非标准英语。'],
+      ['保持易读', '拼写只做轻微的规整。一页 World English 绝不应让英语读者感到陌生。'],
+      ['一条规则，没有例外清单', '一项特性只有当它能被表述为初学者可套用的规则、且不带一张特例表时，才算“完成”。'],
+      ['记录缘由', '每一处偏离标准英语的改动，都连同它解决的学习问题和它接受的取舍一并记录在案。'],
+    ],
+    methodH: '它是如何设计的',
+    methodLede: '每一步都产出下一步所依据的文档。没有什么是悄悄决定的。',
+    method: [
+      '梳理标准英语——把实际的规则记录下来作为基线。',
+      '编录难点——记录学习者的困难，以及原因。',
+      '设计对策——针对每个难点，给出一条规整化的规则，附带示例和取舍。',
+      '规范语言——把规则整合进各项规范。',
+      '证明规则自洽——把它们套用到真实文段上，并做机械化检验。',
+      '打造工具——翻译器和发音支持。',
+    ],
+    notH: '它不是什么',
+    not: [
+      '不是文学、法律或母语日常使用中对英语的替代。',
+      '不是“降智版”英语——它用更少的任意机制表达同样的意思。',
+      '不是拼音式改写——拼写改动保守且可辨认。',
+      '尚未完成——规则在被逐一厘清的过程中还会变动。',
+    ],
+    ctaRules: '阅读规则',
+    ctaResearch: '查看研究',
+  },
+};
+const COPY = DICT[locale] ?? DICT.en;
 ---
 
 <div class="shell page prose measure" data-pagefind-body>

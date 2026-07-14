@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { locales, defaultLocale, getLocale, useTranslations, localePath } from '../i18n/ui';
+import { locales, defaultLocale, getLocale, useTranslations, localePath, stripLocale } from '../i18n/ui';
 
 interface Props {
   title?: string;
@@ -25,7 +25,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 
 // The current path with any locale prefix stripped, so we can list the same page
 // in every language as an hreflang alternate (x-default points at English).
-const barePath = Astro.url.pathname.replace(/^\/(es)(?=\/|$)/, '') || '/';
+const barePath = stripLocale(Astro.url.pathname);
 const alternates = [
   ...locales.map((loc) => ({
     hreflang: loc,

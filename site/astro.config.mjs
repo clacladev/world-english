@@ -23,7 +23,7 @@ export default defineConfig({
   // a matter of appending its code here and to src/i18n/ui.ts. See site/README.md.
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'es'],
+    locales: ['en', 'es', 'zh'],
     routing: { prefixDefaultLocale: false },
   },
   markdown: {
@@ -47,7 +47,7 @@ export default defineConfig({
     sitemap({
       // Advertise the language alternates so search engines pair /about with
       // /es/about instead of treating them as duplicate content.
-      i18n: { defaultLocale: 'en', locales: { en: 'en-US', es: 'es-ES' } },
+      i18n: { defaultLocale: 'en', locales: { en: 'en-US', es: 'es-ES', zh: 'zh-CN' } },
     }),
   ],
   vite: {

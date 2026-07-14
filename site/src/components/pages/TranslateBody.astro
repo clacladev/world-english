@@ -7,7 +7,7 @@ const locale = getLocale(Astro.currentLocale);
 // verbatim in every language; only descriptive UI text is translated. Strings
 // the client script sets at runtime are passed to it via the data-i18n attribute
 // below so the single bundled script serves every locale.
-const COPY = {
+const DICT = {
   en: {
     eyebrow: 'Try it',
     h1: 'Translator',
@@ -55,7 +55,31 @@ const COPY = {
       notesEmpty: 'Sin marcas: cada forma se convirtió de manera determinista.',
     },
   },
-}[locale === defaultLocale ? 'en' : (locale as 'es')];
+  zh: {
+    eyebrow: '试一试',
+    h1: '翻译器',
+    lede:
+      '输入标准英语，看它变成 World English；或粘贴 World English，把它转换回去。它运行的是项目自带的同一个确定性翻译器——完全在你的浏览器里进行。',
+    dirLabel: '翻译方向',
+    standard: '标准英语',
+    notesTitle: '备注',
+    notesHint:
+      '翻译器只做确定性的改动。以下是它不愿臆测的形式——它们需要词性、句法或核心词汇才能确定。',
+    swapTitle: '交换方向和文本',
+    js: {
+      labelStandard: '标准英语',
+      labelWoe: 'World English',
+      phStandard: 'She has taken the children to see the mice.',
+      phWoe: 'She taked the childs to see the mouses.',
+      copy: '复制',
+      copied: '已复制',
+      loading: '加载中…',
+      loadFail: '翻译器加载失败。',
+      notesEmpty: '没有标记——每个形式都已确定性地转换。',
+    },
+  },
+};
+const COPY = DICT[locale] ?? DICT.en;
 ---
 
 <div class="shell page">

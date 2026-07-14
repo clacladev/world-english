@@ -1,12 +1,12 @@
 ---
-import { locales, localeNames, localePath, getLocale, useTranslations } from '../i18n/ui';
+import { locales, localeNames, localePath, getLocale, useTranslations, stripLocale } from '../i18n/ui';
 
 const current = getLocale(Astro.currentLocale);
 const t = useTranslations(current);
 
 // The current path with any locale prefix stripped, so each option can point at
 // the equivalent page in its own language rather than back to the home page.
-const bare = Astro.url.pathname.replace(/^\/(es)(?=\/|$)/, '') || '/';
+const bare = stripLocale(Astro.url.pathname);
 
 const options = locales.map((loc) => ({
   loc,

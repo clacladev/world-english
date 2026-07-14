@@ -1,0 +1,13 @@
+---
+// Chinese translator page. Shares TranslateBody; UI labels switch on the /zh URL
+// locale. The tool itself works on English/WoE text and is unchanged.
+import Base from '../../layouts/Base.astro';
+import TranslateBody from '../../components/pages/TranslateBody.astro';
+---
+
+<Base
+  title="翻译器"
+  description="在标准英语与 World English 之间翻译文本。与各项工具背后相同的确定性翻译器，直接在你的浏览器中运行。"
+>
+  <TranslateBody />
+</Base>
