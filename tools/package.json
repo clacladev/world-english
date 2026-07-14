@@ -9,6 +9,7 @@
     "lint": "bun lint.ts",
     "translate": "bun translate.ts",
     "pronounce": "bun pronounce.ts",
+    "build:skill": "bun build-skill.ts",
     "test": "bun test",
     "typecheck": "tsc --noEmit"
   },
