@@ -155,73 +155,39 @@ unambiguous and instantly understood. One rule replaces a list plus a borrowed-p
 
 ## Rule M5 — One comparative rule
 
-**Rule.** The regular comparative and superlative are **`-er`** and **`-est`** for **every**
-adjective and adverb — no irregular one-word suppletives (*good* → **gooder**, not *better*).
-The clumsy cases where the periphrastic **`more`/`most`** (and **`less`/`least`**) is
-permitted as an **optional, natural-sounding alternative** are defined by an explicit,
-derivable trigger rather than a vague "reads clumsy": **adjectives and adverbs of three or
-more syllables** (long adjectives, most `-ly` adverbs, the quantifiers *many*/*much* and
-*little*/*few*) take the escape hatch; **adjectives of one or two syllables take
-`-er`/`-est` only** (*bigger*, never *more big*; *happier*, never *more happy*) — the same
-syllable-count line standard English already draws for comparatives, so nothing new is
-invented. **Participial adjectives are classified separately and unconditionally:** any
-adjective built from a verb's `-ing` or `-ed` form (*interesting*, *tired*, *bored*,
-*surprising*) always takes **`more`/`most`**, regardless of syllable count, because it is
-not a true adjective but a verb form used adjectivally — so *more interesting* and *more
-tired* are the only forms, never *interestinger* or *tireder*.
+**Rule.** Every adjective and adverb has its comparative and superlative available **two ways,
+both always valid**: the regular **`-er`/`-est`** (*gooder*, *goodest*) and the periphrastic
+**`more`/`most`** (*more good*, *most good*). Pick whichever reads better — there is **no
+syllable count, no participial test, no boundary to judge**, because neither form is ever wrong.
+Consonant + `y` takes the ordinary **`y → i`** spelling (*happy → happier*), the same sub-rule
+[M4](#rule-m4--all-plurals-are-regular) uses for plurals (*city → cities*).
 
-**Problem it solves.** Suppletive comparatives (*good/better/best*) and the fuzzy
-`-er`/`more` boundary (see [§5](../resources/IRREGULARITIES.md#5-adjectives--adverbs)).
+The **one hard line** is that irregular one-word **suppletives stay abolished**: *better/best* →
+**gooder/goodest**, *worse/worst* → **badder/baddest** — never the suppletive stem. The
+quantifiers take their periphrastic comparative — *many/much* → **more/most**, *little/few* →
+**less/least** — a valid World English form, never the suppletive.
+
+**Problem it solves.** Suppletive comparatives (*good/better/best*) and the fuzzy `-er`/*more*
+boundary — the by-feel judgment of which form a given adjective "should" take (see
+[§5](../resources/IRREGULARITIES.md#5-adjectives--adverbs)). World English removes the boundary
+entirely: both forms are always available, so the choice is never wrong and never has to be
+learned.
 
 **Examples.**
 
 | Standard | World English |
 | -------- | ------------- |
-| good / better / best | good / **gooder** / **goodest** |
-| bad / worse / worst | bad / **badder** / **baddest** |
-| many / more / most | many / **manier** *or* **more** / **maniest** *or* **most** |
+| good / better / best | good / **gooder** / **goodest** (*or* **more good** / **most good**) |
+| bad / worse / worst | bad / **badder** / **baddest** (*or* **more bad** / **most bad**) |
+| many / more / most | many / **more** / **most** |
 | beautiful / more beautiful / most beautiful | beautiful / **beautifuler** *or* **more beautiful** / **beautifulest** *or* **most beautiful** |
 
-**Divergence & trade-off.** *gooder*, *beautifuler* are non-standard but fully transparent,
-and are always available as the regular form. The escape hatch deliberately lets the familiar
-*more/most* back in for the clumsy cases (long adjectives, `-ly` adverbs, quantifiers), because
-naturalness is worth it there. This re-admits the *`-er`*-vs-*more* choice M5 otherwise
-removes — but only as an **optional** aid: the regular `-er`/`-est` is always a valid,
-unambiguous fallback, so no one is *forced* to make the judgment. The one hard line is that
-irregular one-word suppletives (*better*, *worse*) stay abolished — the hatch is periphrastic
-*more/most* only, never *better*.
-
-**Two cases the base rule leaves to state.**
-
-- **Comparatives of `-ly` adverbs.** An adverb ending in `-ly` is a consonant + `y`, so it
-  takes the same **`y → i`** spelling sub-rule already used elsewhere for consonant + `y`
-  stems — [M1](#rule-m1--all-verbs-are-regular)'s verb past tense (*try → tried*) and
-  [M4](#rule-m4--all-plurals-are-regular)'s noun plural (*city → cities*): `-lier` / `-liest`.
-  The same sub-rule applies uniformly to any consonant + `y` comparative, including the
-  quantifier *many* below (*many* is consonant + `y` exactly like *quickly*, so it takes
-  **manier**/**maniest**, not *manyer*/*manyest* — there is no principled exception for
-  *many*, so none is made).
-
-  | Adverb | Comparative | Superlative |
-  | ------ | ----------- | ----------- |
-  | quickly | **quicklier** | **quickliest** |
-  | easily | **easilier** | **easiliest** |
-  | carefully | **carefullier** | **carefulliest** |
-
-  So *quickly* → **quicklier** is the regular form. **Escape hatch:** because *carefullier*
-  and *easilier* are clumsy, the periphrastic **`more`/`most`** is permitted here too (*more
-  carefully*, *most easily*) as the natural-sounding alternative. Both are valid; the regular
-  `-lier`/`-liest` is always available.
-
-- **Quantifier *more* / *most*.** *many/much* regularize to **`manier` / `maniest`** (row
-  above, via the same consonant + `y` sub-rule just stated, and
-  [G5](grammar.md#rule-g5--all-nouns-are-countable) makes every noun count), so
-  *manier than 100 persons* and *maniest persons* are the regular forms. But because the bare
-  quantifiers are the clumsiest cases of all (*I want manier*), the standard **`more`/`most`**
-  are permitted here as the escape hatch (*I want more*, *more than 100 persons*, *most
-  persons*); *little/few* likewise take **`less`/`least`** alongside *littler/littlest*. Both
-  are valid. The translators leave *more/most/less/least* untouched (they are valid World
-  English) and never force *manier*.
+**Divergence & trade-off.** *gooder*, *beautifuler* are non-standard but fully transparent, and
+always valid. Keeping *more/most* valid everywhere re-admits the familiar periphrastic form for
+the cases where the regular ending would read clumsily (*more carefully*, *more beautiful*) — but
+as a **free choice**, not a rule to apply: neither form is ever wrong, so no one is forced to
+judge. The one thing dropped is the irregular one-word suppletive (*better*, *worse*), which stays
+abolished.
 
 ---
 

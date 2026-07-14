@@ -54,8 +54,7 @@ tamed grammar), deployed in a **bounded context** (news, aircraft manuals, busin
   should pair its core word-list with the full rule specs, not lean on vocabulary limits
   alone.
 - **Bears on.** The core lexicon;
-  [S3](../docs/style.md#rule-s3--one-word-one-meaning-avoid-heavy-polysemy),
-  [S4](../docs/style.md#rule-s4--avoid-idioms-and-culture-bound-expressions).
+  [S2](../docs/style.md#rule-s2--plain-single-sense-words) (plain, single-sense words).
 
 ### VOA Special English (now "Learning English")
 
@@ -89,9 +88,8 @@ tamed grammar), deployed in a **bounded context** (news, aircraft manuals, busin
   set plus a controlled lexicon, proven to work **where safety and intelligibility matter
   most**. "One word, one meaning" and "prefer active voice" are STE rules World English
   reaches independently.
-- **Bears on.** [S3](../docs/style.md#rule-s3--one-word-one-meaning-avoid-heavy-polysemy)
-  (one meaning), [S2](../docs/style.md#rule-s2--prefer-plain-verbs-over-phrasal-verbs) (plain
-  verbs), [G9](../docs/grammar.md#rule-g9--passive-voice)+[S1](../docs/style.md#rule-s1--fixed-subjectverbobject-order)
+- **Bears on.** [S2](../docs/style.md#rule-s2--plain-single-sense-words)
+  (plain, single-sense words), [G9](../docs/grammar.md#rule-g9--passive-voice)+[S1](../docs/style.md#rule-s1--fixed-subjectverbobject-order)
   (prefer active), and the whole controlled-grammar approach.
 
 ### Globish
@@ -163,7 +161,8 @@ are the **conservative subset** — which is precisely the line World English dr
   Cut Spelling comparison below answers with a related but distinct criterion — "keep the list
   small" — which is the same bet, not a different one, but neither O2 nor this file previously
   said so plainly; see ["The coined-pronoun tension"](#the-coined-pronoun-tension-webster-again)
-  below for the same trade-off applied to WoE's pronoun paradigms.
+  below for the same tension as it once applied to WoE's pronoun paradigms, before those
+  coinages were retired.
 - **Bears on.** [O1](../docs/orthography.md#rule-o1--one-dialect-one-spelling) (the successful
   subset), [O2](../docs/orthography.md#rule-o2--drop-purely-silent-etymological-letters) (the
   coinage exception, acknowledged), [O4](../docs/orthography.md#rule-o4--what-is-deliberately-left-alone)/[O5](../docs/orthography.md#rule-o5--respell-ough-words-only-where-an-informal-form-already-exists)
@@ -238,43 +237,25 @@ are the **conservative subset** — which is precisely the line World English dr
 
 ### The coined-pronoun tension (Webster, again)
 
-- **The honest problem.** The strongest lesson in this whole section is that reforms asking the
-  public to *re-learn* something fail, and successes were *subsets* — "none asked anyone to
-  spell differently." World English's grammar breaks that pattern in one place: G4's pronoun
-  paradigm (*mes, hims, uss, yous, thems*) and G12's reflexives (*meself, hisself*) and G4's
-  plural-*you* possessive (*you all's*) are not adopted from anywhere — they are coined forms a
-  learner must memorize, in the exact structural position Webster's *tho/thru/tung/wimmen/
-  fether/iland* occupied before most of them died. The creole-convergence evidence above
-  defends WoE's *verb/tense* moves (no 3sg *-s*, preverbal negation, invariant tags, regularized
-  past) as natural endpoints of simplification, not designer inventions — but it says nothing
-  about the pronoun coinages, because no creole or interlanguage source is cited for *mes* or
-  *hisself* as a class. The "adopt an existing form, never coin" boundary
+- **The tension, as it stood.** The strongest lesson in this whole section is that reforms asking
+  the public to *re-learn* something fail, and successes were *subsets* — "none asked anyone to
+  spell differently." Earlier drafts of World English's grammar broke that pattern in one place:
+  G4 coined a pronoun paradigm (*mes, hims, uss, yous, thems*) and G12 coined reflexives (*meself,
+  hisself*), in the exact structural position Webster's *tho/thru/tung/wimmen/fether/iland*
+  occupied before most of them died. The creole-convergence evidence above defends WoE's
+  *verb/tense* moves (no 3sg *-s*, preverbal negation, invariant tags, regularized past) as
+  natural endpoints of simplification, not designer inventions — but it said nothing about the
+  pronoun coinages, because no creole or interlanguage source was cited for *mes* or *hisself* as
+  a class. The "adopt an existing form, never coin" boundary
   ([O5](../docs/orthography.md#rule-o5--respell-ough-words-only-where-an-informal-form-already-exists))
-  is also applied selectively: it was used to reject a coined question particle (kept intonation
+  was also applied selectively: used to reject a coined question particle (kept intonation
   instead, per P7 in §C), yet waived for the entire pronoun/reflexive system.
-- **Why WoE includes them anyway.** Three differences from Webster's failed coinages, stated
-  plainly rather than left silent:
-  1. **Small and closed.** Webster's radical set was an open-ended, word-by-word rewrite of
-     ordinary vocabulary (any word could get a new spelling); WoE's coinages are a closed
-     paradigm of a dozen or so pronoun/reflexive forms, learned once as a system rather than
-     memorized word by word.
-  2. **Systematic and derivable.** Every coined pronoun follows one visible pattern (object/
-     possessive form = subject form + *-s*; reflexive = possessive-looking form + *-self*), so
-     once a learner sees the rule they can produce the rest — unlike Webster's respellings, which
-     had to be learned one word at a time with no generative rule linking them.
-  3. **Learnable in isolation, not competing with existing habits at scale.** Webster's spellings
-     had to displace an already-automatic reading habit across the entire everyday vocabulary
-     simultaneously. A dozen new pronoun forms are a one-time, front-loaded cost a learner pays
-     once at the start, not a continuous tax on every word they already half-know how to spell.
-  This is a considered bet, not a proven one — it has not been tested empirically the way the
-  LFC tests P3/P4/P7.
-  The honest position is: **the coined pronoun paradigms are the part of WoE structurally
-  closest to Webster's failures**, kept deliberately because they are small, systematic, and
-  front-loaded rather than because prior art endorses them.
-- **Bears on.** [G4](../docs/grammar.md#rule-g4--regular-pronoun-case),
-  [G12](../docs/grammar.md#rule-g12--reflexive-pronouns),
-  [O5](../docs/orthography.md#rule-o5--respell-ough-words-only-where-an-informal-form-already-exists)
-  (the never-coin line, and its one deliberate exception).
+- **Resolution.** The coinage this section warned about was removed rather than defended: G4 now
+  keeps every standard pronoun form (subject, object, possessive determiner, standalone
+  possessive), changing only the dying *who/whom* distinction (→ **who**); G12 no longer exists
+  as a reflexives rule, since standard reflexives (*myself, himself, themselves*) need no
+  regularizing. World English no longer asks a learner to memorize a coined pronoun paradigm.
+- **Bears on.** [G4](../docs/grammar.md#rule-g4--regular-pronoun-case).
 
 ---
 
@@ -375,7 +356,7 @@ actually helps or hurts understanding between non-native speakers. It is where p
 | Basic English, VOA, STE, Globish, Plain English | **survived** | Subsets in a bounded domain, backed by institutions, work. Don't reform spelling; constrain vocabulary and grammar and stay legible. |
 | Webster (radical set), SSB, Cut Spelling, ITA | **failed** | Public respelling fails; only the conservative subset ever sticks. Adopt existing forms, never coin; keep the phonetic layer separate from the orthography. |
 | Quirk's Nuclear English | **stalled** | A proposal that is never built changes nothing. Ship specs, dogfood, and tool. |
-| Jenkins' LFC | **contradicts (th, word-stress, question intonation)** | Keeping /θ/–/ð/, marking lexical stress, and load-bearing question intonation are not required for intelligibility — the tension is now **resolved** (item 18): P3/P4 kept as reading aids, P7's spoken divergence accepted. |
+| Jenkins' LFC | **contradicts (th, word-stress, question intonation)** | Keeping /θ/–/ð/, marking lexical stress, and load-bearing question intonation are not required for intelligibility — the tension is now **resolved**: P3/P4 kept as reading aids, P7's spoken divergence accepted. |
 | Creole / interlanguage convergence | **corroborates** | No 3rd-sg *-s*, preverbal negation, invariant tags, regularized past are what English becomes when simplified — natural, not arbitrary. |
 
 ---
@@ -383,23 +364,22 @@ actually helps or hurts understanding between non-native speakers. It is where p
 ## D. A design-principle trade-off this evidence surfaces
 
 STE's rule ("one word, one meaning," a controlled dictionary) is the closest precedent to
-[design principle 4](../README.md#design-principles), "no table of special cases to memorize" —
-but reading WoE's own [G3](../docs/grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs)
-against that precedent surfaces a gap worth recording rather than leaving implicit. G3's
-preposition-drop/keep rulings are backed by a per-verb list (31 drop / 4 keep / 2 replace rows in
-the core lexicon), and G3's prose says the moves "apply on sight." STE's dictionary is exactly
-this kind of list too — approved/non-approved words a writer looks up — and STE is a success
-story, not a counterexample; the lesson from STE is that an explicit, looked-up list is a
-legitimate tool, not a violation, *as long as it is stated and small*. Where WoE's practice
-diverges from the letter of principle 4 is narrower than "there's a hidden list": the list is
-public and versioned ([vocabulary.md](../docs/vocabulary.md) Table A), so the *acceptance
-criterion* ("no *hidden* word list") is met. But "apply on sight" overstates what a learner can
-actually do without consulting that list — *depend on* drops its preposition, *agree with* keeps
-it, and nothing about the verb's shape predicts which. That is a real, if narrow, gap between the
-principle's letter and the rule's practice, and it should be named as a trade-off rather than
-asserted away: WoE accepts an explicit, lookup-based exception list for prepositions (STE's
-method) while describing the result in language ("on sight") that promises more than a lookup
-system can deliver.
+[design principle 4](../README.md#design-principles), "no table of special cases to memorize."
+Earlier drafts of [G3](../docs/grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs)
+sat in tension with that precedent: a per-verb drop/keep list a learner had to consult, described
+in prose as applying "on sight" when it did not — *depend on* dropped its preposition, *agree
+with* kept it, and nothing about the verb's shape predicted which. That tension is now resolved by
+retiring the list rather than defending it: G3 no longer rules drop or keep on any verb's
+preposition, so there is nothing left to look up — a verb's preposition is ordinary vocabulary,
+standard and unchanged (*listen to*, *wait for*, *depend on*).
+
+The same STE lesson still applies elsewhere in the core lexicon:
+[S2](../docs/style.md#rule-s2--plain-single-sense-words)'s phrasal-verb, preferred-sense, and
+collocation tables are exactly the kind of approved/non-approved word list STE's dictionary is —
+and STE is a success story, not a counterexample. An explicit, looked-up list is a legitimate
+tool, not a violation of principle 4, *as long as it is stated and small*: WoE's list is public,
+versioned, and test-checked ([vocabulary.md](../docs/vocabulary.md)), so the *acceptance
+criterion* ("no *hidden* word list") is met.
 
 ---
 

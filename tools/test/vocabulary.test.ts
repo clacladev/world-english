@@ -59,15 +59,9 @@ describe("vocabulary.md coverage table matches lexicon.json row counts", () => {
   });
 });
 
-describe("Table A highlights match droppedPreps", () => {
-  const rows = tableAfterHeading("Table A").slice(0); // [verb, prep, ruling, woe]
-
-  it("every highlighted verb+prep pair exists in lexicon.json with the same ruling", () => {
-    for (const [verb, prep, ruling] of rows) {
-      const entry = lexicon.droppedPreps.find((d) => d.verb === verb && d.prep === prep);
-      expect(entry, `${verb} ${prep} missing from droppedPreps`).toBeDefined();
-      expect(ruling!.startsWith(entry!.ruling)).toBe(true);
-    }
+describe("droppedPreps is retired (G3 no longer drops verb prepositions)", () => {
+  it("has no rows in lexicon.json", () => {
+    expect(lexicon.droppedPreps.length).toBe(0);
   });
 });
 

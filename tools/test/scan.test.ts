@@ -45,22 +45,19 @@ describe("planted-bug detection (the point-4 class of mistake)", () => {
     expect(classesFor("it is better")).toContain("better:suppletive-comparative/M5");
   });
 
-  it("flags multi-word phrasal verbs and dropped-prep pairs", () => {
+  it("flags multi-word phrasal verbs (S2)", () => {
     expect(classesFor("please give up now")).toContain("give up:phrasal-verb/S2");
-    expect(classesFor("listen to music")).toContain("listen to:dropped-prep/G3");
   });
 
-  it("flags inflected phrasal/dropped-prep forms too, not just the base (#70)", () => {
-    expect(classesFor("she listened to the radio")).toContain("listened to:dropped-prep/G3");
-    expect(classesFor("he listens to music")).toContain("listens to:dropped-prep/G3");
+  it("flags inflected phrasal forms too, not just the base (#70)", () => {
     expect(classesFor("she gave up yesterday")).toContain("gave up:phrasal-verb/S2");
     expect(classesFor("he finds out the truth")).toContain("finds out:phrasal-verb/S2");
   });
 
-  it("flags the object `wait for` but NOT the kept duration `wait for` (G3 for-test)", () => {
-    expect(classesFor("wait for the bus")).toContain("wait for:dropped-prep/G3");
-    expect(classesFor("wait for three minutes")).not.toContain("wait for:dropped-prep/G3");
-    expect(classesFor("wait for a while")).not.toContain("wait for:dropped-prep/G3");
+  it("never flags a verb's kept preposition (G3 no longer drops)", () => {
+    expect(classesFor("listen to music").some((c) => c.includes("dropped-prep"))).toBe(false);
+    expect(classesFor("wait for the bus").some((c) => c.includes("dropped-prep"))).toBe(false);
+    expect(classesFor("he depends on it").some((c) => c.includes("dropped-prep"))).toBe(false);
   });
 
   it("suggests the regularized World-English replacement", () => {

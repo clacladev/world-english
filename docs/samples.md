@@ -28,7 +28,7 @@ Rule keys: `O*` [orthography](orthography.md) · `P*` [pronunciation](pronunciat
 
 > The mayor announced yesterday that the city builded new hospital. It beed designed by
 > famous architect and costed fifty million dollars. Officials say that it will open on
-> September. Many residents wait gooder health care for years.
+> September. Many residents wait for gooder health care for years.
 
 **Annotations**
 
@@ -36,30 +36,23 @@ Rule keys: `O*` [orthography](orthography.md) · `P*` [pronunciation](pronunciat
    *finished action* → simple past (the hospital is already complete; the tense is licensed by
    the content clause's own finished-ness, not by *yesterday*, which is the **matrix** clause's
    time word for *announced*) · `[G2]` drop indefinite article (*a new hospital* →
-   **new hospital**) · `[G14]` content clause: complementizer **that** kept after *announced*.
+   **new hospital**) · `[G11]` content clause: complementizer **that** kept after *announced*.
    *announced* is already regular (`[M1]`, no change).
 2. *It beed designed by famous architect and costed fifty million dollars.* — `[G9]` passive
    *be + -ed* (**beed designed**) · `[M2]` was → **beed** · `[G2]` drop *a* · `[M1]` cost →
    **costed** (no more zero-past).
 3. *Officials say that it will open on September.* — `[M4]` official → **officials** ·
-   `[G14]` content clause: complementizer **that** kept after *say* — always kept, never
+   `[G11]` content clause: complementizer **that** kept after *say* — always kept, never
    dropped, so *Officials say **that** it will open* (not *officials say it will open*) ·
    `[G7]` future **will** kept · `[G3]` time preposition defaults to **on** (*in September* →
    **on September**).
-4. *Many residents wait gooder health care for years.* — `[M4]` **residents** (already standard
+4. *Many residents wait for gooder health care for years.* — `[M4]` **residents** (already standard
    English here — *many residents* needed no `[G5]` transformation; `[G5]` fires only where an
    uncountable noun is forced to count, which does not happen in this sentence) · `[G1]`
-   present perfect *still ongoing* → **present tense** (they are still waiting) · `[G3]` drop
-   verb-selected *for* (*wait for X* → **wait X**) · `[M5]` better → **gooder** · `[S5]`
-   duration keeps **for** (*for years*).
-   ✅ **Resolved** ([G3 *for* test](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs)):
-   *wait X* (dropped object-*for*) and *for years* (kept duration-*for*) both follow the rule —
-   keep *for* only before a length of time, drop it otherwise.
-   **Legibility note.** This sentence stacks three reforms at once — transitive *wait*
-   (dropped object-*for*), the present-for-still-true mapping, and the kept duration *for* —
-   and the result is the corpus's hardest sentence to parse: an English reader's first pass
-   reads *wait* as intransitive and stumbles on the bare NP *gooder health care* before
-   recovering. Recorded here as a real legibility cost of combining reforms, not smoothed over.
+   present perfect *still ongoing* → **present tense** (they are still waiting) · `[G3]`
+   verb-selected *for* is **kept** (*wait **for*** — the verb keeps its standard preposition as
+   vocabulary) · `[M5]` better → **gooder** · `[S3]` the duration also keeps **for** (*for
+   years*). The clause holds two *for*s — the verb's own and the duration's — both standard.
 
 ---
 
@@ -74,27 +67,27 @@ Rule keys: `O*` [orthography](orthography.md) · `P*` [pronunciation](pronunciat
 
 **World English**
 
-> "?You seed mes keys?" Tom asked.
-> "No. ?You looked under the sofa?" Mary sayed.
+> "You seed my keys?" Tom asked.
+> "No. You looked under the sofa?" Mary sayed.
 > "I already looked there. I can not find them anywhere."
-> "Maybe they be in yous coat. You should check the pockets."
+> "Maybe they be in your coat. You should check the pockets."
 
 **Annotations**
 
-1. *?You seed mes keys? Tom asked.* — `[G6]` yes/no question marked by the **leading `?`**
+1. *You seed my keys? Tom asked.* — `[G6]` yes/no question marked by the **trailing `?`**
    (rising intonation in speech; no *do*, no inversion) · `[G1]` present perfect → simple past ·
-   `[M1]` see → **seed** · `[G4]` my → **mes** · `[M4]` **keys** · `[S1]` undo the *asked Tom*
-   inversion → **Tom asked**.
-2. *No. ?You looked under the sofa? Mary sayed.* — `[G6]` short answer is invariant **No.**
-   (no *I haven't* echo) · `[G6]` **leading `?`** + rising intonation, no *do*-support · `[M1]`
+   `[M1]` see → **seed** · `[M4]` **keys** · `[S1]` undo the *asked Tom*
+   inversion → **Tom asked**. (*my* is standard — G4 leaves it unchanged.)
+2. *No. You looked under the sofa? Mary sayed.* — `[G6]` short answer is invariant **No.**
+   (no *I haven't* echo) · `[G6]` **trailing `?`** + rising intonation, no *do*-support · `[M1]`
    look → **looked**, say → **sayed** · `[G3]` keep **under** (real spatial relation) · `[S1]`
    undo inversion.
-3. *I already looked there. I can not find them anywhere.* — `[S5]` **already** carries the
+3. *I already looked there. I can not find them anywhere.* — `[S3]` **already** carries the
    perfect's relevance · `[M1]` **looked** · `[G6]`/`[G7]` modal negation **can not** (*not*
-   after the modal, before the verb) · `[G4]` **them** (object form).
-4. *Maybe they be in yous coat. You should check the pockets.* — `[G7]` sentence adverb
+   after the modal, before the verb) · `[G4]` **them** (object form, standard).
+4. *Maybe they be in your coat. You should check the pockets.* — `[G7]` sentence adverb
    **maybe**, modal **should** · `[M2]` are → **be** · `[G3]` keep **in** (containment, a
-   real relation) · `[G4]` your → **yous** · `[M4]` **pockets**.
+   real relation) · `[M4]` **pockets**. (*your* is standard — G4 leaves it unchanged.)
 
 ---
 
@@ -115,18 +108,17 @@ Rule keys: `O*` [orthography](orthography.md) · `P*` [pronunciation](pronunciat
 **Annotations**
 
 1. *To make tea, first boil the water.* — unchanged; `[G2]` **the water** stays (definite,
-   the specific water you are boiling). `[G13]` *to make* is the plain *to* + base infinitive.
+   the specific water you are boiling). `[G12]` *to make* is the plain *to* + base infinitive.
 2. *Put tea bag in cup and pour the hot water over it.* — `[G2]` drop *a* twice (**tea bag**,
    **cup**) · `[G3]` keep **in** and **over** (real spatial relations) · **the hot water**
    stays definite.
-3. *Wait for three minutes, then remove the bag.* — `[S5]` keep **for** (it marks a
-   **duration**, so it is not the droppable verb-selected *for*) · **the bag** definite.
-   ✅ **Resolved** ([G3 *for* test](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs)):
-   *for* is kept because *three minutes* is a span, not the thing awaited.
+3. *Wait for three minutes, then remove the bag.* — `[G3]` *wait* keeps its **for** (a
+   verb-selected preposition, standard) · `[S3]` the same *for* marks a **duration** (*for three
+   minutes*) · **the bag** definite.
 4. *Add milk or sugar if you like.* — `[G2]` no article on **milk** / **sugar** (indefinite) ·
-   `[G8]` *if* + natural present tense · `[G15]` *if* as the condition subordinator.
+   `[G8]` *if* + natural present tense · `[G13]` *if* as the condition subordinator.
 5. *Not drink it while it be too hot.* — `[G6]` negative imperative **Not drink** (no
-   *do*-support) · `[M2]` is → **be** · `[G15]` *while* (time — during), trailing clause, no comma.
+   *do*-support) · `[M2]` is → **be** · `[G13]` *while* (time — during), trailing clause, no comma.
 
 ---
 
@@ -140,30 +132,30 @@ Rule keys: `O*` [orthography](orthography.md) · `P*` [pronunciation](pronunciat
 
 **World English**
 
-> Last year I goed to Japan with mes two childs. We taked the train from Tokyo to Kyoto. The
-> food beed gooder than I expected, and the persons beed very kind. Mes son sayed that it beed
-> the goodest trip of hims life. We already booked uss tickets to go again next spring.
+> Last year I goed to Japan with my two childs. We taked the train from Tokyo to Kyoto. The
+> food beed gooder than I expected, and the persons beed very kind. My son sayed that it beed
+> the goodest trip of his life. We already booked our tickets to go again next spring.
 
 **Annotations**
 
-1. *Last year I goed to Japan with mes two childs.* — `[M1]` go → **goed** · `[G3]` keep
-   **to** (direction) and **with** (accompaniment) · `[G4]` my → **mes** · `[M4]` child →
-   **childs**.
+1. *Last year I goed to Japan with my two childs.* — `[M1]` go → **goed** · `[G3]` keep
+   **to** (direction) and **with** (accompaniment) · `[M4]` child →
+   **childs**. (*my* is standard — G4 leaves it unchanged.)
 2. *We taked the train from Tokyo to Kyoto.* — `[M1]` take → **taked** · `[G3]` keep
    **from**/**to** (direction) · **the train** definite.
 3. *The food beed gooder than I expected, and the persons beed very kind.* — `[M2]`
    was/were → **beed** · `[M5]` better → **gooder** · `[M4]` people → **persons** · `[M1]`
    expect → **expected**.
-4. *Mes son sayed that it beed the goodest trip of hims life.* — `[G4]` my → **mes**, his →
-   **hims** · `[M1]` say → **sayed** · `[M2]` was → **beed** · `[M5]` best → **goodest** ·
-   `[G14]` reported speech: complementizer **that** kept, natural tense (no backshift) ·
-   `[G10]` keep **of** — a fixed superlative frame (*trip of hims life*), not a possession, so
-   the *of*-genitive is preferred over *hims life's*.
-   ✅ **Resolved:** [G14](grammar.md#rule-g14--content-clauses-and-reported-speech) settles the
+4. *My son sayed that it beed the goodest trip of his life.* — `[M1]` say → **sayed** ·
+   `[M2]` was → **beed** · `[M5]` best → **goodest** ·
+   `[G11]` reported speech: complementizer **that** kept, natural tense (no backshift) ·
+   `[G10]` keep **of** — a fixed superlative frame (*trip of his life*), not a possession, so
+   the *of*-genitive is preferred over *his life's*. (*my*, *his* are standard — G4 leaves them.)
+   ✅ **Resolved:** [G11](grammar.md#rule-g11--subordinate-clauses-introduced-by-that) settles the
    reported clause (keep *that*, no backshift — *beed* is past because the trip is over), and
    [G10](grammar.md#rule-g10--noun-possessive)'s `'s`-vs-*of* boundary keeps *of* here.
-5. *We already booked uss tickets to go again next spring.* — `[S5]` **already** (dropped
-   perfect) · `[M1]` book → **booked** · `[G4]` our → **uss** · `[G13]` *to go* plain
+5. *We already booked our tickets to go again next spring.* — `[S3]` **already** (dropped
+   perfect) · `[M1]` book → **booked** · `[G12]` *to go* plain
    infinitive of purpose.
 
 ---
@@ -177,28 +169,26 @@ Rule keys: `O*` [orthography](orthography.md) · `P*` [pronunciation](pronunciat
 
 **World English**
 
-> You all worked more quickly this year, so more of you all passed the test. Next time, plan
+> You worked more quickly this year, so more of you passed the test. Next time, plan
 > more carefully.
 
 **Annotations**
 
-1. *You all worked more quickly this year, so more of you all passed the test.* — `[G4]`
-   plural *you* → **you all**, subject and object alike; the subject *you all* is already the
-   SE original's form (no transformation there), so the actual `[G4]` transformation in this
-   sentence is the **object** *of you* → **of you all** · `[M1]` **worked** / **passed**
-   (already regular) · `[M5]` `-ly` adverb comparative via the **optional *more/most* escape
-   hatch** (*more quickly* kept, over the regular *quicklier*) · `[M5]` quantifier **more of**
-   (escape hatch, over the regular *manyer of*) · `[G15]` *so* (result) subordinator · `[S7]`
-   the comparative phrase **more quickly** stays in its natural **post-verb** position (*worked
-   more quickly*), the stated exception to S7's single-word pre-verb slot for multi-word
+1. *You worked more quickly this year, so more of you passed the test.* — `[M1]` **worked** /
+   **passed** (already regular) · `[M5]` `-ly` adverb comparative — **more quickly** (both the
+   regular `-er` form and the periphrastic *more quickly* are valid; the writer picked *more
+   quickly*) · `[M5]` quantifier **more of** (periphrastic *more*) · `[G13]` *so* (result)
+   subordinator ·
+   `[S4]` the comparative phrase **more quickly** stays in its natural **post-verb** position
+   (*worked more quickly*), the stated exception to S4's single-word pre-verb slot for multi-word
    comparative adverb phrases — fronting it (*more quickly worked*) would read worse than the
-   order it replaces.
-2. *Next time, plan more carefully.* — `[M5]` `-ly` adverb comparative, again the **escape
-   hatch** *more carefully* (over *carefullier*) · `[S7]` **more carefully** likewise stays
-   post-verb under the same comparative-adverb-phrase exception · `[S7]` the time adjunct
-   **Next time** is **fronted** for topicalization, a licensed option (clause-final is only the
-   unmarked position). This passage exercises item-17: `you all` plus the optional `more/most`
-   hatch — *more/most* is valid World English, so the linter does not flag it.
+   order it replaces. (*you* is standard — plural *you* is just *you*.)
+2. *Next time, plan more carefully.* — `[M5]` `-ly` adverb comparative, again **more carefully**
+   (both forms valid) · `[S4]` **more carefully** likewise stays post-verb under the same
+   comparative-adverb-phrase exception · `[S4]` the time adjunct **Next time** is **fronted** for
+   topicalization, a licensed option (clause-final is only the unmarked position). This passage
+   exercises the M5 both-forms rule — *more/most* is valid World English, so the linter does not
+   flag it.
 
 ---
 
@@ -236,8 +226,8 @@ reference.
 1. *The new library be very popular.* — `[W3]`/`[W4]` topic sentence states the paragraph's one
    idea first · `[M2]` is → **be**.
 2. *The university builded it because students needed quiet place to study.* — `[M1]` build →
-   **builded** · `[G2]` drop *a* (**quiet place**) · `[W5]`/`[G15]` explicit **because** carries
-   the reason · `[G13]` *to study* plain infinitive.
+   **builded** · `[G2]` drop *a* (**quiet place**) · `[W5]`/`[G13]` explicit **because** carries
+   the reason · `[G12]` *to study* plain infinitive.
 3. *The library offer three things: fast internet, long hours, and many books.* — `[W1]` the
    **colon** is kept — a **list** follows — with the always-present serial comma · `[M4]`
    **hours**/**books** (*many books* was already standard English here — no `[G5]`
@@ -253,7 +243,7 @@ reference.
    expensive.* — `[W3]`/`[W4]` topic sentence leads with the paragraph's one idea — **worth the
    cost** — instead of the SE original's concession-first order (*The building was expensive;
    however…*); the concession now follows as the paragraph's second, supporting sentence, as
-   point-first requires · `[G14]` content clause: complementizer **that** kept after *think* ·
+   point-first requires · `[G11]` content clause: complementizer **that** kept after *think* ·
    `[W1]` the standard **semicolon** is abolished → two sentences · `[W5]` *however* → **but**
    (one connective per relation) · `[M2]` was → **beed** (twice) · third-person *thinks* →
    **think** ([M3](morphology.md)) · `[W6]` **the building** is repeated instead of a pronoun
@@ -277,8 +267,8 @@ reference resolved by rule.
 
 A short email — the setting §7 singles out (*"students who omit greetings and closings are
 perceived as impolite"*). It exercises the [style.md](style.md) pragmatics rules inside a real
-message: the fixed politeness markers ([S8](style.md#rule-s8--fixed-politeness-markers-not-graded-indirectness))
-and the plain speech-act templates ([S9](style.md#rule-s9--plain-templates-for-the-hard-speech-acts)).
+message: the fixed politeness markers and plain speech-act templates
+([S5](style.md#rule-s5--politeness-markers-and-speech-act-templates)).
 
 **Standard English**
 
@@ -294,7 +284,7 @@ and the plain speech-act templates ([S9](style.md#rule-s9--plain-templates-for-t
 
 > Hello Sara,
 >
-> Thank you. I seed yous message about the meeting on Friday. No. Sorry, I can not come, because
+> Thank you. I seed your message about the meeting on Friday. No. Sorry, I can not come, because
 > I will be away. Please send me the notes. I will read them next week.
 >
 > Goodbye,
@@ -302,23 +292,23 @@ and the plain speech-act templates ([S9](style.md#rule-s9--plain-templates-for-t
 
 **Annotations**
 
-1. *Hello Sara,* — `[S9]` fixed email **greeting** (omitting it reads as impolite).
-2. *Thank you.* — `[S9]` invariant **thanks**.
-3. *I seed yous message about the meeting on Friday.* — `[M1]` see → **seed** · `[G4]` your →
-   **yous** · `[G3]` keep **about**/**on** (real relations) · `[G1]` finished action → past tense.
-4. *No. Sorry, I can not come, because I will be away.* — `[S8]`/`[S9]` **refusal** template:
+1. *Hello Sara,* — `[S5]` fixed email **greeting** (omitting it reads as impolite).
+2. *Thank you.* — `[S5]` invariant **thanks**.
+3. *I seed your message about the meeting on Friday.* — `[M1]` see → **seed** · `[G3]` keep
+   **about**/**on** (real relations) · `[G1]` finished action → past tense. (*your* is standard.)
+4. *No. Sorry, I can not come, because I will be away.* — `[S5]` **refusal** template:
    invariant **No.** + plain reason, with the **optional `Sorry` softener** (permitted, never
    required) — not graded indirectness (standard *I'm terribly sorry, but I'm afraid I won't be
-   able to…* → direct) · `[G6]` modal negation **can not** · `[W5]`/`[G15]` explicit **because** ·
+   able to…* → direct) · `[G6]` modal negation **can not** · `[W5]`/`[G13]` explicit **because** ·
    `[G7]` future **will**.
-5. *Please send me the notes.* — `[S8]`/`[S9]` **request** template: **please** + plain
+5. *Please send me the notes.* — `[S5]` **request** template: **please** + plain
    imperative (`[G6]`, no *do*), replacing the graded *Could you possibly…?* · `[G4]` **me**.
 6. *I will read them next week.* — `[G7]` **will** · `[G4]` **them** (object) · time adjunct
    *next week* stays clause-final.
-7. *Goodbye, Tom* — `[S9]` fixed email **closing**.
+7. *Goodbye, Tom* — `[S5]` fixed email **closing**.
 
 This passage needed no construction the specs do not cover — every speech act resolved by an
-S8/S9 template.
+S5 template.
 
 ---
 
@@ -329,7 +319,7 @@ This passage packs the full [G1](grammar.md#rule-g1--a-leaner-tenseaspect-system
 range into one paragraph: present-perfect-with-**since**, **continuous aspect** (present and
 past), **past perfect**, **future perfect**, and the relevance words **`just`** / **`yet`** —
 each rendered by G1's one deterministic test (*still true?* → tense) plus an
-[S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect) time word.
+[S3](style.md#rule-s3--state-relevance-explicitly-cover-for-the-dropped-perfect) time word.
 
 **Standard English**
 
@@ -341,38 +331,38 @@ each rendered by G1's one deterministic test (*still true?* → tense) plus an
 **World English**
 
 > I live in this city since 2015, and I still work in the same office. I study English for
-> three years, and I be still learning it. By next June, I finish mes degree. When you called,
-> I already goed home, because I beed feeling tired. I not see the new film yet, but mes
+> three years, and I be still learning it. By next June, I finish my degree. When you called,
+> I already goed home, because I beed feeling tired. I not see the new film yet, but my
 > sister just watched it.
 
 **Annotations**
 
 1. *I live in this city since 2015, and I still work in the same office.* — `[G1]` present
    perfect *still true* → **present tense** (*have lived* → **live**; the residence continues) ·
-   `[S5]` **since** kept for a **starting point** (*since 2015*) and **still** carries the
+   `[S3]` **since** kept for a **starting point** (*since 2015*) and **still** carries the
    ongoing relevance · `[G3]` keep **in** twice (real spatial relation).
 2. *I study English for three years, and I be still learning it.* — `[G1]` present perfect
-   *still true* → **present** (*have studied* → **study**) · `[S5]` **for** kept for a
+   *still true* → **present** (*have studied* → **study**) · `[S3]` **for** kept for a
    **duration** (*for three years*) · `[G1]` **continuous aspect** *am + -ing* → **be
-   learning** (present continuous) · `[M2]` am → **be** · `[S5]` **still**.
-3. *By next June, I finish mes degree.* — `[G1]` **future perfect** → **present tense** + a
-   time word (*will have finished* → **finish**; *By next June* carries the completion) ·
-   `[G4]` my → **mes**.
+   learning** (present continuous) · `[M2]` am → **be** · `[S3]` **still**.
+3. *By next June, I finish my degree.* — `[G1]` **future perfect** → **present tense** + a
+   time word (*will have finished* → **finish**; *By next June* carries the completion).
+   (*my* is standard — G4 leaves it unchanged.)
 4. *When you called, I already goed home, because I beed feeling tired.* — `[G1]` **past
    perfect** → **simple past** + a time word (*had already gone* → **already goed**; *already*
-   carries the earlier-past) · `[M1]` go → **goed** · `[S5]` **already** · `[G1]` **past
-   continuous** *was + -ing* → **beed feeling** · `[M2]` was → **beed** · `[G15]` **when** /
+   carries the earlier-past) · `[M1]` go → **goed** · `[S3]` **already** · `[G1]` **past
+   continuous** *was + -ing* → **beed feeling** · `[M2]` was → **beed** · `[G13]` **when** /
    **because** subordinators, natural tense.
-5. *I not see the new film yet, but mes sister just watched it.* — `[G1]` present perfect
+5. *I not see the new film yet, but my sister just watched it.* — `[G1]` present perfect
    *still true* (negative) → **present tense** (*have not seen* → **not see**; the film remains
-   unseen) · `[S5]` **`yet`** carries the ongoing relevance · `[G6]` negation **not** before the
+   unseen) · `[S3]` **`yet`** carries the ongoing relevance · `[G6]` negation **not** before the
    verb, no *do*-support · `[G1]` present perfect *finished* → **past tense** (*has just watched*
-   → **just watched**) · `[S5]` **`just`** carries the relevance the perfect used to · `[G4]`
-   my → **mes** · **the new film** stays definite.
+   → **just watched**) · `[S3]` **`just`** carries the relevance the perfect used to. (*my* is
+   standard.) **the new film** stays definite.
 
 This passage needed no construction the specs do not cover — every tense-aspect case resolved
 by [G1](grammar.md#rule-g1--a-leaner-tenseaspect-system)'s *still-true?* test plus an
-[S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect) time word.
+[S3](style.md#rule-s3--state-relevance-explicitly-cover-for-the-dropped-perfect) time word.
 
 ---
 
@@ -391,27 +381,28 @@ built to fire the rules the rest of the corpus never touches.
 
 **World English**
 
-> ?Where you live now? Sara's neighbor be the man that we meeted last year. If you have many
-> homeworks, you will stay home. Many visitors listen music while they wait the bus.
+> Where you live now? Sara's neighbor be the man that we meeted last year. If you have many
+> homeworks, you will stay home. Many visitors listen to music while they wait for the bus.
 
 **Annotations**
 
-1. *?Where you live now?* — `[G6]` **wh-question**: the question word **where** moves to the
-   front, no dummy *do*, and the rest keeps normal SVO order (*you live now*, not *do you live*).
+1. *Where you live now?* — `[G6]` **wh-question**: the question word **where** moves to the
+   front, no dummy *do*, and the rest keeps normal SVO order (*you live now*, not *do you live*);
+   the trailing `?` marks it in writing.
 2. *Sara's neighbor be the man that we meeted last year.* — `[G10]` the noun possessive **'s**
-   is kept unchanged (**Sara's**) — the one construction that still takes an apostrophe, unlike
-   the apostrophe-less pronoun possessive elsewhere in this file (`[G4]`: *mes*, *hims*) ·
-   `[G11]` **relative clause**: invariant **that** introduces the clause and is kept even though
-   standard English drops it here (the SE original's zero relative *the man we met* has no
-   relativizer at all) · `[M1]` meet → **meeted** · `[M2]` is → **be**.
+   is kept unchanged (**Sara's**) — it takes an apostrophe, unlike the apostrophe-less pronoun
+   possessive (`[G4]`: standard *my*, *his*) · `[G11]` **relative clause**: invariant **that**
+   introduces the clause and is kept even though standard English drops it here (the SE
+   original's zero relative *the man we met* has no relativizer at all) · `[M1]` meet →
+   **meeted** · `[M2]` is → **be**.
 3. *If you have many homeworks, you will stay home.* — `[G5]` determiner **much → many**
    (*much homework* → **many homeworks**; *homework* pluralizes like every other noun now that
    the uncountable category is removed) · `[G8]` **predictive conditional**: the *if*-clause
    stays present tense and the result clause marks a real/expected outcome with **will**.
-4. *Many visitors listen music while they wait the bus.* — `[G3]` drop the verb-selected
-   preposition twice: *listen to* → **listen**, *wait for* → **wait** (the bus is the thing
-   awaited, not a duration, so the not-duration guard drops *for* — see the item-16/G3 *for*
-   test) · `[G15]` **while** (time — during), trailing clause, no comma.
+4. *Many visitors listen to music while they wait for the bus.* — `[G3]` the verbs keep their
+   standard prepositions: *listen **to*** music, *wait **for*** the bus (verb-selected
+   prepositions, learned as vocabulary — not dropped) · `[G13]` **while** (time — during),
+   trailing clause, no comma.
 
 This passage needed no construction the specs do not cover; it exists to close the blind spots
 [review.md](review.md) issue #46 identified, not to showcase a new one.
@@ -423,18 +414,19 @@ This passage needed no construction the specs do not cover; it exists to close t
 Dogfooding turned up four constructions the specs did not cover. Each has since been
 **fixed by rule**:
 
-1. ✅ **The *for* test — duration vs. thing-awaited.**
-   [G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs) now states it: keep
-   *for* only before a length of time (*for three minutes*), drop it otherwise (*wait the
-   bus*). Wired into both translators.
+1. ✅ **Verb prepositions (formerly the *for* test).** Earlier drafts dropped a verb's
+   preposition and needed a duration-vs-object *for* test to decide when *for* survived.
+   [G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs) no longer drops any
+   verb preposition — the verb keeps it as vocabulary (*wait **for** the bus*, *wait **for**
+   three minutes*) — so the test is obsolete and the ambiguity it managed is gone.
 2. ✅ **Reported speech / content clauses.**
-   [G14](grammar.md#rule-g14--content-clauses-and-reported-speech): complementizer *that* is
+   [G11](grammar.md#rule-g11--subordinate-clauses-introduced-by-that): complementizer *that* is
    always kept, and the reported clause takes its natural tense (no backshift, per G1).
 3. ✅ **The *of*-genitive vs. G10 *'s*.**
    [G10](grammar.md#rule-g10--noun-possessive) now draws the boundary: `'s` for genuine
-   possession, *of* for relational and fixed superlative frames (*trip of hims life*).
+   possession, *of* for relational and fixed superlative frames (*trip of his life*).
 4. ✅ **Subordinating conjunctions.**
-   [G15](grammar.md#rule-g15--subordinating-conjunctions): a closed, one-per-meaning set
+   [G13](grammar.md#rule-g13--subordinating-conjunctions): a closed, one-per-meaning set
    (*if, unless, because, altho, when, while, before, after, until, so that, so*), natural
    tense, fixed comma placement.
 

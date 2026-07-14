@@ -4,6 +4,7 @@
 
 // docs/*.md basenames (lowercased, no extension) published under /rules/<slug>/
 export const SPEC_SLUGS = [
+  'learner-grammar',
   'orthography',
   'pronunciation',
   'morphology',

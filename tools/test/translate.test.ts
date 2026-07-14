@@ -25,10 +25,11 @@ describe("deterministic closed-class substitution", () => {
     expect(woe("they are ready and it is done")).toBe("they be ready and it be doed");
   });
 
-  it("converts pronouns (G4/G12)", () => {
-    expect(woe("my son and his car")).toBe("mes son and hims car");
-    expect(woe("our tickets are yours")).toBe("uss tickets be yous");
-    expect(woe("they hurt themselves")).toBe("they hurt themselfs");
+  it("converts whom→who, leaving standard possessives and reflexives unchanged (G4)", () => {
+    expect(woe("the man whom I called")).toBe("the man who I called");
+    expect(woe("my son and his car")).toBe("my son and his car");
+    expect(woe("our tickets are yours")).toBe("our tickets be yours");
+    expect(woe("they hurt themselves")).toBe("they hurt themselves");
   });
 
   it("converts British spellings, silent letters, and ough (O1/O2/O5)", () => {
@@ -47,13 +48,13 @@ describe("deterministic closed-class substitution", () => {
   });
 
   it("preserves the source token's casing", () => {
-    expect(woe("My keys")).toBe("Mes keys");
+    expect(woe("Children play")).toBe("Childs play");
     expect(woe("THROUGH the door")).toBe("THRU the door");
     expect(woe("Was it better?")).toBe("Beed it gooder?");
   });
 
   it("preserves surrounding punctuation and whitespace", () => {
-    expect(woe("My keys, was they?")).toBe("Mes keys, beed they?");
+    expect(woe("Went there, was they?")).toBe("Goed there, beed they?");
     expect(woe("go\n  was\ndone")).toBe("go\n  beed\ndoed");
   });
 });
@@ -101,12 +102,12 @@ describe("flagged, not translated (needs POS / syntax / lexicon)", () => {
     expect(woe("It costs a hundred dollars.")).toBe("It cost a hundred dollars.");
   });
 
-  it("restores a dropped complementizer `that` in reported speech (G14)", () => {
+  it("restores a dropped complementizer `that` in reported speech (G11)", () => {
     expect(woe("I think he is right")).toBe("I think that he be right");
     expect(woe("They know we go there")).toBe("They know that we go there");
   });
 
-  it("does not insert `that` outside the reported-clause shape (G14)", () => {
+  it("does not insert `that` outside the reported-clause shape (G11)", () => {
     expect(woe("I know it")).toBe("I know it"); // object-capable pronoun → bail
     expect(woe("I know that he goes")).toBe("I know that he go"); // already present → no dup (3sg still fires)
   });
@@ -127,48 +128,26 @@ describe("flagged, not translated (needs POS / syntax / lexicon)", () => {
     expect(woe("she will put it back")).toBe("she will put it back"); // modal
   });
 
-  it("does not silently pass an irregular-verb drop-prep form through unflagged (#55)", () => {
-    // `speak` is a homograph-flagged irregular verb (spoke/spoken collide with other readings),
-    // so the dropped-prep transform must not guess-translate "spoke to" — it should leave the
-    // sentence untouched. The inflected phrase collides with the same homograph risk as the
-    // standalone verb, so it is demoted to low confidence (surfaces only under --strict) rather
-    // than high-confidence-flagging a likely-false-positive like "the bike's spoke to hub".
-    expect(woe("The manager spoke to the staff.")).toBe("The manager spoke to the staff.");
-    expect(flagKeys("The manager spoke to the staff.")).not.toContain("spoke to:dropped-prep/G3");
-    expect(flagKeys("The manager spoke to the staff.", true)).toContain("spoke to:dropped-prep/G3");
-  });
-
-  it("resolves phrasal verbs (S2) and dropped prepositions (G3), inflected forms too", () => {
+  it("resolves phrasal verbs (S2), inflected forms too", () => {
     expect(woe("please give up now")).toBe("please quit now");
     expect(woe("she gave up yesterday")).toBe("she quitted yesterday");
-    expect(woe("he listens to music")).toBe("he listens music");
-    expect(woe("they listened to the radio")).toBe("they listened the radio");
-    expect(woe("it depends on the weather")).toBe("it depends the weather");
   });
 
-  it("resolves the `for` test (G3, item 16): drops object-for, keeps duration-for", () => {
-    expect(woe("please wait for the bus")).toBe("please wait the bus");
+  it("keeps verb-selected prepositions unchanged (G3 no longer drops)", () => {
+    // The verb keeps its standard preposition as vocabulary; only the 3sg -s (M3) and be (M2)
+    // change here, never the preposition.
+    expect(woe("he listens to music")).toBe("he listen to music");
+    expect(woe("they listened to the radio")).toBe("they listened to the radio");
+    expect(woe("it depends on the weather")).toBe("it depend on the weather");
+  });
+
+  it("keeps a verb's `for` in every context (G3 no longer drops, so no duration test)", () => {
+    expect(woe("please wait for the bus")).toBe("please wait for the bus");
     expect(woe("wait for three minutes")).toBe("wait for three minutes");
-    expect(woe("wait for the bus for ten minutes")).toBe("wait the bus for ten minutes");
-    expect(woe("I hope for rain")).toBe("I hope rain");
-    // fixed and determiner-led spans are kept…
-    expect(woe("wait for a while")).toBe("wait for a while");
-    expect(woe("wait for a long time")).toBe("wait for a long time");
-    expect(woe("wait for now")).toBe("wait for now");
-    // teens, tens 60-90, and hundred/thousand/million are duration spans too (#60)
-    expect(woe("wait for fifteen minutes")).toBe("wait for fifteen minutes");
-    expect(woe("wait for sixty minutes")).toBe("wait for sixty minutes");
-    expect(woe("wait for a thousand years")).toBe("wait for a thousand years");
-    // …but a time-unit noun buried behind an adjective is an object, not a span → dropped
-    // (better → gooder is the unrelated M5 comparative)
-    expect(woe("hope for a better year")).toBe("hope a gooder year");
-    // "for good" (= permanently) is a bare span, kept; but "good" before a noun is an
-    // adjective, so the object-for drops
-    expect(woe("I hope for good")).toBe("I hope for good");
-    expect(woe("I hope for good news")).toBe("I hope good news");
-    // neither the dropped nor the deliberately-kept `for` is flagged
-    expect(flagKeys("wait for the bus")).not.toContain("wait for:dropped-prep/G3");
-    expect(flagKeys("wait for three minutes")).not.toContain("wait for:dropped-prep/G3");
+    expect(woe("wait for the bus for ten minutes")).toBe("wait for the bus for ten minutes");
+    expect(woe("I hope for rain")).toBe("I hope for rain");
+    // no dropped-prep flags exist anymore
+    expect(flagKeys("wait for the bus").some((k) => k.includes("dropped-prep"))).toBe(false);
   });
 
   it("recognizes a zero-past phrasal head's SE past tense given a past-time signal (#59)", () => {
@@ -286,9 +265,8 @@ describe("gold round-trip against docs/samples.md", () => {
 
   it("flags the out-of-scope constructions the gold passages needed (article 'a')", () => {
     const allSe = pairs.map((p) => p.se).join("\n");
-    // Passage 3's only dropped-prep is the duration 'wait for three minutes' — now RESOLVED by
-    // the G3 for-test (kept, not flagged), so no 'wait for' flag survives.
-    expect(flagKeys(allSe)).not.toContain("wait for:dropped-prep/G3");
+    // G3 no longer drops verb prepositions, so no dropped-prep flag can ever survive.
+    expect(flagKeys(allSe).some((k) => k.includes("dropped-prep"))).toBe(false);
     // articles are now handled by the G2 auto-drop, so 'a' is no longer flagged under strict.
     expect(flagKeys(allSe, true)).not.toContain("a:article/G2");
   });

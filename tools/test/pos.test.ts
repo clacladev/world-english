@@ -85,7 +85,7 @@ describe("articleDrop (G2)", () => {
   });
 });
 
-describe("droppedThat (G14)", () => {
+describe("droppedThat (G11)", () => {
   it("fires on reporting verb + nominative pronoun + clause verb", () => {
     expect(droppedThat(["i", "think", "he", "is", "right"], 2)).toBe(true);
     expect(droppedThat(["they", "know", "we", "go", "there"], 2)).toBe(true);

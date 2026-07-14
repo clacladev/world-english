@@ -1,11 +1,10 @@
 # Vocabulary — The Core Lexicon
 
-> The word list several rules quietly depend on. [G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs)
-> (drop a verb's preposition), [S2](style.md#rule-s2--prefer-plain-verbs-over-phrasal-verbs)
-> (phrasal → plain), [S3](style.md#rule-s3--one-word-one-meaning-avoid-heavy-polysemy)
-> (preferred sense), and [S6](style.md#rule-s6--prefer-regular-replacements-for-collocations)
-> (regular collocations) each quote a per-word list to do their job. Without it those rules are
-> promissory notes — statable in prose, but not verifiable or reversible.
+> The word list [S2](style.md#rule-s2--plain-single-sense-words) quietly depends on. S2's three
+> vocabulary layers — plain verb over opaque phrasal, clearest sense over heavy polysemy, and
+> regular pairing over arbitrary collocation — each quote a per-word list to do their job.
+> Without it those layers are promissory notes — statable in prose, but not verifiable or
+> reversible.
 
 ## Source of truth
 
@@ -18,47 +17,35 @@ disagree, the data wins and the test fails.
 [`../tools/src/core-lexicon.ts`](../tools/src/core-lexicon.ts) loads `lexicon.json` and builds
 everything the tooling consumes from it:
 
-- `toAbolishedEntries()` feeds the linter/translator dataset (`dataset.ts`) — dropped-prep and
-  phrasal-verb forms the same way every other abolished form is tracked.
+- `toAbolishedEntries()` feeds the linter/translator dataset (`dataset.ts`) — phrasal-verb forms
+  the same way every other abolished form is tracked.
 - `buildPhraseTransforms()` feeds the [forward translator](../tools/README.md) (`translate.ts`):
-  every inflected surface form of a `drop`-ruling verb or phrasal verb, matched longest-first.
-- `buildPrepRestorations()` feeds the [reverse translator](../tools/README.md) (`reverse.ts`): the
-  canonical preposition each drop verb restores, inserted and always flagged as a guess.
+  every inflected surface form of a phrasal verb, matched longest-first.
+
+(G3 no longer drops verb prepositions — a verb keeps its standard preposition as vocabulary — so
+`droppedPreps` is empty and there is no dropped-prep transform or preposition-restoration pass.)
 
 ## Schema
 
-Six arrays. `droppedPreps` and `phrasalVerbs` are **machine-actionable** (the translators read
-them); `sensePreferences`, `collocations`, `falseFriends`, and `registerDefaults` are
-**doc-only** — recorded for the human record, never applied or even flagged by tooling, because
-applying them needs word-sense disambiguation or judgment the tools don't have.
+Six arrays. `phrasalVerbs` is **machine-actionable** (the translators read it); `droppedPreps` is
+**retired** — empty, because G3 no longer drops verb prepositions (a verb keeps its standard
+preposition as vocabulary); `sensePreferences`, `collocations`, `falseFriends`, and
+`registerDefaults` are **doc-only** — recorded for the human record, never applied or even flagged
+by tooling, because applying them needs word-sense disambiguation or judgment the tools don't have.
 
 | Array | Rule | Actionable? | Fields |
 | ----- | ---- | ----------- | ------ |
-| `droppedPreps` | [G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs) | yes | `verb, prep, ruling, forward?, replacedBy?, rank?, note?, confidence?` |
-| `phrasalVerbs` | [S2](style.md#rule-s2--prefer-plain-verbs-over-phrasal-verbs) | yes | `phrasal, plain, alternates?, separable?, rank?, note?, confidence?` |
-| `sensePreferences` | [S3](style.md#rule-s3--one-word-one-meaning-avoid-heavy-polysemy) | no | `standard, sense, ruling, woe, rank?, note?` |
-| `collocations` | [S6](style.md#rule-s6--prefer-regular-replacements-for-collocations) | no | `standard, woe, ruling, alternates?, rank?, note?` |
+| `droppedPreps` | — (retired) | no (empty) | — |
+| `phrasalVerbs` | [S2](style.md#rule-s2--plain-single-sense-words) | yes | `phrasal, plain, alternates?, separable?, rank?, note?, confidence?` |
+| `sensePreferences` | [S2](style.md#rule-s2--plain-single-sense-words) | no | `standard, sense, ruling, woe, rank?, note?` |
+| `collocations` | [S2](style.md#rule-s2--plain-single-sense-words) | no | `standard, woe, ruling, alternates?, rank?, note?` |
 | `falseFriends` | — (advanced hazard) | no | `l1, looksLike, actualMeaning, note?` |
 | `registerDefaults` | — (advanced hazard) | no | `concept, variants, default, rank?, note?` |
 
-**`droppedPreps.ruling`** is one of three buckets (the [G3 keep/drop/replace test](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs)):
-`drop` (verb-selected, meaning-neutral — dropped, and reverse-restored by lookup), `keep` (marks a
-real relation — left alone), or `replace` (changes the verb's meaning — routed to
-`phrasalVerbs` via `replacedBy`, naming that entry's `phrasal`). **At most one `drop` ruling
-exists per verb** — the invariant that makes the drop reversible — enforced by
-`tools/test/core-lexicon.test.ts`.
-
-**`droppedPreps.forward`** defaults to `"apply"` (the forward translator drops the preposition).
-`"flag"` withholds the forward transform for a verb whose canonical preposition has a
-high-frequency competing reading the tools can't disambiguate without syntax. No entry
-currently uses this field: the one candidate, **`wait for`** (duration *"wait for three
-minutes"* vs. object *"wait for the bus"*), is handled instead by the **not-duration guard** in
-`core-lexicon.ts` — the forward
-translator drops *for* only when the following span is not a length of time, so `wait for the
-bus` auto-translates and `wait for three minutes` is kept. The *reverse* translator restores
-`wait for` regardless — a stoplist (prepositions, conjunctions, common adverbs, `-ly` words)
-is what keeps a duration phrase like *"wait for three minutes"* from getting a second `for`
-inserted; see [`tools/README.md`](../tools/README.md).
+**`droppedPreps` is retired.** Earlier drafts dropped a verb's meaning-neutral preposition and
+carried a per-verb ruling here; G3 no longer drops, so the array is empty. The two verbs that used
+to route a meaning-changing particle to a plain verb (*believe in → trust*, *approve of → like*)
+survive as ordinary `phrasalVerbs` entries.
 
 **`phrasalVerbs.plain`** is the *one* single-word machine replacement; `alternates` are additional
 human-readable options folded into the linter's report text (`woe` = `[plain, ...alternates].join("
@@ -78,7 +65,7 @@ say about it (a fully regular word like *table* needs none).
 
 | Array | Rows |
 | ----- | ---- |
-| `droppedPreps` | 37 |
+| `droppedPreps` | 0 |
 | `phrasalVerbs` | 56 |
 | `sensePreferences` | 44 |
 | `collocations` | 52 |
@@ -89,28 +76,13 @@ This is a first full pass, not an exhaustive one: only words with a clear, low-c
 case earned a row (see `tools/README.md`'s "Sweep methodology" for the criteria and the cases
 deliberately left out). Growth continues opportunistically as new collisions or gaps surface.
 
-## Table A — G3 canonical prepositions (`droppedPreps`)
+## Table A — G3 canonical prepositions (retired)
 
-Verbs whose selected preposition is **meaning-neutral**: G3 drops it and the verb goes transitive.
-The canonical preposition is what the reverse translator restores by lookup, so each `drop`-ruling
-verb has exactly one.
-
-| Verb | Prep | Ruling | World English |
-| ---- | ---- | ------ | -------------- |
-| listen | to | drop | **listen** music |
-| wait | for | drop | **wait** the bus |
-| depend | on | drop | **depend** the weather |
-| look | at | drop | **look** the picture |
-| believe | in | replace → *trust* | not dropped — routed to Table B |
-| pay | for | keep | not dropped — real relation (*pay the waiter*, *pay for the meal*) |
-
-*wait* is still a `drop` verb — its canonical World English is **wait the bus**, same as the
-others. The `for`-vs-duration test is handled by the **not-duration guard** in `core-lexicon.ts`: the forward translator
-drops *for* only when the following span is not a length of time, so *"wait for the bus"* →
-**wait the bus** and *"wait for three minutes"* is kept (the *for* marks a duration, per
-[S5](style.md#rule-s5--state-relevance-explicitly-cover-for-the-dropped-perfect)). The *reverse*
-translator restores *wait*'s *for* regardless, using a stoplist to skip duration phrases
-instead (see the schema section above).
+**Retired.** G3 no longer drops a verb's preposition — a verb keeps its standard preposition as
+ordinary vocabulary (*listen **to***, *wait **for***, *depend **on***) — so there is nothing to
+tabulate and `droppedPreps` is empty. The two verbs that used to route a meaning-changing particle
+to a plain verb, *believe in → **trust*** and *approve of → **like***, live in
+[Table B](#table-b--s2-phrasal--plain-phrasalverbs) as ordinary phrasal verbs.
 
 ## Table B — S2 phrasal → plain (`phrasalVerbs`)
 
@@ -127,10 +99,11 @@ Non-compositional phrasal verbs and their plain replacement. Transparent phrasal
 | look for | **seek** |
 | believe in | **trust** |
 
-*look for* and *believe in* are routed here from G3's drop/replace test (they change the verb's
-meaning, so they are phrasal, not droppable).
+*look for* and *believe in* are ordinary `phrasalVerbs` entries, not G3 vocabulary: dropping their
+preposition would collide two distinct senses (*look* vs. *look for*, *believe* vs. *believe in*),
+so each is instead replaced by a single plain verb.
 
-## Table C — S3 preferred sense (`sensePreferences`, doc-only)
+## Table C — S2 preferred sense (`sensePreferences`, doc-only)
 
 Where a common word has a rare or risky sense, use the plain word instead. *run*, *get*, and
 *take* are reserved for their most concrete meaning.
@@ -145,12 +118,13 @@ Where a common word has a rare or risky sense, use the plain word instead. *run*
 | take a photo | take = make | **make** a photo |
 | take a bus | take = use | **use** a bus |
 
-## Table D — S6 collocation → regular pairing (`collocations`, doc-only)
+## Table D — S2 collocation → regular pairing (`collocations`, doc-only)
 
 Where standard English forces an arbitrary word-partnership, a regular literal pairing is
-allowed. Includes the **adjective- and noun-selected prepositions** that
-[G3 explicitly hands to S6](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs)
-(a predicate adjective can't take a direct object, so these are not dropped).
+allowed. Includes the **adjective- and noun-selected prepositions** World English keeps standard
+(*good **at** math*, *afraid **of** dogs*, *reason **for** it*) — the same "verbs keep their
+preposition as vocabulary" principle as [G3](grammar.md#rule-g3--regular-prepositions-for-time-place-and-verbs),
+applied to adjectives and nouns.
 
 | Standard collocation | World English |
 | --------------------- | -------------- |
@@ -197,14 +171,12 @@ An entry is "done" only when:
 
 1. It is **consistent with `lexicon.json`** — `tools/test/vocabulary.test.ts` parses every table
    above and every coverage count and asserts both against the data.
-2. It satisfies the **structural invariants** `tools/test/core-lexicon.test.ts` checks: at most
-   one `drop` ruling per verb, every `replace` ruling's `replacedBy` names a real `phrasalVerbs`
-   entry, `phrasalVerbs.plain` is a single word and isn't itself a dropped form, and G3-drop /
-   S2-phrasal bigrams don't collide.
-3. It stays **consistent with [`samples.md`](samples.md)** — e.g. *listen music* / *wait the bus*
-   agree with [Passage 9](samples.md#passage-9--short-exchange-closes-dogfooding-blind-spots).
-4. The forward/reverse **round-trip property** holds: every `drop` + `forward: "apply"` verb
-   translates SE→WoE by dropping its preposition, and WoE→SE restores it, flagged
-   (`tools/test/reverse.test.ts`).
+2. It satisfies the **structural invariants** `tools/test/core-lexicon.test.ts` checks:
+   `droppedPreps` is empty (retired), and `phrasalVerbs.plain` is a single word.
+3. It stays **consistent with [`samples.md`](samples.md)** — e.g. the S2 phrasal replacements
+   agree with the dogfooded passages.
+4. The forward/reverse **round-trip property** holds for the S2 phrasal verbs: the forward
+   translator replaces the phrasal with its plain verb, and the plain verb — itself valid standard
+   English — needs no reverse step (`tools/test/reverse.test.ts`).
 
 These tables are highlights; `lexicon.json` is authoritative for anything not shown here.

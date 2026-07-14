@@ -9,6 +9,7 @@ export interface NavItem {
 }
 
 export const SPEC_NAV: NavItem[] = [
+  { slug: 'learner-grammar', title: 'Learner Grammar', blurb: 'The whole language on one page — every rule in a line.' },
   { slug: 'orthography', title: 'Orthography', blurb: 'Light, legibility-preserving spelling changes.' },
   { slug: 'pronunciation', title: 'Pronunciation', blurb: 'A respelling key so spelling predicts sound.' },
   { slug: 'morphology', title: 'Morphology', blurb: 'Regular verbs, plurals, comparatives, adverbs.' },

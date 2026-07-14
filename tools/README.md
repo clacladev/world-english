@@ -43,7 +43,7 @@ bun run typecheck    # tsc --noEmit
 
 `translate.ts` turns standard English into World English. Per the project's staged plan it
 does only the transforms it can apply **deterministically** — a closed set of unambiguous
-surface-form substitutions, now including the core lexicon's (item 8) drop verbs and phrasal
+surface-form substitutions, now including the core lexicon's drop verbs and phrasal
 verbs — and **flags** (never guesses) everything that still needs part-of-speech or syntax.
 
 The linter's dataset is the single-word forward map: `loadDataset().words` is keyed by the
@@ -71,20 +71,17 @@ The split is the dataset's own `confidence` line (the same one the linter trusts
 lexicon's per-entry `forward` mode:
 
 - **Translated** — every `high`-confidence, single-word entry with a clean single-form
-  replacement: `be` (M2), British/silent-letter/`ough` spellings (O1/O2/O5), pronouns
-  (G4/G12), suppletive comparatives (M5), and the **non-homograph** irregular verbs and plurals
+  replacement: `be` (M2), British/silent-letter/`ough` spellings (O1/O2/O5), `whom`→`who` (G4),
+  suppletive comparatives (M5), and the **non-homograph** irregular verbs and plurals
   (M1/M4, e.g. `went`→`goed`, `children`→`childs` — unambiguous surface forms). Casing and
-  surrounding punctuation are preserved (`My`→`Mes`, `THROUGH`→`THRU`). Also translated:
-  **dropped prepositions (G3)** and **phrasal verbs (S2)** from the core lexicon, inflected forms
-  included — `listens to`→`listens`, `gave up`→`quitted`, `finds out`→`learns`.
+  surrounding punctuation are preserved (`Through`→`Thru`, `Whom`→`Who`). Also translated:
+  **phrasal verbs (S2)** from the core lexicon, inflected forms included — `gave up`→`quitted`,
+  `finds out`→`learns`. (G3 no longer drops verb prepositions — a verb keeps its standard
+  preposition as vocabulary — so there is no preposition transform.)
 - **Flagged, not translated** — article drop (G2), third-person `-s` (M3), do-support (G6),
   modals (G7), relativizers (G11), open-decision comparatives, and homographs (`ground`, `mine`,
-  `well`) — all need part-of-speech or syntax the tool doesn't have. The one lexicon entry that
-  used to be withheld — `wait for` — is now handled by the **not-duration guard** in
-  `core-lexicon.ts`: the forward translator drops *for* only when the following span is not a
-  length of time, so `wait for the bus` auto-translates and `wait for three minutes` is kept.
-  High-confidence flags (dropped-prep, and any low-confidence lexicon entry) show by default;
-  the low-confidence classes are advisory and only shown under `--strict`.
+  `well`) — all need part-of-speech or syntax the tool doesn't have. High-confidence flags show
+  by default; the low-confidence classes are advisory and only shown under `--strict`.
 
 The eight `../docs/samples.md` passages are the translator's gold regression corpus:
 `test/translate.test.ts` translates each Standard-English passage and asserts it produces every
@@ -104,54 +101,47 @@ bun run translate --reverse --json
 
 - **Lossless classes restore uniquely, no flag** — non-homograph irregular verbs (`goed`→`went`
   as the past), plurals (`childs`→`children`), comparatives (`gooder`→`better`), silent letters
-  (`det`→`debt`), `ough` (`thru`→`through`), and the unique pronouns/reflexives (`hims`→`his`,
-  `themselfs`→`themselves`).
+  (`det`→`debt`), and `ough` (`thru`→`through`).
 - **Lossy classes restore a canonical default and flag it** — the forms that collapsed a
   distinction going forward can't be uniquely restored, so the tool picks a canonical form and
-  reports the guess: `be`→`is`, `beed`→`was`, `mes`→`my`, `uss`→`our`, `yous`→`your`,
-  `thems`→`their`, and every irregular verb whose `-ed` past covers both the standard past and
-  its participle (`seed` → `saw`, flagged "past/participle collapsed").
-- **G3 dropped prepositions restore the same way** — a second per-line pass (after word-level
-  restoration) checks whether a restored token is a core-lexicon drop verb (`listen`, `wait`,
-  `depend`, `look`, and the rest of the sweep's 37); if the next word isn't stoplisted, it
-  inserts the verb's canonical preposition and **always flags it**, since the drop is lossy and
-  nothing proves the object reading was meant. The stoplist (prepositions, conjunctions, common
-  place/time/degree adverbs, `-ly` words) is what keeps a duration phrase like *"wait for three
-  minutes"* or *"looked under the sofa"* from getting a second preposition inserted.
+  reports the guess: `be`→`is`, `beed`→`was`, and every irregular verb whose `-ed` past covers
+  both the standard past and its participle (`seed` → `saw`, flagged "past/participle
+  collapsed").
 - **Valid standard English is left untouched** — WoE mandates American spelling, so `color` /
   `center` are standard as-is (not reversed to British), and `who` (which forward-maps from
-  `whom`) is a valid word. **Phrasal verbs are not restored** — `quit`, `delay`, `seek`, and the
-  rest of the core lexicon's plain replacements are themselves valid standard English, so there
-  is nothing to reverse.
+  `whom`) is a valid word. Verb-selected prepositions (`listen to`, `wait for`, `depend on`) are
+  standard WoE too, so they round-trip untouched — G3 no longer drops them, so there is nothing
+  to restore. **Phrasal verbs are not restored** — `quit`, `delay`, `seek`, and the rest of the
+  core lexicon's plain replacements are themselves valid standard English, so there is nothing to
+  reverse.
 
 The proof lives in `test/reverse.test.ts`: it reverse-translates the `samples.md` World-English
 passages and asserts every losslessly-reversible form comes back to its standard original —
 Passage 4 round-trips to its exact Standard-English source.
 
-## The core lexicon (item 8)
+## The core lexicon
 
-G3 (dropped prepositions), S2 (phrasal verbs), S3 (preferred sense), and S6 (regular
-collocations) each quote a per-word list to do their job. That list is
-[`data/lexicon.json`](data/lexicon.json), loaded and built into the shapes the rest of the
-tooling consumes by [`src/core-lexicon.ts`](src/core-lexicon.ts). Six arrays: `droppedPreps` and
-`phrasalVerbs` are **machine-actionable** (the translators read them); `sensePreferences`,
-`collocations`, `falseFriends`, and `registerDefaults` are **doc-only** — applying them needs
-word-sense disambiguation the tools don't have, so they're recorded for the human record only.
-The full schema is documented in the file's own `_comment` and in
-[`../docs/vocabulary.md`](../docs/vocabulary.md), which is the schema doc, representative
+S2's phrasal verbs, preferred senses, and collocations each quote a per-word list to do their
+job. That list is [`data/lexicon.json`](data/lexicon.json), loaded and built into the shapes the
+rest of the tooling consumes by [`src/core-lexicon.ts`](src/core-lexicon.ts). Six arrays:
+`phrasalVerbs` is **machine-actionable** (the translators read it); `droppedPreps` is **retired**
+— empty, since G3 no longer drops verb prepositions (a verb keeps its standard preposition as
+vocabulary); `sensePreferences`, `collocations`, `falseFriends`, and `registerDefaults` are
+**doc-only** — applying them needs word-sense disambiguation the tools don't have, so they're
+recorded for the human record only. The full schema is documented in the file's own `_comment`
+and in [`../docs/vocabulary.md`](../docs/vocabulary.md), which is the schema doc, representative
 highlights, and a test-checked coverage statement (`test/vocabulary.test.ts` asserts the doc
 against the data).
 
 `core-lexicon.ts` exports:
 
 - `loadCoreLexicon()` — the raw data.
-- `toAbolishedEntries()` — merges `droppedPreps` (`ruling: "drop"`) and `phrasalVerbs` into the
-  abolished-forms shape `dataset.ts` consumes, so the linter and both translators see them the
-  same way as every other abolished form.
+- `toAbolishedEntries()` — merges `phrasalVerbs` into the abolished-forms shape `dataset.ts`
+  consumes, so the linter and both translators see them the same way as every other abolished
+  form. (`droppedPreps` is empty, so it contributes nothing here.)
 - `buildPhraseTransforms()` — the forward translator's multi-word transforms: every inflected
-  surface form (base, 3sg, `-ing`, past, participle) of a `drop`-ruling verb or phrasal verb,
-  sorted longest-first for greedy matching.
-- `buildPrepRestorations()` — the reverse translator's verb→canonical-preposition map.
+  surface form (base, 3sg, `-ing`, past, participle) of a phrasal verb, sorted longest-first
+  for greedy matching.
 
 ### Sweep methodology
 
@@ -160,34 +150,24 @@ against the data).
 from the project's own `NGSL_12_stats.csv` download. `lexicon.json`'s sweep walks it rank
 1→2,809 in six ~500-word bands, adding a row only when a word has something non-default to say
 (a fully regular word like *table* needs none). Per band: `bun run lint && bun test && bun run
-typecheck` before moving on, since a new drop verb or phrasal can collide with existing spec or
-`samples.md` text (fixed by re-ruling, a `confidence: "low"` demotion, or — sparingly — an
-`allowlist.json` entry for a genuine coincidental match).
+typecheck` before moving on, since a new phrasal can collide with existing spec or `samples.md`
+text (fixed by a `confidence: "low"` demotion, or — sparingly — an `allowlist.json` entry for a
+genuine coincidental match).
 
-The sweep is deliberately conservative, not exhaustive — a verb+preposition or phrasal-verb
-candidate only earns a `drop`/`phrasalVerbs` row when it passes a real collision check against
-the verb's *other* senses, not just "this pairing exists." Concretely excluded on these grounds:
+The sweep is deliberately conservative, not exhaustive — a phrasal-verb candidate only earns a
+`phrasalVerbs` row when it passes a real collision check against the verb's *other* senses, not
+just "this pairing exists." Concretely excluded on these grounds:
 
-- **Structural role reversal** — `worry about` isn't a drop verb because `worry` already has a
-  transitive sense with the roles swapped (*the news worries me* — subject and object trade
-  places relative to *worry about X*), which the drop would collide with.
-  `recover`/`accuse`/`distinguish`/`derive` have a similar shape (already-transitive senses with
-  a different object role) and are left unlisted for the same reason.
-- **Multi-preposition, meaning-correlated verbs** — `agree` (with a person, to a proposal, on a
-  plan), `compare` (to = liken, with = contrast), and `correspond` (to = match, with =
-  correspond by letter) get a `keep` ruling instead of `drop`: the choice of preposition tracks a
-  real semantic distinction, so it isn't arbitrary.
 - **Dangerously polysemous phrasals** — `pick up` (answer a phone / learn a skill / retrieve an
   object / accelerate) has too many unrelated senses for one machine replacement to be safe, so
   it isn't in `phrasalVerbs` at all; its senses are documented instead, doc-only, in
   `sensePreferences`.
-- **Already-regular verbs** — a verb already commonly transitive without its preposition in
-  standard usage (`escape prison`, `protest the decision`) gets a `drop` row for
-  reversibility/documentation, but needed no forward-behavior change to begin with.
 
 This is a first full pass over the spine, not a final one: only the clear cases earned a row.
 Coverage grows opportunistically from here — a new collision found in review, a gap surfaced by
-dogfooding, or simply revisiting a skipped verb with more care.
+dogfooding, or simply revisiting a skipped verb with more care. (`droppedPreps` — the per-verb
+preposition drop/keep list this methodology used to also sweep — is retired: G3 no longer drops
+or rules on any verb's preposition, so there is nothing left to sweep for it.)
 
 ## The pronunciation tool
 
@@ -257,7 +237,7 @@ dependency: when it is not on PATH, `--audio` prints an install hint and exits n
    table cells — `(definite, singular)`, `(kept — …)`, markdown link anchors — are stripped,
    since they are ordinary English commentary, not the World-English form.
 2. **`src/dataset.ts`** builds the abolished-forms index from `data/`, merging in the core
-   lexicon's dropped-prep and phrasal-verb rows via `src/core-lexicon.ts`.
+   lexicon's phrasal-verb rows via `src/core-lexicon.ts`.
 3. **`src/scan.ts`** tokenizes each span and matches unigrams + multi-word phrases against the
    index, honouring `data/allowlist.json` and the confidence gate.
 
@@ -282,11 +262,11 @@ dataset is authored here. It is also the seed for the deferred **reverse transla
   `regularizePlural()`. Zero-plurals (*sheep*) omitted for the same reason.
 - **`abolished-forms.json`** — directly-authored `abolished → woe` pairs for every other
   directly-authored class (`be`, comparatives, British spellings, silent letters, `ough`,
-  pronouns, articles, and the POS-dependent classes). Phrasal verbs and dropped prepositions live
-  in `lexicon.json` instead (see [above](#the-core-lexicon-item-8)).
-- **`lexicon.json`** — the core lexicon (item 8): dropped prepositions (G3), phrasal verbs (S2),
-  and the doc-only sense/collocation/false-friend/register arrays (S3/S6 and the advanced
-  hazards). Source of truth for `../docs/vocabulary.md`.
+  pronouns, articles, and the POS-dependent classes). Phrasal verbs live in `lexicon.json`
+  instead (see [above](#the-core-lexicon)).
+- **`lexicon.json`** — the core lexicon: phrasal verbs (S2), and the doc-only
+  sense/collocation/false-friend/register arrays (S2's doc-only layers and the advanced
+  hazards). `droppedPreps` is retired (empty). Source of truth for `../docs/vocabulary.md`.
 - **`ngsl.json`** — the NGSL 1.2 frequency spine `lexicon.json`'s sweep walks; rank + headword
   only, no linguistic judgment of its own.
 - **`allowlist.json`** — suppresses legitimate matches (homographs like *saw* the tool; a
@@ -326,24 +306,22 @@ word. Re-run `bun test`.
   low-recall** syntactic detectors (`src/pos.ts`), each firing only on one unambiguous shape and
   bailing to "leave it alone" everywhere else: indefinite-article drop (`a`/`an` → ∅, keeping
   quantifier idioms and the duration-`for` span), third-person `-s` drop after a `he`/`she`/`it`
-  subject (M3), dropped-`that` restoration after a reporting verb + nominative pronoun (G14), and
+  subject (M3), dropped-`that` restoration after a reporting verb + nominative pronoun (G11), and
   the coordinated zero-past above (M1). Cases outside those shapes stay flagged/untouched:
   generic-`the` → bare plural (needs semantics), separated phrasals (`give it up`), and any
   non-coordinated zero-past. It also can only convert forms the dataset or lexicon actually
-  carry: a phrasal/dropped-prep pair the sweep hasn't reached passes through untouched. `wait
-  for` is **not** an exception — the forward translator does handle it, via the not-duration
-  guard described [above](#the-core-lexicon-item-8): `wait for the bus` auto-translates and
-  `wait for three minutes` is correctly left alone.
-- **The reverse translator restores what the dataset and lexicon carry, and only that.** A
-  dropped preposition not in the lexicon's `droppedPreps`, or a form outside the dataset, is
-  left untouched. Phrasal verbs are never restored (their plain replacements are
-  themselves valid standard English). The deliberate collapses (`be`, possessives, verb
-  past/participle, and G3's re-inserted prepositions) are restored to a canonical default and
-  flagged, never silently guessed.
-- **The core lexicon is a first sweep, not exhaustive.** Only verb+preposition and phrasal
-  pairings that passed a real collision check earned a row (see
-  [the sweep methodology](#the-core-lexicon-item-8)); many plausible candidates were deliberately
-  left out because they were too risky to auto-transform, not because they don't exist.
+  carry: a phrasal-verb pair the sweep hasn't reached passes through untouched. Verb-selected
+  prepositions (`wait for`, `listen to`) are never transformed at all — G3 keeps them as
+  standard vocabulary, so `wait for the bus` and `wait for three minutes` both pass through
+  unchanged.
+- **The reverse translator restores what the dataset carries, and only that.** A form outside
+  the dataset is left untouched. Phrasal verbs and verb-selected prepositions are never restored
+  (they are themselves valid standard English). The deliberate collapses (`be` and verb
+  past/participle) are restored to a canonical default and flagged, never silently guessed.
+- **The core lexicon is a first sweep, not exhaustive.** Only phrasal-verb pairings that passed
+  a real collision check earned a row (see [the sweep methodology](#the-core-lexicon));
+  many plausible candidates were deliberately left out because they were too risky to
+  auto-transform, not because they don't exist.
 - **The pronunciation lexicon is a seed.** It carries only the 66 entries (64 distinct words) in
   `pronunciation.md`; any other word is emitted verbatim and flagged, not guessed. It grows
   frequency-first, mirroring `vocabulary.md`'s seed convention.
