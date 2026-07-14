@@ -29,7 +29,9 @@ run from that directory: `bun install`, `bun run dev`, `bun run build`. CI build
   and Brehe's Grammar Anatomy (standard-English reference).
 - `tools/` — Bun/TypeScript tooling: the spec linter, SE↔WoE translators, and pronunciation
   renderer. See [tools/README.md](tools/README.md) for details.
-- `site/` — the public documentation site (Astro), rendering `docs/` for the web.
+- `site/` — the public documentation site (Astro), rendering `docs/` for the web. The UI is
+  multilingual (English default at bare URLs, translations under `/es/` etc.); see
+  [site/README.md](site/README.md) → "Translations" before touching UI copy or adding a language.
 - `skills/world-english-translator/` — a self-contained World English Agent Skill. Its
   `reference/data/*.json` is a generated copy of `tools/data/` — regenerate with
   `bun run build:skill` after a data change; never hand-edit it (edits get overwritten).
@@ -53,8 +55,10 @@ site, tooling, and the packaged skill.
    `docs/` files for anything that referenced the old rule (examples, cross-links, exception
    lists). Update `docs/samples.md` — the regression test — so it reflects the new behavior.
 2. **Website content.** Review `site/` for any content that restates or depends on the rule
-   (the site renders `docs/`, but check hand-written pages and examples too). Rebuild with
-   `bun run build` from `site/` to confirm it still builds.
+   (the site renders `docs/`, but check hand-written pages and examples too). If a translated
+   page (`src/components/pages/*Body.astro`, `src/i18n/ui.ts`) restates the rule, update every
+   locale's copy — WoE example forms stay verbatim across languages. Rebuild with `bun run build`
+   from `site/` to confirm it still builds.
 3. **Translators, linter, and data.** Update `tools/` — the SE↔WoE translators, the linter's
    abolished-form list, and the closed-list tables in `tools/data/` (`abolished-forms.json`,
    `irregular-verbs.json`, `irregular-plurals.json`, `lexicon.json`) as the rule requires.

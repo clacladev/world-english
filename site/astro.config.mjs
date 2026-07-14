@@ -18,6 +18,14 @@ const repo = { url: 'https://github.com/clacladev/world-english', branch: 'dev' 
 export default defineConfig({
   site: 'https://worldenglish.tugulab.org',
   trailingSlash: 'ignore',
+  // English is the canonical default and keeps its bare URLs (/about); every
+  // supported translation lives under a prefix (/es/about). Adding a language is
+  // a matter of appending its code here and to src/i18n/ui.ts. See site/README.md.
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'es'],
+    routing: { prefixDefaultLocale: false },
+  },
   markdown: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
@@ -35,7 +43,13 @@ export default defineConfig({
       rehypeWrapTables,
     ],
   },
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // Advertise the language alternates so search engines pair /about with
+      // /es/about instead of treating them as duplicate content.
+      i18n: { defaultLocale: 'en', locales: { en: 'en-US', es: 'es-ES' } },
+    }),
+  ],
   vite: {
     server: {
       // Allow importing the translator from ../tools during `astro dev`.

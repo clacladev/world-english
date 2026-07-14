@@ -30,6 +30,39 @@ bun run preview  # serve the built dist/ (search works here, not in dev)
 - **Search** — [Pagefind](https://pagefind.app) indexes the built HTML (`bun run build`),
   so search is live under `preview`/production but not in `dev`.
 
+## Translations (i18n)
+
+The site UI is available in more than one language. English (`en`) is the canonical default
+and keeps its bare URLs (`/about`); each translation lives under a prefix (`/es/about`). Astro's
+i18n is configured in `astro.config.mjs` with `prefixDefaultLocale: false`.
+
+**Scope (phase 1).** Only the UI *chrome* (header, footer, nav, buttons, generic labels) plus a
+few marketing pages are translated. The full spec docs render Spanish chrome over their English
+body, with an "available in English only" note. Brand and linguistic tokens — "World English",
+the "WERLD ING-glish" wordmark, the `/wɝld ˈɪŋɡlɪʃ/` IPA, and all WoE example forms (`goed`,
+`childs`, …) — are **never** translated, in any language.
+
+- **Shared chrome strings** live in `src/i18n/ui.ts` (a typed dictionary). Any missing key falls
+  back to English, so a partial translation never renders blank. `useTranslations(locale)` returns
+  a `t(key)` bound to a locale; `localePath(path, locale)` prefixes internal links.
+- **Long page prose** (home, about, translator labels) lives in a per-locale `COPY` object inside
+  that page's body component under `src/components/pages/*Body.astro` — kept next to the markup so
+  it is easy to review, rather than in the global dictionary.
+- **Routes** — every page has an English route and a mirror under `src/pages/es/`. The mirror is a
+  thin `<Base><XBody /></Base>` wrapper; `Astro.currentLocale` (from the `/es` URL) drives the
+  chrome. `<EnglishOnlyNote />` renders the English-only banner on non-default locales only.
+- **Detection** — a pre-paint inline script in `src/layouts/Base.astro` honors an explicit saved
+  choice (`localStorage['woe-lang']`, set by the header language switcher), else auto-detects from
+  `navigator.languages` and redirects once from a bare URL to a supported translation, else stays
+  English. `<html lang>`, `hreflang` alternates, and the sitemap's `i18n` option are wired for SEO.
+- **Search** — phase 1 keeps Pagefind English-only; `/es/` bodies are excluded via a
+  `data-pagefind-ignore` on `<main>` for non-default locales (set in `Base.astro`).
+
+**Adding a language** (e.g. `it`): add its code to `locales` in `astro.config.mjs` **and**
+`src/i18n/ui.ts`; add its column to the `ui` dictionary and to `localeNames`; add its `COPY`
+column to each `*Body.astro` you want fully translated; create the `src/pages/it/` route mirrors
+(copy the `es/` ones). Anything you skip falls back to English. Run `bun run build` to confirm.
+
 ## Hosting
 
 Deployed on **Vercel** (static build) and served at **https://worldenglish.tugulab.org**

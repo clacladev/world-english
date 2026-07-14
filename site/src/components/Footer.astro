@@ -1,6 +1,10 @@
 ---
+import { getLocale, useTranslations, localePath } from '../i18n/ui';
+
 // Evaluated at build time — each deploy stamps the current year.
 const year = new Date().getFullYear();
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
 ---
 
 <footer class="site-footer">
@@ -8,25 +12,25 @@ const year = new Date().getFullYear();
     <div class="brand">
       <span class="name">World English</span>
       <span class="say">WERLD ING-glish · <span lang="en-fonipa">/wɝld ˈɪŋɡlɪʃ/</span></span>
-      <p class="status">An open design &amp; research project — everything here is provisional.</p>
+      <p class="status" set:html={t('footer.status')} />
     </div>
     <nav class="cols" aria-label="Footer">
       <div>
-        <h2>Reference</h2>
-        <a href="/rules/">The rules</a>
-        <a href="/research/">Research</a>
-        <a href="/about/">About the project</a>
+        <h2>{t('footer.reference')}</h2>
+        <a href={localePath('/rules/', locale)}>{t('nav.rules')}</a>
+        <a href={localePath('/research/', locale)}>{t('nav.research')}</a>
+        <a href={localePath('/about/', locale)}>{t('footer.aboutProject')}</a>
       </div>
       <div>
-        <h2>Project</h2>
-        <a href="https://github.com/clacladev/world-english" target="_blank" rel="noopener">GitHub repository</a>
-        <a href="https://github.com/clacladev/world-english/issues/new" target="_blank" rel="noopener">Send feedback</a>
+        <h2>{t('footer.project')}</h2>
+        <a href="https://github.com/clacladev/world-english" target="_blank" rel="noopener">{t('footer.repo')}</a>
+        <a href="https://github.com/clacladev/world-english/issues/new" target="_blank" rel="noopener">{t('footer.feedback')}</a>
         <a href="https://twitter.com/clacladev" target="_blank" rel="noopener">@clacladev</a>
       </div>
     </nav>
   </div>
   <div class="shell base">
-    <span>© {year} World English contributors · Code: MIT · Docs:
+    <span>© {year} {t('footer.rights')}
       <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>
     </span>
   </div>

@@ -1,0 +1,31 @@
+---
+// Spanish route mirror of /research/[slug]. Spanish chrome, English body + note.
+import { getCollection, render } from 'astro:content';
+import Doc from '../../../layouts/Doc.astro';
+import { RESEARCH_NAV } from '../../../lib/nav';
+
+export async function getStaticPaths() {
+  const research = await getCollection('research');
+  const allowed = new Set(RESEARCH_NAV.map((n) => n.slug));
+  return research
+    .filter((e) => allowed.has(e.id))
+    .map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const meta = RESEARCH_NAV.find((n) => n.slug === entry.id)!;
+---
+
+<Doc
+  title={meta.title}
+  description={meta.blurb}
+  sectionLabel="Research"
+  sectionHref="/research/"
+  basePath="/research"
+  items={RESEARCH_NAV}
+  current={entry.id}
+  headings={headings}
+>
+  <Content />
+</Doc>

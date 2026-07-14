@@ -1,0 +1,128 @@
+---
+import { locales, localeNames, localePath, getLocale, useTranslations } from '../i18n/ui';
+
+const current = getLocale(Astro.currentLocale);
+const t = useTranslations(current);
+
+// The current path with any locale prefix stripped, so each option can point at
+// the equivalent page in its own language rather than back to the home page.
+const bare = Astro.url.pathname.replace(/^\/(es)(?=\/|$)/, '') || '/';
+
+const options = locales.map((loc) => ({
+  loc,
+  name: localeNames[loc],
+  href: localePath(bare, loc),
+  current: loc === current,
+}));
+---
+
+<details class="lang" data-lang>
+  <summary class="lang__btn" aria-label={t('lang.label')}>
+    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" />
+      <path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18" fill="none" stroke="currentColor" stroke-width="2" />
+    </svg>
+    <span class="lang__current">{localeNames[current]}</span>
+  </summary>
+  <ul class="lang__menu" role="list">
+    {options.map((o) => (
+      <li>
+        <a
+          class:list={['lang__opt', { 'is-active': o.current }]}
+          href={o.href}
+          hreflang={o.loc}
+          lang={o.loc}
+          data-lang-set={o.loc}
+          aria-current={o.current ? 'true' : undefined}
+        >
+          {o.name}
+        </a>
+      </li>
+    ))}
+  </ul>
+</details>
+
+<script is:inline>
+  // Persist an explicit language choice so it beats locale auto-detection on
+  // every future visit (see the detection script in Base.astro). Also close the
+  // menu after a pick and on outside-click.
+  (() => {
+    const wrap = document.querySelector('[data-lang]');
+    if (!wrap) return;
+    wrap.querySelectorAll('[data-lang-set]').forEach((a) => {
+      a.addEventListener('click', () => {
+        try {
+          localStorage.setItem('woe-lang', a.getAttribute('data-lang-set'));
+        } catch {}
+      });
+    });
+    document.addEventListener('click', (e) => {
+      if (wrap.open && !wrap.contains(e.target)) wrap.open = false;
+    });
+  })();
+</script>
+
+<style>
+  .lang {
+    position: relative;
+  }
+  .lang__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    height: 2.25rem;
+    padding-inline: var(--space-3);
+    border-radius: var(--radius-sm);
+    border: var(--border-w) solid var(--border);
+    background: var(--surface);
+    color: var(--text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    list-style: none;
+    white-space: nowrap;
+  }
+  .lang__btn::-webkit-details-marker {
+    display: none;
+  }
+  .lang__btn:hover {
+    color: var(--text);
+    border-color: var(--accent-line);
+  }
+  .lang__menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + var(--space-1));
+    z-index: 50;
+    min-width: 9rem;
+    margin: 0;
+    padding: var(--space-1);
+    list-style: none;
+    background: var(--surface);
+    border: var(--border-w) solid var(--border);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+  }
+  .lang__opt {
+    display: block;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+  }
+  .lang__opt:hover {
+    color: var(--text);
+    background: var(--surface-2);
+  }
+  .lang__opt.is-active {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  @media (max-width: 34rem) {
+    .lang__current {
+      display: none;
+    }
+  }
+</style>

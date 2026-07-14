@@ -1,6 +1,8 @@
 ---
 import Base from './Base.astro';
 import Toc from '../components/Toc.astro';
+import EnglishOnlyNote from '../components/EnglishOnlyNote.astro';
+import { getLocale, localePath } from '../i18n/ui';
 import type { MarkdownHeading } from 'astro';
 import type { NavItem } from '../lib/nav';
 
@@ -18,6 +20,13 @@ interface Props {
 const { title, description, sectionLabel, sectionHref, basePath, items, current, headings } =
   Astro.props;
 
+// Keep in-section navigation inside the active language: /es/rules/… links stay
+// under /es. The nav titles themselves stay in English (they name the English
+// specs, whose bodies are not yet translated).
+const locale = getLocale(Astro.currentLocale);
+const sectionHrefL = localePath(sectionHref, locale);
+const basePathL = localePath(basePath, locale);
+
 const idx = items.findIndex((i) => i.slug === current);
 const prev = idx > 0 ? items[idx - 1] : null;
 const next = idx >= 0 && idx < items.length - 1 ? items[idx + 1] : null;
@@ -28,14 +37,14 @@ const next = idx >= 0 && idx < items.length - 1 ? items[idx + 1] : null;
     <aside class="doc__side">
       <details class="doc__nav-wrap" open>
         <summary class="doc__nav-summary">
-          <a href={sectionHref}>{sectionLabel}</a>
+          <a href={sectionHrefL}>{sectionLabel}</a>
         </summary>
         <nav aria-label={sectionLabel}>
           <ul class="doc__nav">
             {items.map((i) => (
               <li>
                 <a
-                  href={`${basePath}/${i.slug}/`}
+                  href={`${basePathL}/${i.slug}/`}
                   class:list={['doc__nav-link', { 'is-active': i.slug === current }]}
                   aria-current={i.slug === current ? 'page' : undefined}
                 >
@@ -50,19 +59,20 @@ const next = idx >= 0 && idx < items.length - 1 ? items[idx + 1] : null;
 
     <article class="doc__main prose" data-pagefind-body>
       <p class="doc__crumb">
-        <a href={sectionHref}>{sectionLabel}</a>
+        <a href={sectionHrefL}>{sectionLabel}</a>
       </p>
+      <EnglishOnlyNote kind="spec" />
       <slot />
 
       <nav class="doc__pager" aria-label="More in this section">
         {prev ? (
-          <a class="pager pager--prev" href={`${basePath}/${prev.slug}/`}>
+          <a class="pager pager--prev" href={`${basePathL}/${prev.slug}/`}>
             <span class="pager__dir">← Previous</span>
             <span class="pager__title">{prev.title}</span>
           </a>
         ) : <span />}
         {next ? (
-          <a class="pager pager--next" href={`${basePath}/${next.slug}/`}>
+          <a class="pager pager--next" href={`${basePathL}/${next.slug}/`}>
             <span class="pager__dir">Next →</span>
             <span class="pager__title">{next.title}</span>
           </a>

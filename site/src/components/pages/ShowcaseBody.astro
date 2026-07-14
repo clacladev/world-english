@@ -1,0 +1,270 @@
+---
+import { getLocale, localePath } from '../../i18n/ui';
+import EnglishOnlyNote from '../EnglishOnlyNote.astro';
+const locale = getLocale(Astro.currentLocale);
+
+// Flagship texts rendered in World English. Every WoE passage here applies the
+// published rules exactly and carries no abolished form — so the showcase
+// doubles as a conformance sample, not a hand-waved demo. Changed forms are
+// wrapped in <mark> to show the reform at a glance; the full original sits in a
+// <details> under each piece.
+//
+// Both source texts are public domain: the UDHR is UN material free to
+// reproduce, and Lincoln's 1863 address is long out of copyright.
+interface Piece {
+  id: string;
+  title: string;
+  meta: string;
+  provenance: string;
+  woe: string[]; // paragraphs, may contain <mark>…</mark>
+  original: string[];
+  note?: string;
+}
+
+const pieces: Piece[] = [
+  {
+    id: 'udhr',
+    title: 'Universal Declaration of Human Rights',
+    meta: 'Article 1 · United Nations, 1948',
+    provenance:
+      'The most-translated document in human history — over 500 languages. This is what it reads like as the 500-and-first.',
+    woe: [
+      'All human beings <mark>be</mark> born free and equal in dignity and rights. They <mark>be</mark> endowed with reason and conscience and should act towards one another in spirit of brotherhood.',
+    ],
+    original: [
+      'All human beings are born free and equal in dignity and rights. They are endowed with reason and conscience and should act towards one another in a spirit of brotherhood.',
+    ],
+    note:
+      'Almost nothing moves — only “are → be” (M2) and the dropped “a” before “spirit” (G2). That near-invisibility is the point: World English stays legible as English.',
+  },
+  {
+    id: 'gettysburg',
+    title: 'The Gettysburg Address',
+    meta: 'Abraham Lincoln · November 19, 1863',
+    provenance:
+      'Two hundred and seventy-two words of the most solemn English ever written. If the reform can carry this without losing its weight, it can carry anything.',
+    woe: [
+      'Four score and seven years ago <mark>uss</mark> fathers <mark>bringed</mark> forth on this continent new nation, conceived in liberty, and dedicated to the proposition that all <mark>mans</mark> <mark>be</mark> created equal.',
+      'Now we <mark>be</mark> engaged in great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We <mark>be</mark> <mark>meeted</mark> on great battlefield of that war. We <mark>comed</mark> to dedicate portion of that field, as final resting place for those who here <mark>gived</mark> <mark>thems</mark> <mark>lifes</mark> that that nation might live. It <mark>be</mark> altogether fitting and proper that we should do this.',
+      'But, in larger sense, we cannot dedicate, we cannot consecrate, we cannot hallow this ground. The brave <mark>mans</mark>, living and dead, who struggled here, consecrated it, far above <mark>uss</mark> poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they <mark>doed</mark> here. It <mark>be</mark> for us the living, rather, to be dedicated here to the unfinished work which they who <mark>fighted</mark> here thus far so nobly advanced. It <mark>be</mark> rather for us to be here dedicated to the great task remaining before us — that from these honored dead we take increased devotion to that cause for which they <mark>gived</mark> the last full measure of devotion — that we here highly resolve that these dead shall not die in vain — that this nation, under God, shall have new birth of freedom — and that government of the people, by the people, for the people, shall not perish from the earth.',
+    ],
+    original: [
+      'Four score and seven years ago our fathers brought forth on this continent a new nation, conceived in liberty, and dedicated to the proposition that all men are created equal.',
+      'Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battlefield of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this.',
+      'But, in a larger sense, we cannot dedicate, we cannot consecrate, we cannot hallow this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us — that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion — that we here highly resolve that these dead shall not have died in vain — that this nation, under God, shall have a new birth of freedom — and that government of the people, by the people, for the people, shall not perish from the earth.',
+    ],
+    note:
+      'Every changed form follows a single rule: “brought → bringed”, “fought → fighted” (M1); “men → mans”, “lives → lifes” (M4); “our → uss”, “their → thems” (G4); the perfect collapses to the past — “have come → comed”, “have consecrated → consecrated” (G1).',
+  },
+  {
+    id: 'north-wind',
+    title: 'The North Wind and the Sun',
+    meta: 'Aesop · the standard specimen fable of the International Phonetic Association',
+    provenance:
+      'Linguists use this little fable to illustrate the sounds of every language on earth — it has been transcribed in hundreds of them. Here it is as a World English fable.',
+    woe: [
+      'The North Wind and the Sun <mark>beed</mark> disputing which <mark>beed</mark> the stronger, when traveler <mark>comed</mark> along wrapped in warm cloak. They agreed that the one who first succeeded in making the traveler take <mark>hims</mark> cloak off should be considered stronger than the other. Then the North Wind <mark>blowed</mark> as hard as he <mark>can</mark>, but the more he <mark>blowed</mark> the more closely the traveler <mark>folded</mark> hims cloak around him; and at last the North Wind <mark>quitted</mark> the attempt. Then the Sun <mark>shined</mark> out warmly, and immediately the traveler <mark>taked</mark> off hims cloak. And so the North Wind <mark>beed</mark> obliged to confess that the Sun <mark>beed</mark> the stronger of the two.',
+    ],
+    original: [
+      'The North Wind and the Sun were disputing which was the stronger, when a traveller came along wrapped in a warm cloak. They agreed that the one who first succeeded in making the traveller take his cloak off should be considered stronger than the other. Then the North Wind blew as hard as he could, but the more he blew the more closely did the traveller fold his cloak around him; and at last the North Wind gave up the attempt. Then the Sun shone out warmly, and immediately the traveller took off his cloak. And so the North Wind was obliged to confess that the Sun was the stronger of the two.',
+    ],
+    note:
+      'Every verb regularizes — “were → beed”, “came → comed”, “blew → blowed”, “shone → shined”, “took → taked” (M1, M2); “gave up → quitted” (S2). The modal set shrinks — “could → can”, with the past carried by the story (G7) — and the emphatic “did … fold” loses its do-support (G6). “his → hims” (G4).',
+  },
+];
+---
+
+<section class="hero">
+  <div class="shell">
+    <div class="col">
+    <EnglishOnlyNote />
+    <p class="eyebrow">Showcase</p>
+    <h1 class="hero__title">Read it in World English.</h1>
+    <p class="hero__lede">
+      The clearest test of a language is a text you already know by heart. Here are three —
+      rendered in World English by applying the published rules to the letter, so not a single
+      abolished form slips through. See what changes. See how much doesn't.
+    </p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="shell">
+    <div class="col pieces">
+    {
+      pieces.map((p) => (
+        <article class="piece" id={p.id}>
+          <header class="piece__head">
+            <h2 class="piece__title">{p.title}</h2>
+            <p class="piece__meta">{p.meta}</p>
+            <p class="piece__prov">{p.provenance}</p>
+          </header>
+
+          <div class="woe">
+            <span class="woe__tag">World English</span>
+            {p.woe.map((para) => (
+              <p class="woe__p" set:html={para} />
+            ))}
+          </div>
+
+          {p.note && <p class="piece__note">{p.note}</p>}
+
+          <details class="orig">
+            <summary class="orig__summary">Show the original English</summary>
+            {p.original.map((para) => (
+              <p class="orig__p">{para}</p>
+            ))}
+          </details>
+        </article>
+      ))
+    }
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="shell">
+    <div class="col closing">
+    <h2>How these were made</h2>
+    <p>
+      Each passage applies the World English rules exactly as the specifications state them,
+      then is checked for any abolished form — an irregular verb, a stray <em>a/an</em>, an
+      old plural. Nothing that breaks a rule is allowed to survive in a World English passage.
+      The showcase is held to the same standard as the specs.
+    </p>
+    <p class="closing__cta">
+      <a class="btn btn--primary" href={localePath('/rules/', locale)}>Read the rules</a>
+      <a class="btn btn--ghost" href={localePath('/rules/samples/', locale)}>See the annotated samples →</a>
+    </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .col {
+    max-width: var(--content);
+    margin-inline: auto;
+  }
+
+  .hero {
+    padding-block: var(--space-12) var(--space-8);
+    background: radial-gradient(60rem 30rem at 50% -10%, var(--accent-soft), transparent 70%);
+  }
+  .hero__title {
+    font-size: var(--text-3xl);
+    margin: var(--space-2) 0 var(--space-4);
+  }
+  .hero__lede {
+    font-size: var(--text-md);
+    color: var(--text-muted);
+    max-width: 44rem;
+  }
+
+  .pieces {
+    display: grid;
+    gap: var(--space-10);
+  }
+
+  .piece__head {
+    margin-bottom: var(--space-5);
+  }
+  .piece__title {
+    font-size: var(--text-xl);
+    margin: 0 0 var(--space-1);
+  }
+  .piece__meta {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--accent);
+    font-weight: 600;
+    margin: 0 0 var(--space-3);
+  }
+  .piece__prov {
+    font-size: var(--text-base);
+    color: var(--text-muted);
+    margin: 0;
+    max-width: 42rem;
+  }
+
+  /* The star: the World English rendering, set large and warm. */
+  .woe {
+    background: var(--surface);
+    border: var(--border-w) solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-6) var(--space-6) var(--space-5);
+  }
+  .woe__tag {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: var(--space-4);
+  }
+  .woe__p {
+    font-size: var(--text-md);
+    line-height: 1.7;
+    margin: 0 0 var(--space-4);
+  }
+  .woe__p:last-child {
+    margin-bottom: 0;
+  }
+  .woe :global(mark) {
+    background: transparent;
+    color: var(--accent);
+    font-weight: 700;
+    box-shadow: inset 0 -0.4em 0 color-mix(in srgb, var(--accent) 20%, transparent);
+    padding: 0 0.05em;
+  }
+
+  .piece__note {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: var(--space-4) 0 0;
+  }
+
+  .orig {
+    margin-top: var(--space-4);
+    border-top: var(--border-w) solid var(--border);
+    padding-top: var(--space-3);
+  }
+  .orig__summary {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+  .orig__summary:hover {
+    color: var(--text);
+  }
+  .orig__p {
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: var(--space-3) 0 0;
+  }
+
+  .closing h2 {
+    font-size: var(--text-xl);
+    margin: 0 0 var(--space-3);
+  }
+  .closing p {
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  .closing__cta {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-top: var(--space-5);
+  }
+</style>

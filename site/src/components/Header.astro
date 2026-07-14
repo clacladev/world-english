@@ -1,36 +1,46 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
 import Search from './Search.astro';
+import LangSwitcher from './LangSwitcher.astro';
+import { getLocale, useTranslations, localePath, type UIKey } from '../i18n/ui';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
 
 const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
-const links = [
-  { href: '/rules/', label: 'The rules', match: '/rules' },
-  { href: '/translate/', label: 'Translate', match: '/translate' },
-  { href: '/showcase/', label: 'Read it', match: '/showcase' },
-  { href: '/research/', label: 'Research', match: '/research' },
-  { href: '/skills/', label: 'Skills', match: '/skills' },
-  { href: '/about/', label: 'About', match: '/about' },
+const links: { href: string; key: UIKey; match: string }[] = [
+  { href: '/rules/', key: 'nav.rules', match: '/rules' },
+  { href: '/translate/', key: 'nav.translate', match: '/translate' },
+  { href: '/showcase/', key: 'nav.showcase', match: '/showcase' },
+  { href: '/research/', key: 'nav.research', match: '/research' },
+  { href: '/skills/', key: 'nav.skills', match: '/skills' },
+  { href: '/about/', key: 'nav.about', match: '/about' },
 ];
-const isActive = (match: string) => path === match || path.startsWith(match + '/');
+// Active-state test is locale-aware: /es/rules should match the localized href.
+const isActive = (match: string) => {
+  const m = localePath(match, locale);
+  return path === m || path.startsWith(m + '/');
+};
 ---
 
 <header class="site-header">
   <div class="shell bar">
-    <a class="wordmark" href="/">
+    <a class="wordmark" href={localePath('/', locale)}>
       <span class="wordmark__name">World English</span>
       <span class="wordmark__say" aria-hidden="true">WERLD ING-glish</span>
     </a>
 
-    <nav class="nav" aria-label="Primary">
+    <nav class="nav" aria-label={t('nav.primary')}>
       {links.map((l) => (
-        <a href={l.href} class:list={['nav__link', { 'is-active': isActive(l.match) }]}>
-          {l.label}
+        <a href={localePath(l.href, locale)} class:list={['nav__link', { 'is-active': isActive(l.match) }]}>
+          {t(l.key)}
         </a>
       ))}
     </nav>
 
     <div class="tools">
       <Search />
+      <LangSwitcher />
       <ThemeToggle />
     </div>
   </div>

@@ -1,0 +1,153 @@
+---
+import { getLocale, localePath, defaultLocale } from '../../i18n/ui';
+
+const locale = getLocale(Astro.currentLocale);
+const lp = (path: string) => localePath(path, locale);
+
+// Heading ids stay in English so in-page anchors remain stable across locales;
+// only the visible text is translated.
+const COPY = {
+  en: {
+    eyebrow: 'About the project',
+    h1: 'What World English is',
+    lede:
+      'World English (WoE) is a deliberate revision of English that keeps what works and fixes what doesn’t — aiming for a variant that is regular, predictable, easier to learn, and still readable to anyone who knows English.',
+    intro:
+      'English is the default language of the internet, science, aviation, business, and travel. It is also, by accident of history rather than design, one of the harder languages to learn well: its spelling rarely predicts its sound, its verbs and plurals are riddled with memorized exceptions, and many of its “rules” are not rules at all but lists. In many respects World English is a <strong>subset</strong> of British and American English — it takes the common core and drops the irregular edges. In others it is a genuine <strong>reform</strong>, replacing rules that are broken beyond repair with something simpler.',
+    whyH: 'Why it exists',
+    why:
+      'A learner today must absorb thousands of irregular spellings, hundreds of irregular verbs, an oversized tense system, and a layer of near-arbitrary choices that native speakers themselves cannot explain. None of that complexity is necessary to communicate clearly — it is historical residue. World English asks, rigorously: <em>how simple could English be while still being English?</em> It is a research and design effort, not a campaign to make anyone switch.',
+    principlesH: 'Design principles',
+    principles: [
+      ['Subtract before you add', 'The first tool is removing irregularity, not inventing new grammar. Most wins come from regularizing what already exists.'],
+      ['Reform only where subtraction fails', 'Where a rule is irreparably arbitrary, replace it with a single predictable rule — even if that form isn’t standard English.'],
+      ['Stay legible', 'Spelling is regularized only lightly. A page of World English should never look alien to an English reader.'],
+      ['One rule, no exception lists', 'A feature is “done” only when it can be stated as a rule a beginner can apply, with no table of special cases.'],
+      ['Document the why', 'Every divergence from standard English is recorded with the learner problem it solves and the trade-off it accepts.'],
+    ],
+    methodH: 'How it is being designed',
+    methodLede: 'Each step produces documentation the next step builds on. Nothing is decided silently.',
+    method: [
+      'Map standard English — document the actual rules as a baseline.',
+      'Catalogue the difficulties — record what learners struggle with, and why.',
+      'Design the fixes — for each difficulty, a regularized rule with examples and trade-offs.',
+      'Specify the language — consolidate the rules into the specifications.',
+      'Prove the rules hold together — dogfood them on real passages and check them mechanically.',
+      'Build the tools — translators and pronunciation support.',
+    ],
+    notH: 'What it is not',
+    not: [
+      'Not a replacement for English in literature, law, or native everyday use.',
+      'Not a “dumbed-down” English — it expresses the same ideas with less arbitrary machinery.',
+      'Not a phonetic rewrite — spelling changes are conservative and recognizable.',
+      'Not finished — the rules keep changing as they are worked out.',
+    ],
+    ctaRules: 'Read the rules',
+    ctaResearch: 'See the research',
+  },
+  es: {
+    eyebrow: 'Acerca del proyecto',
+    h1: 'Qué es World English',
+    lede:
+      'World English (WoE) es una revisión deliberada del inglés que conserva lo que funciona y corrige lo que no, con el objetivo de una variante regular, predecible, más fácil de aprender y aún legible para cualquiera que sepa inglés.',
+    intro:
+      'El inglés es la lengua por defecto de internet, la ciencia, la aviación, los negocios y los viajes. También es, por accidente de la historia y no por diseño, uno de los idiomas más difíciles de aprender bien: su escritura rara vez predice su sonido, sus verbos y plurales están plagados de excepciones que hay que memorizar, y muchas de sus «reglas» no son reglas en absoluto, sino listas. En muchos aspectos World English es un <strong>subconjunto</strong> del inglés británico y estadounidense: toma el núcleo común y descarta los bordes irregulares. En otros es una auténtica <strong>reforma</strong>, que reemplaza reglas irreparables por algo más simple.',
+    whyH: 'Por qué existe',
+    why:
+      'Hoy quien aprende debe asimilar miles de grafías irregulares, cientos de verbos irregulares, un sistema de tiempos sobredimensionado y una capa de decisiones casi arbitrarias que ni los propios nativos saben explicar. Nada de esa complejidad hace falta para comunicarse con claridad: es residuo histórico. World English pregunta, con rigor: <em>¿cuán simple podría ser el inglés sin dejar de ser inglés?</em> Es un esfuerzo de investigación y diseño, no una campaña para que nadie cambie de idioma.',
+    principlesH: 'Principios de diseño',
+    principles: [
+      ['Restar antes de añadir', 'La primera herramienta es eliminar irregularidad, no inventar gramática nueva. La mayoría de las mejoras vienen de regularizar lo que ya existe.'],
+      ['Reformar solo cuando restar no basta', 'Donde una regla es arbitraria sin remedio, se reemplaza por una única regla predecible, aunque esa forma no sea inglés estándar.'],
+      ['Seguir siendo legible', 'La ortografía se regulariza solo de forma leve. Una página de World English nunca debería parecerle ajena a un lector de inglés.'],
+      ['Una regla, sin listas de excepciones', 'Una característica está «terminada» solo cuando puede enunciarse como una regla que un principiante pueda aplicar, sin una tabla de casos especiales.'],
+      ['Documentar el porqué', 'Cada divergencia del inglés estándar se registra junto con el problema de aprendizaje que resuelve y el compromiso que acepta.'],
+    ],
+    methodH: 'Cómo se está diseñando',
+    methodLede: 'Cada paso produce documentación sobre la que se apoya el siguiente. Nada se decide en silencio.',
+    method: [
+      'Mapear el inglés estándar: documentar las reglas reales como base.',
+      'Catalogar las dificultades: registrar con qué luchan quienes aprenden, y por qué.',
+      'Diseñar las soluciones: para cada dificultad, una regla regularizada con ejemplos y compromisos.',
+      'Especificar el idioma: consolidar las reglas en las especificaciones.',
+      'Probar que las reglas encajan: aplicarlas a pasajes reales y verificarlas de forma mecánica.',
+      'Construir las herramientas: traductores y apoyo a la pronunciación.',
+    ],
+    notH: 'Qué no es',
+    not: [
+      'No es un reemplazo del inglés en la literatura, el derecho o el uso cotidiano nativo.',
+      'No es un inglés «rebajado»: expresa las mismas ideas con menos maquinaria arbitraria.',
+      'No es una reescritura fonética: los cambios de ortografía son conservadores y reconocibles.',
+      'No está terminado: las reglas siguen cambiando a medida que se resuelven.',
+    ],
+    ctaRules: 'Lee las reglas',
+    ctaResearch: 'Ver la investigación',
+  },
+}[locale === defaultLocale ? 'en' : (locale as 'es')];
+---
+
+<div class="shell page prose measure" data-pagefind-body>
+  <p class="eyebrow">{COPY.eyebrow}</p>
+  <h1 id="what-is-world-english">{COPY.h1}</h1>
+
+  <p class="lede">{COPY.lede}</p>
+
+  <p set:html={COPY.intro} />
+
+  <h2 id="why">{COPY.whyH}</h2>
+  <p set:html={COPY.why} />
+
+  <h2 id="design-principles">{COPY.principlesH}</h2>
+  <ol class="principles">
+    {
+      COPY.principles.map(([title, body]) => (
+        <li>
+          <strong>{title}.</strong> {body}
+        </li>
+      ))
+    }
+  </ol>
+
+  <h2 id="methodology">{COPY.methodH}</h2>
+  <p>{COPY.methodLede}</p>
+  <ol class="method">
+    {COPY.method.map((step) => <li>{step}</li>)}
+  </ol>
+
+  <h2 id="not">{COPY.notH}</h2>
+  <ul>
+    {COPY.not.map((item) => <li>{item}</li>)}
+  </ul>
+
+  <div class="next">
+    <a class="btn btn--primary" href={lp('/rules/')}>{COPY.ctaRules}</a>
+    <a class="btn btn--ghost" href={lp('/research/')}>{COPY.ctaResearch}</a>
+  </div>
+</div>
+
+<style>
+  .page {
+    padding-block: var(--space-8) var(--space-10);
+  }
+  .page h1 {
+    font-size: var(--text-2xl);
+    margin: var(--space-2) 0 var(--space-4);
+  }
+  .principles,
+  .method {
+    padding-left: 1.25rem;
+  }
+  .principles li,
+  .method li {
+    margin-bottom: var(--space-3);
+  }
+  .principles strong {
+    color: var(--accent);
+  }
+  .next {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-top: var(--space-8);
+  }
+</style>

@@ -1,0 +1,621 @@
+---
+import BeforeAfter from '../BeforeAfter.astro';
+import RuleCard from '../RuleCard.astro';
+import { getLocale, localePath, defaultLocale } from '../../i18n/ui';
+
+const locale = getLocale(Astro.currentLocale);
+const lp = (path: string) => localePath(path, locale);
+
+// Page copy, per locale. WoE example forms (goed, taked, childs…), brand tokens,
+// and the pronunciation card stay verbatim in every language — only descriptive
+// prose is translated. English is the source of truth; add a locale by adding a
+// column below.
+const COPY = {
+  en: {
+    eyebrow: 'World English · WoE',
+    heroTitle: 'A simpler, more regular English.',
+    heroLede:
+      'English became the world’s shared language by accident of history — and it is one of the harder languages to learn well. <strong>World English</strong> is a careful revision that keeps what works and regularizes what doesn’t, so people anywhere can learn it with far less effort.',
+    sayCaption: 'How a word is written should tell you how it is said.',
+    statLabels: ['irregular verbs', 'forms of “be”', 'articles', 'irregular plurals'],
+    ctaRules: 'Read the rules',
+    ctaWhy: 'Why it exists',
+    ideaTitle: 'The idea in ten seconds',
+    ideaLede:
+      'Take ordinary English, then delete the exceptions. Every change is transparent — you can still read it at a glance.',
+    baNotes: [
+      'Regular verbs (M1) and regular plurals (M4); the perfect collapses to the simple past (G1).',
+      'One verb “be” for every person (M2); no “a/an” — indefinite things take no article (G2).',
+      'Questions use a trailing “?” and rising pitch — no do-support, no word-order flip (G6).',
+    ],
+    showcaseEyebrow: 'See it carry real weight',
+    showcaseCite: 'The Gettysburg Address, in World English',
+    showcaseBody:
+      'The best test of the reform is a text you already know by heart. We rendered the Universal Declaration of Human Rights and Lincoln\'s Gettysburg Address in World English by the book — every line applying the published rules, with not one abolished form left in. See what changes, and how much doesn\'t.',
+    showcaseCta: 'Read them in World English →',
+    goalsTitle: 'What it aims to be',
+    goalsLede: 'Four goals, in the project’s own words.',
+    goals: [
+      ['Regular', 'Rules apply consistently, with as few exceptions as possible.'],
+      ['Predictable', 'Know the rule and you can produce and read new forms — nobody has to teach you each one.'],
+      ['Easier', 'Less to memorize, fewer traps, a gentler learning curve.'],
+      ['Readable', 'To someone who already knows English, it still looks and reads like English. An evolution, not a cipher.'],
+    ],
+    prioTitle: 'What comes first',
+    prioLede:
+      'Language exists for communication, so World English orders its priorities plainly:',
+    prioChain: ['ease', 'clarity', 'entertainment'],
+    prioTail:
+      'Where they conflict, the earlier one wins — which is why it trades away idiom and flourish. One constraint bounds all three: it must stay <strong>legible as English</strong>. An evolution, not a cipher.',
+    rulesTitle: 'The main rules at a glance',
+    rulesLede: 'A few of the load-bearing changes. Each links into the full specification.',
+    ruleCards: [
+      ['M1', 'All verbs are regular'],
+      ['M3', 'No third-person “-s”'],
+      ['M4', 'All plurals are regular'],
+      ['G2', 'One article'],
+      ['G1', 'A leaner tense system'],
+      ['G6', 'Simple questions'],
+      ['O1', 'One spelling'],
+      ['P1', 'Spelling predicts sound'],
+    ],
+    rulesMore: 'See all the rules →',
+    teaserEyebrow: 'Grounded in evidence',
+    teaserTitle: 'The reasoning behind it',
+    teaserCtaResearch: 'Read the research →',
+    teaserCtaAbout: 'About the project →',
+  },
+  es: {
+    eyebrow: 'World English · WoE',
+    heroTitle: 'Un inglés más simple y más regular.',
+    heroLede:
+      'El inglés se convirtió en la lengua común del mundo por accidente de la historia, y es uno de los idiomas más difíciles de aprender bien. <strong>World English</strong> es una revisión cuidadosa que conserva lo que funciona y regulariza lo que no, para que cualquier persona pueda aprenderlo con mucho menos esfuerzo.',
+    sayCaption: 'Cómo se escribe una palabra debería decirte cómo se pronuncia.',
+    statLabels: ['verbos irregulares', 'formas de «be»', 'artículos', 'plurales irregulares'],
+    ctaRules: 'Lee las reglas',
+    ctaWhy: 'Por qué existe',
+    ideaTitle: 'La idea en diez segundos',
+    ideaLede:
+      'Toma el inglés corriente y elimina las excepciones. Cada cambio es transparente: aún puedes leerlo de un vistazo.',
+    baNotes: [
+      'Verbos regulares (M1) y plurales regulares (M4); el perfecto se reduce al pasado simple (G1).',
+      'Un solo verbo «be» para toda persona (M2); sin «a/an»: lo indefinido no lleva artículo (G2).',
+      'Las preguntas usan un «?» final y entonación ascendente: sin do-support ni cambio de orden (G6).',
+    ],
+    showcaseEyebrow: 'Míralo sostener peso de verdad',
+    showcaseCite: 'El Discurso de Gettysburg, en World English',
+    showcaseBody:
+      'La mejor prueba de la reforma es un texto que ya te sabes de memoria. Tradujimos la Declaración Universal de Derechos Humanos y el Discurso de Gettysburg de Lincoln a World English al pie de la letra: cada línea aplica las reglas publicadas, sin dejar ni una forma abolida. Mira qué cambia y cuánto no cambia.',
+    showcaseCta: 'Léelos en World English →',
+    goalsTitle: 'Lo que aspira a ser',
+    goalsLede: 'Cuatro metas, en palabras del propio proyecto.',
+    goals: [
+      ['Regular', 'Las reglas se aplican de forma consistente, con las menos excepciones posibles.'],
+      ['Predecible', 'Conoce la regla y podrás producir y leer formas nuevas: nadie tiene que enseñarte cada una.'],
+      ['Más fácil', 'Menos que memorizar, menos trampas, una curva de aprendizaje más suave.'],
+      ['Legible', 'Para quien ya sabe inglés, sigue pareciendo y leyéndose como inglés. Una evolución, no un cifrado.'],
+    ],
+    prioTitle: 'Qué va primero',
+    prioLede:
+      'El lenguaje existe para comunicar, así que World English ordena sus prioridades con claridad:',
+    prioChain: ['facilidad', 'claridad', 'entretenimiento'],
+    prioTail:
+      'Cuando entran en conflicto, gana la anterior, y por eso renuncia al modismo y al adorno. Una sola restricción abarca las tres: debe seguir siendo <strong>legible como inglés</strong>. Una evolución, no un cifrado.',
+    rulesTitle: 'Las reglas principales de un vistazo',
+    rulesLede: 'Algunos de los cambios de fondo. Cada uno enlaza con la especificación completa.',
+    ruleCards: [
+      ['M1', 'Todos los verbos son regulares'],
+      ['M3', 'Sin «-s» de tercera persona'],
+      ['M4', 'Todos los plurales son regulares'],
+      ['G2', 'Un solo artículo'],
+      ['G1', 'Un sistema de tiempos más simple'],
+      ['G6', 'Preguntas simples'],
+      ['O1', 'Una sola ortografía'],
+      ['P1', 'La escritura predice el sonido'],
+    ],
+    rulesMore: 'Ver todas las reglas →',
+    teaserEyebrow: 'Con base en la evidencia',
+    teaserTitle: 'El razonamiento detrás',
+    teaserCtaResearch: 'Lee la investigación →',
+    teaserCtaAbout: 'Sobre el proyecto →',
+  },
+}[locale === defaultLocale ? 'en' : (locale as 'es')];
+
+// Static data whose WoE example forms never translate; only labels come from COPY.
+const stats = [
+  { before: '≈200', after: '0', href: '/rules/morphology/#rule-m1--all-verbs-are-regular' },
+  { before: '8', after: '3', href: '/rules/morphology/#rule-m2--one-verb-of-be-regularized' },
+  { before: '3', after: '1', href: '/rules/grammar/#rule-g2--one-article-rule' },
+  { before: 'dozens', after: '0', href: '/rules/morphology/#rule-m4--all-plurals-are-regular' },
+].map((s, i) => ({ ...s, label: COPY.statLabels[i] }));
+
+const ruleMeta = [
+  { href: '/rules/morphology/#rule-m1--all-verbs-are-regular' },
+  { href: '/rules/morphology/#rule-m3--no-third-person--s' },
+  { href: '/rules/morphology/#rule-m4--all-plurals-are-regular' },
+  { href: '/rules/grammar/#rule-g2--one-article-rule' },
+  { href: '/rules/grammar/#rule-g1--a-leaner-tenseaspect-system' },
+  { href: '/rules/grammar/#rule-g6--regular-questions-and-negation-no-do-support' },
+  { href: '/rules/orthography/#rule-o1--one-dialect-one-spelling' },
+  { href: '/rules/pronunciation/' },
+];
+---
+
+<!-- Hero -->
+<section class="hero">
+  <div class="shell">
+    <div class="hero__inner col">
+    <p class="eyebrow">{COPY.eyebrow}</p>
+    <h1 class="hero__title">{COPY.heroTitle}</h1>
+    <p class="hero__lede" set:html={COPY.heroLede} />
+
+    <div class="say-card">
+      <div class="say-card__row">
+        <span class="say-card__name">World English</span>
+        <span class="say-card__arrow" aria-hidden="true">→</span>
+        <span class="say-card__respell">WERLD ING-glish</span>
+        <span class="say-card__ipa" lang="en-fonipa">/wɝld ˈɪŋɡlɪʃ/</span>
+      </div>
+      <p class="say-card__caption">{COPY.sayCaption}</p>
+    </div>
+
+    <ul class="hero-stats">
+      {
+        stats.map((s) => (
+          <li class="hero-stat">
+            <a href={lp(s.href)}>
+              <span class="hero-stat__nums" aria-hidden="true">
+                <s class="hero-stat__before">{s.before}</s>
+                <span class="hero-stat__arrow" aria-hidden="true">→</span>
+                <b class="hero-stat__after">{s.after}</b>
+              </span>
+              <span class="hero-stat__label">{s.label}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="hero__cta">
+      <a class="btn btn--primary" href={lp('/rules/')}>{COPY.ctaRules}</a>
+      <a class="btn btn--ghost" href={lp('/research/')}>{COPY.ctaWhy}</a>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- The idea in 10 seconds -->
+<section class="section">
+  <div class="shell">
+    <div class="col">
+    <header class="sec-head">
+      <h2>{COPY.ideaTitle}</h2>
+      <p class="lede">{COPY.ideaLede}</p>
+    </header>
+
+    <div class="ba-stack">
+      <BeforeAfter note={COPY.baNotes[0]}>
+        <Fragment slot="before">She has <mark>taken</mark> the <mark>children</mark> to see the <mark>mice</mark>.</Fragment>
+        <Fragment slot="after">She <mark>taked</mark> the <mark>childs</mark> to see the <mark>mouses</mark>.</Fragment>
+      </BeforeAfter>
+
+      <BeforeAfter note={COPY.baNotes[1]}>
+        <Fragment slot="before">She <mark>is</mark> <mark>a</mark> good doctor.</Fragment>
+        <Fragment slot="after">She <mark>be</mark> good doctor.</Fragment>
+      </BeforeAfter>
+
+      <BeforeAfter note={COPY.baNotes[2]}>
+        <Fragment slot="before"><mark>Have you seen</mark> my keys?</Fragment>
+        <Fragment slot="after"><mark>You seed</mark> my keys?</Fragment>
+      </BeforeAfter>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- Showcase -->
+<section class="section">
+  <div class="shell">
+    <div class="col">
+    <div class="showcase">
+      <p class="showcase__eyebrow">{COPY.showcaseEyebrow}</p>
+      <blockquote class="showcase__quote">
+        “…that these dead shall not die in vain — that this nation, under God, shall have
+        <mark>new</mark> birth of freedom — and that government of the people, by the people,
+        for the people, shall not perish from the earth.”
+      </blockquote>
+      <p class="showcase__cite">{COPY.showcaseCite}</p>
+      <p class="showcase__body">{COPY.showcaseBody}</p>
+      <p class="showcase__cta">
+        <a class="btn btn--primary" href={lp('/showcase/')}>{COPY.showcaseCta}</a>
+      </p>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- Goals -->
+<section class="section section--tint">
+  <div class="shell">
+    <header class="sec-head col">
+      <h2>{COPY.goalsTitle}</h2>
+      <p class="lede">{COPY.goalsLede}</p>
+    </header>
+    <ul class="goals col">
+      {
+        COPY.goals.map(([title, body]) => (
+          <li class="goal">
+            <h3 class="goal__title">{title}</h3>
+            <p class="goal__body">{body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<!-- Priorities -->
+<section class="section">
+  <div class="shell">
+    <div class="col">
+    <header class="sec-head">
+      <h2>{COPY.prioTitle}</h2>
+    </header>
+    <p class="prio">
+      {COPY.prioLede}
+      <span class="prio__chain"
+        ><b>{COPY.prioChain[0]}</b> <span aria-hidden="true">›</span> <b>{COPY.prioChain[1]}</b>
+        <span aria-hidden="true">›</span> <b>{COPY.prioChain[2]}</b></span
+      >. <Fragment set:html={COPY.prioTail} />
+    </p>
+    </div>
+  </div>
+</section>
+
+<!-- Main rules at a glance -->
+<section class="section section--tint">
+  <div class="shell">
+    <header class="sec-head col">
+      <h2>{COPY.rulesTitle}</h2>
+      <p class="lede">{COPY.rulesLede}</p>
+    </header>
+    <div class="rule-grid col">
+      <RuleCard id="M1" title={COPY.ruleCards[0][1]} href={lp(ruleMeta[0].href)}>
+        <b>go → goed</b>, <b>take → taked</b>. About 200 irregular verbs disappear; one <code>-ed</code> rule replaces the list.
+      </RuleCard>
+      <RuleCard id="M3" title={COPY.ruleCards[1][1]} href={lp(ruleMeta[1].href)}>
+        <b>he go</b>, <b>she try</b>. One present-tense form for every person.
+      </RuleCard>
+      <RuleCard id="M4" title={COPY.ruleCards[2][1]} href={lp(ruleMeta[2].href)}>
+        <b>childs</b>, <b>foots</b>, <b>mouses</b>. Add <code>-s</code>, always — no irregular or borrowed plurals.
+      </RuleCard>
+      <RuleCard id="G2" title={COPY.ruleCards[3][1]} href={lp(ruleMeta[3].href)}>
+        Just <b>the</b>, for known things. Indefinite things take no article. No <em>a/an</em>.
+      </RuleCard>
+      <RuleCard id="G1" title={COPY.ruleCards[4][1]} href={lp(ruleMeta[4].href)}>
+        Three tenses, no perfect. Still true? Use present. Finished? Use past. The question has one answer.
+      </RuleCard>
+      <RuleCard id="G6" title={COPY.ruleCards[5][1]} href={lp(ruleMeta[5].href)}>
+        A trailing <b>?</b> and rising pitch. No <em>do</em>-support, no inversion, invariant tag <b>right?</b>
+      </RuleCard>
+      <RuleCard id="O1" title={COPY.ruleCards[6][1]} href={lp(ruleMeta[6].href)}>
+        <b>color</b>, <b>center</b>, <b>realize</b>. One dialect, the shorter and more phonetic form.
+      </RuleCard>
+      <RuleCard id="P1" title={COPY.ruleCards[7][1]} href={lp(ruleMeta[7].href)}>
+        A simple respelling key — <b>ING-glish</b> — so you can say any word from how it is written.
+      </RuleCard>
+    </div>
+    <p class="rule-grid__more col">
+      <a class="btn btn--ghost" href={lp('/rules/')}>{COPY.rulesMore}</a>
+    </p>
+  </div>
+</section>
+
+<!-- Research teaser -->
+<section class="section">
+  <div class="shell">
+    <div class="teaser col">
+    <header class="sec-head">
+      <p class="eyebrow">{COPY.teaserEyebrow}</p>
+      <h2>{COPY.teaserTitle}</h2>
+    </header>
+    <p>
+      {
+        locale === defaultLocale ? (
+          <Fragment>
+            World English is a design and research effort, not a campaign. It starts from a
+            research-backed survey of <a href={lp('/research/pain-points/')}>what actually makes English
+            hard to learn</a>, works from a <a href={lp('/research/irregularities/')}>catalogue of what the
+            language forces you to memorize</a>, and measures every choice against
+            <a href={lp('/research/prior-art/')}>a century of earlier reforms</a> — noting honestly where
+            the evidence backs a rule and where it pushes back.
+          </Fragment>
+        ) : (
+          <Fragment>
+            World English es un esfuerzo de diseño e investigación, no una campaña. Parte de un
+            estudio con base científica sobre <a href={lp('/research/pain-points/')}>qué hace que el inglés
+            sea difícil de aprender</a>, trabaja a partir de un <a href={lp('/research/irregularities/')}>catálogo de
+            lo que el idioma te obliga a memorizar</a> y contrasta cada decisión con
+            <a href={lp('/research/prior-art/')}>un siglo de reformas anteriores</a>, señalando con honestidad
+            dónde la evidencia respalda una regla y dónde la contradice.
+          </Fragment>
+        )
+      }
+    </p>
+    <p class="research-cta">
+      <a class="btn btn--ghost" href={lp('/research/')}>{COPY.teaserCtaResearch}</a>
+      <a class="btn btn--ghost" href={lp('/about/')}>{COPY.teaserCtaAbout}</a>
+    </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Hero */
+  .hero {
+    padding-block: var(--space-12) var(--space-10);
+    background:
+      radial-gradient(60rem 30rem at 50% -10%, var(--accent-soft), transparent 70%);
+  }
+  /* One shared, centered content column. Everything — hero, section heads,
+     prose, and card grids — spans exactly this width, left-aligned inside it,
+     so the whole page has a single axis and a single pair of edges. */
+  .col {
+    max-width: var(--content);
+    margin-inline: auto;
+  }
+
+  .hero__title {
+    font-size: var(--text-3xl);
+    margin: var(--space-2) 0 var(--space-4);
+  }
+  .hero__lede {
+    font-size: var(--text-md);
+    color: var(--text-muted);
+  }
+  .say-card {
+    margin: var(--space-8) 0 0;
+    max-width: 34rem;
+    background: var(--surface);
+    border: var(--border-w) solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-4) var(--space-5);
+  }
+  .say-card__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2) var(--space-3);
+  }
+  .say-card__name {
+    font-weight: 700;
+    font-size: var(--text-base);
+  }
+  .say-card__arrow {
+    color: var(--accent);
+  }
+  .say-card__respell,
+  .say-card__ipa {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+  }
+  .say-card__respell {
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+  .say-card__ipa {
+    color: var(--text-muted);
+  }
+  .say-card__caption {
+    margin: var(--space-3) 0 0;
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+  /* What disappears — the quantified hook under the pronunciation card */
+  .hero-stats {
+    list-style: none;
+    margin: var(--space-6) 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-3);
+    font-family: var(--font-sans);
+  }
+  .hero-stat a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1rem;
+    padding: var(--space-2) var(--space-4);
+    border: var(--border-w) solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    text-decoration: none;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.15s ease, transform 0.1s ease;
+  }
+  .hero-stat a:hover {
+    border-color: var(--accent-line);
+    transform: translateY(-2px);
+  }
+  .hero-stat__nums {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    font-size: var(--text-lg);
+    line-height: 1.2;
+  }
+  .hero-stat__before {
+    color: var(--text-muted);
+  }
+  .hero-stat__arrow {
+    color: var(--accent);
+  }
+  .hero-stat__after {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .hero-stat__label {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+
+  .hero__cta {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-top: var(--space-6);
+  }
+
+  /* Gentle entrance — global.css zeroes these durations under reduced motion */
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(0.6rem);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .hero__inner > * {
+    animation: hero-rise 0.5s ease-out backwards;
+  }
+  .hero__inner > :nth-child(2) { animation-delay: 0.06s; }
+  .hero__inner > :nth-child(3) { animation-delay: 0.12s; }
+  .hero__inner > :nth-child(4) { animation-delay: 0.18s; }
+  .hero__inner > :nth-child(5) { animation-delay: 0.24s; }
+  .hero__inner > :nth-child(6) { animation-delay: 0.3s; }
+
+  /* Section heads — same edges as everything else in the column. */
+  .sec-head {
+    margin-bottom: var(--space-6);
+  }
+  .sec-head h2 {
+    font-size: var(--text-xl);
+    margin: 0 0 var(--space-2);
+  }
+
+  .ba-stack {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  /* Goals */
+  .goals {
+    list-style: none;
+    margin-block: 0; /* block only — .col owns the inline (auto-centering) margins */
+    padding: 0;
+    display: grid;
+    /* Two even columns at column width; single column on narrow screens. */
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+    gap: var(--space-4);
+  }
+  .goal {
+    background: var(--surface);
+    border: var(--border-w) solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--space-5);
+  }
+  .goal__title {
+    font-size: var(--text-md);
+    margin: 0 0 var(--space-2);
+    color: var(--accent);
+  }
+  .goal__body {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.55;
+  }
+
+  /* Priorities */
+  .prio {
+font-size: var(--text-md);
+    line-height: 1.6;
+  }
+  .prio__chain {
+    white-space: nowrap;
+  }
+  .prio__chain b {
+    color: var(--accent);
+  }
+  .prio__chain span {
+    color: var(--text-muted);
+    margin-inline: 0.15em;
+  }
+
+  /* Rule grid */
+  .rule-grid {
+    display: grid;
+    /* Two even columns at column width; single column on narrow screens. */
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+    gap: var(--space-4);
+  }
+  .rule-grid :global(code) {
+    background: var(--surface-2);
+    border-radius: 4px;
+    padding: 0 0.3em;
+  }
+  .rule-grid__more {
+    margin-top: var(--space-6);
+  }
+
+  .research-cta {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-top: var(--space-5);
+  }
+
+  /* Showcase teaser — a famous text in WoE, boldly quoted */
+  .showcase {
+    border: var(--border-w) solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-6) var(--space-6) var(--space-5);
+  }
+  .showcase__eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 var(--space-3);
+  }
+  .showcase__quote {
+    font-family: var(--font-serif, Fraunces, serif);
+    font-size: var(--text-lg);
+    line-height: 1.6;
+    margin: 0;
+    border: 0;
+    padding: 0;
+  }
+  .showcase__quote mark {
+    background: transparent;
+    color: var(--accent);
+    font-weight: 700;
+    box-shadow: inset 0 -0.35em 0 color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+  .showcase__cite {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    margin: var(--space-3) 0 var(--space-5);
+  }
+  .showcase__body {
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0;
+  }
+  .showcase__cta {
+    margin: var(--space-5) 0 0;
+  }
+</style>
