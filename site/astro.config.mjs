@@ -36,4 +36,10 @@ export default defineConfig({
     ],
   },
   integrations: [sitemap()],
+  vite: {
+    server: {
+      // Allow importing the translator from ../tools during `astro dev`.
+      fs: { allow: [repoRoot.pathname] },
+    },
+  },
 });
