@@ -18,6 +18,9 @@ bun test             # unit + acceptance tests (all pass except one environment-
 
 The pronunciation tool's `--audio` flag requires `espeak-ng` on PATH (external dependency).
 
+The documentation site lives in `site/` (Astro + Pagefind search) with its own commands —
+run from that directory: `bun install`, `bun run dev`, `bun run build`. CI builds it separately.
+
 ## Architecture
 
 - `docs/` — the language specifications (orthography, pronunciation, morphology, grammar,
@@ -26,6 +29,10 @@ The pronunciation tool's `--audio` flag requires `espeak-ng` on PATH (external d
   and Brehe's Grammar Anatomy (standard-English reference).
 - `tools/` — Bun/TypeScript tooling: the spec linter, SE↔WoE translators, and pronunciation
   renderer. See [tools/README.md](tools/README.md) for details.
+- `site/` — the public documentation site (Astro), rendering `docs/` for the web.
+- `skills/world-english-translator/` — a self-contained World English Agent Skill. Its
+  `reference/data/*.json` is a generated copy of `tools/data/` — regenerate with
+  `bun run build:skill` after a data change; never hand-edit it (edits get overwritten).
 
 ## Key conventions
 
@@ -35,3 +42,29 @@ The pronunciation tool's `--audio` flag requires `espeak-ng` on PATH (external d
   arbitrary prose (which legitimately names abolished forms when explaining them).
 - The forward translator applies only deterministic transforms and flags everything else —
   never guesses. See tools/README.md "Limitations (by design)".
+
+## Changing a language rule
+
+Whenever a rule is added, changed, or removed, walk this checklist so the whole project stays
+consistent. Don't stop at the doc that owns the rule — a rule change ripples across specs,
+site, tooling, and the packaged skill.
+
+1. **Docs and their cross-references.** Update the owning spec in `docs/`, then grep the other
+   `docs/` files for anything that referenced the old rule (examples, cross-links, exception
+   lists). Update `docs/samples.md` — the regression test — so it reflects the new behavior.
+2. **Website content.** Review `site/` for any content that restates or depends on the rule
+   (the site renders `docs/`, but check hand-written pages and examples too). Rebuild with
+   `bun run build` from `site/` to confirm it still builds.
+3. **Translators, linter, and data.** Update `tools/` — the SE↔WoE translators, the linter's
+   abolished-form list, and the closed-list tables in `tools/data/` (`abolished-forms.json`,
+   `irregular-verbs.json`, `irregular-plurals.json`, `lexicon.json`) as the rule requires.
+4. **Tests and code checks.** From `tools/`, run `bun run lint`, `bun run typecheck`, and
+   `bun test`. Add or update tests for the new behavior; the linter sweep and `samples.md`
+   acceptance tests must pass.
+5. **Repackage the skill.** Run `bun run build:skill` from `tools/` to re-sync the generated
+   data snapshot into `skills/world-english-translator/reference/data/`. If the rule's prose
+   changed, also update the skill's hand-maintained files (`SKILL.md`, `reference/rules.md`,
+   `reference/examples.md`) — `build:skill` only copies data, not prose.
+6. **Final consistency pass.** Confirm docs, site, tools, tests, and the packaged skill all
+   describe the same rule. A rule is "done" only when it is statable without a hidden word list
+   and every surface above agrees (see Key conventions).
