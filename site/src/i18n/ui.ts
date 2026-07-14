@@ -8,7 +8,7 @@
 // partial translation never renders blank. See site/README.md → "Translations".
 
 export const defaultLocale = 'en' as const;
-export const locales = ['en', 'es', 'zh'] as const;
+export const locales = ['en', 'es', 'zh', 'pt', 'it'] as const;
 export type Locale = (typeof locales)[number];
 
 // Each language's own name — what its speakers recognize (no flags: a flag is a
@@ -17,6 +17,8 @@ export const localeNames: Record<Locale, string> = {
   en: 'English',
   es: 'Español',
   zh: '中文',
+  pt: 'Português',
+  it: 'Italiano',
 };
 
 // Shared UI strings, keyed by a stable dotted id. `en` is the source of truth;
@@ -94,6 +96,54 @@ const ui = {
     'footer.rights': 'World English 贡献者 · 代码：MIT · 文档：',
     'englishOnly.page': '本页面仅提供英文版本。',
     'englishOnly.spec': '本规范仅提供英文版本。',
+  },
+  pt: {
+    'nav.rules': 'As regras',
+    'nav.translate': 'Traduzir',
+    'nav.showcase': 'Leia',
+    'nav.research': 'Pesquisa',
+    'nav.skills': 'Skills',
+    'nav.about': 'Sobre',
+    'nav.primary': 'Principal',
+    'search.label': 'Buscar',
+    'search.close': 'Esc',
+    'search.title': 'Buscar',
+    'search.note': 'A busca é gerada na compilação. Rode <code>bun run build &amp;&amp; bun run preview</code> para testá-la localmente.',
+    'lang.label': 'Idioma',
+    'skip': 'Pular para o conteúdo',
+    'footer.status': 'Um projeto aberto de design e pesquisa — tudo aqui é provisório.',
+    'footer.reference': 'Referência',
+    'footer.aboutProject': 'Sobre o projeto',
+    'footer.project': 'Projeto',
+    'footer.repo': 'Repositório no GitHub',
+    'footer.feedback': 'Enviar feedback',
+    'footer.rights': 'Colaboradores do World English · Código: MIT · Docs:',
+    'englishOnly.page': 'Esta página está disponível apenas em inglês.',
+    'englishOnly.spec': 'Esta especificação está disponível apenas em inglês.',
+  },
+  it: {
+    'nav.rules': 'Le regole',
+    'nav.translate': 'Traduci',
+    'nav.showcase': 'Leggilo',
+    'nav.research': 'Ricerca',
+    'nav.skills': 'Skills',
+    'nav.about': 'Informazioni',
+    'nav.primary': 'Principale',
+    'search.label': 'Cerca',
+    'search.close': 'Esc',
+    'search.title': 'Cerca',
+    'search.note': 'La ricerca viene generata in fase di build. Esegui <code>bun run build &amp;&amp; bun run preview</code> per provarla in locale.',
+    'lang.label': 'Lingua',
+    'skip': 'Vai al contenuto',
+    'footer.status': 'Un progetto aperto di design e ricerca — qui è tutto provvisorio.',
+    'footer.reference': 'Riferimento',
+    'footer.aboutProject': 'Informazioni sul progetto',
+    'footer.project': 'Progetto',
+    'footer.repo': 'Repository GitHub',
+    'footer.feedback': 'Invia un feedback',
+    'footer.rights': 'Collaboratori di World English · Codice: MIT · Docs:',
+    'englishOnly.page': 'Questa pagina è disponibile solo in inglese.',
+    'englishOnly.spec': 'Questa specifica è disponibile solo in inglese.',
   },
 } as const;
 
