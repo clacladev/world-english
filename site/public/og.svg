@@ -1,5 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="World English — a simpler, more regular English">
+  <defs>
+    <!-- Soft accent glow — the same warm halo the site paints below its header (accent-soft) -->
+    <radialGradient id="glow" cx="50%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#fdf0e8"/>
+      <stop offset="70%" stop-color="#fdf0e8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
   <rect width="1200" height="630" fill="#f6f5f1"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
   <rect width="1200" height="12" fill="#c2410c"/>
   <g font-family="Fraunces, Georgia, 'Times New Roman', serif" fill="#353534">
     <text x="90" y="180" font-size="34" letter-spacing="3" fill="#c2410c" font-family="Inter, system-ui, sans-serif" font-weight="600">WORLD ENGLISH · WoE</text>
