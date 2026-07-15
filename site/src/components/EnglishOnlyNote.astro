@@ -1,0 +1,53 @@
+---
+// Shown on pages whose chrome is translated but whose body is still English.
+// Renders nothing on the default (English) locale.
+import { getLocale, useTranslations, defaultLocale, type UIKey } from '../i18n/ui';
+
+interface Props {
+  // Which note to show: the generic page note or the specification note.
+  kind?: 'page' | 'spec';
+}
+
+const { kind = 'page' } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const key = (kind === 'spec' ? 'englishOnly.spec' : 'englishOnly.page') as UIKey;
+---
+
+{locale !== defaultLocale && (
+  <p class="english-only" lang="es">
+    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" />
+      <path d="M12 8v5M12 16.5v.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </svg>
+    <span>{t(key)}</span>
+  </p>
+)}
+
+<style>
+  .english-only {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    /* Match the content column on every page: cap at the shared 52rem measure
+       and center, so the note never spills to full width when it is dropped
+       directly into a page shell (e.g. the rules/research index pages) rather
+       than inside a centered content column. */
+    width: 100%;
+    max-width: var(--content);
+    box-sizing: border-box;
+    margin: 0 auto var(--space-6);
+    padding: var(--space-3) var(--space-4);
+    border: var(--border-w) solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+  }
+  .english-only svg {
+    flex: none;
+    color: var(--accent);
+  }
+</style>

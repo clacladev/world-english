@@ -1,0 +1,33 @@
+---
+// Italian route mirror of /rules/[slug]. The chrome renders in Italian (from the
+// /it URL prefix); the spec body stays English with an "English only" note. See
+// site/README.md → "Translations".
+import { getCollection, render } from 'astro:content';
+import Doc from '../../../layouts/Doc.astro';
+import { SPEC_NAV } from '../../../lib/nav';
+
+export async function getStaticPaths() {
+  const specs = await getCollection('specs');
+  const allowed = new Set(SPEC_NAV.map((n) => n.slug));
+  return specs
+    .filter((e) => allowed.has(e.id))
+    .map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const meta = SPEC_NAV.find((n) => n.slug === entry.id)!;
+---
+
+<Doc
+  title={meta.title}
+  description={meta.blurb}
+  sectionLabel="The rules"
+  sectionHref="/rules/"
+  basePath="/rules"
+  items={SPEC_NAV}
+  current={entry.id}
+  headings={headings}
+>
+  <Content />
+</Doc>

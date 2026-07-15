@@ -1,0 +1,128 @@
+---
+import Callout from '../Callout.astro';
+import { getLocale, localePath } from '../../i18n/ui';
+import EnglishOnlyNote from '../EnglishOnlyNote.astro';
+const locale = getLocale(Astro.currentLocale);
+
+const repo = 'https://github.com/clacladev/world-english';
+const skillPath = 'skills/world-english-translator';
+---
+
+<div class="shell page prose measure" data-pagefind-body>
+  <EnglishOnlyNote />
+  <p class="eyebrow">Agent Skill</p>
+  <h1 id="translate-in-your-agent">Translate in your agent</h1>
+
+  <p class="lede">
+    A single Agent Skill that does full, judgment-based World English translation — both
+    directions, in any AI coding agent that can read a file. Install once, it stays fresh on
+    its own.
+  </p>
+
+  <h2 id="what-it-is">What it is</h2>
+  <p>
+    The <a href={localePath('/translate/', locale)}>in-browser translator</a> on this site is deliberately
+    conservative: it applies only the high-confidence, closed-class rules and flags everything
+    that needs judgment — dropping an article, dropping a third-person <code>-s</code>, resolving
+    a homograph. This skill is the judgment layer. Point your agent at a passage and ask it to
+    translate to or from World English, and it resolves the flagged cases too, using the same
+    published rules a human translator would apply by hand.
+  </p>
+  <p>
+    It works the same way in <strong>Claude Code</strong>, <strong>Cursor</strong>,
+    <strong>Codex</strong>, <strong>Gemini CLI</strong>, or any agent that can read a Markdown
+    file — one skill, not one rewrite per agent. Notes are optional: ask for a clean translation,
+    or ask it to explain the changes and it cites the rule behind each one, the same way
+    <a href={localePath('/rules/samples/', locale)}>the samples page</a> does.
+  </p>
+
+  <h2 id="install">Install</h2>
+  <p>Run this once:</p>
+  <pre><code>curl -fsSL https://worldenglish.tugulab.org/install.sh | sh</code></pre>
+  <p>
+    It downloads the skill to <code>~/.agents/skills/world-english-translator/</code> and, if
+    Claude Code is installed, automatically symlinks it into
+    <code>~/.claude/skills/</code>. The script is POSIX <code>sh</code>, needs only
+    <code>curl</code> and <code>tar</code>, and is safe to re-run — re-running refreshes the
+    skill in place.
+  </p>
+
+  <h2 id="per-agent-wiring">Per-agent wiring</h2>
+  <p>
+    The skill content is the same everywhere — only how an agent <em>discovers</em> it differs.
+  </p>
+  <ul>
+    <li>
+      <strong>Claude Code</strong> — done automatically by the installer. Manual fallback:
+      <pre><code>ln -s ~/.agents/skills/world-english-translator ~/.claude/skills/world-english-translator</code></pre>
+    </li>
+    <li>
+      <strong>Other agents</strong> — point your agent, or your project's <code>AGENTS.md</code>,
+      at:
+      <pre><code>~/.agents/skills/world-english-translator/SKILL.md</code></pre>
+    </li>
+    <li>
+      <strong>Manual install</strong> (any agent) — download the
+      <a href={`${repo}/tree/dev/${skillPath}`} target="_blank" rel="noopener">skill folder</a>
+      into <code>~/.agents/skills/</code> yourself.
+    </li>
+  </ul>
+
+  <h2 id="keep-it-fresh">Keep it fresh (weekly)</h2>
+  <p>
+    The rules keep changing as they're worked out, so the skill is designed to update itself
+    rather than go stale. Answer <strong>y</strong> when the installer asks about a weekly
+    auto-update, or pass <code>--cron</code> up front:
+  </p>
+  <pre><code>curl -fsSL https://worldenglish.tugulab.org/install.sh | sh -s -- --cron</code></pre>
+  <p>
+    This adds a Monday 09:00 <code>crontab</code> entry that re-runs the installer, rewriting
+    the neutral copy — any agent symlinked to it (Claude Code included) picks up the fresh
+    content automatically, with no re-linking needed. Prefer to manage it yourself? The
+    equivalent line is:
+  </p>
+  <pre><code>0 9 * * 1 curl -fsSL https://worldenglish.tugulab.org/install.sh | sh</code></pre>
+  <Callout title="Windows">
+    <p>
+      <code>cron</code> is macOS/Linux only. On Windows, create a weekly Task Scheduler task
+      that runs the same one-liner under WSL or Git Bash, or just re-run the install command by
+      hand whenever you want the latest rules.
+    </p>
+  </Callout>
+
+  <h2 id="using-it">Using it</h2>
+  <p>Once installed, just ask, in plain language:</p>
+  <ul>
+    <li><em>"Translate this to World English: …"</em></li>
+    <li><em>"Translate this to World English, and explain the changes."</em></li>
+    <li><em>"Put this World English back into standard English."</em></li>
+  </ul>
+
+  <h2 id="source">Source</h2>
+  <p>
+    The skill is part of the World English repository, under the same open licensing as the
+    rest of the project — code MIT, docs CC BY 4.0.
+  </p>
+  <p class="next">
+    <a class="btn btn--primary" href={`${repo}/tree/dev/${skillPath}`} target="_blank" rel="noopener"
+      >View the skill on GitHub</a
+    >
+    <a class="btn btn--ghost" href={localePath('/rules/', locale)}>Read the rules</a>
+  </p>
+</div>
+
+<style>
+  .page {
+    padding-block: var(--space-8) var(--space-10);
+  }
+  .page h1 {
+    font-size: var(--text-2xl);
+    margin: var(--space-2) 0 var(--space-4);
+  }
+  .next {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-top: var(--space-8);
+  }
+</style>

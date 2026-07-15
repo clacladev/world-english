@@ -1,0 +1,268 @@
+---
+import { getLocale, localePath, defaultLocale } from '../../i18n/ui';
+
+const locale = getLocale(Astro.currentLocale);
+const lp = (path: string) => localePath(path, locale);
+
+// Heading ids stay in English so in-page anchors remain stable across locales;
+// only the visible text is translated. A missing locale falls back to English.
+const DICT = {
+  en: {
+    eyebrow: 'About the project',
+    h1: 'What World English is',
+    lede:
+      'World English (WoE) is a deliberate revision of English that keeps what works and fixes what doesn’t — aiming for a variant that is regular, predictable, easier to learn, and still readable to anyone who knows English.',
+    intro:
+      'English is the default language of the internet, science, aviation, business, and travel. It is also, by accident of history rather than design, one of the harder languages to learn well: its spelling rarely predicts its sound, its verbs and plurals are riddled with memorized exceptions, and many of its “rules” are not rules at all but lists. In many respects World English is a <strong>subset</strong> of British and American English — it takes the common core and drops the irregular edges. In others it is a genuine <strong>reform</strong>, replacing rules that are broken beyond repair with something simpler.',
+    whyH: 'Why it exists',
+    why:
+      'A learner today must absorb thousands of irregular spellings, hundreds of irregular verbs, an oversized tense system, and a layer of near-arbitrary choices that native speakers themselves cannot explain. None of that complexity is necessary to communicate clearly — it is historical residue. World English asks, rigorously: <em>how simple could English be while still being English?</em> It is a research and design effort, not a campaign to make anyone switch.',
+    principlesH: 'Design principles',
+    principles: [
+      ['Subtract before you add', 'The first tool is removing irregularity, not inventing new grammar. Most wins come from regularizing what already exists.'],
+      ['Reform only where subtraction fails', 'Where a rule is irreparably arbitrary, replace it with a single predictable rule — even if that form isn’t standard English.'],
+      ['Stay legible', 'Spelling is regularized only lightly. A page of World English should never look alien to an English reader.'],
+      ['One rule, no exception lists', 'A feature is “done” only when it can be stated as a rule a beginner can apply, with no table of special cases.'],
+      ['Document the why', 'Every divergence from standard English is recorded with the learner problem it solves and the trade-off it accepts.'],
+    ],
+    methodH: 'How it is being designed',
+    methodLede: 'Each step produces documentation the next step builds on. Nothing is decided silently.',
+    method: [
+      'Map standard English — document the actual rules as a baseline.',
+      'Catalogue the difficulties — record what learners struggle with, and why.',
+      'Design the fixes — for each difficulty, a regularized rule with examples and trade-offs.',
+      'Specify the language — consolidate the rules into the specifications.',
+      'Prove the rules hold together — dogfood them on real passages and check them mechanically.',
+      'Build the tools — translators and pronunciation support.',
+    ],
+    notH: 'What it is not',
+    not: [
+      'Not a replacement for English in literature, law, or native everyday use.',
+      'Not a “dumbed-down” English — it expresses the same ideas with less arbitrary machinery.',
+      'Not a phonetic rewrite — spelling changes are conservative and recognizable.',
+      'Not finished — the rules keep changing as they are worked out.',
+    ],
+    ctaRules: 'Read the rules',
+    ctaResearch: 'See the research',
+  },
+  es: {
+    eyebrow: 'Acerca del proyecto',
+    h1: 'Qué es World English',
+    lede:
+      'World English (WoE) es una revisión deliberada del inglés que conserva lo que funciona y corrige lo que no, con el objetivo de una variante regular, predecible, más fácil de aprender y aún legible para cualquiera que sepa inglés.',
+    intro:
+      'El inglés es la lengua por defecto de internet, la ciencia, la aviación, los negocios y los viajes. También es, por accidente de la historia y no por diseño, uno de los idiomas más difíciles de aprender bien: su ortografía rara vez predice su sonido, sus verbos y plurales están plagados de excepciones que hay que memorizar, y muchas de sus «reglas» no son reglas en absoluto, sino listas. En muchos aspectos World English es un <strong>subconjunto</strong> del inglés británico y estadounidense: toma el núcleo común y descarta los bordes irregulares. En otros es una auténtica <strong>reforma</strong>, que reemplaza reglas irreparables por algo más simple.',
+    whyH: 'Por qué existe',
+    why:
+      'Hoy quien aprende debe asimilar miles de grafías irregulares, cientos de verbos irregulares, un sistema de tiempos sobredimensionado y una capa de decisiones casi arbitrarias que ni los propios nativos saben explicar. Nada de esa complejidad hace falta para comunicarse con claridad: es residuo histórico. World English pregunta, con rigor: <em>¿cuán simple podría ser el inglés sin dejar de ser inglés?</em> Es un esfuerzo de investigación y diseño, no una campaña para que nadie cambie de idioma.',
+    principlesH: 'Principios de diseño',
+    principles: [
+      ['Restar antes de añadir', 'La primera herramienta es eliminar irregularidad, no inventar gramática nueva. La mayoría de las mejoras vienen de regularizar lo que ya existe.'],
+      ['Reformar solo cuando restar no basta', 'Donde una regla es arbitraria sin remedio, se reemplaza por una única regla predecible, aunque esa forma no sea inglés estándar.'],
+      ['Seguir siendo legible', 'La ortografía se regulariza solo de forma leve. Una página de World English nunca debería parecerle ajena a un lector de inglés.'],
+      ['Una regla, sin listas de excepciones', 'Una característica está «terminada» solo cuando puede enunciarse como una regla que un principiante pueda aplicar, sin una tabla de casos especiales.'],
+      ['Documentar el porqué', 'Cada divergencia del inglés estándar se registra junto con el problema de aprendizaje que resuelve y el compromiso que acepta.'],
+    ],
+    methodH: 'Cómo se está diseñando',
+    methodLede: 'Cada paso produce documentación sobre la que se apoya el siguiente. Nada se decide en silencio.',
+    method: [
+      'Mapear el inglés estándar: documentar las reglas reales como base.',
+      'Catalogar las dificultades: registrar con qué luchan quienes aprenden, y por qué.',
+      'Diseñar las soluciones: para cada dificultad, una regla regularizada con ejemplos y compromisos.',
+      'Especificar el idioma: consolidar las reglas en las especificaciones.',
+      'Probar que las reglas encajan: aplicarlas a pasajes reales y verificarlas de forma mecánica.',
+      'Construir las herramientas: traductores y apoyo a la pronunciación.',
+    ],
+    notH: 'Qué no es',
+    not: [
+      'No es un reemplazo del inglés en la literatura, el derecho o el uso cotidiano nativo.',
+      'No es un inglés «rebajado»: expresa las mismas ideas con menos maquinaria arbitraria.',
+      'No es una reescritura fonética: los cambios de ortografía son conservadores y reconocibles.',
+      'No está terminado: las reglas siguen cambiando a medida que se resuelven.',
+    ],
+    ctaRules: 'Lee las reglas',
+    ctaResearch: 'Ver la investigación',
+  },
+  zh: {
+    eyebrow: '关于本项目',
+    h1: 'World English 是什么',
+    lede:
+      'World English（WoE）是对英语的一次审慎修订：保留行之有效的部分，修正不合理的部分——目标是一种规则、可预测、更易学、又依然让任何懂英语的人都读得懂的变体。',
+    intro:
+      '英语是互联网、科学、航空、商业和旅行的默认语言。然而，由于历史的偶然而非有意的设计，它也是最难学好的语言之一：拼写很少能预示读音，动词和复数充斥着需要死记的例外，许多所谓的“规则”根本不是规则，而是清单。在许多方面，World English 是英式与美式英语的一个<strong>子集</strong>——取其共同的核心，舍去不规则的边角。在另一些方面，它是一次真正的<strong>改革</strong>，用更简单的东西替换那些已无可救药的规则。',
+    whyH: '为什么存在',
+    why:
+      '今天的学习者必须吸收成千上万的不规则拼写、数百个不规则动词、一套过于庞大的时态系统，以及一层连母语者自己都解释不清的近乎任意的选择。要清晰地交流，这些复杂性一样都不需要——它们只是历史的沉积物。World English 严谨地发问：<em>英语在仍然是英语的前提下，能简单到什么程度？</em>它是一项研究与设计的工作，而不是一场劝人改用它的运动。',
+    principlesH: '设计原则',
+    principles: [
+      ['先做减法，再做加法', '首要的工具是去除不规则，而不是发明新的语法。大多数收益都来自把已有的东西规整化。'],
+      ['只有在减法失效时才改革', '当一条规则任意到无可救药时，用一条可预测的规则取而代之——哪怕那种形式并非标准英语。'],
+      ['保持易读', '拼写只做轻微的规整。一页 World English 绝不应让英语读者感到陌生。'],
+      ['一条规则，没有例外清单', '一项特性只有当它能被表述为初学者可套用的规则、且不带一张特例表时，才算“完成”。'],
+      ['记录缘由', '每一处偏离标准英语的改动，都连同它解决的学习问题和它接受的取舍一并记录在案。'],
+    ],
+    methodH: '它是如何设计的',
+    methodLede: '每一步都产出下一步所依据的文档。没有什么是悄悄决定的。',
+    method: [
+      '梳理标准英语——把实际的规则记录下来作为基线。',
+      '编录难点——记录学习者的困难，以及原因。',
+      '设计对策——针对每个难点，给出一条规整化的规则，附带示例和取舍。',
+      '规范语言——把规则整合进各项规范。',
+      '证明规则自洽——把它们套用到真实文段上，并做机械化检验。',
+      '打造工具——翻译器和发音支持。',
+    ],
+    notH: '它不是什么',
+    not: [
+      '不是文学、法律或母语日常使用中对英语的替代。',
+      '不是“降智版”英语——它用更少的任意机制表达同样的意思。',
+      '不是拼音式改写——拼写改动保守且可辨认。',
+      '尚未完成——规则在被逐一厘清的过程中还会变动。',
+    ],
+    ctaRules: '阅读规则',
+    ctaResearch: '查看研究',
+  },
+  pt: {
+    eyebrow: 'Sobre o projeto',
+    h1: 'O que é o World English',
+    lede:
+      'O World English (WoE) é uma revisão deliberada do inglês que mantém o que funciona e conserta o que não funciona — buscando uma variante regular, previsível, mais fácil de aprender e ainda legível para quem sabe inglês.',
+    intro:
+      'O inglês é a língua padrão da internet, da ciência, da aviação, dos negócios e das viagens. É também, por acaso da história e não por projeto, um dos idiomas mais difíceis de aprender bem: sua grafia raramente prevê o som, seus verbos e plurais estão cheios de exceções decoradas, e muitas de suas “regras” não são regras, mas listas. Em muitos aspectos, o World English é um <strong>subconjunto</strong> do inglês britânico e americano — pega o núcleo comum e descarta as bordas irregulares. Em outros, é uma verdadeira <strong>reforma</strong>, substituindo regras quebradas sem conserto por algo mais simples.',
+    whyH: 'Por que existe',
+    why:
+      'Quem aprende hoje precisa absorver milhares de grafias irregulares, centenas de verbos irregulares, um sistema de tempos exagerado e uma camada de escolhas quase arbitrárias que os próprios nativos não sabem explicar. Nada dessa complexidade é necessário para se comunicar com clareza — é resíduo histórico. O World English pergunta, com rigor: <em>quão simples o inglês poderia ser sem deixar de ser inglês?</em> É um esforço de pesquisa e design, não uma campanha para fazer alguém mudar de idioma.',
+    principlesH: 'Princípios de design',
+    principles: [
+      ['Subtraia antes de acrescentar', 'A primeira ferramenta é remover a irregularidade, não inventar gramática nova. A maioria dos ganhos vem de regularizar o que já existe.'],
+      ['Reforme só onde subtrair não basta', 'Onde uma regra é arbitrária sem conserto, substitua-a por uma única regra previsível — mesmo que essa forma não seja inglês padrão.'],
+      ['Continue legível', 'A grafia é regularizada apenas de leve. Uma página de World English nunca deveria parecer estranha a um leitor de inglês.'],
+      ['Uma regra, sem listas de exceção', 'Um recurso só está “pronto” quando pode ser enunciado como uma regra que um iniciante consiga aplicar, sem uma tabela de casos especiais.'],
+      ['Documente o porquê', 'Cada divergência do inglês padrão é registrada com o problema de aprendizado que resolve e o compromisso que aceita.'],
+    ],
+    methodH: 'Como está sendo projetado',
+    methodLede: 'Cada etapa produz documentação sobre a qual a próxima se apoia. Nada é decidido em silêncio.',
+    method: [
+      'Mapear o inglês padrão — documentar as regras reais como linha de base.',
+      'Catalogar as dificuldades — registrar com o que os aprendizes lutam, e por quê.',
+      'Projetar as soluções — para cada dificuldade, uma regra regularizada com exemplos e compromissos.',
+      'Especificar a língua — consolidar as regras nas especificações.',
+      'Provar que as regras se sustentam — aplicá-las a trechos reais e verificá-las mecanicamente.',
+      'Construir as ferramentas — tradutores e apoio à pronúncia.',
+    ],
+    notH: 'O que não é',
+    not: [
+      'Não é um substituto do inglês na literatura, no direito ou no uso cotidiano nativo.',
+      'Não é um inglês “simplificado demais” — expressa as mesmas ideias com menos maquinaria arbitrária.',
+      'Não é uma reescrita fonética — as mudanças de grafia são conservadoras e reconhecíveis.',
+      'Não está pronto — as regras seguem mudando à medida que são elaboradas.',
+    ],
+    ctaRules: 'Leia as regras',
+    ctaResearch: 'Veja a pesquisa',
+  },
+  it: {
+    eyebrow: 'Informazioni sul progetto',
+    h1: 'Che cos’è World English',
+    lede:
+      'World English (WoE) è una revisione deliberata dell’inglese che conserva ciò che funziona e corregge ciò che non funziona — puntando a una variante regolare, prevedibile, più facile da imparare e ancora leggibile per chiunque conosca l’inglese.',
+    intro:
+      'L’inglese è la lingua predefinita di internet, della scienza, dell’aviazione, degli affari e dei viaggi. È anche, per caso storico e non per progetto, una delle lingue più difficili da imparare bene: la sua ortografia prevede raramente il suono, i suoi verbi e plurali sono pieni di eccezioni da memorizzare, e molte delle sue “regole” non sono affatto regole, ma elenchi. Per molti versi World English è un <strong>sottoinsieme</strong> dell’inglese britannico e americano — prende il nucleo comune e scarta i bordi irregolari. In altri è una vera <strong>riforma</strong>, che sostituisce regole irrimediabilmente guaste con qualcosa di più semplice.',
+    whyH: 'Perché esiste',
+    why:
+      'Chi impara oggi deve assorbire migliaia di grafie irregolari, centinaia di verbi irregolari, un sistema di tempi sovradimensionato e uno strato di scelte quasi arbitrarie che gli stessi madrelingua non sanno spiegare. Nulla di questa complessità è necessario per comunicare con chiarezza — è residuo storico. World English si chiede, con rigore: <em>quanto potrebbe essere semplice l’inglese pur restando inglese?</em> È un lavoro di ricerca e design, non una campagna per far cambiare lingua a qualcuno.',
+    principlesH: 'Principi di design',
+    principles: [
+      ['Sottrai prima di aggiungere', 'Il primo strumento è rimuovere l’irregolarità, non inventare nuova grammatica. La maggior parte dei vantaggi viene dal regolarizzare ciò che già esiste.'],
+      ['Riforma solo dove sottrarre non basta', 'Dove una regola è arbitraria senza rimedio, sostituiscila con un’unica regola prevedibile — anche se quella forma non è inglese standard.'],
+      ['Resta leggibile', 'L’ortografia è regolarizzata solo lievemente. Una pagina di World English non dovrebbe mai sembrare estranea a un lettore di inglese.'],
+      ['Una regola, niente liste di eccezioni', 'Una caratteristica è “finita” solo quando può essere enunciata come una regola applicabile da un principiante, senza una tabella di casi speciali.'],
+      ['Documenta il perché', 'Ogni divergenza dall’inglese standard è registrata con il problema di apprendimento che risolve e il compromesso che accetta.'],
+    ],
+    methodH: 'Come viene progettato',
+    methodLede: 'Ogni passo produce documentazione su cui il successivo si basa. Nulla viene deciso in silenzio.',
+    method: [
+      'Mappare l’inglese standard — documentare le regole reali come base.',
+      'Catalogare le difficoltà — registrare con cosa fatica chi impara, e perché.',
+      'Progettare le soluzioni — per ogni difficoltà, una regola regolarizzata con esempi e compromessi.',
+      'Specificare la lingua — consolidare le regole nelle specifiche.',
+      'Dimostrare che le regole tengono — applicarle a testi reali e verificarle meccanicamente.',
+      'Costruire gli strumenti — traduttori e supporto alla pronuncia.',
+    ],
+    notH: 'Cosa non è',
+    not: [
+      'Non è un sostituto dell’inglese nella letteratura, nel diritto o nell’uso quotidiano dei madrelingua.',
+      'Non è un inglese “semplificato” — esprime le stesse idee con meno meccanismi arbitrari.',
+      'Non è una riscrittura fonetica — le modifiche ortografiche sono conservative e riconoscibili.',
+      'Non è finito — le regole continuano a cambiare man mano che vengono elaborate.',
+    ],
+    ctaRules: 'Leggi le regole',
+    ctaResearch: 'Vedi la ricerca',
+  },
+};
+const COPY = DICT[locale] ?? DICT.en;
+---
+
+<div class="shell page prose measure" data-pagefind-body>
+  <p class="eyebrow">{COPY.eyebrow}</p>
+  <h1 id="what-is-world-english">{COPY.h1}</h1>
+
+  <p class="lede">{COPY.lede}</p>
+
+  <p set:html={COPY.intro} />
+
+  <h2 id="why">{COPY.whyH}</h2>
+  <p set:html={COPY.why} />
+
+  <h2 id="design-principles">{COPY.principlesH}</h2>
+  <ol class="principles">
+    {
+      COPY.principles.map(([title, body]) => (
+        <li>
+          <strong>{title}.</strong> {body}
+        </li>
+      ))
+    }
+  </ol>
+
+  <h2 id="methodology">{COPY.methodH}</h2>
+  <p>{COPY.methodLede}</p>
+  <ol class="method">
+    {COPY.method.map((step) => <li>{step}</li>)}
+  </ol>
+
+  <h2 id="not">{COPY.notH}</h2>
+  <ul>
+    {COPY.not.map((item) => <li>{item}</li>)}
+  </ul>
+
+  <div class="next">
+    <a class="btn btn--primary" href={lp('/rules/')}>{COPY.ctaRules}</a>
+    <a class="btn btn--ghost" href={lp('/research/')}>{COPY.ctaResearch}</a>
+  </div>
+</div>
+
+<style>
+  .page {
+    padding-block: var(--space-8) var(--space-10);
+  }
+  .page h1 {
+    font-size: var(--text-2xl);
+    margin: var(--space-2) 0 var(--space-4);
+  }
+  .principles,
+  .method {
+    padding-left: 1.25rem;
+  }
+  .principles li,
+  .method li {
+    margin-bottom: var(--space-3);
+  }
+  .principles strong {
+    color: var(--accent);
+  }
+  .next {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-top: var(--space-8);
+  }
+</style>

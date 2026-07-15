@@ -1,0 +1,112 @@
+---
+import { SPEC_NAV } from '../../lib/nav';
+import { getLocale, localePath } from '../../i18n/ui';
+import EnglishOnlyNote from '../EnglishOnlyNote.astro';
+const locale = getLocale(Astro.currentLocale);
+---
+
+<div class="shell page">
+  <EnglishOnlyNote />
+  <header class="page__head col">
+    <p class="eyebrow">Reference</p>
+    <h1>The full rules</h1>
+    <p class="lede">
+      World English is defined by a set of specifications, each taking one class of English
+      irregularity and replacing it with a regular, predictable rule. Every rule follows the
+      same shape: <strong>the rule</strong>, <strong>the problem it solves</strong>,
+      <strong>examples</strong>, and <strong>the trade-off</strong> it accepts.
+    </p>
+  </header>
+
+  <ul class="cards col">
+    {
+      SPEC_NAV.map((s) => (
+        <li>
+          <a class="card" href={localePath(`/rules/${s.slug}/`, locale)}>
+            <h2 class="card__title">{s.title}</h2>
+            <p class="card__blurb">{s.blurb}</p>
+            <span class="card__go" aria-hidden="true">Read →</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p id="status" class="status col">
+    <strong>Status.</strong> These specifications are provisional — a first design pass.
+    Every divergence from standard English is recorded with its rationale, and the rules keep
+    changing as they are worked out. <a href={localePath('/rules/samples/', locale)}>Samples</a> is the regression
+    test that keeps them consistent.
+  </p>
+</div>
+
+<style>
+  .page {
+    padding-block: var(--space-8) var(--space-10);
+  }
+  /* Shared centered column — heads, prose, and the card grid all span the same
+     width on one axis, left-aligned (as on the landing page). */
+  .col {
+    max-width: var(--content);
+    margin-inline: auto;
+  }
+  .page__head {
+    margin-bottom: var(--space-8);
+  }
+  .page__head h1 {
+    font-size: var(--text-2xl);
+    margin: 0 0 var(--space-4);
+  }
+  .cards {
+    list-style: none;
+    margin-block: 0; /* block only — .col owns the inline (auto-centering) margins */
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: var(--space-4);
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: var(--space-5);
+    background: var(--surface);
+    border: var(--border-w) solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: inherit;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.15s ease, transform 0.1s ease;
+  }
+  .card:hover {
+    border-color: var(--accent-line);
+    transform: translateY(-2px);
+  }
+  .card__title {
+    font-size: var(--text-md);
+    margin: 0 0 var(--space-2);
+  }
+  .card__blurb {
+    margin: 0 0 var(--space-4);
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    flex: 1;
+  }
+  .card__go {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .status {
+    margin-top: var(--space-8);
+    padding-top: var(--space-5);
+    border-top: var(--border-w) solid var(--border);
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+  }
+  .status strong {
+    color: var(--text);
+  }
+</style>

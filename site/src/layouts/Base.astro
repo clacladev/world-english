@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { locales, defaultLocale, getLocale, useTranslations, localePath, stripLocale } from '../i18n/ui';
 
 interface Props {
   title?: string;
@@ -15,22 +16,73 @@ const {
   ogType = 'website',
 } = Astro.props;
 
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+
 const siteName = 'World English';
 const fullTitle = title ? `${title} · ${siteName}` : `${siteName} — a simpler, more regular English`;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+// The current path with any locale prefix stripped, so we can list the same page
+// in every language as an hreflang alternate (x-default points at English).
+const barePath = stripLocale(Astro.url.pathname);
+const alternates = [
+  ...locales.map((loc) => ({
+    hreflang: loc,
+    href: new URL(localePath(barePath, loc), Astro.site).href,
+  })),
+  { hreflang: 'x-default', href: new URL(localePath(barePath, defaultLocale), Astro.site).href },
+];
 // PNG, not SVG — X/Facebook/Slack/LinkedIn don't render SVG social cards.
 const ogImage = new URL('/og.png', Astro.site).href;
 const ogImageAlt = 'World English — a simpler, more regular English';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Pick the visitor's language before paint: honor an explicit saved choice,
+         else auto-detect from the browser and redirect once from a bare (English)
+         URL to a supported translation. Runs first so the redirect beats layout. -->
+    <script is:inline define:vars={{ locales: [...locales], defaultLocale }}>
+      (() => {
+        try {
+          const nonDefault = locales.filter((l) => l !== defaultLocale);
+          const path = location.pathname;
+          const seg = path.split('/')[1];
+          const onLocale = nonDefault.indexOf(seg) !== -1;
+          const currentLoc = onLocale ? seg : defaultLocale;
+          const bare = onLocale ? path.slice(seg.length + 1) || '/' : path;
+          const toPath = (loc) =>
+            loc === defaultLocale ? bare : bare === '/' ? '/' + loc : '/' + loc + bare;
+
+          let explicit = null;
+          try { explicit = localStorage.getItem('woe-lang'); } catch {}
+
+          let target = null;
+          if (explicit && (explicit === defaultLocale || nonDefault.indexOf(explicit) !== -1)) {
+            if (explicit !== currentLoc) target = toPath(explicit);
+          } else if (currentLoc === defaultLocale) {
+            const langs = navigator.languages || (navigator.language ? [navigator.language] : []);
+            for (const l of langs) {
+              const base = (l || '').toLowerCase().split('-')[0];
+              if (nonDefault.indexOf(base) !== -1) { target = toPath(base); break; }
+            }
+          }
+          if (target && target !== path) location.replace(target + location.search + location.hash);
+        } catch {}
+      })();
+    </script>
+
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {alternates.map((a) => (
+      <link rel="alternate" hreflang={a.hreflang} href={a.href} />
+    ))}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <meta name="theme-color" content="#f6f5f1" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#1b1916" media="(prefers-color-scheme: dark)" />
@@ -70,9 +122,12 @@ const ogImageAlt = 'World English — a simpler, more regular English';
     </script>
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main">{t('skip')}</a>
     <Header />
-    <main id="main">
+    {/* Phase 1: search is English-only. Non-default locales are excluded from the
+        Pagefind index so translated chrome over English bodies never doubles the
+        results. Revisit once page bodies are translated. */}
+    <main id="main" data-pagefind-ignore={locale === defaultLocale ? undefined : 'all'}>
       <slot />
     </main>
     <Footer />

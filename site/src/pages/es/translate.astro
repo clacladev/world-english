@@ -1,0 +1,13 @@
+---
+// Spanish translator page. Shares TranslateBody; UI labels switch on the /es URL
+// locale. The tool itself works on English/WoE text and is unchanged.
+import Base from '../../layouts/Base.astro';
+import TranslateBody from '../../components/pages/TranslateBody.astro';
+---
+
+<Base
+  title="Traductor"
+  description="Traduce texto entre inglés estándar y World English. El mismo traductor determinista que impulsa las herramientas, ejecutándose en tu navegador."
+>
+  <TranslateBody />
+</Base>

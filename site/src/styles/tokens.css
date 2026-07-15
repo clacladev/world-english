@@ -4,9 +4,14 @@
 
 :root {
   /* Type families */
-  --font-serif: "Fraunces", Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  /* CJK families sit just before the generic in each stack: the Latin webfonts
+     (Fraunces, Inter) have no Chinese glyphs, so those characters fall through to
+     the platform's native CJK font (no multi-MB webfont download). The generic
+     must stay last — it always resolves, so anything after it is unreachable. */
+  --font-cjk: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", "Noto Sans CJK SC";
+  --font-serif: "Fraunces", Georgia, Cambria, "Times New Roman", Times, "Songti SC", "Noto Serif SC", serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, var(--font-cjk), sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, var(--font-cjk), monospace;
 
   /* Fluid type scale — tuned for a content-heavy docs site. Body sits at
      ~15.5–17px (a comfortable reading size); the hero tops out around 53px.
@@ -36,7 +41,8 @@
   --space-10: 4.5rem;
   --space-12: 6rem;
 
-  --measure: 44rem;        /* comfortable reading width */
+  --measure: 44rem;        /* comfortable reading width — long-form prose (about, skills, specs) */
+  --content: 52rem;        /* landing/listing/tool pages (home, rules, research, showcase, translate) */
   --page-max: 78rem;       /* outer shell */
   --radius: 10px;
   --radius-sm: 6px;
